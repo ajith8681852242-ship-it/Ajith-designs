@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Ajith Studio | Graphics Designer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-palette logo-icon-rotate blue-clr"></i> 
+                <span>Ajith <span class="logo-blue">studio</span></span>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home">HOME</a></li>
+                <li><a href="#about">ABOUT</a></li>
+                <li><a href="#services">SERVICES</a></li>
+                <li><a href="#contact">CONTACT</a></li>
+            </ul>
+            <div class="toggle-btn" id="menuToggle"><i class="fas fa-bars"></i></div>
+        </div>
+    </nav>
+
+<section class="banner" id="home">
+    <div class="banner-container">
+        
+        <div class="header-mini-bar">
+            <span id="live-time">00:00:00 PM</span>
+            <span class="s">|</span>
+            <span id="live-day">Sun</span>
+            <span class="s">|</span>
+            <span id="live-month">Jan</span>
+            <span class="s">|</span>
+            <span id="live-date-year">04 - 2026</span>
+            <span class="s">|</span>
+            <span id="festival-wish" class="pink-blink">Welcome</span>
+        </div>
+
+        <div class="banner-content">
+            <h1 class="main-heading">Hi i m <span class="blue-clr">Ajith</span><br><span class="white-clr">Graphics Designer</span></h1>
+            
+         
+
+            <p class="thin-p one-line-p">Creative designs for your professional needs</p>
+            <button class="whatsapp-btn-live" id="chatBtn">
+                <i class="fab fa-whatsapp"></i> Chat Live Now
+            </button>
+        </div>
+
+
+
+   <div class="social-stock-container">
+                <a href="https://youtube.com/yourchannel" target="_blank" class="stock-icon yt-bg" title="YouTube">
+                    <i class="fab fa-youtube"></i>
+                </a>
+                <a href="https://behance.net/yourprofile" target="_blank" class="stock-icon be-bg" title="Behance">
+                    <i class="fab fa-behance"></i>
+                </a>
+                <a href="https://instagram.com/yourprofile" target="_blank" class="stock-icon ig-bg" title="Instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
+            </div>
+
+
+
+
+
+        
+
+        <div class="banner-image">
+            <img src="web-design-png-8812 copy.png" alt="Banner Image" class="custom-img">
+        </div> 
+    </div>
+<div id="status-final-safe-layer"></div>
+               
+<div id="status-final-safe-layer"></div>
+<script>
+(function() {
+    const host = document.querySelector('#status-final-safe-layer');
+    if(!host) return;
+    const shadow = host.attachShadow({mode: 'closed'});
+
+    shadow.innerHTML = `
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700;800&display=swap');
+        
+        :host { 
+            /* இது பேனரைத் தொடவே தொடாது - No Disturbance */
+            position: absolute; 
+            left: 70%;
+            transform: translateX(-50%);
+            /* "Small top move" - பேனரின் மேல்பகுதிக்குக் கொண்டு செல்ல */
+            top: 645px; 
+            z-index: 9999;
+            width: 100%;
+            display: block;
+            pointer-events: none;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-family: 'Poppins', sans-serif;
+            pointer-events: auto;
+        }
+
+        .row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        /* லேப்டாப்பில் பெரிய அளவு (Big Size) */
+        .status-text {
+            font-size: 25px; 
+            font-weight: 800;
+            text-transform: uppercase;
+            line-height: 1;
+        }
+
+        .icon-box {
+            position: relative;
+            width: 16px;
+            height: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .dot { width: 10px; height: 10px; background-color: currentColor; border-radius: 50%; }
+        .ring {
+            position: absolute; width: 100%; height: 100%;
+            border: 2px solid currentColor; border-radius: 50%;
+            animation: ripple 2s infinite ease-out;
+        }
+
+        @keyframes ripple {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(3); opacity: 0; }
+        }
+
+        /* நேரம் அடுத்த வரியில் கறுப்பு நிறத்தில் */
+        .daily-time {
+            font-size: 10px;
+            color: #000000; 
+            font-weight: 700;
+            margin-top: 6px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* மொபைல் வியூ (Small Size for Mobile) */
+        @media (max-width: 768px) {
+            :host { top: 190px; left: 50%; z-index: 1000;}
+            .status-text { font-size: 10px; }
+            .daily-time { font-size: 3px; margin-top: 3px; }
+            .icon-box { width: 10px; height: 10px; }
+            .dot { width: 5px; height: 5px; }
+            .row { gap: 5px; }
+        }
+    </style>
+    
+    <div class="container">
+        <div class="row" id="ui-wrap">
+            <div class="icon-box">
+                <span class="dot"></span>
+                <span class="ring"></span>
+            </div>
+            <span class="status-text" id="ui-label">...</span>
+        </div>
+        <div class="daily-time">9:00 AM - 7:00 PM</div>
+    </div>
+    `;
+
+    function update() {
+        const h = new Date().getHours();
+        const wrap = shadow.querySelector('#ui-wrap');
+        const label = shadow.querySelector('#ui-label');
+        
+        // 9 AM - 7 PM 
+        const isOpen = (h >= 9 && h < 19);
+
+        const color = isOpen ? '#2ecc71' : '#e74c3c';
+        wrap.style.color = color;
+        label.textContent = isOpen ? 'OPEN' : 'CLOSED';
+    }
+    update();
+    setInterval(update, 30000);
+})();
+</script>
+           </section> <div class="feature-strip">
+            <div class="f-box purple">
+                <div class="f-content">
+                    <i class="fas fa-tags"></i>
+                    <div class="f-text">
+                        <span class="f-title">Best Price</span>
+                        <span class="f-desc">Top savings guaranteed.</span>
+                    </div>
+                </div>
+            </div>
+            <div class="f-box yellow">
+                <div class="f-content">
+                    <i class="fas fa-award"></i>
+                    <div class="f-text">
+                        <span class="f-title">High Quality</span>
+                        <span class="f-desc">Premium standards always.</span>
+                    </div>
+                </div>
+            </div>
+            <div class="f-box red">
+                <div class="f-content">
+                    <i class="fas fa-shipping-fast"></i>
+                    <div class="f-text">
+                        <span class="f-title">Fast Delivery</span>
+                        <span class="f-desc">Super quick turnaround.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+    <section class="services" id="services">
+        <div class="container">
+            <h2 class="section-title">My Services</h2>
+            <div class="services-grid">
+                <div class="service-box">
+                    <i class="fas fa-pen-nib"></i>
+                    <h3>Logo Design</h3>
+                    <p class="thin-p dark">Unique brand identity.</p>
+                </div>
+                <div class="service-box">
+                    <i class="fas fa-ad"></i>
+                    <h3>Ads Design</h3>
+                    <p class="thin-p dark">Social media posters.</p>
+                </div>
+                <div class="service-box">
+                    <i class="fas fa-brush"></i>
+                    <h3>Branding</h3>
+                    <p class="thin-p dark">Visual color systems.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-grid">
+            <div class="footer-logo">Ajith <span class="logo-blue">studio</span></div>
+            <div class="footer-text">&copy; 2026 All Rights Reserved</div>
+        </div>
+    </footer>
+
+    <div class="form-overlay" id="formOverlay">
+        <div class="contact-form">
+            <span class="close-btn" id="closeForm">&times;</span>
+            <h4 class="small-title">Quick Inquiry</h4>
+            <input type="text" id="userName" placeholder="Your Name">
+            <select id="userService" class="form-select">
+                <option value="Logo Design">Logo Design</option>
+                <option value="Ads Design">Ads Design</option>
+                <option value="Branding">Branding</option>
+            </select>
+            <textarea id="userMsg" placeholder="Project details..."></textarea>
+            <button class="send-btn" id="submitToWA">Send via WhatsApp</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,600 @@
+
+/* Global Reset */
+
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
+
+/* Colors & Animations */
+.blue-clr { color: #1e90ff !important; }
+.white-clr { color: #1f1f1f; }
+.dark { color: #1f1f1f;; }
+
+@keyframes rotateLogo { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+.logo-icon-rotate { animation: rotateLogo 5s linear infinite; display: inline-block; margin-right: 5px; }
+
+@keyframes pulseLive {
+    0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+    70% { box-shadow: 0 0 0 8px rgba(37, 211, 102, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+}
+
+/* Navbar (Laptop: Black & Medium 500) */
+.navbar { background: #fff; height: 60px; display: flex; align-items: center; position: fixed; width: 100%; top: 0; z-index: 1000; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+.nav-container { width: 92%; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+.logo { font-weight: 600; font-size: 0.9rem; }
+.logo-blue { color: #1e90ff; }
+.nav-links { display: flex; list-style: none; }
+.nav-links li a { color: #000000; margin-left: 25px; text-decoration: none; font-size: 0.75rem; font-weight: 500; }
+
+/* Banner (Reduced Height & One Line P) */
+.banner { height: 80vh; background: #e9e9e9; color: #1f1f1f; display: flex; align-items: center; padding-top: 60px; }
+.banner-container { width: 90%; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+.main-heading { font-size: 1.8rem; font-weight: 600; line-height: 1.2; }
+.one-line-p { white-space: nowrap; font-size: 0.75rem; font-weight: 200; color: #000000; margin-top: 8px; }
+
+.laptop-icon { font-size: 5rem; color: #1e90ff; }
+
+/* WhatsApp Button */
+.whatsapp-btn-live { 
+    background: #25d366; color: #fff; border: none; padding: 5px 14px; 
+    border-radius: 50px; font-size: 0.6rem; font-weight: 600; cursor: pointer; 
+    margin-top: 12px; display: inline-flex; align-items: center; gap: 5px; 
+    animation: pulseLive 2s infinite; 
+}
+
+/* Sections & Footer */
+.container { width: 90%; margin: 0 auto; }
+.services { padding: 50px 0; background: #fff; text-align: center; }
+.services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 30px; }
+.service-box { padding: 25px; border: 1px solid #eee; border-radius: 10px; }
+.footer { background: #111; color: #fff; padding: 20px 0; font-size: 0.7rem; }
+.footer-grid { width: 92%; margin: 0 auto; display: flex; justify-content: space-between; }
+.custom-img {
+    width: 100%;       /* டிவ்வின் முழு அகலத்திற்கு ஏற்ப மாறும் */
+    height: auto;      /* உயரத்தை தானாகவே சரி செய்யும் */
+    display: block;
+}
+/* Mobile View & Toggle Fix */
+@media (min-width: 993px) { .toggle-btn { display: none !important; } }
+@media (max-width: 992px) {
+    .toggle-btn { 
+        display: block; 
+        cursor: pointer; 
+        font-size: 1.2rem; }
+    .nav-links { position: fixed; right: -100%; top: 60px; background: #fff; width: 240px; height: 100vh; flex-direction: column; padding: 30px; transition: 0.4s ease; z-index: 1001; }
+    .nav-links.active { right: 0 !important; }
+    .nav-links li { margin-bottom: 18px; }
+    .nav-links li a { margin: 0; font-size: 0.85rem; font-weight: 600; color: #333; }
+    .banner { height: 33vh; }
+    .main-heading { 
+        font-size: 1.0rem;
+     }
+    .one-line-p { font-size: 0.55rem; }
+    .services-grid { grid-template-columns: 1fr; }
+}
+
+/* Popup Form */
+.form-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); display: none; justify-content: center; align-items: center; z-index: 2000; }
+.contact-form { background: #fff; padding: 20px; border-radius: 10px; width: 88%; max-width: 310px; position: relative; }
+.contact-form input, .form-select, .contact-form textarea { width: 100%; padding: 8px; margin: 6px 0; border: 1px solid #ddd; border-radius: 4px; font-size: 0.75rem; }
+.send-btn { width: 100%; background: #25d366; color: #fff; border: none; padding: 10px; font-weight: 600; cursor: pointer; }
+.close-btn { position: absolute; right: 12px; top: 8px; cursor: pointer; font-size: 1.4rem; }
+/* 1. பெரிய திரைகள் (Laptops/Desktops) - இதில் Toggle பட்டன் தெரியாது */
+
+
+
+
+
+
+
+
+
+
+@media (min-width: 1024px) {
+    /* 1. முதலில் பேனருக்கு எல்லை வகுக்கவும் (கட்டாயம் தேவை) */
+    .banner {
+        position: relative !important;
+    }
+
+    .header-mini-bar {
+        display: flex !important;
+        justify-content: center !important; 
+        align-items: center !important;
+        background: transparent !important;
+        width: 100% !important;
+        left: 0 !important;
+        
+        /* அடியில் தள்ள (Corrected Bottom Move) */
+        position: absolute !important;
+        bottom: 250px !important;  /* 750px-க்கு பதில் 20px கொடுக்கவும் */
+        top: auto !important;     /* பழைய Top பொசிஷனை ரத்து செய்ய */
+        
+        padding: 0 !important;
+        margin: 0 !important;
+        border: none !important;
+        z-index: 100 !important;
+    }
+
+    /* உரை அமைப்புகள் (நீங்கள் கேட்டது போலவே) */
+    .header-mini-bar span {
+        color: #000000 !important;
+        font-size: 11px !important;
+        font-weight: 50 !important; 
+        text-transform: capitalize !important;
+        font-family: 'Poppins', sans-serif !important;
+        letter-spacing: 1.1px !important;
+    }
+
+    .header-mini-bar .s {
+        margin: 0 8px !important;
+        color: #000000 !important;
+        opacity: 0.3 !important;
+    }
+
+    #festival-wish {
+        color: #ff69b4 !important;
+        font-weight: 350 !important; /* உரை தெரியும்படி 350 வைக்கவும் */
+        text-transform: none !important;
+        animation: slowBlink 4s ease-in-out infinite !important;
+    }
+}
+
+/* மெதுவான பிளிங்க் அனிமேஷன் */
+@keyframes slowBlink {
+    0% { opacity: 1; }
+    50% { opacity: 0.3; }
+    100% { opacity: 1; }
+}
+/* மொபைலில் மேலேயே இருக்க (ஏற்கனவே உள்ள கோட் அப்படியே இருக்கட்டும்) */
+
+
+
+
+
+/* --- Timer Bar Top Position & Slow Blink --- */
+
+.header-mini-bar {
+    position: absolute !important;
+    top: 5px !important; /* மிக உச்சிக்கு நகர்த்தப்பட்டுள்ளது */
+    left: 0;
+    width: 100% !important;
+    background: transparent !important;
+    display: flex !important;
+    justify-content: center !important; /* லேப்டாப் சென்டர் */
+    align-items: center !important;
+    font-family: 'Poppins', sans-serif !important;
+    z-index: 100 !important;
+}
+
+/* கருப்பு மற்றும் மெல்லிய எழுத்துரு */
+.header-mini-bar span {
+    color: #000000 !important;
+    font-weight: 350 !important; /* Thin Poppins */
+    font-size: 12px !important;
+    letter-spacing: 0.5px !important;
+}
+
+/* பிரிப்பான் கோடு */
+.header-mini-bar .s {
+    opacity: 0.3 !important;
+    padding: 0 4px !important;
+}
+
+/* Welcome - பிங்க் நிறம் மற்றும் மெதுவான பிளிங்க் (Slow Blink) */
+#festival-wish {
+    color: #ff3399 !important;
+    font-weight: 400 !important; /* வாசிக்க எளிதாக இருக்க சற்று தடிமன் */
+    animation: slowBlink 3s ease-in-out infinite !important; /* 3 விநாடி மெதுவான அனிமேஷன் */
+}
+
+/* மெதுவான பிளிங்கிங் அனிமேஷன் (Slow Animation) */
+@keyframes slowBlink {
+    0% { opacity: 1; }
+    50% { opacity: 0.2; }
+    100% { opacity: 1; }
+}
+
+/* --- Mobile Device Adjustments --- */
+@media screen and (max-width: 768px) {
+    .header-mini-bar {
+        top: 70px !important; /* மொபைலில் இன்னும் உச்சிக்கு */
+        justify-content: flex-start !important; /* இடது ஓரம் */
+        padding-left: 28px !important;
+    }
+    
+    .header-mini-bar span {
+        font-size: 6px !important;
+    }
+}
+
+
+
+
+
+/* Social media icons (Laptop View) */
+
+  
+
+
+
+/* Social media icons (Laptop View) */
+
+  
+
+@media (min-width: 1024px) {
+    
+    .social-stock-container {
+        display: flex !important;
+        flex-direction: row !important;    /* ஐகான்களை வரிசையாக வைக்க */
+        position: absolute !important;     /* பேனரின் மீது எங்கு வேண்டுமானாலும் வைக்க */
+        left: 180px !important;             /* இடது பக்க விளிம்பிலிருந்து 20px தள்ளி */
+        top: 600px !important;             /* பேனருக்குள் உங்களுக்கு தேவையான உயரம் (இதை மாற்றிக்கொள்ளலாம்) */
+        gap: 15px !important;              /* ஐகான்களுக்கு இடையே உள்ள இடைவெளி */
+        z-index: 100 !important;
+    }
+
+    .stock-icon {
+        width: 40px !important;            /* ஐகான் பெட்டியின் அகலம் */
+        height: 40px !important;           /* ஐகான் பெட்டியின் உயரம் */
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        border-radius: 15% !important;     /* வட்ட வடிவம் */
+        transition: transform 0.3s ease !important;
+        text-decoration: none !important;
+        
+    }
+
+    .stock-icon:hover {
+       
+        transform: translateY(-5px) !important; /* சற்று மேலே உயரும் */
+    }
+
+    .stock-icon i {
+        font-size: 18px !important;
+        color: #ffffff !important;         /* ஐகான் நிறம் வெள்ளை */
+    }
+    .yt-bg { background-color: #ff0000 !important; } /* YouTube Red */
+    .be-bg { background-color: #053eff !important; } /* Behance Blue */
+    .ig-bg { background-color: #e4405f !important; } /* Instagram Pink */
+}
+
+
+
+
+
+/* --- Desktop & Laptop View (Height: 100px) --- */
+.feature-strip {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.f-box {
+    flex: 1 !important;
+    height: 100px !important; /* Laptop Height */
+    min-height: 100px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important; /* மேலேயும் கீழேயும் சமமான கேப் */
+    align-items: center !important;
+    box-sizing: border-box !important;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+/* Background Colors & White Theme */
+.purple { background-color: #9b59b6 !important; }
+.yellow { background-color: #2ecc71 !important; }
+.red    { background-color: #2980b9 !important; }
+
+.f-content {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 8px !important; /* லேப்டாப் கேப் */
+}
+
+/* Icons & Text White Color */
+.f-content i, .f-title {
+    color: #ffffff !important;
+}
+
+.f-content i {
+    font-size: 30px !important;
+}
+
+.f-title {
+    font-size: 16px !important;
+    font-weight: 800 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+}
+
+.f-desc { display: none !important; }
+
+
+
+
+.navbar {
+        position: fixed !important;
+        top: 0 !important;
+        z-index: 9999 !important; /* இது ஐகான்களை விட அதிகம் */
+        background: #ffffff !important; /* பின்புலம் தெரிந்தால் தான் ஐகான் மறையும் */
+    }
+
+
+
+
+
+/* --- All Mobile Devices View --- */
+@media screen and (max-width: 992px) {
+    
+    .f-box {
+        height: 50px !important;
+        min-height: 50px !important;
+        display: grid !important; /* கிரிட் முறை துல்லியமாக வேலை செய்யும் */
+        place-items: center !important;
+        padding: 2px 0 !important;
+        box-sizing: border-box !important;
+    }
+
+    .f-content {
+        display: flex !important;
+        flex-direction: column !important;
+        /* ஐகானை மட்டும் கீழே தள்ள (Move Icon Bottom) */
+        justify-content: flex-end !important; 
+        height: 100% !important;
+        gap: 0px !important; /* ஐகான் மற்றும் உரை ஒட்டி இருக்க */
+    }
+
+    .f-content i {
+        font-size: 16px !important;
+        color: #ffffff !important;
+        /* ஐகானுக்கு மேலே அதிக இடைவெளி கொடுத்து கீழே தள்ளுதல் */
+        margin-top: 5px !important; 
+        line-height: 1 !important;
+    }
+    .f-text {
+
+      margin-bottom: 0px;  
+    }
+
+    .f-title {
+        font-size: 8px !important;
+        color: #ffffff !important;
+        font-weight: bold !important;
+        text-transform: uppercase !important;
+        margin: 0 !important;
+        padding-bottom: 2px !important; /* அடியில் சிறிய இடைவெளி */
+        line-height: 1.2 !important;
+    }
+
+    /* தேவையற்ற டிஸ்கிரிப்ஷன் நீக்க */
+    .f-desc {
+        display: none !important;
+    }
+}
+
+
+@media screen and (max-width: 992px) {
+    /* 1. மெயின் பேனர் அமைப்பு */
+    .banner {
+        display: block !important;
+        position: relative !important;
+        height: 220px !important;
+        background-color: #e9e9e9 !important; /* பின்னணி நிறம் இங்கே லாக் செய்யப்பட்டுள்ளது */
+        overflow: hidden !important;
+        padding: 0 !important;
+    }
+
+    /* 2. பேனர் படம் (Visibility & Size Fix) */
+    .banner-image {
+        display: flex !important;
+        position: absolute !important;
+        right: 10px !important; /* வலது ஓரம் */
+        bottom: 10px !important; /* கீழே லாக் */
+        width: 140px !important; /* அளவு */
+        justify-content: flex-end !important;
+        z-index: 5 !important;
+        background: transparent !important;
+    }
+
+    .banner-image img {
+        width: 140px !important; /* படத்தின் அகலத்தை உறுதி செய்கிறது */
+        height: auto !important;
+        object-fit: contain !important;
+        margin-bottom: 25px;
+        display: block !important;
+    }
+
+    /* 3. பேனர் எழுத்துக்கள் (Position Lock) */
+    .banner-content {
+        position: absolute !important;
+        left: 15px !important;
+        top: 100px !important;
+        width: 50% !important;
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 4px !important;
+        z-index: 10 !important;
+        margin-left: 0 !important;
+    }
+
+    .main-heading {
+        font-size: 15px !important;
+        line-height: 1.2 !important;
+        margin: 0 !important;
+        text-align: left !important;
+    }
+
+    /* 4. பாராகிராப் (Paragraph Fix) */
+    .thin-p.one-line-p {
+        font-size: 8px !important; 
+        white-space: nowrap !important;
+        font-weight: 300 !important;
+        text-align: left !important; /* Right-க்கு பதில் Left கொடுத்துள்ளேன், அப்போதுதான் Heading உடன் சேரும் */
+        margin: 0 !important;
+        display: block !important;
+        width: auto !important;
+    }
+
+    /* 5. வாட்ஸ்அப் பட்டன் (Perfect Size) */
+    .whatsapp-btn-live {
+        display: inline-flex !important;
+        width: 135px !important;
+        height: 38px !important;
+        background-color: #25d366 !important;
+        color: white !important;
+        border-radius: 50px !important;
+        font-size: 11px !important;
+        justify-content: center !important;
+        align-items: center !important;
+        margin-top: 5px !important;
+        text-decoration: none !important;
+    }
+}
+
+
+
+
+@media (max-width: 992px) {
+    /* 1. மெயின் கண்டெய்னர் - இடைவெளியை உறுதி செய்ய */
+    .banner-content {
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        /* இதுதான் நீங்கள் கேட்ட சிறிய இடைவெளி (Small Gap) */
+        gap: 5px !important; 
+        margin-left: 10px !important;
+        padding: 0 !important;
+    }
+
+    /* 2. தலைப்பை சிறிதாக்க (Heading) */
+    .main-heading { 
+        font-size: 0.9rem !important; 
+        margin: 0 !important; /* தேவையற்ற இடைவெளியை நீக்க */
+        line-height: 1.1 !important;
+    }
+
+    /* 3. பாராகிராப்பை சிறிதாக்க (Paragraph) */
+    .thin-p.one-line-p { 
+        font-size: 0.4rem !important; 
+        margin: 0 !important; /* தேவையற்ற இடைவெளியை நீக்க */
+        padding: 0 !important;
+        text-align: left !important;
+        white-space: nowrap;
+    }
+
+    /* 4. பட்டனை சிறிதாக்க (Button) */
+    .whatsapp-btn-live {
+        font-size: 0.6rem !important; /* மிகச்சிறிய எழுத்து */
+        padding: 4px 10px !important; /* சிறிய பட்டன் அளவு */
+        width: fit-content !important; 
+        margin: 0 !important; /* தேவையற்ற இடைவெளியை நீக்க */
+        height: auto !important;
+        min-height: unset !important;
+    }
+
+    /* ஐகான் அளவு */
+    .whatsapp-btn-live i {
+        font-size: 0.7rem !important;
+    }
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+   
+}
+
+.logo-icon-rotate {
+    font-size: clamp(0.8rem, 4vw, 1.1rem) !important; /* ஐகான் அளவு தானாக மாறும் */
+    margin-left: 10px; /* லேசாக வலது பக்கம் நகர்த்த */
+}
+
+
+
+
+
+
+/* --- 3 Social media icon) --- */
+
+
+
+
+@media screen and (max-width: 1023px) {
+    /* 1. ஐகான் பெட்டி - நேவ்பாருக்குக் கீழே நகர்த்தப்பட்டுள்ளது */
+    .social-stock-container {
+        display: flex !important;
+        flex-direction: row !important;
+        position: absolute !important; 
+        left: 30px !important; 
+        
+        /* நேவ்பாருக்குச் சரியாகக் கீழே லாக் செய்யப்பட்டுள்ளது */
+        top: 190px !important; 
+        
+        gap: 6px !important;
+        z-index: 2000 !important;
+    }
+
+    /* 2. உங்கள் அதே ஐகான் டிசைன் - கோடுகள் நீக்கப்பட்டுள்ளது */
+    .stock-icon {
+        width: 15px !important; 
+        height: 15px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        border-radius: 2px !important; 
+        
+        /* கோடுகளை நீக்க */
+        text-decoration: none !important; 
+        border: none !important;
+        box-shadow: none !important;
+    }
+
+    .stock-icon i {
+        font-size: 7px !important; 
+        color: #ffffff !important;
+        text-decoration: none !important;
+        line-height: 1 !important;
+        display: block !important;
+    }
+
+    /* உங்கள் ஒரிஜினல் நிறங்கள் மாறாது */
+    .yt-bg { background-color: #ff0000 !important; }
+    .be-bg { background-color: #053eff !important; }
+    .ig-bg { background-color: #e4405f !important; }
+}
+
+/* 3. இது இருந்தால் மட்டுமே ஐகான்கள் பேனருக்குள் நிலையாக இருக்கும் */
+.banner {
+    position: relative !important;
+}
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
