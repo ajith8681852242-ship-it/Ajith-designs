@@ -27,18 +27,18 @@ html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
 .nav-links li a { color: #000000; margin-left: 25px; text-decoration: none; font-size: 0.75rem; font-weight: 500; }
 
 /* Banner (Reduced Height & One Line P) */
-.banner { height: 80vh; background: #e9e9e9; color: #1f1f1f; display: flex; align-items: center; padding-top: 60px; }
-.banner-container { width: 90%; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
-.main-heading { font-size: 1.8rem; font-weight: 600; line-height: 1.2; }
-.one-line-p { white-space: nowrap; font-size: 0.75rem; font-weight: 200; color: #000000; margin-top: 8px; }
+.banner { height: 84.3vh; background: #e9e9e9; color: #1f1f1f; display: flex; align-items: center; padding-top: 60px; }
+.banner-container { width: 90%; margin: 0 auto; margin-right: 30px; display: flex; justify-content: space-between; align-items: center; }
+.main-heading { font-size: 3.8rem; font-weight: 600; line-height: 1.2; }
+.one-line-p { white-space: nowrap; font-size: 1.75rem; font-weight: 200; color: #000000; margin-top: 8px; }
 
 .laptop-icon { font-size: 5rem; color: #1e90ff; }
 
 /* WhatsApp Button */
 .whatsapp-btn-live { 
-    background: #25d366; color: #fff; border: none; padding: 5px 14px; 
-    border-radius: 50px; font-size: 0.6rem; font-weight: 600; cursor: pointer; 
-    margin-top: 12px; display: inline-flex; align-items: center; gap: 5px; 
+    background: #25d366; color: #fff; border: none; padding: 20px 44px; 
+    border-radius: 50px; font-size: 1.6rem; font-weight: 600; cursor: pointer; 
+    margin-top: 12px; display: inline-flex; align-items: center; gap: 10px; 
     animation: pulseLive 2s infinite; 
 }
 
@@ -106,7 +106,7 @@ html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
         
         /* அடியில் தள்ள (Corrected Bottom Move) */
         position: absolute !important;
-        bottom: 250px !important;  /* 750px-க்கு பதில் 20px கொடுக்கவும் */
+        bottom: 550px !important;  /* 750px-க்கு பதில் 20px கொடுக்கவும் */
         top: auto !important;     /* பழைய Top பொசிஷனை ரத்து செய்ய */
         
         padding: 0 !important;
@@ -169,7 +169,7 @@ html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
 /* கருப்பு மற்றும் மெல்லிய எழுத்துரு */
 .header-mini-bar span {
     color: #000000 !important;
-    font-weight: 350 !important; /* Thin Poppins */
+    font-weight: 400 !important; /* Thin Poppins */
     font-size: 12px !important;
     letter-spacing: 0.5px !important;
 }
@@ -207,13 +207,194 @@ html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
     }
 }
 
+/* Main Title Style */
+.main-title-small {
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    border-left: 4px solid #ff2d75;
+    padding-left: 10px;
+}
 
+/* "Our" Color */
+.color-our {
+    color: #333; /* Dark Grey/Black */
+}
+
+/* "Services" Color */
+.color-services {
+    color: #ff2d75; /* Pink */
+}
+
+/* Title Animation */
+.animated-title {
+    animation: fadeInSlide 1s ease-out;
+}
+
+@keyframes fadeInSlide {
+    0% {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Hexagon & Content Gaps (Optimized) */
+.service-card {
+    animation: fadeInUp 0.8s ease-out forwards;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Button Pink Text & Animation */
+.view-btn-text {
+    font-size: 8px;
+    font-weight: 700;
+    color: #ff2d75 !important;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.view-btn-text:active {
+    transform: scale(0.9);
+}
 
 
 
 /* Social media icons (Laptop View) */
 
-  
+
+
+
+
+/* Container & Fonts */
+.services-pink-theme {
+    padding: 20px 5px;
+    font-family: 'Poppins', sans-serif;
+    overflow: hidden;
+}
+
+/* Two-Tone Heading with Animation */
+.main-title-small {
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+    border-left: 3px solid #ff2d75;
+    padding-left: 8px;
+    display: flex;
+    gap: 5px;
+}
+
+.txt-our { color: #333; } /* Our - Dark Color */
+.txt-svc { color: #ff2d75; } /* Services - Pink Color */
+
+/* Entry Animation for Title */
+.animated-title {
+    animation: fadeInRight 1s ease-out;
+}
+
+@keyframes fadeInRight {
+    0% { opacity: 0; transform: translateX(-20px); }
+    100% { opacity: 1; transform: translateX(0); }
+}
+
+/* Desktop & Mobile: Fixed 3 Columns Layout */
+.row-flex-mobile {
+    display: flex !important;
+    flex-wrap: nowrap !important; /* Prevents wrapping on any screen */
+    justify-content: space-between;
+    gap: 5px; 
+    width: 100%;
+}
+
+.service-card {
+    flex: 0 0 32%; /* Fixed width for all screens */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+/* Hexagon Shape - Fixed Size */
+.hex-shape {
+    width: 30px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 12px;
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+    margin-bottom: 6px;
+}
+
+.purple-bg { background-color: #8e44ad; }
+.blue-bg   { background-color: #2980b9; }
+.orange-bg { background-color: #d35400; }
+
+/* Content Small Size */
+.service-card h3 {
+    font-size: 9px;
+    font-weight: 700;
+    margin-bottom: 3px;
+    color: #333;
+    text-transform: uppercase;
+}
+
+.service-card p {
+    font-size: 7.5px;
+    color: #666;
+    line-height: 1.2;
+    margin-bottom: 5px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* View Button - Pink Text Only & Animation */
+.view-btn-text {
+    font-size: 8px;
+    font-weight: 700;
+    color: #ff2d75 !important;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: 0.3s ease;
+}
+
+.view-btn-text:active {
+    transform: scale(0.9);
+}
+
+/* Card Load Animation */
+.slide-up {
+    animation: fadeInUp 0.8s ease forwards;
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+
+
+
+
 
 
 
@@ -227,8 +408,8 @@ html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
         display: flex !important;
         flex-direction: row !important;    /* ஐகான்களை வரிசையாக வைக்க */
         position: absolute !important;     /* பேனரின் மீது எங்கு வேண்டுமானாலும் வைக்க */
-        left: 180px !important;             /* இடது பக்க விளிம்பிலிருந்து 20px தள்ளி */
-        top: 600px !important;             /* பேனருக்குள் உங்களுக்கு தேவையான உயரம் (இதை மாற்றிக்கொள்ளலாம்) */
+        left: 150px !important;             /* இடது பக்க விளிம்பிலிருந்து 20px தள்ளி */
+        top: 700px !important;             /* பேனருக்குள் உங்களுக்கு தேவையான உயரம் (இதை மாற்றிக்கொள்ளலாம்) */
         gap: 15px !important;              /* ஐகான்களுக்கு இடையே உள்ள இடைவெளி */
         z-index: 100 !important;
     }
@@ -275,8 +456,8 @@ html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
 
 .f-box {
     flex: 1 !important;
-    height: 100px !important; /* Laptop Height */
-    min-height: 100px !important;
+    height: 150px !important; /* Laptop Height */
+    min-height: 150px !important;
     display: flex !important;
     flex-direction: column !important;
     justify-content: center !important; /* மேலேயும் கீழேயும் சமமான கேப் */
@@ -303,11 +484,11 @@ html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
 }
 
 .f-content i {
-    font-size: 30px !important;
+    font-size: 40px !important;
 }
 
 .f-title {
-    font-size: 16px !important;
+    font-size: 20px !important;
     font-weight: 800 !important;
     text-transform: uppercase !important;
     letter-spacing: 0.5px !important;
@@ -379,6 +560,12 @@ html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
 }
 
 
+
+ /* 1. Banner setup - Mobile */
+
+
+
+
 @media screen and (max-width: 992px) {
     /* 1. மெயின் பேனர் அமைப்பு */
     .banner {
@@ -446,6 +633,7 @@ html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
         display: inline-flex !important;
         width: 135px !important;
         height: 38px !important;
+        gap: 5px;
         background-color: #25d366 !important;
         color: white !important;
         border-radius: 50px !important;
@@ -457,7 +645,7 @@ html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
     }
 }
 
-
+/* 1. Banner - Mobile Sizes*/
 
 
 @media (max-width: 992px) {
@@ -514,7 +702,6 @@ html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
     font-size: clamp(0.8rem, 4vw, 1.1rem) !important; /* ஐகான் அளவு தானாக மாறும் */
     margin-left: 10px; /* லேசாக வலது பக்கம் நகர்த்த */
 }
-
 
 
 
@@ -597,4 +784,366 @@ html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
 
 
 
+
+
+
+/* Small Device Optimization */
+@media (max-width: 360px) {
+    .layout-wrapper { gap: 5px; }
+    .list li { padding-left: 6px; }
+    .outer-box-top { width: 40px; }
+}
+
+
+
+
+/* Universal Reseting */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.design-section {
+    padding: 20px 5px;
+    font-family: 'Poppins', sans-serif;
+    width: 100%;
+    background: #fff;
+    overflow-x: hidden;
+}
+
+/* Force Same Line for All Devices */
+.layout-wrapper {
+    display: flex !important;
+    flex-wrap: nowrap !important; 
+    gap: 10px;
+    align-items: stretch;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Image Column (35% fixed) */
+.visual-column {
+    flex: 0 0 35%;
+    position: relative;
+    padding: 10px 0;
+}
+
+.main-image-box {
+    width: 100%;
+    height: 100%;
+    min-height: 150px;
+    background: #f0f0f0;
+    z-index: 2;
+    position: relative;
+}
+
+.main-image-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Outer Purple Boxes */
+.outer-box-top {
+    position: absolute;
+    top: -10px; left: -0px;
+    width: 50%; height: 10%;
+    background: #8e44ad;
+    z-index: 1;
+}
+
+.outer-box-bottom {
+    position: absolute;
+    bottom: -10px; left: 50%;
     
+    width: 50%; height: 10%;
+    background: #8e44ad;
+    z-index: 1;
+}
+
+/* Text Column (65% fixed) */
+.text-column {
+    flex: 0 0 65%;
+    display: flex;
+    flex-direction: column;
+}
+
+.content-between {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+/* Heading Resize based on screen width */
+.main-title {
+    font-size: clamp(12px, 3.5vw, 26px);
+    font-weight: 800;
+    margin-bottom: 5px;
+    line-height: 1.2;
+}
+
+.pink { color: #ff2d75; }
+
+/* Grid Layout for Desktop & Mobile */
+.graphics-grid, .bottom-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 4px;
+}
+
+.group-label {
+    font-size: clamp(5.5px, 1.6vw, 11px);
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 3px;
+    white-space: nowrap;
+}
+
+.no-label { margin-top: 10px; }
+
+/* List Item Auto-Shrink */
+.list { list-style: none; padding: 0; }
+.list li {
+    font-size: clamp(5px, 1.4vw, 9px);
+    color: #444;
+    margin-bottom: 2px;
+    position: relative;
+    padding-left: 8px;
+    font-weight: 600;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.list li::before {
+    content: '✔';
+    position: absolute;
+    left: 0;
+    color: #007bff;
+    font-size: clamp(4.5px, 1.4vw, 9px);
+}
+
+/* Rate Us Button - Shrink with screen */
+.relative-pos { position: relative; }
+
+
+
+.rate-btn-inline {
+    background: #ff6600;
+    color: #fff;
+    padding: 2px 6px;
+    font-size: clamp(5.5px, 1.5vw, 10px);
+    font-weight: 700;
+    border-radius: 2px;
+    cursor: pointer;
+    display: inline-block;
+    margin-top: 0px;
+    transition: transform 0.1s;
+}
+
+.rate-btn-inline:active {
+    transform: scale(0.85);
+}
+
+
+
+
+/* Motion & Web கண்டென்ட்டை மொத்தமாக மேலெழும்பச் செய்ய */
+.bottom-content-area {
+    display: flex;
+    align-items: flex-start; /* கண்டென்ட் மேலே இருக்க (Top moving) */
+    gap: 15px;
+    margin-top: 10px; /* Graphics Design-ல் இருந்து சிறிய இடைவெளி */
+    width: 100%;
+}
+
+/* Rate Us பட்டன் கண்டென்ட் ஏரியா (Left Side) */
+.rate-us-container {
+    flex: 0 0 25%; /* பட்டனுக்கான அகலம் */
+    display: flex;
+    align-items: flex-start; /* பட்டன் மேலே இருக்க */
+    padding-top: 5px; /* தலைப்புக்கு நேராக வர சிறிய அட்ஜஸ்ட்மென்ட் */
+}
+
+.rate-btn-inline {
+    background: #ff6600;
+    color: #fff;
+    padding: 4px 10px;
+    font-size: clamp(6px, 1.8vw, 11px);
+    font-weight: 700;
+    border-radius: 3px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: transform 0.1s;
+}
+
+.rate-btn-inline:active {
+    transform: scale(0.9);
+}
+
+/* Motion & Web கண்டென்ட் ஏரியா (Right Side) */
+.bottom-grids {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Motion மற்றும் Web இரண்டு நெடுவரிசைகள் */
+    gap: 10px;
+    
+}
+
+/* மற்ற அலைன்மென்ட்கள் (முந்தையது போலவே) */
+.group-label {
+    font-size: clamp(6px, 1.8vw, 11px);
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+    color: #333;
+}
+
+.list { list-style: none; padding: 0; }
+.list li {
+    font-size: clamp(5.5px, 1.5vw, 9px);
+    color: #444;
+    margin-bottom: 2px;
+    padding-left: 10px;
+    position: relative;            
+}
+
+.list li::before {
+    content: '✔';
+    position: absolute;
+    left: 0;
+    color: #007bff;
+}
+
+
+.content-between {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; 
+    gap: 10px; /* இடைவெளியை இன்னும் குறைத்துள்ளேன் */
+    height: auto; /* 100% என்பதற்கு பதில் auto கொடுத்துப் பார்க்கவும் */
+    padding-top: 0; /* மேல் இடைவெளியைத் தவிர்க்க */
+    margin-top: 0;
+}
+
+
+.content-between {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; 
+    gap: 5px; /* இடைவெளியை இன்னும் குறைத்துள்ளேன் */
+    height: auto; /* 100% என்பதற்கு பதில் auto கொடுத்துப் பார்க்கவும் */
+    padding-top: 0; /* மேல் இடைவெளியைத் தவிர்க்க */
+    margin-top: 0;
+}
+
+
+.group-label {
+    font-size: clamp(6px, 1.8vw, 11px);
+    font-weight: 700;
+    margin-top: 0; /* கட்டாயம் 0 ஆக இருக்க வேண்டும் */
+    margin-bottom: 3px; 
+    line-height: 1;
+    display: block; /* லேபிள் முழுமையாக மேலே நகர உதவும் */
+}
+.bottom-grid-col 
+
+
+
+
+.group-label {
+    font-size: clamp(6px, 1.8vw, 11px);
+    font-weight: 700;
+    margin-top: 0;      /* மேலே உள்ள இடைவெளியை நீக்க */
+    margin-bottom: 7px; /* லிஸ்டுக்கும் லேபிளுக்கும் உள்ள இடைவெளி */
+    line-height: 1;
+    padding: 0;
+}
+
+/* ஒருவேளை உங்கள் லிஸ்ட் <ul> ஆக இருந்தால் */
+.bottom-grids ul {
+    margin-top: 0;      /* லிஸ்ட் மேலே ஒட்ட */
+    padding-left: 15px; /* புல்லட் பாயிண்ட்ஸ்க்கு மட்டும் */
+    list-style-position: inside;
+}
+
+.bottom-grids li {
+    margin-bottom: 2px; /* ஒவ்வொரு வரிக்கும் இடையே உள்ள கேப் */
+}
+
+
+.rate-us-section {
+
+    margin-left: 0px;
+    
+}
+
+/* இமேஜ் மற்றும் டெக்ஸ்ட் கண்டெய்னருக்கு இடையே மட்டும் இடைவெளியை அதிகரிக்க */
+.layout-wrapper {
+    display: flex !important;
+    flex-wrap: nowrap !important; 
+    gap: 50px; /* இந்த அளவை (10px-லிருந்து 50px-ஆக) மாற்றியுள்ளேன். இன்னும் தேவை எனில் 60px வைக்கலாம். */
+    align-items: stretch;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* மொபைலில் இடைவெளி அதிகமாக இருந்தால் டெக்ஸ்ட் பகுதி மிகவும் சுருங்கிவிடும், 
+எனவே மொபைலுக்கு மட்டும் இதை அட்ஜஸ்ட் செய்யவும் */
+@media (max-width: 480px) {
+    .layout-wrapper {
+        gap: 15px; /* மொபைல் திரைக்கு ஏற்ற இடைவெளி */
+    }
+}
+
+.graphics-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    align-items: start; /* அனைத்தும் மேலிருந்து சமமாகத் தொடங்கும் */
+}
+
+/* லேபிள் இல்லாத இடங்களிலும் உயரத்தைச் சமப்படுத்த */
+.invisible-label {
+    visibility: hidden;
+    margin-bottom: 3px;
+}
+
+.group-label {
+    font-size: clamp(6px, 1.8vw, 11px);
+    font-weight: 700;
+    margin-bottom: 5px;
+    line-height: 1;
+}
+
+/* 4. லிஸ்ட் வரிகள் உடையாமல் இருக்க */
+.list li {
+    font-size: clamp(5px, 1.4vw, 8.5px);
+    white-space: nowrap;
+    margin-bottom: 3px;
+}
+
+.main-title {
+    font-size: clamp(12px, 3.5vw, 26px);
+    font-weight: 800;
+    
+    /* இந்த மூன்று வரிகள் கட்டாயமாக தலைப்பை மேலே உயர்த்தும் */
+    margin-top: -25px !important;  /* எதிர்மறை மார்ஜின் மூலம் மேலே தள்ளுதல் */
+    padding-top: 0 !important;
+    position: relative;
+    top: 0;
+    
+    line-height: 1;
+    margin-bottom: 8px; /* தலைப்புக்கும் கீழே உள்ளவற்றுக்கும் இடைவெளி */
+    display: inline-block; /* மார்ஜின் சரியாக வேலை செய்ய இது உதவும் */
+}
+
+/* 2. தலைப்பு இருக்கும் கண்டெய்னரில் உள்ள தேவையற்ற இடைவெளியை நீக்க */
+.top-content {
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+}
+
+
