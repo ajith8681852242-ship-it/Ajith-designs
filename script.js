@@ -93,12 +93,22 @@ updateStatusLine();
 
 
 
-function preview(event, id) {
-            const reader = new FileReader();
-            reader.onload = function() {
-                document.getElementById(id).src = reader.result;
-            }
-            if(event.target.files[0]) {
-                reader.readAsDataURL(event.target.files[0]);
-            }
+// This function checks if the user is on a laptop/desktop or mobile
+    function handleImageClick(inputId) {
+        // If it's NOT a touch device (likely a laptop), open the gallery
+        if (!('ontouchstart' in window) && navigator.maxTouchPoints <= 0) {
+            document.getElementById(inputId).click();
+        } else {
+            console.log("Mobile device detected: Gallery option disabled.");
         }
+    }
+
+    function preview(event, id) {
+        const reader = new FileReader();
+        reader.onload = function() {
+            document.getElementById(id).src = reader.result;
+        }
+        if(event.target.files[0]) {
+            reader.readAsDataURL(event.target.files[0]);
+        }
+    }
