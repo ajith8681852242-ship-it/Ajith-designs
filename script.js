@@ -93,4 +93,12 @@ updateStatusLine();
 
 
 
-
+function preview(event, id) {
+            const reader = new FileReader();
+            reader.onload = function() {
+                document.getElementById(id).src = reader.result;
+            }
+            if(event.target.files[0]) {
+                reader.readAsDataURL(event.target.files[0]);
+            }
+        }
