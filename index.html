@@ -10,6 +10,13 @@
 </head>
 <body>
 
+
+
+
+
+
+
+    
     <nav class="navbar">
         <div class="nav-container">
             <div class="logo">
@@ -288,7 +295,7 @@
                     <div class="graphics-grid">
                         <div class="col">
                             <h3 class="group-label">Graphics <span class="pink">Design</span></h3>
-                            <ul class="list">
+                            <ul class="list one">
                                 <li>Logo Design</li>
                                 <li>Re Creating</li>
                                 <li>Brochure Design</li>
@@ -351,7 +358,68 @@
     </div>
 </section>
 
+<div class="main-wrapper">
+    <div class="header-section">
+        <h1>Book <span>Now</span></h1>
+        <p>choose a design and book your order.</p>
+    </div>
 
+    <div class="sprite-grid">
+        <div class="box">
+            <div class="img-area" onclick="document.getElementById('f1').click();">
+                <img id="img1" src="https://via.placeholder.com/1000">
+                <input type="file" id="f1" style="display:none;" onchange="preview(event, 'img1')">
+            </div>
+            <h2>Poster <span>Design</span></h2>
+            <p class="details">Size: <b>1000X1000</b></p>
+            <p class="details">Price: <b>100</b></p>
+            <button class="btn-book">Book Now</button>
+        </div>
+
+        <div class="box">
+            <div class="img-area" onclick="document.getElementById('f2').click();">
+                <img id="img2" src="https://via.placeholder.com/1000">
+                <input type="file" id="f2" style="display:none;" onchange="preview(event, 'img2')">
+            </div>
+            <h2>Flyer <span>Design</span></h2>
+            <p class="details">Size: <b>1000X1000</b></p>
+            <p class="details">Price: <b>200</b></p>
+            <button class="btn-book">Book Now</button>
+        </div>
+
+        <div class="box">
+            <div class="img-area" onclick="document.getElementById('f3').click();">
+                <img id="img3" src="https://via.placeholder.com/1000">
+                <input type="file" id="f3" style="display:none;" onchange="preview(event, 'img3')">
+            </div>
+            <h2>Calender <span>Design</span></h2>
+            <p class="details">Size: <b>1000X1000</b></p>
+            <p class="details">Price: <b>500</b></p>
+            <button class="btn-book">Book Now</button>
+        </div>
+    </div>
+
+    <div class="see-all">
+        <button class="see-all-btn" onclick="alert('See all clicked!')">See all</button>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
 
         
 
@@ -405,4 +473,3 @@
     <script src="script.js"></script>
 </body>
 </html>
-
