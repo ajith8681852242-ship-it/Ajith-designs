@@ -20,14 +20,38 @@
     <nav class="navbar">
         <div class="nav-container">
             <div class="logo">
-                <i class="fas fa-palette logo-icon-rotate blue-clr"></i> 
-                <span>Ajith <span class="logo-blue">studio</span></span>
+                <div class="nav-logo">
+    <i id="secret-icon" onclick="handleSecretClick()" class="fas fa-palette logo-icon-rotate blue-clr" style="cursor: pointer;"></i>
+    
+    <span>Ajith <span class="logo-blue">studio</span></span>
+</div>
+
+<script>
+    let clickCount = 0;
+    let clickTimer;
+
+    function handleSecretClick() {
+        clickCount++;
+        
+        // கிளிக் செய்த 2 வினாடிகளுக்குள் அடுத்த கிளிக் செய்ய வேண்டும், இல்லையென்றால் 0 ஆகும்
+        clearTimeout(clickTimer);
+        clickTimer = setTimeout(() => {
+            clickCount = 0;
+        }, 2000);
+
+        // 5-வது கிளிக் செய்தவுடன் login.html பக்கத்திற்கு அழைத்துச் செல்லும்
+        if (clickCount === 5) {
+            window.location.href = "login.html";
+        }
+    }
+</script>
             </div>
             <ul class="nav-links" id="navLinks">
                 <li><a href="#home">HOME</a></li>
                 <li><a href="#about">ABOUT</a></li>
                 <li><a href="#services">SERVICES</a></li>
                 <li><a href="#contact">CONTACT</a></li>
+                <li><a href="#" onclick="logout()" style="color: red;">LOGOUT</a></li>
             </ul>
             <div class="toggle-btn" id="menuToggle"><i class="fas fa-bars"></i></div>
         </div>
@@ -280,11 +304,13 @@
 <section class="design-section">
     <div class="container layout-wrapper">
         
-        <div class="visual-column">
-            <div class="outer-box-top"></div> <div class="main-image-box">
-                <img src="Screenshot 2026-01-19 090341.png" alt="Showcase">
-            </div>
-            <div class="outer-box-bottom"></div> </div>
+    <div class="visual-column">
+    <div class="outer-box-top"></div> 
+    <div class="main-image-box">
+        <img id="home_showcase" src="Screenshot 2026-01-19 090341.png" alt="Showcase">
+    </div>
+    <div class="outer-box-bottom"></div> 
+</div>
 
         <div class="text-column">
             <div class="content-between">
@@ -358,49 +384,202 @@
     </div>
 </section>
 
+
+
+
+
+
+
 <div class="main-wrapper">
-    <div class="header-section">
-        <h1>Book <span>Now</span></h1>
-        <p>choose a design and book your order.</p>
+    <div class="reveal" id="header_joint" style="display: flex; align-items: center; gap: 15px; margin-bottom: 20px;">
+        <div class="header-section" style="margin-bottom: 0;">
+            <h1>Book <span>Now</span></h1>
+            <p>Choose a design and book your order.</p>
+        </div>
+
+        <div class="timer-float-right" id="timer_container" style="position: static; width: 95px;">
+            <div class="tm-head">OFFER ENDS 🔥</div>
+            <div class="tm-flex">
+                <div class="tm-unit"><div class="tm-box" id="d_fix">00</div><div class="tm-lab">D</div></div>
+                <div class="tm-sep">:</div>
+                <div class="tm-unit"><div class="tm-box" id="h_fix">00</div><div class="tm-lab">H</div></div>
+                <div class="tm-sep">:</div>
+                <div class="tm-unit"><div class="tm-box" id="m_fix">00</div><div class="tm-lab">M</div></div>
+                <div class="tm-sep">:</div>
+                <div class="tm-unit"><div class="tm-box" id="s_fix">00</div><div class="tm-lab">S</div></div>
+            </div>
+        </div>
     </div>
 
     <div class="sprite-grid">
-        <div class="box">
-            <div class="img-area" onclick="document.getElementById('f1').click();">
-                <img id="img1" src="https://via.placeholder.com/1000">
-                <input type="file" id="f1" style="display:none;" onchange="preview(event, 'img1')">
+        <div class="box reveal">
+            <div class="img-area"> 
+                <div class="top-left-offer" id="v_off1">20% OFF</div>
+                <img id="v_img1" src="https://via.placeholder.com/1000">
             </div>
-            <h2>Poster <span>Design</span></h2>
-            <p class="details">Size: <b>1000X1000</b></p>
-            <p class="details">Price: <b>100</b></p>
+            <h2 id="v_tit1">Poster <span>Design</span></h2>
+            <p class="details">Size: <b id="v_siz1">1000X1000</b></p>
+            <p class="details">Price: <b id="v_pri1">100</b></p>
             <button class="btn-book">Book Now</button>
         </div>
 
-        <div class="box">
-            <div class="img-area" onclick="document.getElementById('f2').click();">
-                <img id="img2" src="https://via.placeholder.com/1000">
-                <input type="file" id="f2" style="display:none;" onchange="preview(event, 'img2')">
+        <div class="box reveal">
+            <div class="img-area">
+                <div class="top-left-offer" id="v_off2">20% OFF</div>
+                <img id="v_img2" src="https://via.placeholder.com/1000">
             </div>
-            <h2>Flyer <span>Design</span></h2>
-            <p class="details">Size: <b>1000X1000</b></p>
-            <p class="details">Price: <b>200</b></p>
+            <h2 id="v_tit2">Flyer <span>Design</span></h2>
+            <p class="details">Size: <b id="v_siz2">1000X1000</b></p>
+            <p class="details">Price: <b id="v_pri2">200</b></p>
             <button class="btn-book">Book Now</button>
         </div>
 
-        <div class="box">
-            <div class="img-area" onclick="document.getElementById('f3').click();">
-                <img id="img3" src="https://via.placeholder.com/1000">
-                <input type="file" id="f3" style="display:none;" onchange="preview(event, 'img3')">
+        <div class="box reveal">
+            <div class="img-area">
+                <div class="top-left-offer" id="v_off3">20% OFF</div>
+                <img id="v_img3" src="https://via.placeholder.com/1000">
             </div>
-            <h2>Calender <span>Design</span></h2>
-            <p class="details">Size: <b>1000X1000</b></p>
-            <p class="details">Price: <b>500</b></p>
+            <h2 id="v_tit3">Calendar <span>Design</span></h2>
+            <p class="details">Size: <b id="v_siz3">1000X1000</b></p>
+            <p class="details">Price: <b id="v_pri3">500</b></p>
             <button class="btn-book">Book Now</button>
         </div>
     </div>
 
-    <div class="see-all">
-        <button class="see-all-btn" onclick="alert('See all clicked!')">See all</button>
+    <div class="see-all reveal">
+        <button class="see-all-btn">See all</button>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    
+    // --- 1. SCROLL REVEAL ANIMATION ---
+    const observerOptions = {
+        threshold: 0.15,
+        rootMargin: "0px 0px -50px 0px"
+    };
+
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+
+
+
+
+
+
+    // --- 2. TIMER LOGIC ---
+
+
+
+    
+    let countDownDate = new Date().getTime() + (1 * 60 * 1000); 
+
+    function updateTimer() {
+        const now = new Date().getTime();
+        const distance = countDownDate - now;
+
+        if (distance < 0) {
+            clearInterval(timerInterval);
+            document.querySelectorAll('.top-left-offer').forEach(el => el.style.display = 'none');
+            const timerBox = document.getElementById('timer_container');
+            if (timerBox) timerBox.style.display = 'none';
+            return;
+        }
+
+        const d = Math.floor(distance / 86400000);
+        const h = Math.floor((distance % 86400000) / 3600000);
+        const m = Math.floor((distance % 3600000) / 60000);
+        const s = Math.floor((distance % 60000) / 1000);
+
+        const setVal = (id, val) => {
+            let el = document.getElementById(id);
+            if (el) el.innerText = val.toString().padStart(2, '0');
+        };
+
+        setVal("d_fix", d); setVal("h_fix", h); setVal("m_fix", m); setVal("s_fix", s);
+    }
+
+    const timerInterval = setInterval(updateTimer, 1000);
+    updateTimer();
+});
+
+
+
+
+</script>
+
+        
+
+
+
+<div class="rev-container">
+    <div class="rev-top-flex">
+        <div class="rev-left-group">
+            <h2 class="rev-main-title">
+                <span class="txt-black">clint</span> <span class="txt-orange">review</span>
+            </h2>
+            <p class="rev-sub-text">
+               "Thank you for sharing your honest review with us."</p>
+            <div class="rev-submit-side">
+                <button class="rev-btn-small">write a review</button>
+            </div>
+        </div>
+
+        <div class="rev-bars-side">
+            <div class="rev-score-row">
+                <span class="rev-num">4.5</span>
+                <span class="rev-stars">★★★★★</span>
+            </div>
+            <div class="rev-bar-stack">
+                <div class="rev-b-item">5 <div class="rev-bg"><div class="rev-fill" style="width: 90%"></div></div></div>
+                <div class="rev-b-item">4 <div class="rev-bg"><div class="rev-fill" style="width: 70%"></div></div></div>
+                <div class="rev-b-item">3 <div class="rev-bg"><div class="rev-fill" style="width: 45%"></div></div></div>
+                <div class="rev-b-item">2 <div class="rev-bg"><div class="rev-fill" style="width: 25%"></div></div></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="rev-cards-row">
+        <div class="rev-box">
+            <div class="rev-user-header">
+                <div class="rev-pfp-rect"></div>
+                <div class="rev-meta">
+                    <span class="rev-name">Leslie A.</span>
+                    <span class="rev-time">2 mins ago</span>
+                </div>
+            </div>
+            <div class="rev-rating-line-row">
+                <span class="rev-stars-orange">★★★★★</span>
+                <span class="rev-rating-num">5.0</span>
+                <span class="rev-status excellent">excellent</span>
+            </div>
+            <p class="rev-msg">Stylish, durable, and great value. The quality exceeds expectations.</p>
+        </div>
+
+        <div class="rev-box">
+            <div class="rev-user-header">
+                <div class="rev-pfp-rect"></div>
+                <div class="rev-meta">
+                    <span class="rev-name">Dianne R.</span>
+                    <span class="rev-time">5 mins ago</span>
+                </div>
+            </div>
+            <div class="rev-rating-line-row">
+                <span class="rev-stars-orange">★★★★☆</span>
+                <span class="rev-rating-num">3.5</span>
+                <span class="rev-status average">average</span>
+            </div>
+            <p class="rev-msg">Quality is better than imagined! I will purchase more soon.</p>
+        </div>
     </div>
 </div>
 
@@ -414,14 +593,6 @@
 
 
 
-
-
-
-
-
-    
-
-        
 
 
 
@@ -470,6 +641,61 @@
         </div>
     </div>
 
+
+
+
+
+
+
+
+
+   <script>
+
+
+
+
+
+
+
+    function sync() {
+        for(let i=1; i<=3; i++) {
+            const off = localStorage.getItem(`b${i}_off`);
+            const tit = localStorage.getItem(`b${i}_tit`);
+            const siz = localStorage.getItem(`b${i}_siz`);
+            const pri = localStorage.getItem(`b${i}_pri`);
+            const img = localStorage.getItem(`b${i}_img`);
+
+            if(off) document.getElementById(`v_off${i}`).innerText = off;
+            if(tit) document.getElementById(`v_tit${i}`).innerHTML = tit + " <span>Design</span>";
+            if(siz) document.getElementById(`v_siz${i}`).innerText = siz;
+            if(pri) document.getElementById(`v_pri${i}`).innerText = pri;
+            if(img) document.getElementById(`v_img${i}`).src = img;
+        }
+    }
+    window.onload = sync;
+    window.addEventListener('storage', sync); // அட்மின் எடிட் செய்தவுடன் தானாக அப்டேட் ஆகும்
+
+
+
+
+
+
+
+
+
+
+
+     
+
+
+
+
+
+
+</script>
+
+
+    
     <script src="script.js"></script>
 </body>
 </html>
