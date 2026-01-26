@@ -1461,167 +1461,441 @@ html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
 
 
 
-/* Booking Now 3 Boxes - Mobile view */
 
+/* ஆரம்பத்தில் மறைத்து வைக்க */
+.reveal {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 0.9s ease-out;
+}
 
+/* ஸ்க்ரோல் செய்து அந்த இடத்திற்கு வந்தவுடன் காட்ட */
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
 
-
-
-.main-wrapper {
-        padding: 20px 15px;
-        font-family: 'Poppins', sans-serif;
-    }
-
-    .header-section {
-    background-color: #8e44ad;
-    padding: 6px 15px;
-    border-radius: 4px;
-    width: fit-content;
-    margin-bottom: 30px;
-    display: block;
-    
-    /* ADD THIS LINE to move it left specifically */
-    margin-left:10px; 
+/* See All Button Styling */
+.see-all {
+    text-align: center;
+    padding: 30px 0;
+}
+.see-all-btn {
+    background: #007bff;
+    color: #fff;
+    border: none;
+    padding: 12px 35px;
+    border-radius: 25px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 
 
-    .header-section h1 {
-        font-size: 15px;
-        font-weight: 700;
-        color: #ffffff;
-        margin: 0;
-        white-space: nowrap;
-    }
-
-    .header-section h1 span { color: #f1c40f; }
-
-    .header-section p {
-        font-size: 8px;
-        color: #f5f5f5;
-        margin: 0;
-    }
-
-    /* Sprite Grid: 1 line, centered boxes */
-    .sprite-grid {
-        display: flex;
-        justify-content: center; 
-        align-items: flex-start;
-        gap: 12px; 
-        width: 100%;
-        box-sizing: border-box;
-        flex-wrap: nowrap; /* Forces one line */
-    }
-
-    .box {
-        flex: 0 0 calc(33.33% - 14px); /* All mobile 1-line logic */
-        max-width: 100px;
-        border: 1px solid #000;
-        border-radius: 4px;
-        padding: 5px;
-        background: #fff;
-        box-sizing: border-box;
-    }
-
-    .img-area {
-        width: 100%;
-        aspect-ratio: 1/1;
-        background: #f0f0f0;
-        overflow: hidden;
-        border-radius: 2px;
-    }
-
-    .img-area img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-
-    .box h2 {
-        font-size: 8px;
-        font-weight: 600;
-        margin: 4px 0 2px 0;
-        white-space: nowrap;
-        overflow: hidden;
-    }
-
-    .box h2 span { color: #8e44ad; }
-
-    .details {
-        font-size: 6px;
-        margin: 1px 0;
-        color: #999;
-    }
-
-    .btn-book {
-        background: #8e44ad;
-        color: #fff;
-        border: none;
-        width: 100%;
-        padding: 4px 0;
-        font-size: 7.5px;
-        font-weight: 600;
-        margin-top: 5px;
-        border-radius: 2px;
-    }
-
-    /* See All Button: Fixed Position */
-    .see-all {
-        display: flex;
-        justify-content: flex-end; /* Aligns to right */
-        margin-top: 15px;
-        width: 100%;
-        padding-right: 5px;
-    }
-
-    .see-all button {
-        color: #8e44ad;
-        font-size: 10px;
-        font-weight: 600;
-        border: none;
-        background: none;
-        cursor: pointer;
-    }
+/* 2. அனிமேஷன் எலிமெண்ட்கள் திரையை விட்டு வெளியே போகாது */
+.main-wrapper {
+    width: 100%;
+    max-width: 100vw;
+    overflow: hidden; /* இதையும் சேர்ப்பது பாதுகாப்பானது */
+    position: relative;
+    padding: 20px 10px; /* ஓரங்களில் கச்சிதமான இடைவெளி */
+}
 
 
-    .btn-book, .see-all-btn {
-        cursor: pointer;
-        transition: transform 0.1s ease, opacity 0.1s ease;
-    }
+/* --- Global --- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
-    .btn-book {
-        background: #8e44ad;
-        color: #fff;
-        border: none;
-        width: 100%;
-        padding: 4px 0;
-        font-size: 7.5px;
-        font-weight: 600;
-        margin-top: 5px;
-        border-radius: 2px;
-    }
+.main-wrapper {
+    /* ஓரங்களில் அதிக இடைவெளி */
+    padding: 20px 25px; 
+    font-family: 'Poppins', sans-serif;
+    overflow-x: hidden;
+    width: 100%;
+}
 
-    /* Missing Animation Added Here */
-    .btn-book:active, .see-all-btn:active {
-        transform: scale(0.92);
-        opacity: 0.8;
-    }
+/* 1. Top Heading - Original Purple Design Restored */
+.header-section {
+    background-color: #8e44ad;
+    padding: 8px 15px;
+    border-radius: 4px;
+    width: fit-content;
+    max-width: 90%; 
+    margin-bottom: 20px;
+    display: block; /* தாராளமாகத் தெரியும்படி */
+}
 
-    .see-all {
-        display: flex;
-        justify-content: flex-end;
-        margin-top: 15px;
-        width: 100%;
-        padding-right: 5px;
-    }
+.header-section h1 {
+    font-size: clamp(12px, 4vw, 15px);
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0;
+}
 
-    .see-all-btn {
-        color: #8e44ad;
-        font-size: 10px;
-        font-weight: 600;
-        border: none;
-        background: none;
-        padding: 5px;
-    }
+.header-section h1 span { color: #f1c40f; } /* Yellow Text */
+
+.header-section p {
+    font-size: 8px;
+    color: #f5f5f5;
+    margin-top: 2px;
+}
+
+/* 2. Grid - 3 Boxes Same Time Shrink */
+.sprite-grid {
+    display: flex;
+    justify-content: center;
+    gap: 12px; /* நீங்கள் கேட்ட அந்த சிறிய அதிகரிப்பு */
+    width: 100%;
+    flex-wrap: nowrap;
+}
+
+.box {
+    flex: 1 1 0px; 
+    min-width: 0; 
+    max-width: 110px; 
+    border: 1px solid #000;
+    border-radius: 4px;
+    padding: 6px; 
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    
+    /* 3. Inner Gap - டெக்ஸ்ட் மற்றும் பட்டன் இடையே கச்சிதமான இடைவெளி */
+    gap: 5px; 
+}
+
+.img-area {
+    width: 100%;
+    aspect-ratio: 1/1; 
+    background: #f0f0f0;
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.img-area img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* 4. Text & Styles (Compact yet Readable) */
+.box h2 {
+    font-size: 8.5px;
+    font-weight: 600;
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.2;
+}
+
+.box h2 span { color: #8e44ad; }
+
+.details {
+    font-size: 6.5px;
+    margin: 0; 
+    color: #999;
+    line-height: 1.1;
+}
+
+/* 5. Book Now Button - Design Restored */
+.btn-book {
+    background: #8e44ad;
+    color: #fff;
+    border: none;
+    width: 100%;
+    padding: 4px 0; 
+    font-size: 7.5px;
+    font-weight: 600;
+    margin-top: auto; 
+    border-radius: 2px;
+    cursor: pointer;
+}
+
+/* பட்டன் இருக்கும் பகுதி */
+/* பட்டன் இருக்கும் பகுதி - சீரமைக்கப்பட்டது */
+/* பட்டன் இருக்கும் பகுதி */
+.see-all {
+    display: flex;
+    justify-content: flex-end; 
+    width: 100%;
+    margin-top: -15px;         
+    padding-right: 5px;      /* 35px-லிருந்து 18px ஆகக் குறைத்துள்ளேன். இது பட்டனை மீண்டும் வலது ஓரம் நகர்த்தும் */
+    position: relative;
+    z-index: 5;
+}
+
+/* பட்டன் ஸ்டைல் */
+.see-all-btn {
+    background-color: #ff6600; 
+    color: #ffffff;
+    border: none;
+    padding: 6px 18px; 
+    font-size: 10px;
+    font-weight: bold;
+    border-radius: 4px; 
+    cursor: pointer;
+}
+/* Click Animation */
+.see-all-btn:active {
+    transform: scale(0.95);
+    background-color: #e65c00;
+}
+
+.see-all-btn:hover {
+    background-color: #fb8c00;
+}
+
+
+/* Price மற்றும் Offer-ஐ ஒரே வரிசையில் வைக்க */
+.price-row {
+    display: flex;
+    justify-content: space-between; /* ஒன்றை இடதுபுறமும், மற்றொன்றை வலது ஓரம் தள்ளும் */
+    align-items: center;            /* இரண்டையும் ஒரே உயரத்தில் (Equal) வைக்கும் */
+    width: 100%;
+    margin-top: 2px;
+}
+
+/* 20% OFF - Small Red Box */
+.discount-badge {
+    background-color: #ff0000;
+    color: #ffffff;
+    font-size: 7px;
+    font-weight: bold;
+    padding: 2px 5px;
+    border-radius: 3px;
+    white-space: nowrap;
+    animation: slowBlink 2.5s infinite ease-in-out;
+}
+
+@keyframes slowBlink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+}
+
+/* மற்றவை மாறாமல் இருக்க */
+.details {
+    margin: 0; /* தேவையற்ற இடைவெளியைத் தவிர்க்க */
+    font-size: 7.5px;
+}
+
+.box {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 10px;
+}
+
+
+
+/* வரிகளைச் சீரமைக்க */
+.info-row {
+    display: flex;
+    justify-content: space-between; /* இடது மற்றும் வலது ஓரம் */
+    align-items: center;
+    width: 100%;
+    margin-bottom: 2px; /* Size மற்றும் Price இடையே சமமான இடைவெளி (Same gap) */
+}
+
+/* 20% OFF - Reduced Size (மிகச் சிறிய பெட்டி) */
+.offer-tag {
+    background-color: #ff0000;
+    color: #ffffff;
+    font-size: 6px;           /* எழுத்தின் அளவு குறைக்கப்பட்டுள்ளது */
+    font-weight: 900;
+    padding: 1px 3px;         /* பெட்டியின் நீளம்/உயரம் குறைக்கப்பட்டுள்ளது */
+    border-radius: 2px;
+    white-space: nowrap;
+    text-transform: uppercase;
+    animation: slowBlink 2.5s infinite ease-in-out;
+}
+
+@keyframes slowBlink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+}
+
+/* டெக்ஸ்ட் அளவு */
+.details {
+    font-size: 7.5px;
+    margin: 0;
+}
+
+/* பெட்டியின் பொதுவான அமைப்பு */
+.box {
+    display: flex;
+    flex-direction: column;
+    padding: 8px;
+    border: 1px solid #000;
+    border-radius: 5px;
+}
+
+.btn-book {
+    width: 100%;
+    margin-top: 5px;
+    background: #8e44ad;
+    color: white;
+    border: none;
+    padding: 5px 0;
+    font-size: 8px;
+    font-weight: bold;
+    border-radius: 3px;
+}
+
+
+
+/* 1. இமேஜ் ஏரியா - மற்றவை மாறாமல் இருக்க */
+.img-area {
+    position: relative; /* இது மிகவும் முக்கியம் */
+    width: 100%;
+}
+
+/* 2. ஆஃபர் பேட்ஜ் - இது தனி அடுக்கில் (Absolute) இருப்பதால் எதையும் நகர்த்தாது */
+.top-left-offer {
+    position: absolute;   /* இது மற்ற ஐட்டங்களை தொந்தரவு செய்யாது */
+    top: 5px;             /* மேலிருந்து 5px */
+    left: 5px;            /* இடதுபுறம் இருந்து 5px */
+    background-color: #ff0000;
+    color: white;
+    font-size: 6px;       /* மிகச் சிறிய அளவு */
+    font-weight: bold;
+    padding: 1px 4px;
+    border-radius: 2px;
+    z-index: 10;          /* படத்திற்கு மேல் தெரிய */
+    animation: slowBlink 2.5s infinite ease-in-out;
+}
+
+/* 3. மற்ற டெக்ஸ்டுகள் - உங்கள் பழைய அதே இடைவெளி */
+.details {
+    margin: 2px 0; 
+    font-size: 7.5px;
+}
+
+/* மின்னும் அனிமேஷன் */
+@keyframes slowBlink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+}
+
+/* பட்டன் மற்றும் பெட்டி ஸ்டைல்கள் மாறாது */
+.btn-book {
+    width: 100%;
+    background: #8e44ad;
+    color: white;
+    border: none;
+    padding: 6px 0;
+    font-weight: bold;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* பட்டனின் பொதுவான ஸ்டைல் */
+.btn-book {
+    width: 100%;
+    margin-top: 5px;
+    background-color: #8e44ad; /* ஊதா நிறம் */
+    color: white;
+    border: none;
+    padding: 6px 0;
+    font-size: 8px;
+    font-weight: bold;
+    border-radius: 4px;
+    cursor: pointer;
+    
+    /* மென்மையான மாற்றத்திற்கு (Smooth transition) */
+    transition: all 0.2s ease;
+    outline: none;
+}
+
+/* 1. மவுஸ் பட்டன் மேல் இருக்கும் போது (Hover Effect) */
+.btn-book:hover {
+    background-color: #7d3c98; /* நிறம் சற்று கருமையாகும் */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+/* 2. பட்டனை அழுத்தும் போது (Click Animation) */
+.btn-book:active {
+    transform: scale(0.95);    /* பட்டன் லேசாக அமுங்கும் */
+    background-color: #6c3483; /* அழுத்தும் போது இன்னும் கருமையாகும் */
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.3); /* உள்ளே அமுங்கிய உணர்வு தரும் */
+}
+
+
+
+
+
+
+/* பெட்டியின் பொதுவான அமைப்பு */
+.box {
+    display: flex;
+    flex-direction: column;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    /* இதுதான் அனைத்துக்கும் இடையே சமமான கேப் கொடுக்கும் */
+    gap: 3px; 
+}
+
+/* 20% OFF - படத்தின் மேல் இடது ஓரத்தில் */
+.top-left-offer {
+    position: absolute;
+    top: 0px;
+    left: 4px;
+    background-color: #ff0000;
+    color: white;
+    font-size: 6px;
+    padding: 1px 3px;
+    border-radius: 2px;
+    z-index: 10;
+}
+
+/* தலைப்பு (Heading) - கீழே நகர்த்தப்பட்டுள்ளது */
+h2 {
+    font-size: 9px;
+    margin-top: 5px;    /* படத்திலிருந்து கொஞ்சம் கீழே நகர்த்த */
+    margin-bottom: 0px; /* டெக்ஸ்டுகளுக்கு நெருக்கமாக இருக்க */
+    line-height: 1;
+}
+
+/* Size மற்றும் Price - சமமான இடைவெளி */
+.details {
+    font-size: 7px;
+    margin: 0;          /* தேவையற்ற மார்ஜின் நீக்கம் */
+    line-height: 1.2;
+    color: #333;
+}
+
+/* பட்டன் - சரியான கேப் உடன் */
+.btn-book {
+    width: 100%;
+    margin-top: 2px;    /* பிரைஸிலிருந்து சமமான கேப் */
+    background: #8e44ad;
+    color: white;
+    padding: 5px 0;
+    font-size: 8px;
+    border-radius: 3px;
+    border: none;
+    font-weight: bold;
+}
+
+@keyframes slowBlink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+}
+
+
+/* தலைப்பை மட்டும் கீழே நகர்த்த (Heading bottom move) */
+h2 {
+    font-size: 9px;
+    margin-top: 4px !important;    /* இந்த மதிப்பை (8px) கூட்டினால் தலைப்பு இன்னும் கீழே இறங்கும் */
+    margin-bottom: 2px;            /* கீழே உள்ள Size டெக்ஸ்டுடன் உள்ள கேப் */
+    padding: 0;
+    line-height: 1;
+    display: block;
+}
 
 
 
@@ -1629,6 +1903,166 @@ html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
 
 
 
+
+
+
+
+
+
+
+
+.timer-float-right { 
+                position: absolute; 
+                left: 235px; /* பழைய ஹெடர் இருந்த இடத்திற்கு தள்ளி வைக்கிறது */
+                top: 0; 
+                width: 100px; 
+                text-align: center;
+                font-family: Arial, sans-serif;
+            }
+            .tm-head { font-size: 7px; font-weight: bold; color: #d9534f; margin-bottom: 3px; text-transform: uppercase; }
+            .tm-flex { display: flex; align-items: center; justify-content: space-between; gap: 2px; }
+            .tm-unit { display: flex; flex-direction: column; align-items: center; flex: 1; }
+            .tm-box { 
+                background: #007bff; color: #fff; width: 100%; aspect-ratio: 1/1; 
+                display: flex; justify-content: center; align-items: center; 
+                border-radius: 2px; font-size: 12px; font-weight: 900; 
+            }
+            .tm-lab { color: #d9534f; font-size: 6px; font-weight: bold; margin-top: 1px; }
+            .tm-sep { color: #007bff; font-weight: bold; font-size: 10px; padding-bottom: 8px; }
+
+
+
+            /* 1. டைமரை வலதுபுறம் கொண்டு செல்ல (Absolute Position) */
+.timer-container-fixed {
+    position: absolute !important;
+    top: 20px;            /* ஹெடருக்கு இணையான உயரம் */
+    right: 25px;          /* வலது ஓரத்திலிருந்து இடைவெளி */
+    width: 100px;         /* டைமரின் அகலம் */
+    height: auto !important;
+    margin: 0 !important;
+    z-index: 100;
+}
+
+/* டைமர் உள்ளே இருக்கும் அலைன்மென்ட் */
+.timer-float-right {
+    position: relative;
+    left: 0 !important;   /* பழைய லெஃப்ட் அலைன்மென்ட்டை நீக்க */
+    width: 100%;
+}
+
+/* 2. See All பட்டனை சற்று மேலே நகர்த்த */
+
+/* மற்ற CSS ஐட்டங்கள் அப்படியே இருக்கும் */
+.tm-box { 
+    background: #ff3300; 
+    color: #fff; 
+    width: 100%; 
+    aspect-ratio: 1/1; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    border-radius: 2px; 
+    font-size: 10px; 
+    font-weight: 900; 
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.rev-container { 
+    max-width: 360px; 
+    margin: -1px auto; /* இங்கே 10px-லிருந்து 0px ஆக மாற்றப்பட்டுள்ளது, எனவே இது மேலே நகரும் */
+    padding: 0 12px; 
+    font-family: sans-serif;
+}
+
+/* மேல் பகுதி லேஅவுட் */
+.rev-top-flex { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: flex-start; 
+    margin-bottom: 20px; 
+}
+
+/* இடது பக்கம் நகர்வு */
+.rev-left-group { 
+    display: flex; 
+    flex-direction: column; 
+    text-align: left; 
+    flex: 1; 
+    margin-left: 15px; 
+}
+
+.rev-main-title { font-size: 16px; font-weight: bold; margin: 0 0 4px 0; text-transform: capitalize; }
+.txt-black { color: #000; }
+.txt-orange { color: #FF8C00; }
+
+.rev-sub-text {
+    font-size: 9px;
+    color: #666;
+    width: 60%; 
+    line-height: 1.2;
+    margin: 0 0 10px 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* பட்டன் ஸ்டைல் */
+.rev-btn-small { 
+    background: #FF8C00; 
+    color: #fff; 
+    border: none; 
+    padding: 6px 14px; 
+    border-radius: 4px; 
+    font-size: 8px; 
+    font-weight: bold; 
+    cursor: pointer;
+    text-transform: lowercase;
+}
+
+/* வலது பக்கம் Rating Bars */
+.rev-bars-side { width: 110px; flex-shrink: 0; margin-right: 35px; }
+.rev-score-row { display: flex; align-items: center; gap: 4px; margin-bottom: 4px; }
+.rev-num { font-size: 16px; font-weight: bold; }
+.rev-stars { color: #FFB400; font-size: 7px; }
+.rev-bar-stack { display: flex; flex-direction: column; gap: 3px; }
+.rev-b-item { display: flex; align-items: center; gap: 4px; font-size: 7px; color: #777; }
+.rev-bg { flex: 1; height: 3px; background: #eee; border-radius: 2px; }
+.rev-fill { height: 100%; background: #FF8C00; }
+
+/* Review Boxes */
+.rev-cards-row { display: flex; gap: 8px; }
+.rev-box { flex: 1; border: 1px solid #f2f2f2; border-radius: 8px; padding: 8px; height: 95px; background: #fff; overflow: hidden; }
+
+/* Rectangular PFP */
+.rev-user-header { display: flex; align-items: center; gap: 6px; margin-bottom: 6px; }
+.rev-pfp-rect { width: 18px; height: 18px; border-radius: 3px; background: #eee; border: 1px solid #FF8C00; }
+
+.rev-meta { display: flex; flex-direction: column; line-height: 1.1; }
+.rev-name { font-size: 8px; font-weight: bold; }
+.rev-time { font-size: 6px; color: #999; }
+
+/* Rating Line: Stars + 3.5 + average */
+.rev-rating-line-row { display: flex; align-items: center; gap: 5px; margin-bottom: 4px; }
+.rev-stars-orange { color: #FF8C00; font-size: 7px; }
+.rev-rating-num { font-size: 7px; color: #333; font-weight: bold; }
+.rev-status { font-size: 6px; font-weight: bold; text-transform: lowercase; }
+.excellent { color: #28a745; }
+.average { color: #ffc107; }
+
+.rev-msg { font-size: 7.5px; color: #555; line-height: 1.2; margin-top: 2px; }
 
 
 
