@@ -93,22 +93,121 @@ updateStatusLine();
 
 
 
-// This function checks if the user is on a laptop/desktop or mobile
-    function handleImageClick(inputId) {
-        // If it's NOT a touch device (likely a laptop), open the gallery
-        if (!('ontouchstart' in window) && navigator.maxTouchPoints <= 0) {
-            document.getElementById(inputId).click();
-        } else {
-            console.log("Mobile device detected: Gallery option disabled.");
-        }
-    }
 
-    function preview(event, id) {
-        const reader = new FileReader();
-        reader.onload = function() {
-            document.getElementById(id).src = reader.result;
-        }
-        if(event.target.files[0]) {
-            reader.readAsDataURL(event.target.files[0]);
-        }
+
+
+
+
+function sync() {
+    for (let i = 1; i <= 3; i++) {
+        const off = localStorage.getItem(`b${i}_off`);
+        const tit = localStorage.getItem(`b${i}_tit`);
+        const siz = localStorage.getItem(`b${i}_siz`);
+        const pri = localStorage.getItem(`b${i}_pri`);
+        const img = localStorage.getItem(`b${i}_img`);
+
+        // எலிமெண்ட் இருக்கிறதா என்று சரிபார்த்து பிறகு அப்டேட் செய்யவும்
+        if (off && document.getElementById(`v_off${i}`)) 
+            document.getElementById(`v_off${i}`).innerText = off;
+        
+        if (tit && document.getElementById(`v_tit${i}`)) 
+            document.getElementById(`v_tit${i}`).innerHTML = tit + " <span>Design</span>";
+        
+        if (siz && document.getElementById(`v_siz${i}`)) 
+            document.getElementById(`v_siz${i}`).innerText = siz;
+        
+        if (pri && document.getElementById(`v_pri${i}`)) 
+            document.getElementById(`v_pri${i}`).innerText = pri;
+        
+        if (img && document.getElementById(`v_img${i}`)) 
+            document.getElementById(`v_img${i}`).src = img;
     }
+}
+window.onload = sync;
+window.addEventListener('storage', sync);
+
+
+
+
+
+
+
+
+
+document.addEventListener("DOMContentLoaded", function() {
+    const observerOptions = {
+        threshold: 0.15 // ஐட்டம் 15% தெரிந்தவுடன் அனிமேஷன் தொடங்கும்
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+            }
+        });
+    }, observerOptions);
+
+    // reveal கிளாஸ் உள்ள அனைத்தையும் கவனிக்கச் சொல்கிறோம்
+    document.querySelectorAll('.reveal').forEach(el => {
+        observer.observe(el);
+    });
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Zoom effect on tap
+document.querySelectorAll('.rev-card').forEach(card => {
+    card.addEventListener('click', () => {
+        card.style.transform = 'scale(1.05)';
+        setTimeout(() => {
+            card.style.transform = 'scale(1)';
+        }, 200);
+    });
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
