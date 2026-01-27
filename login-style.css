@@ -1,0 +1,438 @@
+
+/* Global Reset */
+
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
+
+/* Colors & Animations */
+.blue-clr { color: #1e90ff !important; }
+.white-clr { color: #1f1f1f; }
+.dark { color: #1f1f1f;; }
+
+@keyframes rotateLogo { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+.logo-icon-rotate { animation: rotateLogo 5s linear infinite; display: inline-block; margin-right: 5px; }
+
+@keyframes pulseLive {
+    0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+    70% { box-shadow: 0 0 0 8px rgba(37, 211, 102, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+}
+
+/* Navbar (Laptop: Black & Medium 500) */
+.navbar { background: #fff; height: 60px; display: flex; align-items: center; position: fixed; width: 100%; top: 0; z-index: 1000; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+.nav-container { width: 92%; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+.logo { font-weight: 600; font-size: 0.9rem; }
+.logo-blue { color: #1e90ff; }
+.nav-links { display: flex; list-style: none; }
+.nav-links li a { color: #000000; margin-left: 25px; text-decoration: none; font-size: 0.75rem; font-weight: 500; }
+
+
+/* Mobile View & Toggle Fix */
+@media (min-width: 993px) { .toggle-btn { display: none !important; } }
+@media (max-width: 992px) {
+    .toggle-btn { 
+        display: block; 
+        cursor: pointer; 
+        font-size: 1.2rem; }
+    .nav-links { position: fixed; right: -100%; top: 60px; background: #fff; width: 240px; height: 100vh; flex-direction: column; padding: 30px; transition: 0.4s ease; z-index: 1001; }
+    .nav-links.active { right: 0 !important; }
+    .nav-links li { margin-bottom: 18px; }
+    .nav-links li a { margin: 0; font-size: 0.85rem; font-weight: 600; color: #333; }
+
+
+
+
+
+body { font-family: 'Poppins', sans-serif; background: #f0f2f5; padding: 20px; }
+        .main-title { text-align: center; color: #8e44ad; font-weight: 800; border-bottom: 3px solid #8e44ad; padding-bottom: 10px; margin-bottom: 30px; }
+        .edit-container { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
+        .edit-card { background: #fff; border-radius: 10px; padding: 15px; width: 280px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); border: 1px solid #ddd; }
+        .edit-card h3 { font-size: 14px; margin-bottom: 15px; color: #333; text-transform: uppercase; }
+        .preview-img { width: 100%; height: 120px; object-fit: cover; border-radius: 5px; background: #eee; margin-bottom: 15px; border: 1px solid #ddd; }
+        input { width: 100%; margin-bottom: 10px; padding: 10px; border: 1px solid #ccc; border-radius: 5px; font-size: 13px; box-sizing: border-box; }
+        input:focus { border-color: #8e44ad; outline: none; }
+        .hint { font-size: 11px; color: #777; margin-bottom: 5px; }
+    </style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    * {
+    box-sizing: border-box;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 300; /* மெல்லிய எழுத்துக்கள் */
+}
+
+body {
+    margin: 0;
+    background-color: #f7f9fc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 20px; /* மொபைலில் பார்டரைத் தொடாமல் இருக்க */
+}
+
+.login-box {
+    width: 100%;
+    max-width: 340px; /* சிறிய பெட்டி */
+    padding: 40px 30px;
+    background: #ffffff;
+    border: 1px solid #e1e1e1;
+    text-align: center;
+    border-radius: 2px;
+}
+
+h1 {
+    font-size: 20px;
+    color: #444;
+    margin-bottom: 30px;
+}
+
+.input-container {
+    border: 1px solid #e1e1e1;
+    border-radius: 2px;
+    margin-bottom: 20px;
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    outline: none;
+    font-size: 14px;
+    text-align: center;
+}
+
+/* பட்டனை சிறியதாக்கி நடுவில் வைக்க */
+.btn-area {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.sign-in-btn {
+    width: 180px; /* சிறிய அகலம் */
+    padding: 10px;
+    background-color: #4b7bec;
+    color: white;
+    border: none;
+    font-size: 13px;
+    cursor: pointer;
+    border-radius: 2px;
+}
+
+.links {
+    font-size: 11px;
+    color: #999;
+}
+
+.blue-text { color: #4b7bec; cursor: pointer; }
+
+.line {
+    margin: 20px 0;
+    border-top: 1px solid #eee;
+    position: relative;
+}
+
+.line span {
+    position: absolute;
+    top: -10px;
+    background: #fff;
+    padding: 0 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 10px;
+    color: #ccc;
+}
+
+/* Google Button மையப்படுத்த */
+.g_id_signin {
+    display: flex;
+    justify-content: center;
+}
+    
+
+
+
+/* 1. பிரவுசர் தரும் அனைத்து டீபால்ட் அடையாளங்களையும் நீக்க */
+* {
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+}
+
+body {
+    background-color: #f7f9fc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+.login-box {
+    width: 340px;
+    padding: 50px 30px;
+    background: #ffffff;
+    border: 1px solid #eeeeee;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.03);
+}
+
+h1 {
+    font-size: 22px;
+    font-weight: 300; /* மிக மெல்லிய எழுத்து */
+    color: #444;
+    margin-bottom: 30px;
+}
+
+.input-container {
+    border: 1px solid #e0e0e0;
+    border-radius: 2px;
+    margin-bottom: 25px;
+    background: #fff;
+}
+
+/* அம்புக்குறியை நீக்கும் முக்கிய பகுதி */
+input {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    outline: none;
+    text-align: center;
+    font-size: 15px;
+    font-weight: 300;
+    color: #666;
+    background: transparent;
+    
+    /* ஏரோ மார்க்கை நீக்க */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+/* பாஸ்வேர்டு புள்ளிகளை மட்டும் காட்ட */
+input[type="password"] {
+    letter-spacing: 2px;
+}
+
+.btn-area {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.sign-in-btn {
+    width: 180px;
+    padding: 12px;
+    background-color: #4b7bec;
+    color: white;
+    border: none;
+    font-size: 13px;
+    cursor: pointer;
+    border-radius: 2px;
+    transition: opacity 0.2s;
+}
+
+.sign-in-btn:hover { opacity: 0.9; }
+
+.links { font-size: 12px; color: #999; }
+.blue-text { color: #4b7bec; cursor: pointer; text-decoration: none; }
+
+.line {
+    margin: 25px 0;
+    border-top: 1px solid #eee;
+    position: relative;
+}
+.line span {
+    position: absolute;
+    top: -10px; left: 50%;
+    transform: translateX(-50%);
+    background: #fff; padding: 0 10px;
+    font-size: 11px; color: #ccc;
+}
+
+
+
+
+/* Poppins Font Import */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+.login-box {
+    background: white;
+    padding: 20px;
+    border: 1px solid #eee; /* லேசான பார்டர் மட்டும் */
+    box-shadow: none; /* நிழல் நீக்கப்பட்டது */
+    width: 280px; /* அளவு மேலும் குறைக்கப்பட்டுள்ளது */
+    text-align: center;
+    margin: auto;
+}
+
+.brand-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.brand-header i {
+    font-size: 20px;
+    color: #007bff;
+}
+
+.brand-name {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Password Box Correction */
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 0; /* வளைவு நீக்கப்பட்டது */
+    background: #fff;
+    outline: none;
+    text-align: center;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+}
+
+/* Buttons Styling */
+.sign-in-btn {
+    width: 100%;
+    padding: 10px;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 0; /* பட்டன் வளைவு நீக்கப்பட்டது */
+    font-family: 'Poppins', sans-serif; /* Poppins Font */
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    text-transform: uppercase;
+}
+
+.sign-in-btn:hover {
+    background: #0056b3;
+}
+
+/* Google Sign-in adjustment */
+.g_id_signin {
+    margin-top: 10px;
+    border-radius: 0 !important;
+}
+
+.blue-text {
+    color: #007bff;
+}
+
+.links p {
+    font-size: 12px;
+    margin-top: 10px;
+}
+
+
+
+.login-box {
+    width: 280px;
+    background: white;
+    padding: 25px;
+    text-align: center;
+    border: 1px solid #ddd; /* மெல்லிய பார்டர் மட்டும் */
+}
+
+/* முக்கியமானது: இன்புட் பாக்ஸைச் சுற்றியுள்ள தேவையற்ற இடைவெளியை நீக்க */
+.input-container {
+    margin-bottom: 20px;
+    border: none; /* இங்கே பார்டர் இருந்தால் அதை நீக்கிவிடும் */
+    padding: 0;
+}
+
+input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc; /* மெயின் பாஸ்வேர்டு பாக்ஸ் பார்டர் */
+    border-radius: 0; /* நீங்கள் கேட்டபடி Sharp edges */
+    outline: none;
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+    box-sizing: border-box;
+    display: block;
+}
+
+/* பட்டன் ஸ்டைல் */
+.sign-in-btn {
+    width: 100%;
+    padding: 12px;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 0; /* கூர்மையான ஓரங்கள் */
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    cursor: pointer;
+    text-transform: uppercase;
+}
+
+.brand-name {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 20px;
+}
+
+
+/* Poppins Font Import */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+
+.footer-back {
+    margin-top: 25px; /* மேலே உள்ளவற்றிலிருந்து இடைவெளி விட */
+    text-align: center;
+}
+
+.back-home-small {
+    text-decoration: none;
+    color: #999;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500; /* Medium Font Weight */
+    font-size: 11px; /* Small Size */
+    transition: 0.3s;
+    letter-spacing: 0.5px;
+}
+
+.back-home-small:hover {
+    color: #007bff; /* ஹோவர் செய்யும் போது நீல நிறமாகும் */
+    text-decoration: underline;
+}
+
+/* மற்ற தேவையற்ற கோடுகளை நீக்க */
+.login-box {
+    padding: 25px;
+    width: 280px;
+}
+
+.input-container {
+    border: none !important; /* கூடுதல் பெட்டியை நீக்கும் */
+    padding: 0;
+}
+
+#passKey {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    box-sizing: border-box; /* இது மிக அவசியம் */
+    font-family: 'Poppins', sans-serif;
+}

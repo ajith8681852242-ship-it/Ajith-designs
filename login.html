@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Login</title>
+    <link rel="stylesheet" href="login-style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+</head>
+<body>
+
+     
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <div class="nav-logo">
+    <i id="secret-icon" onclick="handleSecretClick()" class="fas fa-palette logo-icon-rotate blue-clr" style="cursor: pointer;"></i>
+    
+    <span>Ajith <span class="logo-blue">studio</span></span>
+</div>
+
+
+     
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+    let clickCount = 0;
+    let clickTimer;
+
+    function handleSecretClick() {
+        clickCount++;
+        
+        // கிளிக் செய்த 2 வினாடிகளுக்குள் அடுத்த கிளிக் செய்ய வேண்டும், இல்லையென்றால் 0 ஆகும்
+        clearTimeout(clickTimer);
+        clickTimer = setTimeout(() => {
+            clickCount = 0;
+        }, 2000);
+
+        // 5-வது கிளிக் செய்தவுடன் login.html பக்கத்திற்கு அழைத்துச் செல்லும்
+        if (clickCount === 5) {
+            window.location.href = "login.html";
+        }
+    }
+</script>
+            </div>
+
+
+
+
+
+<ul class="nav-links" id="navLinks">
+    <li><a href="index.html">HOME</a></li> 
+    <li><a href="index.html#about">ABOUT</a></li>
+    <li><a href="index.html#services">SERVICES</a></li>
+    <li><a href="index.html#contact">CONTACT</a></li>
+</ul>
+            <div class="toggle-btn" id="menuToggle"><i class="fas fa-bars"></i></div>
+        </div>
+    </nav>
+
+    <div class="login-box">
+        <div class="brand-header">
+            <i class="fas fa-palette logo-blue"></i>
+            <span class="brand-name">Ajith <span class="blue-text">studio</span></span>
+        </div>
+        
+        <div class="input-container">
+            <input type="password" id="passKey" placeholder="Password" autocomplete="off">
+        </div>
+
+        <button class="sign-in-btn" onclick="handleLogin()">SIGN IN</button>
+        
+        
+
+        <div class="footer-back">
+            <a href="index.html" class="back-home-small">Back to Home</a>
+        </div>
+    </div>
+
+
+    <form id="loginAlertForm" action="https://formspree.io/f/உங்கள்_ID" method="POST" style="display:none;">
+    <input type="text" name="message" value="Ajith Studio: Admin Logged In Just Now!">
+</form>
+
+    <script src="admin-logic.js"></script>
+    
+    
+    </script>
+
+</body>
+</html>

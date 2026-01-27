@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajith Studio | Control Room</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* Navbar மற்றும் Content இடையே இடைவெளி */
+        body {
+            margin: 0;
+            padding-top: 70px; /* Navbar மறைக்காமல் இருக்க */
+            background-color: #f9f9f9;
+        }
+
+        /* பிரதான தலைப்பு - New Heading Added */
+        .page-main-heading {
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        .page-main-heading h2 {
+            font-size: 22px;
+            color: #2c3e50;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+
+        .page-main-heading p {
+            font-size: 11px;
+            color: #7f8c8d;
+            margin: 0;
+        }
+
+        /* அட்மின் கண்டெய்னர் */
+        .admin-panel {
+            font-family: 'Poppins', sans-serif;
+            padding: 20px 10px;
+            text-align: center;
+        }
+
+        /* 3 பெட்டிகள் ஒரே வரிசையில் */
+        .grid-editors {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        /* மிகச்சிறிய மற்றும் உயரம் குறைக்கப்பட்ட பெட்டி */
+        .editor-card {
+            width: 105px;
+            height: 190px;
+            border: 1px solid #000;
+            background: #fff;
+            padding: 5px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            border-radius: 4px;
+        }
+
+        /* இடது மேல் மூலை - Delete பட்டன் */
+        .del-btn {
+            position: absolute;
+            top: -6px;
+            left: -6px;
+            background: #000;
+            color: #fff;
+            width: 18px;
+            height: 18px;
+            font-size: 12px;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 2px;
+            z-index: 10;
+        }
+
+        /* சதுர இமேஜ் பாக்ஸ் */
+        .img-box {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            border: 1px solid #eee;
+            margin-bottom: 5px;
+            cursor: pointer;
+            background: #fafafa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .img-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* இன்புட்கள் */
+        .editor-card input {
+            width: 100%;
+            border: none;
+            border-bottom: 1px solid #eee;
+            font-size: 9px;
+            margin-bottom: 5px;
+            padding: 2px 0;
+            outline: none;
+            text-align: left;
+        }
+
+        .editor-card input:focus {
+            border-bottom: 1px solid #3498db;
+        }
+
+        .box-label {
+            margin-top: auto;
+            font-size: 9px;
+            font-weight: bold;
+            color: #3498db;
+        }
+
+        .save-hint {
+            font-size: 10px;
+            color: #27ae60;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <div class="nav-logo">
+                    <i id="secret-icon" onclick="handleSecretClick()" class="fas fa-palette logo-icon-rotate blue-clr" style="cursor: pointer;"></i>
+                    <span>Ajith <span class="logo-blue">studio</span></span>
+                </div>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html#home">HOME</a></li>
+                <li><a href="index.html#about">ABOUT</a></li>
+                <li><a href="index.html#services">SERVICES</a></li>
+                <li><a href="index.html#contact">CONTACT</a></li>
+                <li><a href="#" onclick="logout()" style="color: red;">LOGOUT</a></li>
+            </ul>
+            <div class="toggle-btn" id="menuToggle"><i class="fas fa-bars"></i></div>
+        </div>
+    </nav>
+
+    <div class="page-main-heading">
+        <h2>CONTROL ROOM</h2>
+        
+    </div>
+
+    <div class="admin-panel">
+        <div class="grid-editors">
+            <div class="editor-card">
+                <button class="del-btn" onclick="clearData(1)">X</button>
+                <label for="f1" class="img-box">
+                    <img id="p_img1" src="https://via.placeholder.com/100?text=Upload">
+                </label>
+                <input type="file" id="f1" style="display:none" onchange="saveImg(this, 1)">
+                <input type="text" id="i_tit1" oninput="saveData(1)" placeholder="Heading">
+                <input type="text" id="i_siz1" oninput="saveData(1)" placeholder="Size">
+                <input type="text" id="i_pri1" oninput="saveData(1)" placeholder="Price">
+                <input type="text" id="i_off1" oninput="saveData(1)" placeholder="Offer">
+                <div class="box-label">BOX 1</div>
+            </div>
+
+            <div class="editor-card">
+                <button class="del-btn" onclick="clearData(2)">X</button>
+                <label for="f2" class="img-box">
+                    <img id="p_img2" src="https://via.placeholder.com/100?text=Upload">
+                </label>
+                <input type="file" id="f2" style="display:none" onchange="saveImg(this, 2)">
+                <input type="text" id="i_tit2" oninput="saveData(2)" placeholder="Heading">
+                <input type="text" id="i_siz2" oninput="saveData(2)" placeholder="Size">
+                <input type="text" id="i_pri2" oninput="saveData(2)" placeholder="Price">
+                <input type="text" id="i_off2" oninput="saveData(2)" placeholder="Offer">
+                <div class="box-label">BOX 2</div>
+            </div>
+
+            <div class="editor-card">
+                <button class="del-btn" onclick="clearData(3)">X</button>
+                <label for="f3" class="img-box">
+                    <img id="p_img3" src="https://via.placeholder.com/100?text=Upload">
+                </label>
+                <input type="file" id="f3" style="display:none" onchange="saveImg(this, 3)">
+                <input type="text" id="i_tit3" oninput="saveData(3)" placeholder="Heading">
+                <input type="text" id="i_siz3" oninput="saveData(3)" placeholder="Size">
+                <input type="text" id="i_pri3" oninput="saveData(3)" placeholder="Price">
+                <input type="text" id="i_off3" oninput="saveData(3)" placeholder="Offer">
+                <div class="box-label">BOX 3</div>
+            </div>
+        </div>
+        <p class="save-hint">✓ Auto-Saving Enabled</p>
+    </div>
+
+    <script>
+        // Secret Click to Login
+        let clickCount = 0;
+        let clickTimer;
+        function handleSecretClick() {
+            clickCount++;
+            clearTimeout(clickTimer);
+            clickTimer = setTimeout(() => { clickCount = 0; }, 2000);
+            if (clickCount === 5) { window.location.href = "login.html"; }
+        }
+
+        // Save Data
+        function saveData(id) {
+            localStorage.setItem(`b${id}_tit`, document.getElementById(`i_tit${id}`).value);
+            localStorage.setItem(`b${id}_siz`, document.getElementById(`i_siz${id}`).value);
+            localStorage.setItem(`b${id}_pri`, document.getElementById(`i_pri${id}`).value);
+            localStorage.setItem(`b${id}_off`, document.getElementById(`i_off${id}`).value);
+        }                                         
+                                               
+        // Save Image
+        function saveImg(input, id) {
+            if (input.files && input.files[0]) {
+                let reader = new FileReader();
+                reader.onload = function(e) {
+                    localStorage.setItem(`b${id}_img`, e.target.result);
+                    document.getElementById(`p_img${id}`).src = e.target.result;
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        // Delete Data
+        function clearData(id) {
+            if(confirm("Delete Box " + id + "?")) {
+                localStorage.removeItem(`b${id}_tit`);
+                localStorage.removeItem(`b${id}_siz`);
+                localStorage.removeItem(`b${id}_pri`);
+                localStorage.removeItem(`b${id}_off`);
+                localStorage.removeItem(`b${id}_img`);
+                location.reload(); 
+            }
+        }
+
+        // Load Data on Start
+        window.onload = function() {
+            for(let i=1; i<=3; i++) {
+                document.getElementById(`i_tit${i}`).value = localStorage.getItem(`b${i}_tit`) || "";
+                document.getElementById(`i_siz${i}`).value = localStorage.getItem(`b${i}_siz`) || "";
+                document.getElementById(`i_pri${i}`).value = localStorage.getItem(`b${i}_pri`) || "";
+                document.getElementById(`i_off${i}`).value = localStorage.getItem(`b${i}_off`) || "";
+                if(localStorage.getItem(`b${i}_img`)) {
+                    document.getElementById(`p_img${i}`).src = localStorage.getItem(`b${i}_img`);
+                }
+            }
+        };
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+
+                 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <script src="script.js"></script>
+</body>
+</html>
