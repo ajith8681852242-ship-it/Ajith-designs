@@ -9,44 +9,40 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // 2. WhatsApp Popup
-    const chatBtn = document.getElementById('chatBtn');
-    const formOverlay = document.getElementById('formOverlay');
-    const closeForm = document.getElementById('closeForm');
 
-    if (chatBtn) {
-        chatBtn.addEventListener('click', function() {
-            formOverlay.style.display = 'flex';
-        });
-    }
+document.getElementById('rc-top-value').innerText = dominantStar + ".0";
+            document.getElementById('rc-top-stars-display').innerText = "★".repeat(dominantStar);
+            document.getElementById('rc-top-status').innerText = statusMap[dominantStar].t;
+        }
 
-    if (closeForm) {
-        closeForm.addEventListener('click', function() {
-            formOverlay.style.display = 'none';
-        });
-    }
+        function openReviewPopup() {
+            document.getElementById('rc-form-overlay').style.display = 'flex';
+        }
 
-    // 3. WhatsApp Send Function
-    const submitBtn = document.getElementById('submitToWA');
-    if (submitBtn) {
-        submitBtn.addEventListener('click', function() {
-            const name = document.getElementById('userName').value;
-            const service = document.getElementById('userService').value;
+        function closeReviewPopup() {
+            document.getElementById('rc-form-overlay').style.display = 'none';
+        }
+
+        function setReviewStars(n) {
+            currentStars = n;
+            const stars = document.querySelectorAll('#rc-star-trigger span');
+            stars.forEach((s, i) => s.classList.toggle('selected', i < n));
+            document.getElementById('rc-form-type-text').innerText = statusMap[n].t;
+            document.getElementById('rc-form-type-text').style.color = statusMap[n].c;
+        }
+
+        function submitFinalReview() {
+            const name = document.getElementById('rc-user-name').value;
             const msg = document.getElementById('userMsg').value;
-            const phone = "917845188347";
+            if(!name || currentStars === 0) return alert("Please fill all details!");
 
-            if (name.trim() === "") {
-                alert("Please enter your name");
-                return;
-            }
+            allReviews.unshift({ name, msg, rate: currentStars, time: Date.now() });
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(allReviews));
+            closeReviewPopup();
+            refreshUI();
+        }
 
-            const text = `*New Inquiry*%0A*Name:* ${name}%0A*Service:* ${service}%0A*Message:* ${msg}`;
-            window.open(`https://wa.me/${phone}?text=${text}`, '_blank');
-        });
-    }
-});
-
-
+        refreshUI();
 
 
 
@@ -197,6 +193,7 @@ document.querySelectorAll('.rev-card').forEach(card => {
 
 
 
+   // Review code coment box
 
 
 
@@ -204,8 +201,120 @@ document.querySelectorAll('.rev-card').forEach(card => {
 
 
 
+  const STORAGE_KEY = 'clint_realtime_reviews_v2';
+        let currentStars = 0;
+        let activeIdx = -1;
+        let allReviews = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
 
+        const statusMap = {
+            1: { t: "Very Poor", c: "#e74c3c" }, 2: { t: "Average", c: "#e67e22" },
+            3: { t: "OK", c: "#3498db" }, 4: { t: "Good", c: "#2ecc71" }, 5: { t: "Excellent", c: "#1b5e20" }
+        };
 
+        // Real-time calculation function
+        function timeAgo(timestamp) {
+            const now = new Date();
+            const past = new Date(timestamp);
+            const diffInSeconds = Math.floor((now - past) / 1000);
+
+            if (diffInSeconds < 60) return "Just now";
+            const minutes = Math.floor(diffInSeconds / 60);
+            if (minutes < 60) return minutes + " min ago";
+            const hours = Math.floor(minutes / 60);
+            if (hours < 24) return hours + " hours ago";
+            const days = Math.floor(hours / 24);
+            return days + " days ago";
+        }
+
+        document.addEventListener('DOMContentLoaded', refreshUI);
+
+        function openReviewPopup() { activeIdx = -1; document.getElementById('rc-form-overlay').style.display = 'flex'; }
+        function closeReviewPopup() { document.getElementById('rc-form-overlay').style.display = 'none'; resetForm(); }
+        function resetForm() { document.getElementById('rc-user-name').value = ""; document.getElementById('rc-user-msg').value = ""; setReviewStars(0); }
+
+        function setReviewStars(n) {
+            currentStars = n;
+            document.querySelectorAll('#rc-star-trigger span').forEach((s, i) => s.classList.toggle('selected', i < n));
+            const lbl = document.getElementById('rc-status-hint');
+            if(n>0) { lbl.innerText = statusMap[n].t; lbl.style.color = statusMap[n].c; }
+            else { lbl.innerText = "Select Rating"; lbl.style.color = "#eee"; }
+        }
+
+        function submitFinalReview() {
+            const name = document.getElementById('rc-user-name').value;
+            if (!name || currentStars === 0) return alert("Please fill Name and Stars");
+            
+            const reviewObj = { 
+                name, 
+                msg: document.getElementById('rc-user-msg').value, 
+                rate: currentStars, 
+                time: new Date().getTime() // Saves exact time
+            };
+            
+            if (activeIdx > -1) {
+                reviewObj.time = allReviews[activeIdx].time; // Keep original time on edit
+                allReviews[activeIdx] = reviewObj;
+            } else {
+                allReviews.unshift(reviewObj);
+            }
+            
+            saveAndRefresh();
+            closeReviewPopup();
+        }
+
+        function deleteReview() {
+            allReviews.splice(activeIdx, 1);
+            saveAndRefresh();
+            document.getElementById('rc-secret-menu').style.display = 'none';
+        }
+
+        function editReview() {
+            const rev = allReviews[activeIdx];
+            document.getElementById('rc-user-name').value = rev.name;
+            document.getElementById('rc-user-msg').value = rev.msg;
+            setReviewStars(rev.rate);
+            document.getElementById('rc-secret-menu').style.display = 'none';
+            document.getElementById('rc-form-overlay').style.display = 'flex';
+        }
+
+        function saveAndRefresh() {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(allReviews));
+            refreshUI();
+        }
+
+        function refreshUI() {
+            const list = document.getElementById('rc-feed');
+            list.innerHTML = '';
+            let counts = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
+
+            allReviews.forEach((rev, i) => {
+                counts[rev.rate]++;
+                list.innerHTML += `<div class="rc-card" onclick="if(event.detail===3){ activeIdx=${i}; document.getElementById('rc-secret-menu').style.display='flex'; }">
+                    <span class="rc-user">${rev.name}</span>
+                    <span class="rc-date">${timeAgo(rev.time)}</span>
+                    <div class="rc-rating-line">
+                        <span class="rc-stars">${"★".repeat(rev.rate)}${"☆".repeat(5-rev.rate)}</span>
+                        <span class="rc-label" style="color:${statusMap[rev.rate].c}">${statusMap[rev.rate].t}</span>
+                    </div>
+                    <p class="rc-para">${rev.msg}</p>
+                </div>`;
+            });
+
+            for(let i=1; i<=5; i++) {
+                document.getElementById('rc-p-' + i).style.width = Math.min(100, counts[i] * 5) + "%";
+            }
+
+            if(allReviews.length > 0) {
+                const latest = allReviews[0];
+                document.getElementById('rc-avg-num').innerText = latest.rate + ".0";
+                document.getElementById('rc-avg-txt').innerText = statusMap[latest.rate].t;
+                document.getElementById('rc-avg-txt').style.color = statusMap[latest.rate].c;
+                document.getElementById('rc-top-star-icons').innerText = "★".repeat(latest.rate) + "☆".repeat(5-latest.rate);
+            }
+        }
+        
+        // Auto update every 30 seconds to keep time fresh
+        setInterval(refreshUI, 30000);
 
 
 
