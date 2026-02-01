@@ -1652,47 +1652,34 @@ html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
 
 
 
-/* ஆரம்பத்தில் மறைத்து வைக்க */
-.reveal {
-    opacity: 0;
-    transform: translateY(50px);
-    transition: all 0.9s ease-out;
-}
-
-/* ஸ்க்ரோல் செய்து அந்த இடத்திற்கு வந்தவுடன் காட்ட */
-.reveal.active {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* See All Button Styling */
-.see-all {
-    text-align: center;
-    padding: 30px 0;
-}
-.see-all-btn {
-    background: #007bff;
-    color: #fff;
-    border: none;
-    padding: 12px 35px;
-    border-radius: 25px;
-    font-weight: bold;
-    cursor: pointer;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-}
 
 
-/* 2. அனிமேஷன் எலிமெண்ட்கள் திரையை விட்டு வெளியே போகாது */
-.main-wrapper {
-    width: 100%;
-    max-width: 100vw;
-    overflow: hidden; /* இதையும் சேர்ப்பது பாதுகாப்பானது */
-    position: relative;
-    padding: 20px 10px; /* ஓரங்களில் கச்சிதமான இடைவெளி */
-}
 
 
-/* --- Global --- */
+
+
+a
+
+
+
+
+
+
+
+
+
+
+
+/* --- 1. Global & Wrapper --- */
+
+
+
+
+
+
+
+
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -1700,68 +1687,95 @@ html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
 }
 
 .main-wrapper {
-    /* ஓரங்களில் அதிக இடைவெளி */
-    padding: 20px 25px; 
-    font-family: 'Poppins', sans-serif;
-    overflow-x: hidden;
     width: 100%;
+    max-width: 100vw;
+    overflow-x: hidden; 
+    position: relative;
+    padding: 20px 0; /* Vertical padding */
+    font-family: 'Poppins', sans-serif;
 }
 
-/* 1. Top Heading - Original Purple Design Restored */
+/* --- 2. Animations (Reveal & Blink) --- */
+.reveal {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 0.9s ease-out;
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+@keyframes slowBlink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+}
+
+/* --- 3. Top Heading --- */
 .header-section {
     background-color: #8e44ad;
     padding: 8px 15px;
     border-radius: 4px;
     width: fit-content;
     max-width: 90%; 
-    margin-bottom: 20px;
-    display: block; /* தாராளமாகத் தெரியும்படி */
+    margin: 0 15px 20px 15px; /* Aligned with grid padding */
+    display: block;
 }
 
 .header-section h1 {
     font-size: clamp(12px, 4vw, 15px);
     font-weight: 700;
     color: #ffffff;
-    margin: 0;
 }
 
-.header-section h1 span { color: #f1c40f; } /* Yellow Text */
+.header-section h1 span { color: #f1c40f; }
 
 .header-section p {
     font-size: 8px;
     color: #f5f5f5;
-    margin-top: 2px;
 }
 
-/* 2. Grid - 3 Boxes Same Time Shrink */
+/* --- 4. The Grid (2 Box View Only) --- */
 .sprite-grid {
     display: flex;
-    justify-content: center;
-    gap: 12px; /* நீங்கள் கேட்ட அந்த சிறிய அதிகரிப்பு */
-    width: 100%;
-    flex-wrap: nowrap;
+    flex-wrap: nowrap;      
+    overflow-x: auto;       
+    gap: 10px;              /* பெட்டிகளுக்கு இடையே உள்ள இடைவெளியை லேசாக குறைத்துள்ளேன் */
+    padding: 10px 15px;     /* இடது மற்றும் வலது ஓரங்களில் 15px */
+    scroll-snap-type: x mandatory; 
+    -webkit-overflow-scrolling: touch;
+    scroll-padding-left: 15px;
 }
 
+/* --- 5. Product Box Design --- */
 .box {
-    flex: 1 1 0px; 
-    min-width: 0; 
-    max-width: 110px; 
-    border: 1px solid #000;
-    border-radius: 4px;
-    padding: 6px; 
+    /* 2 பெட்டிகள் மட்டும் தெரிய இந்த கணக்கீடு கச்சிதமாக இருக்கும் */
+    /* இது 3-வது பெட்டியை முற்றிலும் வலது ஓரம் வெளியே தள்ளும் */
+    flex: 0 0 calc(55% - 20px); 
+    max-width: calc(55% - 20px);
+    
+    scroll-snap-align: start; 
     background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 8px;
     display: flex;
     flex-direction: column;
-    
-    /* 3. Inner Gap - டெக்ஸ்ட் மற்றும் பட்டன் இடையே கச்சிதமான இடைவெளி */
-    gap: 5px; 
+    gap: 3px; 
+    position: relative;
+}
+
+.sprite-grid::-webkit-scrollbar {
+    display: none; /* Hide scrollbar */
 }
 
 .img-area {
+    position: relative;
     width: 100%;
     aspect-ratio: 1/1; 
     background: #f0f0f0;
-    border-radius: 2px;
+    border-radius: 4px;
     overflow: hidden;
 }
 
@@ -1771,265 +1785,7 @@ html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
     object-fit: cover;
 }
 
-/* 4. Text & Styles (Compact yet Readable) */
-.box h2 {
-    font-size: 8.5px;
-    font-weight: 600;
-    margin: 0;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    line-height: 1.2;
-}
-
-.box h2 span { color: #8e44ad; }
-
-.details {
-    font-size: 6.5px;
-    margin: 0; 
-    color: #999;
-    line-height: 1.1;
-}
-
-/* 5. Book Now Button - Design Restored */
-.btn-book {
-    background: #8e44ad;
-    color: #fff;
-    border: none;
-    width: 100%;
-    padding: 4px 0; 
-    font-size: 7.5px;
-    font-weight: 600;
-    margin-top: auto; 
-    border-radius: 2px;
-    cursor: pointer;
-}
-
-/* பட்டன் இருக்கும் பகுதி */
-/* பட்டன் இருக்கும் பகுதி - சீரமைக்கப்பட்டது */
-/* பட்டன் இருக்கும் பகுதி */
-.see-all {
-    display: flex;
-    justify-content: flex-end; 
-    width: 100%;
-    margin-top: -15px;         
-    padding-right: 5px;      /* 35px-லிருந்து 18px ஆகக் குறைத்துள்ளேன். இது பட்டனை மீண்டும் வலது ஓரம் நகர்த்தும் */
-    position: relative;
-    z-index: 5;
-}
-
-/* பட்டன் ஸ்டைல் */
-.see-all-btn {
-    background-color: #ff6600; 
-    color: #ffffff;
-    border: none;
-    padding: 6px 18px; 
-    font-size: 10px;
-    font-weight: bold;
-    border-radius: 4px; 
-    cursor: pointer;
-}
-/* Click Animation */
-.see-all-btn:active {
-    transform: scale(0.95);
-    background-color: #e65c00;
-}
-
-.see-all-btn:hover {
-    background-color: #fb8c00;
-}
-
-
-/* Price மற்றும் Offer-ஐ ஒரே வரிசையில் வைக்க */
-.price-row {
-    display: flex;
-    justify-content: space-between; /* ஒன்றை இடதுபுறமும், மற்றொன்றை வலது ஓரம் தள்ளும் */
-    align-items: center;            /* இரண்டையும் ஒரே உயரத்தில் (Equal) வைக்கும் */
-    width: 100%;
-    margin-top: 2px;
-}
-
-/* 20% OFF - Small Red Box */
-.discount-badge {
-    background-color: #ff0000;
-    color: #ffffff;
-    font-size: 7px;
-    font-weight: bold;
-    padding: 2px 5px;
-    border-radius: 3px;
-    white-space: nowrap;
-    animation: slowBlink 2.5s infinite ease-in-out;
-}
-
-@keyframes slowBlink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.3; }
-}
-
-/* மற்றவை மாறாமல் இருக்க */
-.details {
-    margin: 0; /* தேவையற்ற இடைவெளியைத் தவிர்க்க */
-    font-size: 7.5px;
-}
-
-.box {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    padding: 10px;
-}
-
-
-
-/* வரிகளைச் சீரமைக்க */
-.info-row {
-    display: flex;
-    justify-content: space-between; /* இடது மற்றும் வலது ஓரம் */
-    align-items: center;
-    width: 100%;
-    margin-bottom: 2px; /* Size மற்றும் Price இடையே சமமான இடைவெளி (Same gap) */
-}
-
-/* 20% OFF - Reduced Size (மிகச் சிறிய பெட்டி) */
-.offer-tag {
-    background-color: #ff0000;
-    color: #ffffff;
-    font-size: 6px;           /* எழுத்தின் அளவு குறைக்கப்பட்டுள்ளது */
-    font-weight: 900;
-    padding: 1px 3px;         /* பெட்டியின் நீளம்/உயரம் குறைக்கப்பட்டுள்ளது */
-    border-radius: 2px;
-    white-space: nowrap;
-    text-transform: uppercase;
-    animation: slowBlink 2.5s infinite ease-in-out;
-}
-
-@keyframes slowBlink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.3; }
-}
-
-/* டெக்ஸ்ட் அளவு */
-.details {
-    font-size: 7.5px;
-    margin: 0;
-}
-
-/* பெட்டியின் பொதுவான அமைப்பு */
-.box {
-    display: flex;
-    flex-direction: column;
-    padding: 8px;
-    border: 1px solid #000;
-    border-radius: 5px;
-}
-
-.btn-book {
-    width: 100%;
-    margin-top: 5px;
-    background: #8e44ad;
-    color: white;
-    border: none;
-    padding: 5px 0;
-    font-size: 8px;
-    font-weight: bold;
-    border-radius: 3px;
-}
-
-
-
-/* 1. இமேஜ் ஏரியா - மற்றவை மாறாமல் இருக்க */
-.img-area {
-    position: relative; /* இது மிகவும் முக்கியம் */
-    width: 100%;
-}
-
-/* 2. ஆஃபர் பேட்ஜ் - இது தனி அடுக்கில் (Absolute) இருப்பதால் எதையும் நகர்த்தாது */
-.top-left-offer {
-    position: absolute;   /* இது மற்ற ஐட்டங்களை தொந்தரவு செய்யாது */
-    top: 5px;             /* மேலிருந்து 5px */
-    left: 5px;            /* இடதுபுறம் இருந்து 5px */
-    background-color: #ff0000;
-    color: white;
-    font-size: 6px;       /* மிகச் சிறிய அளவு */
-    font-weight: bold;
-    padding: 1px 4px;
-    border-radius: 2px;
-    z-index: 10;          /* படத்திற்கு மேல் தெரிய */
-    animation: slowBlink 2.5s infinite ease-in-out;
-}
-
-/* 3. மற்ற டெக்ஸ்டுகள் - உங்கள் பழைய அதே இடைவெளி */
-.details {
-    margin: 2px 0; 
-    font-size: 7.5px;
-}
-
-/* மின்னும் அனிமேஷன் */
-@keyframes slowBlink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.4; }
-}
-
-/* பட்டன் மற்றும் பெட்டி ஸ்டைல்கள் மாறாது */
-.btn-book {
-    width: 100%;
-    background: #8e44ad;
-    color: white;
-    border: none;
-    padding: 6px 0;
-    font-weight: bold;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-/* பட்டனின் பொதுவான ஸ்டைல் */
-.btn-book {
-    width: 100%;
-    margin-top: 5px;
-    background-color: #8e44ad; /* ஊதா நிறம் */
-    color: white;
-    border: none;
-    padding: 6px 0;
-    font-size: 8px;
-    font-weight: bold;
-    border-radius: 4px;
-    cursor: pointer;
-    
-    /* மென்மையான மாற்றத்திற்கு (Smooth transition) */
-    transition: all 0.2s ease;
-    outline: none;
-}
-
-/* 1. மவுஸ் பட்டன் மேல் இருக்கும் போது (Hover Effect) */
-.btn-book:hover {
-    background-color: #7d3c98; /* நிறம் சற்று கருமையாகும் */
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-}
-
-/* 2. பட்டனை அழுத்தும் போது (Click Animation) */
-.btn-book:active {
-    transform: scale(0.95);    /* பட்டன் லேசாக அமுங்கும் */
-    background-color: #6c3483; /* அழுத்தும் போது இன்னும் கருமையாகும் */
-    box-shadow: inset 0 2px 4px rgba(0,0,0,0.3); /* உள்ளே அமுங்கிய உணர்வு தரும் */
-}
-
-
-
-
-
-
-/* பெட்டியின் பொதுவான அமைப்பு */
-.box {
-    display: flex;
-    flex-direction: column;
-    padding: 8px;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    /* இதுதான் அனைத்துக்கும் இடையே சமமான கேப் கொடுக்கும் */
-    gap: 3px; 
-}
-
-/* 20% OFF - படத்தின் மேல் இடது ஓரத்தில் */
+/* Offer Badge on Image */
 .top-left-offer {
     position: absolute;
     top: 0px;
@@ -2040,59 +1796,178 @@ html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
     padding: 1px 3px;
     border-radius: 2px;
     z-index: 10;
+    animation: slowBlink 2.5s infinite ease-in-out;
 }
 
-/* தலைப்பு (Heading) - கீழே நகர்த்தப்பட்டுள்ளது */
-h2 {
+/* Text Styles */
+.box h2 {
     font-size: 9px;
-    margin-top: 5px;    /* படத்திலிருந்து கொஞ்சம் கீழே நகர்த்த */
-    margin-bottom: 0px; /* டெக்ஸ்டுகளுக்கு நெருக்கமாக இருக்க */
+    margin-top: 5px !important;
     line-height: 1;
 }
 
-/* Size மற்றும் Price - சமமான இடைவெளி */
 .details {
     font-size: 7px;
-    margin: 0;          /* தேவையற்ற மார்ஜின் நீக்கம் */
     line-height: 1.2;
     color: #333;
 }
 
-/* பட்டன் - சரியான கேப் உடன் */
+.info-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+/* --- 6. Buttons --- */
 .btn-book {
     width: 100%;
-    margin-top: 2px;    /* பிரைஸிலிருந்து சமமான கேப் */
-    background: #8e44ad;
+    margin-top: 5px;
+    background-color: #8e44ad;
     color: white;
-    padding: 5px 0;
-    font-size: 8px;
-    border-radius: 3px;
     border: none;
+    padding: 6px 0;
+    font-size: 8px;
     font-weight: bold;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
 }
 
+.btn-book:active {
+    transform: scale(0.95);
+    background-color: #6c3483;
+}
+
+/* See All Section */
+.see-all {
+    display: flex;
+    justify-content: flex-end; 
+    width: 100%;
+    margin-top: 10px;          
+    padding-right: 15px; 
+}
+
+.see-all-btn {
+    background-color: #ff6600; 
+    color: #ffffff;
+    border: none;
+    padding: 6px 18px; 
+    font-size: 10px;
+    font-weight: bold;
+    border-radius: 4px; 
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+/* 20% OFF - பேட்ஜ் அளவு அதிகரிக்கப்பட்டுள்ளது */
+.top-left-offer {
+    position: absolute;
+    top: 5px;            /* ஓரத்திலிருந்து லேசான இடைவெளி */
+    left: 5px;
+    background-color: #ff0000;
+    color: #ffffff;
+    
+    /* அளவுகள் அதிகரிக்கப்பட்டுள்ளது */
+    font-size: 10px;      /* எழுத்தின் அளவு (முன்பு 6px) */
+    font-weight: 900;     /* தடிமனான எழுத்து */
+    padding: 3px 8px;     /* பேட்ஜின் நீளம் மற்றும் உயரம் அதிகரிப்பு */
+    
+    border-radius: 4px;   /* வளைவான ஓரங்கள் */
+    z-index: 10;
+    box-shadow: 1px 1px 5px rgba(0,0,0,0.2); /* எடுப்பாகத் தெரிய நிழல் */
+    
+    text-transform: uppercase;
+    animation: slowBlink 2.0s infinite ease-in-out; /* வேகம் சற்றே அதிகரிக்கப்பட்டது */
+}
+
+/* மின்னும் அனிமேஷன் (மாற்றமில்லை) */
 @keyframes slowBlink {
     0%, 100% { opacity: 1; }
-    50% { opacity: 0.4; }
+    50% { opacity: 0.5; }
 }
 
-
-/* தலைப்பை மட்டும் கீழே நகர்த்த (Heading bottom move) */
-h2 {
-    font-size: 9px;
-    margin-top: 4px !important;    /* இந்த மதிப்பை (8px) கூட்டினால் தலைப்பு இன்னும் கீழே இறங்கும் */
-    margin-bottom: 2px;            /* கீழே உள்ள Size டெக்ஸ்டுடன் உள்ள கேப் */
-    padding: 0;
-    line-height: 1;
-    display: block;
+/* --- 1. Two-Color Heading (முதல் வார்த்தை கருப்பு, அடுத்தது ஊதா) --- */
+.box h2 {
+    font-size: 11px;
+    margin-top: 8px !important;
+    line-height: 1.2;
+    color: #000; /* இயல்பு நிறம் கருப்பு */
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* இரண்டு வரிக்கு மேல் போனால் மறைக்கும் */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
+/* HTML-ல் பெயருக்கு நடுவில் <span> சேர்த்தால் இது வேலை செய்யும் */
+.box h2 span {
+    color: #8e44ad; /* இரண்டாவது பகுதி ஊதா நிறம் */
+}
 
+/* --- 2. Heading, Size, Price - Same Gap Create --- */
+/* பாக்ஸிற்குள் இருக்கும் அனைத்து எலிமெண்ட்களுக்கும் சமமான இடைவெளி */
+.box {
+    display: flex;
+    flex-direction: column;
+    gap: 4px; /* இதுதான் Heading, Size, Price இடையே சமமான கேப் கொடுக்கும் */
+    padding: 10px;
+    flex: 0 0 calc(55% - 20px);
+    max-width: calc(55% - 20px);
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    scroll-snap-align: start;
+}
 
+/* விவரங்கள் மற்றும் விலை வரிசை */
+.info-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0; /* தேவையற்ற கேப்பை நீக்க */
+}
 
+.details {
+    font-size: 8px;
+    color: #555;
+    margin: 0;
+}
 
+/* --- 3. Scrolling Animation (லேசான என்ட்ரி எஃபெக்ட்) --- */
+@keyframes boxIn {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
 
+.box {
+    animation: boxIn 0.6s ease-out backwards;
+}
 
+/* ஒவ்வொரு பாக்ஸும் ஒன்றன் பின் ஒன்றாக வர (Delay) */
+.box:nth-child(1) { animation-delay: 0.1s; }
+.box:nth-child(2) { animation-delay: 0.2s; }
+.box:nth-child(3) { animation-delay: 0.3s; }
+
+/* 20% OFF பேட்ஜ் (பெரியது) */
+.top-left-offer {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    background-color: #ff0000;
+    color: #ffffff;
+    font-size: 10px;
+    font-weight: 900;
+    padding: 3px 8px;
+    border-radius: 4px;
+    z-index: 10;
+    animation: slowBlink 2s infinite ease-in-out;
+}
 
 
 
