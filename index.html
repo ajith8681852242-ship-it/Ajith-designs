@@ -22,7 +22,7 @@
 
 <script>
     let clickCount = 0;
-    let clickTimer;
+    let clickTimer;         
 
     function handleSecretClick() {
         clickCount++;
@@ -32,13 +32,14 @@
         clickTimer = setTimeout(() => {
             clickCount = 0;
         }, 2000);
-
+ 
         // 5-வது கிளிக் செய்தவுடன் login.html பக்கத்திற்கு அழைத்துச் செல்லும்
         if (clickCount === 5) {
             window.location.href = "login.html";
         }
     }
 </script>
+ 
             </div>
          <ul class="nav-links" id="navLinks">
     <li><a href="index.html">HOME</a></li> 
@@ -76,7 +77,7 @@
             </button>
         </div>
 
-
+    
 
 
 <style>
@@ -613,46 +614,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-
-
-
-
-    // --- 2. TIMER LOGIC ---
-
-
-
-    
-    let countDownDate = new Date().getTime() + (1 * 60 * 1000); 
-
-    function updateTimer() {
-        const now = new Date().getTime();
-        const distance = countDownDate - now;
-
-        if (distance < 0) {
-            clearInterval(timerInterval);
-            document.querySelectorAll('.top-left-offer').forEach(el => el.style.display = 'none');
-            const timerBox = document.getElementById('timer_container');
-            if (timerBox) timerBox.style.display = 'none';
-            return;
-        }
-
-        const d = Math.floor(distance / 86400000);
-        const h = Math.floor((distance % 86400000) / 3600000);
-        const m = Math.floor((distance % 3600000) / 60000);
-        const s = Math.floor((distance % 60000) / 1000);
-
-        const setVal = (id, val) => {
-            let el = document.getElementById(id);
-            if (el) el.innerText = val.toString().padStart(2, '0');
-        };
-
-        setVal("d_fix", d); setVal("h_fix", h); setVal("m_fix", m); setVal("s_fix", s);
-    }
-
-    const timerInterval = setInterval(updateTimer, 1000);
-    updateTimer();
-});
-
 </script>
 
 <div class="rc-main-wrapper">
@@ -711,7 +672,111 @@ document.addEventListener('DOMContentLoaded', function() {
         .rc-star-selector span.selected { color: #ff7b00; }
         #rc-form-type-text { font-size: 11px; font-weight: bold; margin-bottom: 10px; height: 15px; text-transform: uppercase; }
         .rc-menu-btn { width: 100%; padding: 12px; margin: 6px 0; border: none; cursor: pointer; font-weight: bold; font-size: 14px; border-radius: 6px !important; }
-    </style>
+
+        /* ஆரம்பத்தில் டைமர் மற்றும் ஆஃபர் பேட்ஜை மறைக்க */
+#timer_container, .top-left-offer {
+    display: none;
+}
+</style>
+
+
+
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    
+    // --- உங்களின் ஆஃபர் மற்றும் தயாரிப்பு அட்டவணை ---
+    const offerSchedule = [
+        {
+            name: "DIWALI OFFER",
+            start: "2026-11-01T00:00:00",
+            end:   "2026-11-07T23:59:59",
+            // ஒவ்வொரு தயாரிப்புக்கும் இங்கே தனித்தனி ஆஃபர் செட் செய்யவும்
+            products: {
+                "v_off1": "30% OFF",
+                "v_off2": "60% OFF",
+                "v_off3": "BUY 1 GET 1"
+            }
+        },
+        {
+            name: "FESTIVAL SALE",
+            // இப்போது பிப்ரவரி 1, காலை 10 மணி. சோதிக்க இன்று மதியம் 12 மணி வரை செட் செய்துள்ளேன்.
+            start: "2026-02-01T08:10:16", 
+            end:   "2026-02-01T12:10:17", 
+            products: {
+                "v_off1": "20% OFF", // Poster Design
+                
+                "v_off3": "FREE GIFT" // Calendar Design
+            }
+        }
+    ];
+
+    function updateOfferEngine() {
+        // இந்திய நேரத்தைக் கணக்கிடுதல் (IST)
+        const now = new Date(new Date().toLocaleString("en-US", {timeZone: "Asia/Kolkata"}));
+        let activeOffer = null;
+
+        offerSchedule.forEach(off => {
+            const startDate = new Date(off.start);
+            const endDate = new Date(off.end);
+            if (now >= startDate && now <= endDate) {
+                activeOffer = off;
+            }
+        });
+
+        const timerBox = document.getElementById('timer_container');
+        const tmHead = document.querySelector('.tm-head'); 
+
+        if (activeOffer) {
+            // 1. டைமரைத் திரையில் காட்டு
+            if (timerBox) timerBox.style.setProperty('display', 'block', 'important');
+            
+            // 2. டைமர் தலைப்பை தானாக பண்டிகை பெயருக்கு மாற்று
+            if (tmHead) tmHead.innerHTML = activeOffer.name + " 🔥";
+
+            // 3. ஒவ்வொரு தயாரிப்பு பெட்டியிலும் வெவ்வேறு ஆஃபர் பெயர்களை செட் செய்தல்
+            Object.keys(activeOffer.products).forEach(id => {
+                let badge = document.getElementById(id);
+                if (badge) {
+                    badge.style.setProperty('display', 'block', 'important');
+                    badge.innerText = activeOffer.products[id]; // தானாகப் பெயர்களை மாற்றும்
+                }
+            });
+
+            // 4. டைமர் எண்களைக் கணக்கிடுதல்
+            const diff = new Date(activeOffer.end) - now;
+            const d = Math.floor(diff / 86400000);
+            const h = Math.floor((diff % 86400000) / 3600000);
+            const m = Math.floor((diff % 3600000) / 60000);
+            const s = Math.floor((diff % 60000) / 1000);
+
+            const setVal = (id, val) => {
+                let el = document.getElementById(id);
+                if (el) el.innerText = val.toString().padStart(2, '0');
+            };
+            setVal("d_fix", d); setVal("h_fix", h); setVal("m_fix", m); setVal("s_fix", s);
+
+        } else {
+            // ஆஃபர் முடிந்தால் எல்லாவற்றையும் மறைத்துவிடு
+            if (timerBox) timerBox.style.setProperty('display', 'none', 'important');
+            
+            // எல்லா ஆஃபர் பேட்ஜ்களையும் மறைத்தல்
+            document.querySelectorAll('.top-left-offer').forEach(badge => {
+                badge.style.setProperty('display', 'none', 'important');
+            });
+        }
+    }
+
+    // ஒவ்வொரு வினாடியும் செக் செய்யும்
+    setInterval(updateOfferEngine, 1000);
+    updateOfferEngine();
+});
+</script>
+
+    
+
+
 
     <div class="rc-header">
         <div class="rc-title-area">
@@ -987,7 +1052,7 @@ document.addEventListener('DOMContentLoaded', function() {
     </style>
 
     <div class="works-scroller reveal">
-             <div class="work-box" onclick="openWork(this)">
+      <div class="work-box" onclick="openWork(this)">
         <img src="Images/Artboard 1.png" alt="Artboard 1"></div>
     <div class="work-box" onclick="openWork(this)">
         <img src="Images/d logo moucups.jpg" alt="Logo Mockup"></div>
@@ -1135,6 +1200,38 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
+// Live top timer jav code
+
+
+function runLiveClock() {
+    const now = new Date();
+
+    // Time: 00:00:00 PM format
+    const timeOptions = { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true };
+    const timeStr = now.toLocaleTimeString('en-US', timeOptions);
+
+    // Day: Sun, Mon, etc.
+    const dayStr = now.toLocaleDateString('en-US', { weekday: 'short' });
+
+    // Month: Jan, Feb, etc.
+    const monthStr = now.toLocaleDateString('en-US', { month: 'short' });
+
+    // Date - Year: 31 - 2026 format
+    const dateStr = now.getDate().toString().padStart(2, '0');
+    const yearStr = now.getFullYear();
+    const dateYearStr = `${dateStr} - ${yearStr}`;
+
+    // Update the HTML elements
+    if(document.getElementById('live-time')) document.getElementById('live-time').textContent = timeStr;
+    if(document.getElementById('live-day')) document.getElementById('live-day').textContent = dayStr;
+    if(document.getElementById('live-month')) document.getElementById('live-month').textContent = monthStr;
+    if(document.getElementById('live-date-year')) document.getElementById('live-date-year').textContent = dateYearStr;
+}
+
+// Start the clock
+setInterval(runLiveClock, 1000);
+runLiveClock(); // Run immediately so it doesn't show 00:00:00 on load
+
 
 
 
@@ -1160,5 +1257,3 @@ if (menuToggle && navLinks) {
     <script src="script.js"></script>
 </body>
 </html>
-
-
