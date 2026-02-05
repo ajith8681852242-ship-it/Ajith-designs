@@ -9,7 +9,14 @@
     
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
-        html, body { height: 100vh; width: 100vw; overflow: hidden; background-color: #ffffff; }
+        
+        html, body { 
+            height: 100%; 
+            width: 100vw; 
+            overflow-x: hidden; 
+            overflow-y: auto; 
+            background-color: #ffffff; 
+        }
 
         /* Navbar */
         .navbar { background: #ffffff; height: 60px; display: flex; align-items: center; position: fixed; width: 100%; top: 0; z-index: 1000; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
@@ -25,6 +32,7 @@
 
         @keyframes blinker { 50% { opacity: 0; } }
         .free-blink { color: red; font-weight: bold; animation: blinker 0.8s linear infinite; }
+        .offer-blink { color: #ff0000; animation: blinker 0.8s linear infinite; font-weight: 700; }
         .item-gap { display: inline-block; width: 12px; }
 
         @keyframes fadeInUp {
@@ -40,19 +48,22 @@
             .nav-links li { margin-bottom: 18px; }
             .nav-links li a { margin: 0; font-size: 0.85rem; font-weight: 600; color: #333; }
         }
-        @media (min-width: 993px) { .toggle-btn { display: none !important; } }
 
-        .app-container { height: calc(100vh - 60px); margin-top: 60px; display: flex; flex-direction: column; padding: 10px 25px; }
+        .app-container { 
+            min-height: calc(100vh - 60px); 
+            margin-top: 60px; 
+            display: flex; 
+            flex-direction: column; 
+            padding: 10px 25px; 
+        }
 
         .image-box { width: 100%; max-width: 250px; aspect-ratio: 1/1; margin: 0 auto; border: 1px solid #ddd; border-radius: 4px; padding: 4px; overflow: hidden; }
         .image-box img { width: 100%; height: 100%; object-fit: contain; }
         
-        /* 2 DOT BOTTOM MOVE (Increased margin) */
         .dots { display: flex; justify-content: center; gap: 5px; margin-top: 12px; }
         .dot { width: 6px; height: 6px; background: #ddd; border-radius: 50%; }
         .dot.active { background: #6a3093; }
 
-        /* HEADING SMALL AND TOP MOVE (Reduced size and margin) */
         .header-row { display: flex; justify-content: space-between; align-items: center; margin-top: -8px; min-height: 40px;}
         .title { font-size: 18px; font-weight: 600; color: #000; }
         .title span { color: #6a3093; }
@@ -61,8 +72,16 @@
         .qty-btn { background: #6a3093; color: #fff; border: none; width: 28px; height: 28px; border-radius: 6px; font-size: 18px; font-weight: 500; cursor: pointer; display: flex; align-items: center; justify-content: center; }
 
         .combo-section-wrapper { margin-top: -5px; } 
-        .combo-label { font-size: 13px; font-weight: 600; margin-bottom: 5px; color: #000; }
-        .combo-label span { color: #ff0000; font-weight: 600; }
+        
+        /* REDUCED HEADING SIZE HERE */
+        .combo-label { 
+            font-size: 11px; /* Smaller font */
+            font-weight: 600; 
+            margin-bottom: 4px; 
+            color: #333333; 
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
 
         .combo-grid { display: flex; flex-direction: column; gap: 8px; }
         .row-compact { display: flex; gap: 8px; justify-content: flex-start; }
@@ -76,8 +95,15 @@
         .details-card ul li { margin-bottom: 3px; display: flex; align-items: center; }
         .details-card ul li i { color: #6a3093; margin-right: 8px; font-size: 9px; }
 
-        .footer-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: auto; margin-bottom: 15px; }
-        .footer-btn { height: 40px; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; border: none; display: flex; align-items: center; justify-content: center; }
+        .footer-btns { 
+            display: grid; 
+            grid-template-columns: 1fr 1fr; 
+            gap: 10px; 
+            margin-top: auto; 
+            padding-top: 15px;
+            padding-bottom: 20px; 
+        }
+        .footer-btn { height: 42px; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; border: none; display: flex; align-items: center; justify-content: center; }
         .back-btn { background: #f0f0f0; color: #333; border: 1px solid #ddd; }
         .next-btn { background: #6a3093; color: #fff; }
     </style>
@@ -101,15 +127,16 @@
     </nav>
 
     <div class="app-container">
-       <div class="image-section">
-    <div class="image-box">
-        <img src="WhatsApp Image 2026-02-03 at 8.24.55 PM.jpeg" alt="Design Preview">
-    </div>
-    <div class="dots">
-        <div class="dot active"></div>
-        <div class="dot"></div>
-    </div>
-</div>
+        <div class="image-section">
+            <div class="image-box">
+                <img src="WhatsApp Image 2026-02-03 at 8.24.55 PM.jpeg" alt="Design Preview">
+            </div>
+            <div class="dots">
+                <div class="dot active"></div>
+                <div class="dot"></div>
+            </div>
+        </div>
+
         <div class="header-row">
             <h2 class="title">Poster <span>Design</span></h2>
             <div class="qty-box" id="qtyWrapper">
@@ -120,7 +147,7 @@
         </div>
 
         <div class="combo-section-wrapper">
-            <div class="combo-label">Diwali Special Combo <span>Offer</span></div>
+            <div class="combo-label">Diwali Special Combo <span class="offer-blink">Offer</span></div>
             <div class="combo-grid">
                 <div class="row-compact">
                     <div class="btn-combo" id="defaultCombo" onclick="showOffer('99', this)">99 / - Combo</div>
