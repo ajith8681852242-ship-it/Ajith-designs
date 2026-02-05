@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Ajith Studio | Order View</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        html, body { height: 100vh; width: 100vw; overflow: hidden; background-color: #ffffff; }
+
+        /* Navbar */
+        .navbar { background: #ffffff; height: 60px; display: flex; align-items: center; position: fixed; width: 100%; top: 0; z-index: 1000; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .nav-container { width: 92%; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-weight: 600; font-size: 0.9rem; }
+        .logo-blue { color: #1e90ff; }
+        .nav-links { display: flex; list-style: none; }
+        .nav-links li a { color: #000000; margin-left: 25px; text-decoration: none; font-size: 0.75rem; font-weight: 500; }
+        .blue-clr { color: #1e90ff !important; }
+
+        @keyframes rotateLogo { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        .logo-icon-rotate { animation: rotateLogo 5s linear infinite; display: inline-block; margin-right: 5px; }
+
+        /* BLINK ANIMATION FOR FREE TEXT */
+        @keyframes blinker {
+            50% { opacity: 0; }
+        }
+        .free-blink { 
+            color: red; 
+            font-weight: bold; 
+            animation: blinker 0.8s linear infinite; 
+        }
+
+        /* SPACE GAP MENTION */
+        .item-gap { display: inline-block; width: 12px; }
+
+        /* Animation for Details Card */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-details { animation: fadeInUp 0.4s ease-out; }
+
+        @media (max-width: 992px) {
+            .toggle-btn { display: block; cursor: pointer; font-size: 1.2rem; }
+            .nav-links { position: fixed; right: -100%; top: 60px; background: #ffffff; width: 240px; height: 100vh; flex-direction: column; padding: 30px; transition: 0.4s ease; z-index: 1001; }
+            .nav-links.active { right: 0 !important; }
+            .nav-links li { margin-bottom: 18px; }
+            .nav-links li a { margin: 0; font-size: 0.85rem; font-weight: 600; color: #333; }
+        }
+        @media (min-width: 993px) { .toggle-btn { display: none !important; } }
+
+        .app-container { height: calc(100vh - 60px); margin-top: 60px; display: flex; flex-direction: column; padding: 10px 25px; justify-content: space-between; }
+
+        .image-box { width: 100%; max-width: 250px; aspect-ratio: 1/1; margin: 0 auto; border: 1px solid #ddd; border-radius: 4px; padding: 4px; overflow: hidden; }
+        .image-box img { width: 100%; height: 100%; object-fit: contain; }
+        .dots { display: flex; justify-content: center; gap: 5px; margin-top: 5px; }
+        .dot { width: 6px; height: 6px; background: #ddd; border-radius: 50%; }
+        .dot.active { background: #6a3093; }
+
+        .header-row { display: flex; justify-content: space-between; align-items: center; margin-top: 5px; min-height: 40px;}
+        .title { font-size: 20px; font-weight: 600; color: #000; }
+        .title span { color: #6a3093; }
+
+        .qty-box { display: flex; align-items: center; gap: 15px; }
+        .qty-btn { background: #6a3093; color: #fff; border: none; width: 28px; height: 28px; border-radius: 6px; font-size: 18px; font-weight: 500; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+
+        .size-row { display: flex; align-items: center; gap: 12px; margin: 5px 0; }
+        .label { font-size: 16px; font-weight: 600; color: #000; }
+        .btn-size { padding: 4px 10px; border-radius: 4px; border: 1px solid #ccc; font-size: 10px; font-weight: 500; cursor: pointer; background: #fff; }
+        .btn-size.active { background: #6a3093; color: #fff; border-color: #6a3093; font-weight: 500; }
+
+        .combo-label { font-size: 13px; font-weight: 600; margin-bottom: 5px; color: #000; }
+        .combo-label span { color: #ff0000; font-weight: 600; }
+
+        .combo-grid { display: flex; flex-direction: column; gap: 8px; }
+        .row-compact { display: flex; gap: 8px; justify-content: flex-start; }
+        
+        .btn-combo { border: 1px solid #ccc; border-radius: 4px; font-size: 9px; font-weight: 600; text-align: center; cursor: pointer; background: #fff; color: #333; width: 90px; height: 28px; display: flex; align-items: center; justify-content: center; transition: 0.2s; }
+        .btn-combo.active { background: #6a3093; color: #fff; border-color: #6a3093; }
+
+        .details-card { border: 1px solid #eee; border-radius: 6px; padding: 12px; margin-top: 5px; min-height: 140px; background-color: #fcfcfc; }
+        .details-card h4 { font-size: 12px; color: #6a3093; font-weight: 600; margin-bottom: 8px; }
+        .details-card ul { list-style: none; font-size: 10.5px; font-weight: 400; line-height: 1.6; }
+        .details-card ul li { margin-bottom: 6px; display: flex; align-items: center; }
+        .details-card ul li i { color: #6a3093; margin-right: 8px; font-size: 9px; }
+
+        .footer-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 20px; margin-bottom: 10px;}
+        .footer-btn { height: 40px; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; border: none; display: flex; align-items: center; justify-content: center; }
+        .back-btn { background: #f0f0f0; color: #333; border: 1px solid #ddd; }
+        .next-btn { background: #6a3093; color: #fff; }
+    </style>
+</head>
+<body onload="showOffer('99', document.getElementById('defaultCombo'))">
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <i id="secret-icon" onclick="handleSecretClick()" class="fas fa-palette logo-icon-rotate blue-clr" style="cursor: pointer;"></i>
+                <span>Ajith <span class="logo-blue">studio</span></span>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">HOME</a></li> 
+                <li><a href="index.html#about">ABOUT</a></li>
+                <li><a href="index.html#services">SERVICES</a></li>
+                <li><a href="index.html#contact">CONTACT</a></li>
+            </ul>
+            <div class="toggle-btn" id="menuToggle"><i class="fas fa-bars"></i></div>
+        </div>
+    </nav>
+
+    <div class="app-container">
+        <div class="image-section">
+            <div class="image-box">
+                <img src="c:\Users\ASUS\OneDrive\Pictures\HTML\new web site\WhatsApp Image 2026-02-03 at 8.24.55 PM.jpeg" alt="Design Preview">
+            </div>
+            <div class="dots"><div class="dot active"></div><div class="dot"></div></div>
+        </div>
+
+        <div class="header-row">
+            <h2 class="title">Poster <span>Design</span></h2>
+            <div class="qty-box" id="qtyWrapper">
+                <button class="qty-btn" onclick="changeQty(-1)">−</button>
+                <span style="font-size: 18px; font-weight: 600;" id="qtyVal">1</span>
+                <button class="qty-btn" onclick="changeQty(1)">+</button>
+            </div>
+        </div>
+
+        <div class="size-row">
+            <div class="label">Size</div>
+            <div class="btn-size active">1080X 1350</div>
+            <div class="btn-size">1080X 1080</div>
+        </div>
+
+        <div>
+            <div class="combo-label">Diwali Special Combo <span>Offer</span></div>
+            <div class="combo-grid">
+                <div class="row-compact">
+                    <div class="btn-combo" id="defaultCombo" onclick="showOffer('99', this)">99 / - Combo</div>
+                    <div class="btn-combo" onclick="showOffer('75', this)">75 / - Combo</div>
+                </div>
+                <div class="row-compact">
+                    <div class="btn-combo" onclick="showOffer('199', this)">199 / - Combos</div>
+                    <div class="btn-combo" onclick="showOffer('499', this)">499 / - Combos</div>
+                    <div class="btn-combo" onclick="showOffer('999', this)">999 / - Combos</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="details-card" id="detailsCard">
+            <h4 id="offerTitle"></h4>
+            <ul id="offerList"></ul>
+        </div>
+
+        <div class="footer-btns">
+            <button class="footer-btn back-btn" onclick="history.back()">Back</button>
+            <button class="footer-btn next-btn">Next</button>
+        </div>
+    </div>
+
+    <script>
+        let clickCount = 0; let clickTimer;
+        function handleSecretClick() {
+            clickCount++;
+            clearTimeout(clickTimer);
+            clickTimer = setTimeout(() => { clickCount = 0; }, 2000);
+            if (clickCount === 5) window.location.href = "login.html";
+        }
+
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+        if (menuToggle) { menuToggle.onclick = () => navLinks.classList.toggle('active'); }
+
+        const offers = {
+            '99': {
+                heading: "99 / - Poster Details",
+                items: ['1 Single HD Poster', 'High Quality JPG Format', 'Fast Delivery', 'Social Media Optimized', 'Unlimited Revisions']
+            },
+            '75': {
+                heading: "75 / - Festival Wishes Combo",
+                items: ['1 Simple Poster Design', 'Standard Resolution', 'Fast Delivery', 'Jpg High Quality Image', 'Wishes & Name, phone, address']
+            },
+            '199': {
+                heading: "199 / - Premium Duo Details",
+                items: ['2 Premium Posters', '1 Poster <span class="item-gap"></span> <span class="free-blink">FREE</span>', 'Jpg High Quality Image', 'Unlimited Revisions', 'Fast Track Delivery']
+            },
+            '499': {
+                heading: "499 / - Festival Combo",
+                items: ['5 Professional Posters', '2 Posters <span class="item-gap"></span> <span class="free-blink">FREE</span>', 'Jpg High Quality Image', 'Unlimited Revision', 'Fast Delivery']
+            },
+            '999': {
+                heading: "999 / - Mega Festival Combo",
+                items: ['10 Mega Pack Posters', '2 Posters <span class="item-gap"></span> <span class="free-blink">FREE</span>', '1 Motion Video <span class="item-gap"></span> <span class="free-blink">FREE</span>', 'Super Fast Delivery', 'Unlimited Revisions']
+            }
+        };
+
+        function showOffer(val, el) {
+            document.querySelectorAll('.btn-combo').forEach(b => b.classList.remove('active'));
+            el.classList.add('active');
+            
+            const card = document.getElementById('detailsCard');
+            card.classList.remove('animate-details');
+            void card.offsetWidth; 
+            card.classList.add('animate-details');
+
+            document.getElementById('qtyWrapper').style.visibility = (val === '99' || val === '75') ? 'visible' : 'hidden';
+            
+            const selectedOffer = offers[val];
+            document.getElementById('offerTitle').innerText = selectedOffer.heading;
+            
+            const list = document.getElementById('offerList');
+            list.innerHTML = '';
+            selectedOffer.items.forEach(item => {
+                const li = document.createElement('li');
+                li.innerHTML = `<i class="fas fa-check-circle"></i> ${item}`;
+                list.appendChild(li);
+            });
+        }
+
+        function changeQty(n) {
+            let q = document.getElementById('qtyVal');
+            let v = parseInt(q.innerText) + n;
+            if(v > 0) q.innerText = v;
+        }
+    </script>
+</body>
+</html>
