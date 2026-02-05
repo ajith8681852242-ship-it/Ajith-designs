@@ -3,6 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#ffffff">
+    
     <title>Ajith Studio | Order View</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -15,7 +20,9 @@
             width: 100vw; 
             overflow-x: hidden; 
             overflow-y: auto; 
-            background-color: #ffffff; 
+            background-color: #ffffff;
+            /* Prevents pull-to-refresh to keep it feeling like an App */
+            overscroll-behavior-y: contain; 
         }
 
         /* Navbar */
@@ -51,7 +58,7 @@
 
         .app-container { 
             min-height: calc(100vh - 60px); 
-            margin-top: 60px; 
+            margin-top: 70px; 
             display: flex; 
             flex-direction: column; 
             padding: 10px 25px; 
@@ -71,7 +78,7 @@
         .qty-box { display: flex; align-items: center; gap: 15px; }
         .qty-btn { background: #6a3093; color: #fff; border: none; width: 28px; height: 28px; border-radius: 6px; font-size: 18px; font-weight: 500; cursor: pointer; display: flex; align-items: center; justify-content: center; }
 
-        /* REFINED SMALL GAP FOR HEADING */
+        /* SMALL GAP ADDED HERE */
         .combo-section-wrapper { margin-top: 5px; } 
         
         .combo-label { 
@@ -95,7 +102,7 @@
         .details-card ul li { margin-bottom: 3px; display: flex; align-items: center; }
         .details-card ul li i { color: #6a3093; margin-right: 8px; font-size: 9px; }
 
-        /* BUTTONS POSITIONED DIRECTLY AFTER COMBO DETAILS */
+        /* BUTTONS DIRECTLY UNDER BOX */
         .footer-btns { 
             display: grid; 
             grid-template-columns: 1fr 1fr; 
