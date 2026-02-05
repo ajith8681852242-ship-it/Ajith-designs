@@ -19,7 +19,7 @@ html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
 }
 
 /* Navbar (Laptop: Black & Medium 500) */
-.navbar { background: #fff; height: 60px; display: flex; align-items: center; position: fixed; width: 100%; top: 0; z-index: 1000; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+.navbar { background: #ffffff; height: 60px; display: flex; align-items: center; position: fixed; width: 100%; top: 0; z-index: 1000; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
 .nav-container { width: 92%; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
 .logo { font-weight: 600; font-size: 0.9rem; }
 .logo-blue { color: #1e90ff; }
@@ -61,7 +61,7 @@ html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
         display: block; 
         cursor: pointer; 
         font-size: 1.2rem; }
-    .nav-links { position: fixed; right: -100%; top: 60px; background: #fff; width: 240px; height: 100vh; flex-direction: column; padding: 30px; transition: 0.4s ease; z-index: 1001; }
+    .nav-links { position: fixed; right: -100%; top: 60px; background: #ffffff; width: 240px; height: 100vh; flex-direction: column; padding: 30px; transition: 0.4s ease; z-index: 1001; }
     .nav-links.active { right: 0 !important; }
     .nav-links li { margin-bottom: 18px; }
     .nav-links li a { margin: 0; font-size: 0.85rem; font-weight: 600; color: #333; }
@@ -1969,6 +1969,64 @@ a
     animation: slowBlink 2s infinite ease-in-out;
 }
 
+/* "only ₹" என்ற எழுத்துக்களுக்கான ஸ்டைல் */
+.only-txt {
+    font-size: 8px;
+    font-weight: 700;
+    color: #333;
+}
+
+/* 99 என்ற எண்ணிற்கு மட்டும் சிறிய ஆரஞ்சு பெட்டி */
+.orange-num {
+    background-color: #ff6600; /* Orange background */
+    color: #ffffff !important; /* White text */
+    padding: 2px 5px;
+    border-radius: 2px;
+    font-size: 7px;
+    font-weight: 900;
+    margin-left: 2px;
+    display: inline-block;
+    line-height: 1;
+}
+
+
+
+
+
+/* இரண்டு விலைகளையும் ஒரே வரியில் சமமாகப் பிரிக்க */
+.price-row-equal {
+    display: flex;
+    justify-content: space-between; /* ஒன்றை இடதுபுறமும் மற்றொன்றை வலதுபுறமும் தள்ளும் */
+    align-items: center;            /* இரண்டையும் ஒரே நேர்க்கோட்டில் வைக்கும் */
+    
+}
+
+
+
+/* வலதுபுறம்: ₹200 கட் லைன் */
+.cut-price {
+    font-size: 8px;
+    color: #7c7b7b;
+   
+ margin-right: 10px;
+    font-weight: 600;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -2061,10 +2119,75 @@ a
 
   /* 2. Clint Reviw  form and button  mobile - view*/
 
+.product-rating-box {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin: 5px 0;
+}
+.gold-stars {
+    color: #FFD700 !important; /* பிரகாசமான தங்கம் நிறம் */
+    font-size: 14px;
+    letter-spacing: 1.5px;
+}
+.rating-avg-num {
+    background: #e8f5e9;
+    color: #27ae60;
+    font-size: 10px;
+    font-weight: 800;
+    padding: 1px 5px;
+    border-radius: 4px;
+}
+
+
+
+
+.dynamic-stars {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin: 5px 0;
+    min-height: 20px;
+}
+.box h2 {
+    margin-bottom: 2px !important; /* ஸ்டார்களுக்காக கொஞ்சம் இடம் */
+}
+
+
+
+
+
+/* Product box dot css*/
+
+
+
+
+.scroll-dots {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    margin-top: 20px;
+}
+
+.dot {
+    width: 5px;
+    height: 5px;
+    background-color: #ccc; /* மங்கலான நிறம் */
+    border-radius: 50%;
+    transition: 0.3s;
+}
+
+.dot.active {
+    background-color: #ff4500; /* ஆஃபர் நிறம் - ஆரஞ்சு */
+    transform: scale(1.3); /* ஆக்டிவ் டாட் மட்டும் கொஞ்சம் பெரிதாகத் தெரியும் */
+}
 
 
 
 
 
 
- 
+
+
+
+
