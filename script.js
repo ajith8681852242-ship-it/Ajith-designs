@@ -49,40 +49,6 @@ document.getElementById('rc-top-value').innerText = dominantStar + ".0";
 
 //Top Banner Time and festivel setting
 
-function updateStatusLine() {
-    const now = new Date();
-    
-    // Time
-    document.getElementById('live-time').innerText = now.toLocaleTimeString('en-US', { 
-        hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true 
-    });
-
-    // Day & Month
-    document.getElementById('live-day').innerText = now.toLocaleDateString('en-US', { weekday: 'short' });
-    document.getElementById('live-month').innerText = now.toLocaleDateString('en-US', { month: 'short' });
-
-    // Date - Year
-    const date = now.getDate().toString().padStart(2, '0');
-    document.getElementById('live-date-year').innerText = `${date} - ${now.getFullYear()}`;
-
-    // Festival Logic
-    const m = now.getMonth() + 1;
-    const d = now.getDate();
-    const md = `${m}-${d}`;
-    const wish = document.getElementById('festival-wish');
-
-    const festivals = {
-        "1-1": "Happy New Year! ✨",
-        "1-14": "Happy Pongal! 🌾",
-        "10-20": "Happy Diwali! 🪔"
-    };
-
-    wish.innerText = festivals[md] || "Welcome";
-}
-
-setInterval(updateStatusLine, 1000);
-updateStatusLine();
-
 
 
 
@@ -156,11 +122,22 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 
+// Product Box Dot Java
 
 
 
+const grid = document.querySelector('.sprite-grid');
+const dots = document.querySelectorAll('.dot');
 
+grid.addEventListener('scroll', () => {
+    const scrollLeft = grid.scrollLeft;
+    const width = grid.clientWidth;
+    const activeIndex = Math.round(scrollLeft / width);
 
+    dots.forEach((dot, index) => {
+        dot.classList.toggle('active', index === activeIndex);
+    });
+});
 
 
 
