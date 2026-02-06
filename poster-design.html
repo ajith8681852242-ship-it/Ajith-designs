@@ -41,42 +41,16 @@
         .image-box img { width: 100%; height: 100%; object-fit: contain; transition: opacity 0.3s ease; }
         .fade-out { opacity: 0; }
 
-        /* Dot Styles - Fixed Small Size */
         .dots { display: flex; justify-content: center; gap: 4px; margin-top: 10px; }
         .dot { width: 4px; height: 4px; background: #ddd; border-radius: 50%; transition: 0.3s; }
         .dot.active { background: #6a3093; transform: scale(1.1); }
 
-        /* Header Row */
         .header-row { display: flex; justify-content: space-between; align-items: center; margin-top: 0px; min-height: 40px;}
         .title { font-size: 18px; font-weight: 600; color: #000; }
         .title span { color: #6a3093; }
 
-        /* --- Updated Counter with Gap --- */
-        .qty-box { 
-            display: flex; 
-            align-items: center; 
-            justify-content: space-between; /* பட்டன்களை இருபுறமும் தள்ளும் */
-            background: #ffffff; 
-            border: 1px solid #eee;
-            padding: 0 5px;
-            border-radius: 8px;
-            min-width: 110px; /* இதன் மூலம் பட்டன்களுக்கு இடையே இடைவெளி கிடைக்கும் */
-            height: 34px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-        }
-        .qty-btn { 
-            background: none; 
-            color: #6a3093; 
-            border: none; 
-            width: 30px; 
-            height: 30px; 
-            font-size: 20px; 
-            font-weight: 600; 
-            cursor: pointer; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center;
-        }
+        .qty-box { display: flex; align-items: center; justify-content: space-between; background: #ffffff; border: 1px solid #eee; padding: 0 5px; border-radius: 8px; min-width: 110px; height: 34px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+        .qty-btn { background: none; color: #6a3093; border: none; width: 30px; height: 30px; font-size: 20px; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; }
         #qtyVal { font-size: 16px; font-weight: 600; color: #333; }
 
         /* Combo Buttons */
@@ -86,18 +60,40 @@
         .btn-combo { border: 1px solid #ccc; border-radius: 4px; font-size: 9px; font-weight: 600; width: 90px; height: 28px; display: flex; align-items: center; justify-content: center; cursor: pointer; background: #fff; }
         .btn-combo.active { background: #6a3093; color: #fff; border-color: #6a3093; }
 
+       /* --- Updated Details Section --- */
+.details-card { 
+    margin-top: 12px; /* கார்டுக்கு மேல் உள்ள இடைவெளி குறைப்பு */
+    min-height: 40px; 
+    border: none; 
+    background: none; 
+    padding: 0; 
+}
 
-        
+.details-card h4 { 
+    font-size: 12px; 
+    color: #449330; 
+    margin-bottom: 7px; /* தலைப்புக்கும் லிஸ்டுக்கும் இடையே இடைவெளி குறைப்பு */
+    font-weight: 700; 
+}
 
-        /* Details Card */
-        @keyframes fadeInUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        .details-card { border: 1px solid #eee; border-radius: 6px; padding: 10px; margin-top: 10px; min-height: 40px; background-color: #fcfcfc; }
-        .animate-details { animation: fadeInUp 0.4s ease-out; }
-        .details-card h4 { font-size: 12px; color: #6a3093; margin-bottom: 4px; }
-        .details-card ul { list-style: none; font-size: 10.5px; line-height: 1.3; }
-        .details-card ul li { margin-bottom: 3px; display: flex; align-items: center; }
-        .details-card ul li i { color: #6a3093; margin-right: 8px; font-size: 9px; }
+.details-card ul { 
+    list-style: none; 
+    font-size: 10.5px; 
+    line-height: 1.5; /* வரிகளுக்கு இடையே உள்ள இடைவெளி (Gap) குறைப்பு */
+}
 
+.details-card ul li { 
+    margin-bottom: 2px; /* ஒவ்வொரு பாயிண்ட்டுக்கு இடையே உள்ள இடைவெளி குறைப்பு */
+    display: flex; 
+    align-items: center; 
+    color: #444; 
+}
+
+.details-card ul li i { 
+    color: #6a3093; 
+    margin-right: 6px; 
+    font-size: 8px; 
+}
         /* Blink Effects */
         .offer-blink, .free-blink { color: red; font-weight: bold; animation: blinker 0.8s linear infinite; }
         @keyframes blinker { 50% { opacity: 0; } }
@@ -192,10 +188,10 @@
 
        const images = {
             p99: "WhatsApp Image 2026-02-03 at 8.24.55 PM.jpeg", 
-            p75: "Modern Social Media Design Tips by RSMAT for Engaging Visuals.jpg", // 75 Combo
-            p199: "Naturatta - Agência Let's Rock.jpg",                             // 199 Combo
-            p499: "social media post.jpg",                                         // 499 Combo
-            p999: "FEED SOSIAL MEDIA TEMPLATE.jpg"                                 // 999 Combo
+            p75: "Modern Social Media Design Tips by RSMAT for Engaging Visuals.jpg", 
+            p199: "Naturatta - Agência Let's Rock.jpg", 
+            p499: "social media post.jpg", 
+            p999: "FEED SOSIAL MEDIA TEMPLATE.jpg" 
         };
 
         const offers = {
