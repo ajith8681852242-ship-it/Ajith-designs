@@ -10,76 +10,33 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
         ::-webkit-scrollbar { display: none; }
-        html, body { height: 100%; width: 100vw; overflow-x: hidden; overflow-y: auto; background-color: #ffffff; }
+        html, body { height: 100%; overflow-x: hidden; background-color: #ffffff; }
 
         /* NAVBAR STYLING */
         .navbar { background: #ffffff; height: 60px; display: flex; align-items: center; position: fixed; width: 100%; top: 0; z-index: 1000; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
         .nav-container { width: 92%; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
-/* லோகோ அலைன்மென்ட் */
-.logo { 
-    font-weight: 600; 
-    font-size: 1rem; 
-    margin-left: 15px; 
-    display: flex; 
-    align-items: center; 
-}
+        .logo { font-weight: 600; font-size: 1rem; margin-left: 15px; display: flex; align-items: center; }
+        .logo-blue { color: #1e90ff; }
+        .logo-icon-rotate { display: inline-block; animation: rotateLogo 5s linear infinite; margin-right: 10px; font-size: 1.4rem; color: #1e90ff !important; }
+        @keyframes rotateLogo { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        .toggle-btn { font-size: 1.6rem; color: #333; cursor: pointer; margin-right: 15px; display: flex; align-items: center; }
 
-.logo-blue { color: #1e90ff; }
-
-/* லோகோ ஐகான் அளவு மற்றும் சுழற்சி (Rotation) */
-.logo-icon-rotate { 
-    display: inline-block; 
-    animation: rotateLogo 5s linear infinite; 
-    margin-right: 10px;
-    font-size: 1.4rem; /* ஐகான் அளவு அதிகரிப்பு */
-    color: #1e90ff !important;
-}
-
-@keyframes rotateLogo { 
-    from { transform: rotate(0deg); } 
-    to { transform: rotate(360deg); } 
-}
-
-/* Toggle பட்டன் அளவு மற்றும் இடம் */
-.toggle-btn { 
-    font-size: 1.6rem; /* பட்டன் பெரியதாக மாற்றப்பட்டுள்ளது */
-    color: #333; 
-    cursor: pointer; 
-    margin-right: 15px; 
-    display: flex;
-    align-items: center;
-}
-
-/* லைவ் எஃபெக்ட் (Pulse) */
-.live-icon {
-    animation: pulseLive 2s infinite;
-    border-radius: 50%;
-}
-
-@keyframes pulseLive {
-    0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
-    70% { box-shadow: 0 0 0 8px rgba(37, 211, 102, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
-}
-        
-
-        .app-container { min-height: 100vh; margin-top: 60px; display: flex; flex-direction: column; padding: 10px 25px 80px 25px; }
-        
-        .image-box { 
-            position: relative;
-            width: 100%; max-width: 250px; aspect-ratio: 1/1; margin: 0 auto; border: 1px solid #ddd; border-radius: 4px; padding: 4px; overflow: hidden; background: #fff; 
+        .app-container { 
+            margin-top: 60px; 
+            display: flex; 
+            flex-direction: column; 
+            padding: 10px 25px 80px 25px; 
+            min-height: calc(100vh - 60px); 
+            box-sizing: border-box;
         }
+
+        .image-box { position: relative; width: 100%; max-width: 250px; aspect-ratio: 1/1; margin: 0 auto; border: 1px solid #ddd; border-radius: 4px; padding: 4px; overflow: hidden; background: #fff; }
         .image-box img { width: 100%; height: 100%; object-fit: contain; transition: opacity 0.3s ease; }
 
-        .status-badge {
-            position: absolute; top: 8px; left: 8px; padding: 4px 10px; border-radius: 3px; font-size: 10px; font-weight: 700; color: white; text-transform: uppercase; z-index: 10;
-        }
+        .status-badge { position: absolute; top: 8px; left: 8px; padding: 4px 10px; border-radius: 3px; font-size: 10px; font-weight: 700; color: white; text-transform: uppercase; z-index: 10; }
         .bg-best { background: #1e90ff; }
         .bg-offer { background: #ff0000; animation: slowBlinker 2s linear infinite; }
-
-        @keyframes slowBlinker { 
-            0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } 
-        }
+        @keyframes slowBlinker { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
 
         .dots { display: flex; justify-content: center; gap: 4px; margin-top: 10px; }
         .dot { width: 4px; height: 4px; background: #ddd; border-radius: 50%; transition: 0.3s; }
@@ -93,7 +50,7 @@
         .qty-btn { background: none; color: #6a3093; border: none; width: 30px; font-size: 20px; font-weight: 600; cursor: pointer; }
         #qtyVal { font-size: 16px; font-weight: 600; color: #333; }
 
-        .combo-label { font-size: 11px; font-weight: 600; margin-bottom: 7px; color: #333; text-transform: uppercase; }
+        .combo-label { font-size: 11px; font-weight: 600; margin-bottom: 7px; color: #333; text-transform: uppercase; margin-top: 0px;}
         .combo-grid { display: flex; flex-direction: column; gap: 8px; }
         .row-compact { display: flex; gap: 8px; }
         .btn-combo { border: 1px solid #ccc; border-radius: 4px; font-size: 9px; font-weight: 600; width: 90px; height: 28px; display: flex; align-items: center; justify-content: center; cursor: pointer; background: #fff; }
@@ -104,68 +61,49 @@
         .details-card ul { list-style: none; font-size: 10.5px; line-height: 1.5; }
         .details-card ul li { margin-bottom: 3px; display: flex; align-items: center; color: #444; }
         .details-card ul li i { color: #6a3093; margin-right: 8px; font-size: 8px; }
-
         .free-blink { color: red; font-weight: bold; margin-left: 5px; animation: slowBlinker 2s linear infinite; }
 
-        .footer-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; position: fixed; bottom: 0; left: 0; width: 100%; background: #ffffff; padding: 10px 25px 12px 25px; box-shadow: 0 -2px 10px rgba(0,0,0,0.05); }
+        .bottom-selection { margin-top: 15px; padding-top: 10px; border-top: 1px solid #f0f0f0; }
+        .select-group { display: flex; flex-direction: column; align-items: flex-start; margin-bottom: 12px; gap: 6px; }
+        .select-title { font-size: 12px; font-weight: 600; color: #333; }
+        .pill-container { display: flex; gap: 8px; }
+        .size-pill { border: 1.5px solid #ccc; padding: 5px 12px; border-radius: 6px; font-size: 10px; font-weight: 700; cursor: pointer; background: white; }
+        .size-pill.active { background: #6a3093; color: white; border-color: #6a3093; }
+
+        .delivery-msg-box { border: 1.5px solid #ccc; padding: 6px 12px; border-radius: 8px; background: #fdfdfd; min-width: 160px; }
+        #deliveryText { font-size: 11px; font-weight: 600; color: #6a3093; }
+
+        .footer-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; position: fixed; bottom: 0; left: 0; width: 100%; background: #ffffff; padding: 10px 25px 12px 25px; box-shadow: 0 -2px 10px rgba(0,0,0,0.1); z-index: 500; }
         .footer-btn { height: 35px; border-radius: 6px; font-size: 13px; font-weight: 600; border: none; display: flex; align-items: center; justify-content: center; cursor: pointer; }
         .back-btn { background: #f0f0f0; color: #333; border: 1px solid #ddd; }
         .next-btn { background: #6a3093; color: #fff; }
-        .fade-out { opacity: 0; transition: opacity 0.15s ease; }
 
+        /* SUMMARY VIEW MODAL */
+        .modal-overlay { 
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+            background: rgba(255,255,255,0.4); backdrop-filter: blur(10px); 
+            display: none; align-items: center; justify-content: center; z-index: 3000; 
+        }
+        .modal-card { 
+            width: 85%; max-width: 320px; background: white; border-radius: 20px; 
+            padding: 30px 20px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.1); 
+        }
+        .modal-card h2 { font-size: 22px; font-weight: 700; margin-bottom: 5px; }
+        .modal-card h2 span { color: #6a3093; }
+        .modal-price { font-size: 18px; font-weight: 700; margin-bottom: 20px; }
+        .modal-price span { color: #6a3093; font-size: 16px; }
+        .summary-list { text-align: left; list-style: none; margin-bottom: 25px; display: inline-block; }
+        .summary-list li { font-size: 13px; font-weight: 600; margin-bottom: 10px; display: flex; align-items: center; color: #333; }
+        .summary-list li i { color: #6a3093; margin-right: 12px; font-size: 14px; }
+        .wa-btn { background: #6a3093; color: white; width: 100%; padding: 12px; border-radius: 12px; border: none; font-size: 16px; font-weight: 600; cursor: pointer; margin-bottom: 10px; }
+        .cancel-link { font-size: 14px; font-weight: 700; color: #000; cursor: pointer; }
 
-
-/* Mobile View & Toggle Fix */
-@media (min-width: 993px) { 
-    .toggle-btn { display: none !important; } 
-}
-
-@media (max-width: 992px) {
-    .toggle-btn { 
-        display: block; 
-        cursor: pointer; 
-        /* அளவை அதிகப்படுத்த 1.2rem லிருந்து 1.8rem ஆக மாற்றப்பட்டுள்ளது */
-        font-size: 1.5rem; 
-        color: #333;
-        /* பட்டனை வலது ஓரம் நகர்த்தவும், லோகோவை விட்டுத் தள்ளவும் */
-        margin-right: 10px; 
-        transition: transform 0.2s ease;
-    }
-
-    /* பட்டனை அழுத்தும்போது ஒரு சிறிய எஃபெக்ட் */
-    .toggle-btn:active {
-        transform: scale(0.9);
-    }
-
-    .nav-links { 
-        position: fixed; 
-        right: -100%; 
-        list-style: none !important; 
-        top: 60px; 
-        background: #ffffff; 
-        width: 240px; 
-        height: 100vh; 
-        flex-direction: column; 
-        padding: 30px; 
-        transition: 0.4s ease; 
-        z-index: 1001; 
-        box-shadow: -5px 0 15px rgba(0,0,0,0.1);
-    }
-
-    .nav-links.active { right: 0 !important; }
-    
-    .nav-links li { margin-bottom: 18px; }
-    
-    .nav-links li a { 
-        margin: 0; 
-        font-size: 0.9rem; 
-        font-weight: 600; 
-        text-decoration: none !important; 
-        display: block; 
-        color: #333; 
-    }
-}
-
+        @media (max-width: 992px) {
+            .nav-links { position: fixed; right: -100%; list-style: none; top: 60px; background: #ffffff; width: 240px; height: 100vh; flex-direction: column; padding: 30px; transition: 0.4s ease; z-index: 2000; box-shadow: -5px 0 15px rgba(0,0,0,0.1); }
+            .nav-links.active { right: 0 !important; }
+            .nav-links li { margin-bottom: 18px; }
+            .nav-links li a { font-size: 0.9rem; font-weight: 600; text-decoration: none; display: block; color: #333; }
+        }
     </style>
 </head>
 <body onload="initApp()">
@@ -173,11 +111,10 @@
     <nav class="navbar">
         <div class="nav-container">
             <div class="logo">
-    <i class="fas fa-palette blue-clr logo-icon-rotate"></i>
-    <span>Ajith <span class="logo-blue">studio</span></span>
-</div>
-
-                 <ul class="nav-links" id="navLinks">
+                <i class="fas fa-palette logo-icon-rotate"></i>
+                <span>Ajith <span class="logo-blue">studio</span></span>
+            </div>
+            <ul class="nav-links" id="navLinks">
                 <li><a href="index.html">HOME</a></li> 
                 <li><a href="index.html#about">ABOUT</a></li>
                 <li><a href="index.html#services">SERVICES</a></li>
@@ -187,17 +124,13 @@
         </div>
     </nav>
 
-    </nav>
-
     <div class="app-container">
-        <div class="image-section">
-            <div class="image-box">
-                <div id="topBadge" class="status-badge bg-best">Best Price</div>
-                <img id="displayImg" src="" alt="Poster">
-            </div>
-            <div class="dots" id="dotContainer">
-                <div class="dot active"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
-            </div>
+        <div class="image-box">
+            <div id="topBadge" class="status-badge"></div>
+            <img id="displayImg" src="" alt="Poster">
+        </div>
+        <div class="dots" id="dotContainer">
+            <div class="dot active"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
         </div>
 
         <div class="header-row">
@@ -209,260 +142,117 @@
             </div>
         </div>
 
-        <div class="combo-section-wrapper">
-            <div id="dynamicLabel" class="combo-label">Select Your Combo</div>
-            <div class="combo-grid" id="comboButtonGrid">
-                </div>
-        </div>
+        <div id="dynamicLabel" class="combo-label"></div>
+        <div class="combo-grid" id="comboButtonGrid"></div>
         
-        <div class="details-card" id="detailsCard">
+        <div class="details-card">
             <h4 id="offerTitle"></h4>
             <ul id="offerList"></ul>
         </div>
 
+        <div class="bottom-selection">
+            <div class="select-group">
+                <div class="select-title">Size</div>
+                <div class="pill-container">
+                    <div class="size-pill active" id="size1" onclick="setSize('1080 X 1350', 'size1')">1080 X 1350</div>
+                    <div class="size-pill" id="size2" onclick="setSize('1080 X 1080', 'size2')">1080 X 1080</div>
+                </div>
+            </div>
+            <div class="select-group">
+                <div class="select-title">Maximum Delivery</div>
+                <div class="delivery-msg-box">
+                    <span id="deliveryText">1 Day Delivery</span>
+                </div>
+            </div>
+        </div>
+
         <div class="footer-btns">
             <button class="footer-btn back-btn" onclick="history.back()">Back</button>
-            <button class="footer-btn next-btn">Next</button>
+            <button class="footer-btn next-btn" onclick="openSummary()">Next</button>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="summaryModal">
+        <div class="modal-card">
+            <h2>Poster <span>Design</span></h2>
+            <div class="modal-price" id="mPrice">0 /- <span>Package</span></div>
+            <ul class="summary-list" id="mList">
+                </ul>
+            <button class="wa-btn" onclick="sendToWA()">Send whatsapp</button>
+            <div class="cancel-link" onclick="closeSummary()">Cancel</div>
         </div>
     </div>
 
     <script>
-        // --- 1. EDITABLE RATES AREA ---
         const NORMAL_RATES = { c1: "99", c2: "149", c3: "299", c4: "599", c5: "1199" };
         const FESTIVAL_RATES = { c1: "75", c2: "99", c3: "199", c4: "499", c5: "999" };
 
         const FESTIVAL_DB = [
+            { name: "Festivel", start: { month: 2, date: 7, hour: 9, min: 45 }, end: { month: 2, date: 8, hour: 23, min: 59 }, label: "Feb Special <span class='free-blink'>Offer</span>" },
+            { name: "Easter", start: { month: 3, date: 29, hour: 0, min: 0 }, end: { month: 4, date: 5, hour: 23, min: 59 }, label: "Easter Special <span class='free-blink'>Offer</span>" },
+            { name: "Tamil New Year & Vishu", start: { month: 4, date: 7, hour: 0, min: 0 }, end: { month: 4, date: 15, hour: 23, min: 59 }, label: "புத்தாண்டு & விஷு <span class='free-blink'>Mega Offer</span>" },
+            { name: "Workers Day", start: { month: 4, date: 24, hour: 0, min: 0 }, end: { month: 5, date: 1, hour: 23, min: 59 }, label: "May Day Special <span class='free-blink'>Offer</span>" },
+            { name: "Independence Day", start: { month: 8, date: 8, hour: 0, min: 0 }, end: { month: 8, date: 15, hour: 23, min: 59 }, label: "Independence Day <span class='free-blink'>Offer</span>" },
+            { name: "Onam", start: { month: 8, date: 19, hour: 0, min: 0 }, end: { month: 8, date: 27, hour: 23, min: 59 }, label: "Onam Special <span class='free-blink'>Offer</span>" },
+            { name: "Vinayagar Chaturthi", start: { month: 9, date: 7, hour: 0, min: 0 }, end: { month: 9, date: 14, hour: 23, min: 59 }, label: "விநாயகர் சதுர்த்தி <span class='free-blink'>Offer</span>" },
+            { name: "Ayudha & Saraswathi Puja", start: { month: 10, date: 12, hour: 0, min: 0 }, end: { month: 10, date: 21, hour: 23, min: 59 }, label: "ஆயுத பூஜை <span class='free-blink'>Special Sale</span>" },
+            { name: "Deepavali", start: { month: 11, date: 1, hour: 0, min: 0 }, end: { month: 11, date: 9, hour: 23, min: 59 }, label: "தீபாவளி <span class='free-blink'>Mega Dhamaka</span>" },
+            { name: "Christmas", start: { month: 12, date: 18, hour: 0, min: 0 }, end: { month: 12, date: 26, hour: 23, min: 59 }, label: "Christmas <span class='free-blink'>Special Offer</span>" },
+            { name: "New Year 2027", start: { month: 12, date: 27, hour: 0, min: 0 }, end: { month: 1, date: 2, hour: 23, min: 59 }, label: "New Year 2027 <span class='free-blink'>Offer</span>" }
+        ];
 
-
-      { 
-        name: "Festivel", 
-        start: { month: 2, date: 7, hour: 9, min: 45 }, // 1 week before Apr 5
-        end:   { month: 2, date: 8, hour: 23, min: 59 }, 
-        label: "Easter Special <span class='free-blink'>Offer</span>" 
-    },
-
-
-
-    { 
-        name: "Easter", 
-        start: { month: 3, date: 29, hour: 0, min: 0 }, // 1 week before Apr 5
-        end:   { month: 4, date: 5, hour: 23, min: 59 }, 
-        label: "Easter Special <span class='free-blink'>Offer</span>" 
-    },
-    { 
-        name: "Tamil New Year & Vishu", 
-        start: { month: 4, date: 7, hour: 0, min: 0 }, // 1 week before Apr 14
-        end:   { month: 4, date: 15, hour: 23, min: 59 }, 
-        label: "புத்தாண்டு & விஷு <span class='free-blink'>Mega Offer</span>" 
-    },
-    { 
-        name: "Workers Day", 
-        start: { month: 4, date: 24, hour: 0, min: 0 }, // 1 week before May 1
-        end:   { month: 5, date: 1, hour: 23, min: 59 }, 
-        label: "May Day Special <span class='free-blink'>Offer</span>" 
-    },
-    { 
-        name: "Independence Day", 
-        start: { month: 8, date: 8, hour: 0, min: 0 }, // 1 week before Aug 15
-        end:   { month: 8, date: 15, hour: 23, min: 59 }, 
-        label: "Independence Day <span class='free-blink'>Offer</span>" 
-    },
-    { 
-        name: "Onam", 
-        start: { month: 8, date: 19, hour: 0, min: 0 }, // 1 week before Aug 26
-        end:   { month: 8, date: 27, hour: 23, min: 59 }, 
-        label: "Onam Special <span class='free-blink'>Offer</span>" 
-    },
-    { 
-        name: "Vinayagar Chaturthi", 
-        start: { month: 9, date: 7, hour: 0, min: 0 }, // 1 week before Sep 14
-        end:   { month: 9, date: 14, hour: 23, min: 59 }, 
-        label: "விநாயகர் சதுர்த்தி <span class='free-blink'>Offer</span>" 
-    },
-    { 
-        name: "Ayudha & Saraswathi Puja", 
-        start: { month: 10, date: 12, hour: 0, min: 0 }, // Starts 1 week before Oct 19
-        end:   { month: 10, date: 21, hour: 23, min: 59 }, 
-        label: "ஆயுத பூஜை <span class='free-blink'>Special Sale</span>" 
-    },
-    { 
-        name: "Deepavali", 
-        start: { month: 11, date: 1, hour: 0, min: 0 }, // 1 week before Nov 8
-        end:   { month: 11, date: 9, hour: 23, min: 59 }, 
-        label: "தீபாவளி <span class='free-blink'>Mega Dhamaka</span>" 
-    },
-    { 
-        name: "Christmas", 
-        start: { month: 12, date: 18, hour: 0, min: 0 }, // 1 week before Dec 25
-        end:   { month: 12, date: 26, hour: 23, min: 59 }, 
-        label: "Christmas <span class='free-blink'>Special Offer</span>" 
-    },
-    { 
-        name: "New Year 2027", 
-        start: { month: 12, date: 27, hour: 0, min: 0 }, // Starts Dec 27
-        end:   { month: 1, date: 2, hour: 23, min: 59 }, 
-        label: "New Year 2027 <span class='free-blink'>Offer</span>" 
-    }
-];
-
-        // Images stay linked to the "Position" regardless of price
         const images = {
-            p0: "WhatsApp Image 2026-02-03 at 8.24.55 PM.jpeg", // For Single HD
-            p1: "Modern Social Media Design Tips by RSMAT for Engaging Visuals.jpg", // For Wish Poster
+            p0: "WhatsApp Image 2026-02-03 at 8.24.55 PM.jpeg",
+            p1: "Modern Social Media Design Tips by RSMAT for Engaging Visuals.jpg",
             p2: "Naturatta - Agência Let's Rock.jpg",
             p3: "social media post.jpg",
             p4: "FEED SOSIAL MEDIA TEMPLATE.jpg"
         };
 
         let isFestMode = false;
-        let activeFestName = "";
-        let currentSelectedKey = 'c1'; // Tracks which combo (c1-c5) is active
+        let currentSelectedKey = 'c1';
+        let selectedSize = "1080 X 1350";
 
-        function getIST() {
-            return new Date(new Date().toLocaleString('en-US', { timeZone: 'Asia/Kolkata' }));
-        }
+        function getIST() { return new Date(new Date().toLocaleString('en-US', { timeZone: 'Asia/Kolkata' })); }
 
         function checkStatus() {
             const now = getIST();
             const year = now.getFullYear();
-            
             const activeFest = FESTIVAL_DB.find(f => {
                 const s = new Date(year, f.start.month - 1, f.start.date, f.start.hour, f.start.min);
                 const e = new Date(year, f.end.month - 1, f.end.date, f.end.hour, f.end.min);
                 return (now >= s && now <= e);
             });
-
             const labelEl = document.getElementById('dynamicLabel');
             const badgeEl = document.getElementById('topBadge');
-
             if (activeFest) {
-                if (!isFestMode || activeFestName !== activeFest.name) {
-                    isFestMode = true;
-                    activeFestName = activeFest.name;
-                    badgeEl.innerText = "Special Offer";
-                    badgeEl.className = "status-badge bg-offer";
-                    labelEl.innerHTML = activeFest.label;
-                    renderButtons(); 
-                }
+                isFestMode = true;
+                badgeEl.innerText = "Special Offer";
+                badgeEl.className = "status-badge bg-offer";
+                labelEl.innerHTML = activeFest.label;
             } else {
-                if (isFestMode) {
-                    isFestMode = false;
-                    activeFestName = "";
-                    badgeEl.innerText = "Best Price";
-                    badgeEl.className = "status-badge bg-best";
-                    labelEl.innerText = "Select Your Combo";
-                    renderButtons();
-                }
+                isFestMode = false;
+                badgeEl.innerText = "Best Price";
+                badgeEl.className = "status-badge bg-best";
+                labelEl.innerText = "Select Your Combo";
             }
+            renderButtons();
         }
 
-       // Generate the Combo Data based on current mode
-function getCurrentComboData() {
-    // பண்டிகை காலமா இல்லையா என்பதைப் பொறுத்து விலையைத் தீர்மானிக்கிறது
-    const R = isFestMode ? FESTIVAL_RATES : NORMAL_RATES;
-
-    return {
-        // --- COMBO 1 ---
-        'c1': { 
-            p: R.c1, 
-            h: "Wish Poster", 
-            d: 1, 
-            norm: [
-                'HD Design', 
-                'Same Day Delivery', 
-                'JPG Image', 
-                'Mobile Layout'
-            ], 
-            fest: [
-                'Special Wish', 
-                'Name & Photo Included', 
-                'JPG High Quality', 
-                '1 Hour Delivery'
-            ] 
-        },
-
-        // --- COMBO 2 ---
-        'c2': { 
-            p: R.c2, 
-            h: "Single HD", 
-            d: 0, 
-            norm: [
-                'Single HD Poster', 
-                'Express Delivery', 
-                'JPG Image', 
-                'Standard Revisions'
-            ], 
-            fest: [
-                'Premium HD Poster', 
-                'Festival Frame', 
-                'High Quality JPG', 
-                'Unlimited Revisions'
-            ] 
-        },
-
-        // --- COMBO 3 ---
-        'c3': { 
-            p: R.c3, 
-            h: "Premium Duo", 
-            d: 2, 
-            norm: [
-                '2 Premium Posters', 
-                'Super Fast Delivery', 
-                'HD Digital', 
-                'High Resolution'
-            ], 
-            fest: [
-                '2 Premium Posters', 
-                '1 Poster <span class="free-blink">FREE</span>', 
-                'Festival Colors', 
-                'Unlimited Revisions'
-            ] 
-        },
-
-        // --- COMBO 4 ---
-        'c4': { 
-            p: R.c4, 
-            h: "Pro Combo", 
-            d: 3, 
-            norm: [
-                '5 Pro Posters', 
-                'Business Fast Delivery', 
-                'Agency Grade', 
-                'Premium Quality'
-            ], 
-            fest: [
-                '5 Pro Posters', 
-                '2 Posters <span class="free-blink">FREE</span>', 
-                'Full HD Quality', 
-                'Unlimited Revisions'
-            ] 
-        },
-
-        // --- COMBO 5 ---
-        'c5': { 
-            p: R.c5, 
-            h: "Mega Pack", 
-            d: 4, 
-            norm: [
-                '10 Mega Pack Posters', 
-                'Priority Delivery', 
-                'Ultra HD Quality', 
-                'Branding Kit'
-            ], 
-            fest: [
-                '10 Mega Pack Posters', 
-                '2 Posters <span class="free-blink">FREE</span>', 
-                '1 Video <span class="free-blink">FREE</span>', 
-                'VIP Support'
-            ] 
+        function getCurrentComboData() {
+            const R = isFestMode ? FESTIVAL_RATES : NORMAL_RATES;
+            return {
+                'c1': { p: R.c1, h: "Wish Poster", d: 1, count: 1, free: 0, norm: ['HD Design', 'Same Day Delivery', 'JPG Image', 'Mobile Layout'], fest: ['Special Wish', 'Name & Photo Included', 'JPG High Quality', '1 Hour Delivery'] },
+                'c2': { p: R.c2, h: "Single HD", d: 0, count: 1, free: 0, norm: ['Single HD Poster', 'Express Delivery', 'JPG Image', 'Standard Revisions'], fest: ['Premium HD Poster', 'Festival Frame', 'High Quality JPG', 'Unlimited Revisions'] },
+                'c3': { p: R.c3, h: "Premium Duo", d: 2, count: 2, free: 1, norm: ['2 Premium Posters', 'Super Fast Delivery', 'HD Digital', 'High Resolution'], fest: ['2 Premium Posters', '1 Poster <span class="free-blink">FREE</span>', 'Festival Colors', 'Unlimited Revisions'] },
+                'c4': { p: R.c4, h: "Pro Combo", d: 3, count: 5, free: 2, norm: ['5 Pro Posters', 'Business Fast Delivery', 'Agency Grade', 'Premium Quality'], fest: ['5 Pro Posters', '2 Posters <span class="free-blink">FREE</span>', 'Full HD Quality', 'Unlimited Revisions'] },
+                'c5': { p: R.c5, h: "Mega Pack", d: 4, count: 10, free: 2, norm: ['10 Mega Pack Posters', 'Priority Delivery', 'Ultra HD Quality', 'Branding Kit'], fest: ['10 Mega Pack Posters', '2 Posters <span class="free-blink">FREE</span>', '1 Video <span class="free-blink">FREE</span>', 'VIP Support'] }
+            };
         }
-    };
-}
 
         function renderButtons() {
             const grid = document.getElementById('comboButtonGrid');
             const data = getCurrentComboData();
-            
             grid.innerHTML = `
                 <div class="row-compact">
                     <div class="btn-combo ${currentSelectedKey==='c1'?'active':''}" onclick="selectCombo('c1')">${data.c1.p} / - Combo</div>
@@ -472,84 +262,131 @@ function getCurrentComboData() {
                     <div class="btn-combo ${currentSelectedKey==='c3'?'active':''}" onclick="selectCombo('c3')">${data.c3.p} / - Combo</div>
                     <div class="btn-combo ${currentSelectedKey==='c4'?'active':''}" onclick="selectCombo('c4')">${data.c4.p} / - Combo</div>
                     <div class="btn-combo ${currentSelectedKey==='c5'?'active':''}" onclick="selectCombo('c5')">${data.c5.p} / - Combo</div>
-                </div>
-            `;
+                </div>`;
             updateDetails();
-        }
-
-        function selectCombo(key) {
-            currentSelectedKey = key;
-            renderButtons();
         }
 
         function updateDetails() {
             const data = getCurrentComboData()[currentSelectedKey];
-            const img = document.getElementById('displayImg');
-            
-            // Image logic
-            const targetImg = images['p' + data.d];
-            if(!img.src.includes(targetImg)) {
-                img.classList.add('fade-out');
-                setTimeout(() => { img.src = targetImg; img.classList.remove('fade-out'); }, 150);
-            }
-
-            // Dots & Qty logic
-            document.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === data.d));
-            document.getElementById('qtyWrapper').style.visibility = (currentSelectedKey === 'c1' || currentSelectedKey === 'c2') ? 'visible' : 'hidden';
-            
-            // Title & List
-            document.getElementById('offerTitle').innerText = isFestMode ? (data.p + " / - " + activeFestName + " Pack") : (data.p + " / - " + data.h);
-            
+            const qty = parseInt(document.getElementById('qtyVal').innerText);
+            document.getElementById('displayImg').src = images['p' + data.d];
+            document.getElementById('offerTitle').innerText = isFestMode ? (data.p + " / - Festival Pack") : (data.p + " / - " + data.h);
             const list = document.getElementById('offerList');
             list.innerHTML = '';
-            const items = isFestMode ? data.fest : data.norm;
-            items.forEach(item => {
-                const li = document.createElement('li');
-                li.innerHTML = `<i class="fas fa-check-circle"></i> ${item}`;
-                list.appendChild(li);
-            });
+            (isFestMode ? data.fest : data.norm).forEach(item => { list.innerHTML += `<li><i class="fas fa-check-circle"></i> ${item}</li>`; });
+            document.getElementById('qtyWrapper').style.visibility = (currentSelectedKey === 'c1' || currentSelectedKey === 'c2') ? 'visible' : 'hidden';
+            let days = 1;
+            const price = parseInt(data.p);
+            if (price <= 99) days = qty;
+            else if (price === 199) days = 3;
+            else if (price === 499) days = 7;
+            else if (price === 999) days = 10;
+            document.getElementById('deliveryText').innerText = days + (days === 1 ? " Day Delivery" : " Days Delivery");
+            document.querySelectorAll('.dot').forEach((d, idx) => d.className = idx === data.d ? 'dot active' : 'dot');
         }
+
+        function selectCombo(key) { currentSelectedKey = key; renderButtons(); }
 
         function changeQty(n) {
             let q = document.getElementById('qtyVal');
             let v = parseInt(q.innerText) + n;
-            if(v > 0) q.innerText = v;
+            if(v > 0) { q.innerText = v; updateDetails(); }
         }
 
-    function initApp() {
-    // பழைய ஸ்டேட்டஸ் லாஜிக்
-    checkStatus();
-    setInterval(checkStatus, 5000);
-    renderButtons();
-    
-    // --- மெனு டோகிள் (Nav Toggle) லாஜிக் ---
-    const menuToggle = document.getElementById('menuToggle');
-    const navLinks = document.getElementById('navLinks');
-    
-    if (menuToggle && navLinks) {
-        menuToggle.onclick = function(e) {
-            e.stopPropagation(); // வெளியே கிளிக் செய்யும்போது மெனு மூடுவதற்காக
-            navLinks.classList.toggle('active');
-            
-            // ஐகானை மாற்ற (Bars -> Times/Close)
-            const icon = menuToggle.querySelector('i');
-            if (navLinks.classList.contains('active')) {
-                icon.className = "fas fa-times"; 
-            } else {
-                icon.className = "fas fa-bars";
-            }
-        };
+        function setSize(s, id) {
+            selectedSize = s;
+            document.querySelectorAll('.size-pill').forEach(p => p.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+        }
 
-        // மெனுவுக்கு வெளியே எங்கு கிளிக் செய்தாலும் மெனு தானாக மூடப்பட
-        document.addEventListener('click', function(event) {
-            if (!menuToggle.contains(event.target) && !navLinks.contains(event.target)) {
-                navLinks.classList.remove('active');
-                menuToggle.querySelector('i').className = "fas fa-bars";
-            }
-        });
-    }
+        /* NEW MODAL VIEW LOGIC */
+        function openSummary() {
+            const data = getCurrentComboData()[currentSelectedKey];
+            const qty = (currentSelectedKey === 'c1' || currentSelectedKey === 'c2') ? parseInt(document.getElementById('qtyVal').innerText) : 1;
+            const total = parseInt(data.p) * qty;
+
+            document.getElementById('mPrice').innerHTML = `${total} /- <span>${isFestMode ? 'Festivel' : 'Standard'} Package</span>`;
+            
+            let html = `<li><i class="fas fa-check"></i> ${data.count * qty} Posters</li>`;
+            if(data.free > 0) html += `<li><i class="fas fa-check"></i> ${data.free * qty} Posters <span style="color:red; margin-left:5px">Free</span></li>`;
+            html += `<li><i class="fas fa-check"></i> Custom Design service</li>`;
+            html += `<li><i class="fas fa-check"></i> JPG High Quality Image</li>`;
+            html += `<li><i class="fas fa-check"></i> ${selectedSize}</li>`;
+            html += `<li><i class="fas fa-check"></i> ${document.getElementById('deliveryText').innerText}</li>`;
+            
+            document.getElementById('mList').innerHTML = html;
+            document.getElementById('summaryModal').style.display = 'flex';
+        }
+
+        function closeSummary() { document.getElementById('summaryModal').style.display = 'none'; }
+
+        function sendToWA() {
+            const data = getCurrentComboData()[currentSelectedKey];
+            const qty = (currentSelectedKey === 'c1' || currentSelectedKey === 'c2') ? document.getElementById('qtyVal').innerText : 1;
+            const total = parseInt(data.p) * qty;
+            const text = `*New Order Detail*\n\nPackage: ${data.h}\nPrice: ${total} /-\nPosters: ${data.count * qty}\nSize: ${selectedSize}\nDelivery: ${document.getElementById('deliveryText').innerText}`;
+            window.open(`https://wa.me/910000000000?text=${encodeURIComponent(text)}`); // Change number here
+        }
+
+        function initApp() {
+            checkStatus();
+            const menuToggle = document.getElementById('menuToggle');
+            const navLinks = document.getElementById('navLinks');
+            menuToggle.onclick = () => navLinks.classList.toggle('active');
+        }
+
+
+/* --- UPDATED DYNAMIC SUMMARY LOGIC --- */
+function openSummary() {
+    const data = getCurrentComboData()[currentSelectedKey];
+    const qty = (currentSelectedKey === 'c1' || currentSelectedKey === 'c2') ? parseInt(document.getElementById('qtyVal').innerText) : 1;
+    const total = parseInt(data.p) * qty;
+
+    // 1. Update the Price and Heading
+    document.getElementById('mPrice').innerHTML = `${total} /- <span>${isFestMode ? 'Festival' : 'Standard'} Package</span>`;
+    
+    // 2. Clear the old list
+    const mList = document.getElementById('mList');
+    mList.innerHTML = '';
+
+    // 3. SELECT DETAILS: Dynamic switch based on current time
+    const activeDetails = isFestMode ? data.fest : data.norm;
+
+    // 4. Inject the specific combo details (Festival or Normal)
+    activeDetails.forEach(item => {
+        mList.innerHTML += `<li><i class="fas fa-check"></i> ${item}</li>`;
+    });
+
+    // 5. Add common order attributes
+    mList.innerHTML += `<li><i class="fas fa-check"></i> Size: ${selectedSize}</li>`;
+    mList.innerHTML += `<li><i class="fas fa-check"></i> ${document.getElementById('deliveryText').innerText}</li>`;
+    
+    // 6. Display the Modal
+    document.getElementById('summaryModal').style.display = 'flex';
 }
 
+function closeSummary() { 
+    document.getElementById('summaryModal').style.display = 'none'; 
+}
+
+function sendToWA() {
+    const data = getCurrentComboData()[currentSelectedKey];
+    const qty = (currentSelectedKey === 'c1' || currentSelectedKey === 'c2') ? document.getElementById('qtyVal').innerText : 1;
+    const total = parseInt(data.p) * qty;
+    
+    // Get details for the text message
+    const activeDetails = isFestMode ? data.fest : data.norm;
+    const detailsText = activeDetails.join(', ').replace(/<[^>]*>?/gm, ''); // Remove any HTML like <span>
+
+    const text = `*New Order Detail*\n\n` +
+                 `Package: ${isFestMode ? 'Festival Offer' : data.h}\n` +
+                 `Total Price: ${total} /-\n` +
+                 `Included: ${detailsText}\n` +
+                 `Size: ${selectedSize}\n` +
+                 `Delivery: ${document.getElementById('deliveryText').innerText}`;
+
+    window.open(`https://wa.me/910000000000?text=${encodeURIComponent(text)}`); 
+}
 
 
 
