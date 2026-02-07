@@ -10,112 +10,175 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
         ::-webkit-scrollbar { display: none; }
-        html, body { height: 100%; width: 100vw; overflow-x: hidden; overflow-y: auto; background-color: #ffffff; scrollbar-width: none; }
+        html, body { height: 100%; width: 100vw; overflow-x: hidden; overflow-y: auto; background-color: #ffffff; }
 
-        /* Navbar Styles */
+        /* NAVBAR STYLING */
         .navbar { background: #ffffff; height: 60px; display: flex; align-items: center; position: fixed; width: 100%; top: 0; z-index: 1000; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
         .nav-container { width: 92%; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-weight: 600; font-size: 0.9rem; }
-        .logo-blue { color: #1e90ff; }
-        .nav-links { display: flex; list-style: none; }
-        .nav-links li a { color: #000000; margin-left: 25px; text-decoration: none; font-size: 0.75rem; font-weight: 500; }
-        .blue-clr { color: #1e90ff !important; }
+/* லோகோ அலைன்மென்ட் */
+.logo { 
+    font-weight: 600; 
+    font-size: 1rem; 
+    margin-left: 15px; 
+    display: flex; 
+    align-items: center; 
+}
 
-        /* Logo Rotate Animation */
-        @keyframes rotateLogo { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-        .logo-icon-rotate { animation: rotateLogo 5s linear infinite; display: inline-block; margin-right: 5px; }
+.logo-blue { color: #1e90ff; }
 
-        /* Mobile Menu */
-        .toggle-btn { display: none; }
-        @media (max-width: 992px) {
-            .toggle-btn { display: block; cursor: pointer; font-size: 1.2rem; }
-            .nav-links { position: fixed; right: -100%; top: 60px; background: #ffffff; width: 240px; height: 100vh; flex-direction: column; padding: 30px; transition: 0.4s ease; z-index: 1001; }
-            .nav-links.active { right: 0 !important; }
-            .nav-links li { margin-bottom: 18px; }
-            .nav-links li a { margin: 0; font-size: 0.85rem; font-weight: 600; color: #333; }
-        }
+/* லோகோ ஐகான் அளவு மற்றும் சுழற்சி (Rotation) */
+.logo-icon-rotate { 
+    display: inline-block; 
+    animation: rotateLogo 5s linear infinite; 
+    margin-right: 10px;
+    font-size: 1.4rem; /* ஐகான் அளவு அதிகரிப்பு */
+    color: #1e90ff !important;
+}
 
-        /* Content Layout */
+@keyframes rotateLogo { 
+    from { transform: rotate(0deg); } 
+    to { transform: rotate(360deg); } 
+}
+
+/* Toggle பட்டன் அளவு மற்றும் இடம் */
+.toggle-btn { 
+    font-size: 1.6rem; /* பட்டன் பெரியதாக மாற்றப்பட்டுள்ளது */
+    color: #333; 
+    cursor: pointer; 
+    margin-right: 15px; 
+    display: flex;
+    align-items: center;
+}
+
+/* லைவ் எஃபெக்ட் (Pulse) */
+.live-icon {
+    animation: pulseLive 2s infinite;
+    border-radius: 50%;
+}
+
+@keyframes pulseLive {
+    0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+    70% { box-shadow: 0 0 0 8px rgba(37, 211, 102, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+}
+        
+
         .app-container { min-height: 100vh; margin-top: 60px; display: flex; flex-direction: column; padding: 10px 25px 80px 25px; }
-        .image-box { width: 100%; max-width: 250px; aspect-ratio: 1/1; margin: 0 auto; border: 1px solid #ddd; border-radius: 4px; padding: 4px; overflow: hidden; background: #fff; }
+        
+        .image-box { 
+            position: relative;
+            width: 100%; max-width: 250px; aspect-ratio: 1/1; margin: 0 auto; border: 1px solid #ddd; border-radius: 4px; padding: 4px; overflow: hidden; background: #fff; 
+        }
         .image-box img { width: 100%; height: 100%; object-fit: contain; transition: opacity 0.3s ease; }
-        .fade-out { opacity: 0; }
+
+        .status-badge {
+            position: absolute; top: 8px; left: 8px; padding: 4px 10px; border-radius: 3px; font-size: 10px; font-weight: 700; color: white; text-transform: uppercase; z-index: 10;
+        }
+        .bg-best { background: #1e90ff; }
+        .bg-offer { background: #ff0000; animation: slowBlinker 2s linear infinite; }
+
+        @keyframes slowBlinker { 
+            0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } 
+        }
 
         .dots { display: flex; justify-content: center; gap: 4px; margin-top: 10px; }
         .dot { width: 4px; height: 4px; background: #ddd; border-radius: 50%; transition: 0.3s; }
         .dot.active { background: #6a3093; transform: scale(1.1); }
 
-        .header-row { display: flex; justify-content: space-between; align-items: center; margin-top: 0px; min-height: 40px;}
+        .header-row { display: flex; justify-content: space-between; align-items: center; min-height: 40px;}
         .title { font-size: 18px; font-weight: 600; color: #000; }
         .title span { color: #6a3093; }
 
         .qty-box { display: flex; align-items: center; justify-content: space-between; background: #ffffff; border: 1px solid #eee; padding: 0 5px; border-radius: 8px; min-width: 110px; height: 34px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
-        .qty-btn { background: none; color: #6a3093; border: none; width: 30px; height: 30px; font-size: 20px; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+        .qty-btn { background: none; color: #6a3093; border: none; width: 30px; font-size: 20px; font-weight: 600; cursor: pointer; }
         #qtyVal { font-size: 16px; font-weight: 600; color: #333; }
 
-        /* Combo Buttons */
-        .combo-label { font-size: 11px; font-weight: 600; margin-top: 0px; margin-bottom: 7px; color: #333; text-transform: uppercase; }
+        .combo-label { font-size: 11px; font-weight: 600; margin-bottom: 7px; color: #333; text-transform: uppercase; }
         .combo-grid { display: flex; flex-direction: column; gap: 8px; }
         .row-compact { display: flex; gap: 8px; }
         .btn-combo { border: 1px solid #ccc; border-radius: 4px; font-size: 9px; font-weight: 600; width: 90px; height: 28px; display: flex; align-items: center; justify-content: center; cursor: pointer; background: #fff; }
         .btn-combo.active { background: #6a3093; color: #fff; border-color: #6a3093; }
 
-       /* --- Updated Details Section --- */
-.details-card { 
-    margin-top: 12px; /* கார்டுக்கு மேல் உள்ள இடைவெளி குறைப்பு */
-    min-height: 40px; 
-    border: none; 
-    background: none; 
-    padding: 0; 
-}
+        .details-card { margin-top: 12px; }
+        .details-card h4 { font-size: 12px; color: #449330; margin-bottom: 7px; font-weight: 700; }
+        .details-card ul { list-style: none; font-size: 10.5px; line-height: 1.5; }
+        .details-card ul li { margin-bottom: 3px; display: flex; align-items: center; color: #444; }
+        .details-card ul li i { color: #6a3093; margin-right: 8px; font-size: 8px; }
 
-.details-card h4 { 
-    font-size: 12px; 
-    color: #449330; 
-    margin-bottom: 7px; /* தலைப்புக்கும் லிஸ்டுக்கும் இடையே இடைவெளி குறைப்பு */
-    font-weight: 700; 
-}
+        .free-blink { color: red; font-weight: bold; margin-left: 5px; animation: slowBlinker 2s linear infinite; }
 
-.details-card ul { 
-    list-style: none; 
-    font-size: 10.5px; 
-    line-height: 1.5; /* வரிகளுக்கு இடையே உள்ள இடைவெளி (Gap) குறைப்பு */
-}
-
-.details-card ul li { 
-    margin-bottom: 2px; /* ஒவ்வொரு பாயிண்ட்டுக்கு இடையே உள்ள இடைவெளி குறைப்பு */
-    display: flex; 
-    align-items: center; 
-    color: #444; 
-}
-
-.details-card ul li i { 
-    color: #6a3093; 
-    margin-right: 6px; 
-    font-size: 8px; 
-}
-        /* Blink Effects */
-        .offer-blink, .free-blink { color: red; font-weight: bold; animation: blinker 0.8s linear infinite; }
-        @keyframes blinker { 50% { opacity: 0; } }
-        .item-gap { display: inline-block; width: 12px; }
-
-        /* Footer */
         .footer-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; position: fixed; bottom: 0; left: 0; width: 100%; background: #ffffff; padding: 10px 25px 12px 25px; box-shadow: 0 -2px 10px rgba(0,0,0,0.05); }
         .footer-btn { height: 35px; border-radius: 6px; font-size: 13px; font-weight: 600; border: none; display: flex; align-items: center; justify-content: center; cursor: pointer; }
         .back-btn { background: #f0f0f0; color: #333; border: 1px solid #ddd; }
         .next-btn { background: #6a3093; color: #fff; }
+        .fade-out { opacity: 0; transition: opacity 0.15s ease; }
+
+
+
+/* Mobile View & Toggle Fix */
+@media (min-width: 993px) { 
+    .toggle-btn { display: none !important; } 
+}
+
+@media (max-width: 992px) {
+    .toggle-btn { 
+        display: block; 
+        cursor: pointer; 
+        /* அளவை அதிகப்படுத்த 1.2rem லிருந்து 1.8rem ஆக மாற்றப்பட்டுள்ளது */
+        font-size: 1.5rem; 
+        color: #333;
+        /* பட்டனை வலது ஓரம் நகர்த்தவும், லோகோவை விட்டுத் தள்ளவும் */
+        margin-right: 10px; 
+        transition: transform 0.2s ease;
+    }
+
+    /* பட்டனை அழுத்தும்போது ஒரு சிறிய எஃபெக்ட் */
+    .toggle-btn:active {
+        transform: scale(0.9);
+    }
+
+    .nav-links { 
+        position: fixed; 
+        right: -100%; 
+        list-style: none !important; 
+        top: 60px; 
+        background: #ffffff; 
+        width: 240px; 
+        height: 100vh; 
+        flex-direction: column; 
+        padding: 30px; 
+        transition: 0.4s ease; 
+        z-index: 1001; 
+        box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+    }
+
+    .nav-links.active { right: 0 !important; }
+    
+    .nav-links li { margin-bottom: 18px; }
+    
+    .nav-links li a { 
+        margin: 0; 
+        font-size: 0.9rem; 
+        font-weight: 600; 
+        text-decoration: none !important; 
+        display: block; 
+        color: #333; 
+    }
+}
+
     </style>
 </head>
-<body onload="showOffer('99', document.getElementById('defaultCombo'))">
+<body onload="initApp()">
 
     <nav class="navbar">
         <div class="nav-container">
             <div class="logo">
-                <i id="secret-icon" onclick="handleSecretClick()" class="fas fa-palette logo-icon-rotate blue-clr" style="cursor: pointer;"></i>
-                <span>Ajith <span class="logo-blue">studio</span></span>
-            </div>
-            <ul class="nav-links" id="navLinks">
-                <li><a href="index.html">HOME</a></li>
+    <i class="fas fa-palette blue-clr logo-icon-rotate"></i>
+    <span>Ajith <span class="logo-blue">studio</span></span>
+</div>
+
+                 <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">HOME</a></li> 
                 <li><a href="index.html#about">ABOUT</a></li>
                 <li><a href="index.html#services">SERVICES</a></li>
                 <li><a href="index.html#contact">CONTACT</a></li>
@@ -124,22 +187,21 @@
         </div>
     </nav>
 
+    </nav>
+
     <div class="app-container">
         <div class="image-section">
             <div class="image-box">
-                <img id="displayImg" src="WhatsApp Image 2026-02-03 at 8.24.55 PM.jpeg" alt="Poster">
+                <div id="topBadge" class="status-badge bg-best">Best Price</div>
+                <img id="displayImg" src="" alt="Poster">
             </div>
             <div class="dots" id="dotContainer">
-                <div class="dot active"></div>
-                <div class="dot"></div>
-                <div class="dot"></div>
-                <div class="dot"></div>
-                <div class="dot"></div>
+                <div class="dot active"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
             </div>
         </div>
 
         <div class="header-row">
-            <h2 class="title">Poster <span>Design</span></h2>
+            <h2 class="title">Package <span>Details</span></h2>
             <div class="qty-box" id="qtyWrapper">
                 <button class="qty-btn" onclick="changeQty(-1)">−</button>
                 <span id="qtyVal">1</span>
@@ -148,20 +210,11 @@
         </div>
 
         <div class="combo-section-wrapper">
-            <div class="combo-label">Diwali Special Combo <span class="offer-blink">Offer</span></div>
-            <div class="combo-grid">
-                <div class="row-compact">
-                    <div class="btn-combo" id="defaultCombo" onclick="showOffer('99', this)">99 / - Combo</div>
-                    <div class="btn-combo" onclick="showOffer('75', this)">75 / - Combo</div>
+            <div id="dynamicLabel" class="combo-label">Select Your Combo</div>
+            <div class="combo-grid" id="comboButtonGrid">
                 </div>
-                <div class="row-compact">
-                    <div class="btn-combo" onclick="showOffer('199', this)">199 / - Combos</div>
-                    <div class="btn-combo" onclick="showOffer('499', this)">499 / - Combos</div>
-                    <div class="btn-combo" onclick="showOffer('999', this)">999 / - Combos</div>
-                </div>
-            </div>
         </div>
-       
+        
         <div class="details-card" id="detailsCard">
             <h4 id="offerTitle"></h4>
             <ul id="offerList"></ul>
@@ -174,61 +227,283 @@
     </div>
 
     <script>
-        let clickCount = 0; let clickTimer;
-        function handleSecretClick() {
-            clickCount++;
-            clearTimeout(clickTimer);
-            clickTimer = setTimeout(() => { clickCount = 0; }, 2000);
-            if (clickCount === 5) window.location.href = "login.html";
+        // --- 1. EDITABLE RATES AREA ---
+        const NORMAL_RATES = { c1: "99", c2: "149", c3: "299", c4: "599", c5: "1199" };
+        const FESTIVAL_RATES = { c1: "75", c2: "99", c3: "199", c4: "499", c5: "999" };
+
+        const FESTIVAL_DB = [
+
+
+      { 
+        name: "Festivel", 
+        start: { month: 2, date: 7, hour: 9, min: 45 }, // 1 week before Apr 5
+        end:   { month: 2, date: 8, hour: 23, min: 59 }, 
+        label: "Easter Special <span class='free-blink'>Offer</span>" 
+    },
+
+
+
+    { 
+        name: "Easter", 
+        start: { month: 3, date: 29, hour: 0, min: 0 }, // 1 week before Apr 5
+        end:   { month: 4, date: 5, hour: 23, min: 59 }, 
+        label: "Easter Special <span class='free-blink'>Offer</span>" 
+    },
+    { 
+        name: "Tamil New Year & Vishu", 
+        start: { month: 4, date: 7, hour: 0, min: 0 }, // 1 week before Apr 14
+        end:   { month: 4, date: 15, hour: 23, min: 59 }, 
+        label: "புத்தாண்டு & விஷு <span class='free-blink'>Mega Offer</span>" 
+    },
+    { 
+        name: "Workers Day", 
+        start: { month: 4, date: 24, hour: 0, min: 0 }, // 1 week before May 1
+        end:   { month: 5, date: 1, hour: 23, min: 59 }, 
+        label: "May Day Special <span class='free-blink'>Offer</span>" 
+    },
+    { 
+        name: "Independence Day", 
+        start: { month: 8, date: 8, hour: 0, min: 0 }, // 1 week before Aug 15
+        end:   { month: 8, date: 15, hour: 23, min: 59 }, 
+        label: "Independence Day <span class='free-blink'>Offer</span>" 
+    },
+    { 
+        name: "Onam", 
+        start: { month: 8, date: 19, hour: 0, min: 0 }, // 1 week before Aug 26
+        end:   { month: 8, date: 27, hour: 23, min: 59 }, 
+        label: "Onam Special <span class='free-blink'>Offer</span>" 
+    },
+    { 
+        name: "Vinayagar Chaturthi", 
+        start: { month: 9, date: 7, hour: 0, min: 0 }, // 1 week before Sep 14
+        end:   { month: 9, date: 14, hour: 23, min: 59 }, 
+        label: "விநாயகர் சதுர்த்தி <span class='free-blink'>Offer</span>" 
+    },
+    { 
+        name: "Ayudha & Saraswathi Puja", 
+        start: { month: 10, date: 12, hour: 0, min: 0 }, // Starts 1 week before Oct 19
+        end:   { month: 10, date: 21, hour: 23, min: 59 }, 
+        label: "ஆயுத பூஜை <span class='free-blink'>Special Sale</span>" 
+    },
+    { 
+        name: "Deepavali", 
+        start: { month: 11, date: 1, hour: 0, min: 0 }, // 1 week before Nov 8
+        end:   { month: 11, date: 9, hour: 23, min: 59 }, 
+        label: "தீபாவளி <span class='free-blink'>Mega Dhamaka</span>" 
+    },
+    { 
+        name: "Christmas", 
+        start: { month: 12, date: 18, hour: 0, min: 0 }, // 1 week before Dec 25
+        end:   { month: 12, date: 26, hour: 23, min: 59 }, 
+        label: "Christmas <span class='free-blink'>Special Offer</span>" 
+    },
+    { 
+        name: "New Year 2027", 
+        start: { month: 12, date: 27, hour: 0, min: 0 }, // Starts Dec 27
+        end:   { month: 1, date: 2, hour: 23, min: 59 }, 
+        label: "New Year 2027 <span class='free-blink'>Offer</span>" 
+    }
+];
+
+        // Images stay linked to the "Position" regardless of price
+        const images = {
+            p0: "WhatsApp Image 2026-02-03 at 8.24.55 PM.jpeg", // For Single HD
+            p1: "Modern Social Media Design Tips by RSMAT for Engaging Visuals.jpg", // For Wish Poster
+            p2: "Naturatta - Agência Let's Rock.jpg",
+            p3: "social media post.jpg",
+            p4: "FEED SOSIAL MEDIA TEMPLATE.jpg"
+        };
+
+        let isFestMode = false;
+        let activeFestName = "";
+        let currentSelectedKey = 'c1'; // Tracks which combo (c1-c5) is active
+
+        function getIST() {
+            return new Date(new Date().toLocaleString('en-US', { timeZone: 'Asia/Kolkata' }));
         }
 
-        document.getElementById('menuToggle').onclick = () => {
-            document.getElementById('navLinks').classList.toggle('active');
-        };
+        function checkStatus() {
+            const now = getIST();
+            const year = now.getFullYear();
+            
+            const activeFest = FESTIVAL_DB.find(f => {
+                const s = new Date(year, f.start.month - 1, f.start.date, f.start.hour, f.start.min);
+                const e = new Date(year, f.end.month - 1, f.end.date, f.end.hour, f.end.min);
+                return (now >= s && now <= e);
+            });
 
-       const images = {
-            p99: "WhatsApp Image 2026-02-03 at 8.24.55 PM.jpeg", 
-            p75: "Modern Social Media Design Tips by RSMAT for Engaging Visuals.jpg", 
-            p199: "Naturatta - Agência Let's Rock.jpg", 
-            p499: "social media post.jpg", 
-            p999: "FEED SOSIAL MEDIA TEMPLATE.jpg" 
-        };
+            const labelEl = document.getElementById('dynamicLabel');
+            const badgeEl = document.getElementById('topBadge');
 
-        const offers = {
-            '99': { heading: "99 / - Poster Details", img: images.p99, dot: 0, items: ['1 Single HD Poster', 'High Quality JPG Format', 'Social Media Optimized', 'Unlimited Revisions'] },
-            '75': { heading: "75 / - Festival Wishes Combo", img: images.p75, dot: 1, items: ['1 Simple Poster Design', 'Standard Resolution', 'Jpg High Quality Image', 'Wishes & Name, phone, address'] },
-            '199': { heading: "199 / - Premium Duo Details", img: images.p199, dot: 2, items: ['2 Premium Posters', '1 Poster <span class="item-gap"></span> <span class="free-blink">FREE</span>', 'Jpg High Quality Image', 'Unlimited Revisions'] },
-            '499': { heading: "499 / - Festival Combo", img: images.p499, dot: 3, items: ['5 Professional Posters', '2 Posters <span class="item-gap"></span> <span class="free-blink">FREE</span>', 'Jpg High Quality Image', 'Unlimited Revision'] },
-            '999': { heading: "999 / - Mega Festival Combo", img: images.p999, dot: 4, items: ['10 Mega Pack Posters', '2 Posters <span class="item-gap"></span> <span class="free-blink">FREE</span>', '1 Motion Video <span class="item-gap"></span> <span class="free-blink">FREE</span>', 'Unlimited Revisions'] }
-        };
+            if (activeFest) {
+                if (!isFestMode || activeFestName !== activeFest.name) {
+                    isFestMode = true;
+                    activeFestName = activeFest.name;
+                    badgeEl.innerText = "Special Offer";
+                    badgeEl.className = "status-badge bg-offer";
+                    labelEl.innerHTML = activeFest.label;
+                    renderButtons(); 
+                }
+            } else {
+                if (isFestMode) {
+                    isFestMode = false;
+                    activeFestName = "";
+                    badgeEl.innerText = "Best Price";
+                    badgeEl.className = "status-badge bg-best";
+                    labelEl.innerText = "Select Your Combo";
+                    renderButtons();
+                }
+            }
+        }
 
-        function showOffer(val, el) {
-            document.querySelectorAll('.btn-combo').forEach(b => b.classList.remove('active'));
-            el.classList.add('active');
+       // Generate the Combo Data based on current mode
+function getCurrentComboData() {
+    // பண்டிகை காலமா இல்லையா என்பதைப் பொறுத்து விலையைத் தீர்மானிக்கிறது
+    const R = isFestMode ? FESTIVAL_RATES : NORMAL_RATES;
 
-            const selected = offers[val];
-            const imgElement = document.getElementById('displayImg');
-            const card = document.getElementById('detailsCard');
+    return {
+        // --- COMBO 1 ---
+        'c1': { 
+            p: R.c1, 
+            h: "Wish Poster", 
+            d: 1, 
+            norm: [
+                'HD Design', 
+                'Same Day Delivery', 
+                'JPG Image', 
+                'Mobile Layout'
+            ], 
+            fest: [
+                'Special Wish', 
+                'Name & Photo Included', 
+                'JPG High Quality', 
+                '1 Hour Delivery'
+            ] 
+        },
 
-            imgElement.classList.add('fade-out');
-            setTimeout(() => {
-                imgElement.src = selected.img;
-                imgElement.classList.remove('fade-out');
-            }, 150);
+        // --- COMBO 2 ---
+        'c2': { 
+            p: R.c2, 
+            h: "Single HD", 
+            d: 0, 
+            norm: [
+                'Single HD Poster', 
+                'Express Delivery', 
+                'JPG Image', 
+                'Standard Revisions'
+            ], 
+            fest: [
+                'Premium HD Poster', 
+                'Festival Frame', 
+                'High Quality JPG', 
+                'Unlimited Revisions'
+            ] 
+        },
 
-            const dots = document.querySelectorAll('.dot');
-            dots.forEach((d, i) => d.classList.toggle('active', i === selected.dot));
+        // --- COMBO 3 ---
+        'c3': { 
+            p: R.c3, 
+            h: "Premium Duo", 
+            d: 2, 
+            norm: [
+                '2 Premium Posters', 
+                'Super Fast Delivery', 
+                'HD Digital', 
+                'High Resolution'
+            ], 
+            fest: [
+                '2 Premium Posters', 
+                '1 Poster <span class="free-blink">FREE</span>', 
+                'Festival Colors', 
+                'Unlimited Revisions'
+            ] 
+        },
 
-            card.classList.remove('animate-details');
-            void card.offsetWidth; 
-            card.classList.add('animate-details');
+        // --- COMBO 4 ---
+        'c4': { 
+            p: R.c4, 
+            h: "Pro Combo", 
+            d: 3, 
+            norm: [
+                '5 Pro Posters', 
+                'Business Fast Delivery', 
+                'Agency Grade', 
+                'Premium Quality'
+            ], 
+            fest: [
+                '5 Pro Posters', 
+                '2 Posters <span class="free-blink">FREE</span>', 
+                'Full HD Quality', 
+                'Unlimited Revisions'
+            ] 
+        },
 
-            document.getElementById('qtyWrapper').style.visibility = (val === '99' || val === '75') ? 'visible' : 'hidden';
-            document.getElementById('offerTitle').innerText = selected.heading;
+        // --- COMBO 5 ---
+        'c5': { 
+            p: R.c5, 
+            h: "Mega Pack", 
+            d: 4, 
+            norm: [
+                '10 Mega Pack Posters', 
+                'Priority Delivery', 
+                'Ultra HD Quality', 
+                'Branding Kit'
+            ], 
+            fest: [
+                '10 Mega Pack Posters', 
+                '2 Posters <span class="free-blink">FREE</span>', 
+                '1 Video <span class="free-blink">FREE</span>', 
+                'VIP Support'
+            ] 
+        }
+    };
+}
+
+        function renderButtons() {
+            const grid = document.getElementById('comboButtonGrid');
+            const data = getCurrentComboData();
+            
+            grid.innerHTML = `
+                <div class="row-compact">
+                    <div class="btn-combo ${currentSelectedKey==='c1'?'active':''}" onclick="selectCombo('c1')">${data.c1.p} / - Combo</div>
+                    <div class="btn-combo ${currentSelectedKey==='c2'?'active':''}" onclick="selectCombo('c2')">${data.c2.p} / - Combo</div>
+                </div>
+                <div class="row-compact">
+                    <div class="btn-combo ${currentSelectedKey==='c3'?'active':''}" onclick="selectCombo('c3')">${data.c3.p} / - Combo</div>
+                    <div class="btn-combo ${currentSelectedKey==='c4'?'active':''}" onclick="selectCombo('c4')">${data.c4.p} / - Combo</div>
+                    <div class="btn-combo ${currentSelectedKey==='c5'?'active':''}" onclick="selectCombo('c5')">${data.c5.p} / - Combo</div>
+                </div>
+            `;
+            updateDetails();
+        }
+
+        function selectCombo(key) {
+            currentSelectedKey = key;
+            renderButtons();
+        }
+
+        function updateDetails() {
+            const data = getCurrentComboData()[currentSelectedKey];
+            const img = document.getElementById('displayImg');
+            
+            // Image logic
+            const targetImg = images['p' + data.d];
+            if(!img.src.includes(targetImg)) {
+                img.classList.add('fade-out');
+                setTimeout(() => { img.src = targetImg; img.classList.remove('fade-out'); }, 150);
+            }
+
+            // Dots & Qty logic
+            document.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === data.d));
+            document.getElementById('qtyWrapper').style.visibility = (currentSelectedKey === 'c1' || currentSelectedKey === 'c2') ? 'visible' : 'hidden';
+            
+            // Title & List
+            document.getElementById('offerTitle').innerText = isFestMode ? (data.p + " / - " + activeFestName + " Pack") : (data.p + " / - " + data.h);
             
             const list = document.getElementById('offerList');
             list.innerHTML = '';
-            selected.items.forEach(item => {
+            const items = isFestMode ? data.fest : data.norm;
+            items.forEach(item => {
                 const li = document.createElement('li');
                 li.innerHTML = `<i class="fas fa-check-circle"></i> ${item}`;
                 list.appendChild(li);
@@ -240,6 +515,45 @@
             let v = parseInt(q.innerText) + n;
             if(v > 0) q.innerText = v;
         }
+
+    function initApp() {
+    // பழைய ஸ்டேட்டஸ் லாஜிக்
+    checkStatus();
+    setInterval(checkStatus, 5000);
+    renderButtons();
+    
+    // --- மெனு டோகிள் (Nav Toggle) லாஜிக் ---
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+    
+    if (menuToggle && navLinks) {
+        menuToggle.onclick = function(e) {
+            e.stopPropagation(); // வெளியே கிளிக் செய்யும்போது மெனு மூடுவதற்காக
+            navLinks.classList.toggle('active');
+            
+            // ஐகானை மாற்ற (Bars -> Times/Close)
+            const icon = menuToggle.querySelector('i');
+            if (navLinks.classList.contains('active')) {
+                icon.className = "fas fa-times"; 
+            } else {
+                icon.className = "fas fa-bars";
+            }
+        };
+
+        // மெனுவுக்கு வெளியே எங்கு கிளிக் செய்தாலும் மெனு தானாக மூடப்பட
+        document.addEventListener('click', function(event) {
+            if (!menuToggle.contains(event.target) && !navLinks.contains(event.target)) {
+                navLinks.classList.remove('active');
+                menuToggle.querySelector('i').className = "fas fa-bars";
+            }
+        });
+    }
+}
+
+
+
+
+
     </script>
 </body>
 </html>
