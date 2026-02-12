@@ -441,10 +441,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-
-
-
-
 <section class="design-section">
     <div class="container layout-wrapper">
         
@@ -580,7 +576,7 @@ document.addEventListener('DOMContentLoaded', function() {
             <p class="details">Price: <span class="only-txt"><b class="orange-num" id="v_pri1">Just ₹199</b></p>
             <span class="cut-price">Save ₹100</span>
             </div>
-            <button class="btn-book">Book Now</button>
+          <button class="btn-book" onclick="location.href='flyer-design.html'">View</button>
         </div>
 
         <div class="box reveal">
@@ -827,14 +823,12 @@ document.addEventListener('DOMContentLoaded', function() {
    <script>
     
  
-          
-
-               document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function() {
 
     const now = new Date();
     const year = now.getFullYear();
 
-    // --- 1. ALL FESTIVALS (Start/End with Minutes) ---
+    // --- 1. ALL FESTIVALS ---
     const FESTIVAL_LIST = [
         { name: "VALENTINE OFFER", sM: 2, sD: 3, sH: 11, sMi: 28, eM: 2, eD: 3, eH: 11, eMi: 29 },
         { name: "TAMIL NEW YEAR",  sM: 4, sD: 7, sH: 0, sMi: 0, eM: 4, eD: 14, eH: 23, eMi: 59 },
@@ -843,10 +837,15 @@ document.addEventListener('DOMContentLoaded', function() {
         { name: "NEW YEAR 2027",   sM: 12, sD: 26, sH: 0, sMi: 0, eM: 1, eD: 1, eH: 23, eMi: 59 }
     ];
 
-    // --- 2. CALENDAR SEASON (Place Change) ---
-    const CAL_SEASON = { sM: 2, sD: 2, sH:11, sMi:17, eM: 2, eD: 3, eH:11, eMi: 19, off: "35% OFF", pri: "Just ₹249", sav: "Save ₹150" };
+    // --- 2. CALENDAR SEASON (Place Change Settings) ---
+    // The calendar will move to the 2nd position ONLY between these two times
+    const CAL_SEASON = { 
+        sM: 2, sD: 8, sH: 9, sMi: 48, 
+        eM: 2, eD: 8, eH: 9, eMi: 49, 
+        off: "30% OFF", pri: "Just ₹399", sav: "Save ₹199" 
+    };
 
-    // --- 3. EDITABLE PRICES (Sprite-by-Sprite) ---
+    // --- 3. EDITABLE PRICES ---
     const NORMAL_PRICES = {
         "v_off1": { off: "10% OFF", pri: "Just ₹190", sav: "Save ₹20" },
         "v_off2": { off: "15% OFF", pri: "Just ₹170", sav: "Save ₹30" },
@@ -866,12 +865,10 @@ document.addEventListener('DOMContentLoaded', function() {
         let activeFest = null;
         let targetTime = null;
 
-        // --- STRICT START TIME CHECKER ---
+        // --- FESTIVAL CHECKER ---
         FESTIVAL_LIST.forEach(f => {
             const start = new Date(year, f.sM - 1, f.sD, f.sH, f.sMi);
             const end = new Date(year, f.eM - 1, f.eD, f.eH, f.eMi);
-            
-            // ஆஃபர் நேரம் தொடங்கினால் மட்டுமே உள்ளே செல்லும்
             if (currentTime >= start && currentTime <= end) {
                 activeFest = f;
                 targetTime = end;
@@ -887,16 +884,19 @@ document.addEventListener('DOMContentLoaded', function() {
             if (headingUI) headingUI.innerText = activeFest.name + " ENDS IN";
             renderTimer(targetTime - currentTime);
         } else {
-            // ஆஃபர் தொடங்கவில்லை அல்லது முடிந்துவிட்டது என்றால் டைமர் தெரியாது
             if (timerUI) timerUI.style.display = 'none';
         }
 
-        // --- BOX & CALENDAR LOGIC ---
+        // --- CALENDAR SEASON TIME CALCULATION ---
+        const calStart = new Date(year, CAL_SEASON.sM - 1, CAL_SEASON.sD, CAL_SEASON.sH, CAL_SEASON.sMi);
+        const calEnd = new Date(year, CAL_SEASON.eM - 1, CAL_SEASON.eD, CAL_SEASON.eH, CAL_SEASON.eMi);
+        const isCalSeasonActive = (currentTime >= calStart && currentTime <= calEnd);
+
+        // --- BOX & PRICE LOGIC ---
         const grid = document.querySelector('.sprite-grid');
         const boxes = document.querySelectorAll('.box');
-        let calBox = null, secondBox = boxes[1];
-
-        const isCalSeason = (currentTime.getMonth() + 1 >= CAL_SEASON.sM && currentTime.getMonth() + 1 <= CAL_SEASON.eM);
+        let calBox = null;
+        let secondBox = boxes[1]; // Reference to the box currently in 2nd place
 
         boxes.forEach(box => {
             const badge = box.querySelector('.top-left-offer');
@@ -906,8 +906,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
             let data = activeFest ? FEST_PRICES[badge.id] : NORMAL_PRICES[badge.id];
             
-            // Calendar Season Special Price
-            if (isCal && isCalSeason) data = CAL_SEASON;
+            // Special Season Price
+            if (isCal && isCalSeasonActive) data = CAL_SEASON;
 
             if (data) {
                 badge.innerText = data.off;
@@ -917,16 +917,25 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
 
-        // Anti-Blink Calendar Placement
-        if (isCalSeason && calBox && secondBox && grid) {
-            if (grid.children[1] !== calBox) {
-                grid.insertBefore(calBox, secondBox);
+        // --- DYNAMIC POSITIONING (THE FIX) ---
+        if (calBox && grid && secondBox) {
+            if (isCalSeasonActive) {
+                // Time is running: Move Calendar to 2nd position
+                if (grid.children[1] !== calBox) {
+                    grid.insertBefore(calBox, secondBox);
+                }
+            } else {
+                // Time finished: Move Calendar back to the end (old place)
+                if (grid.lastElementChild !== calBox) {
+                    grid.appendChild(calBox);
+                }
             }
         }
     }
 
     function renderTimer(diff) {
         const f = (n) => n.toString().padStart(2, '0');
+        if (diff < 0) diff = 0;
         document.getElementById('d_fix').innerText = f(Math.floor(diff / 86400000));
         document.getElementById('h_fix').innerText = f(Math.floor((diff % 86400000) / 3600000));
         document.getElementById('m_fix').innerText = f(Math.floor((diff % 3600000) / 60000));
@@ -936,10 +945,6 @@ document.addEventListener('DOMContentLoaded', function() {
     setInterval(updateLogic, 1000);
     updateLogic();
 });
-
-
-
-
 
     
     
