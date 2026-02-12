@@ -63,11 +63,11 @@
         .details-card ul li i { color: #6a3093; margin-right: 8px; font-size: 8px; }
         .free-blink { color: red; font-weight: bold; margin-left: 5px; animation: slowBlinker 2s linear infinite; }
 
-        .bottom-selection { margin-top: 15px; padding-top: 10px; border-top: 1px solid #f0f0f0; }
+        .bottom-selection { margin-top: 5px; padding-top: 10px; border-top: 1px solid #f0f0f0; }
         .select-group { display: flex; flex-direction: column; align-items: flex-start; margin-bottom: 12px; gap: 6px; }
         .select-title { font-size: 12px; font-weight: 600; color: #333; }
         .pill-container { display: flex; gap: 8px; }
-        .size-pill { border: 1.5px solid #ccc; padding: 5px 12px; border-radius: 6px; font-size: 10px; font-weight: 700; cursor: pointer; background: white; }
+        .size-pill { border: 1.5px solid #ccc; padding: 5px 12px; border-radius: 6px; font-size: 10px; font-weight: 600; cursor: pointer; background: white; }
         .size-pill.active { background: #6a3093; color: white; border-color: #6a3093; }
 
         .delivery-msg-box { border: 1.5px solid #ccc; padding: 6px 12px; border-radius: 8px; background: #fdfdfd; min-width: 160px; }
@@ -78,26 +78,7 @@
         .back-btn { background: #f0f0f0; color: #333; border: 1px solid #ddd; }
         .next-btn { background: #6a3093; color: #fff; }
 
-        /* SUMMARY VIEW MODAL */
-        .modal-overlay { 
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
-            background: rgba(255,255,255,0.4); backdrop-filter: blur(10px); 
-            display: none; align-items: center; justify-content: center; z-index: 3000; 
-        }
-        .modal-card { 
-            width: 85%; max-width: 320px; background: white; border-radius: 20px; 
-            padding: 30px 20px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.1); 
-        }
-        .modal-card h2 { font-size: 22px; font-weight: 700; margin-bottom: 5px; }
-        .modal-card h2 span { color: #6a3093; }
-        .modal-price { font-size: 18px; font-weight: 700; margin-bottom: 20px; }
-        .modal-price span { color: #6a3093; font-size: 16px; }
-        .summary-list { text-align: left; list-style: none; margin-bottom: 25px; display: inline-block; }
-        .summary-list li { font-size: 13px; font-weight: 600; margin-bottom: 10px; display: flex; align-items: center; color: #333; }
-        .summary-list li i { color: #6a3093; margin-right: 12px; font-size: 14px; }
-        .wa-btn { background: #6a3093; color: white; width: 100%; padding: 12px; border-radius: 12px; border: none; font-size: 16px; font-weight: 600; cursor: pointer; margin-bottom: 10px; }
-        .cancel-link { font-size: 14px; font-weight: 700; color: #000; cursor: pointer; }
-
+      
         @media (max-width: 992px) {
             .nav-links { position: fixed; right: -100%; list-style: none; top: 60px; background: #ffffff; width: 240px; height: 100vh; flex-direction: column; padding: 30px; transition: 0.4s ease; z-index: 2000; box-shadow: -5px 0 15px rgba(0,0,0,0.1); }
             .nav-links.active { right: 0 !important; }
@@ -172,34 +153,86 @@
         </div>
     </div>
 
-    <div class="modal-overlay" id="summaryModal">
-        <div class="modal-card">
-            <h2>Poster <span>Design</span></h2>
-            <div class="modal-price" id="mPrice">0 /- <span>Package</span></div>
-            <ul class="summary-list" id="mList">
-                </ul>
-            <button class="wa-btn" onclick="sendToWA()">Send whatsapp</button>
-            <div class="cancel-link" onclick="closeSummary()">Cancel</div>
-        </div>
-    </div>
+    
 
     <script>
+           // --- 1. EDITABLE RATES AREA ---
         const NORMAL_RATES = { c1: "99", c2: "149", c3: "299", c4: "599", c5: "1199" };
         const FESTIVAL_RATES = { c1: "75", c2: "99", c3: "199", c4: "499", c5: "999" };
 
         const FESTIVAL_DB = [
-            { name: "Festivel", start: { month: 2, date: 7, hour: 9, min: 45 }, end: { month: 2, date: 8, hour: 23, min: 59 }, label: "Feb Special <span class='free-blink'>Offer</span>" },
-            { name: "Easter", start: { month: 3, date: 29, hour: 0, min: 0 }, end: { month: 4, date: 5, hour: 23, min: 59 }, label: "Easter Special <span class='free-blink'>Offer</span>" },
-            { name: "Tamil New Year & Vishu", start: { month: 4, date: 7, hour: 0, min: 0 }, end: { month: 4, date: 15, hour: 23, min: 59 }, label: "புத்தாண்டு & விஷு <span class='free-blink'>Mega Offer</span>" },
-            { name: "Workers Day", start: { month: 4, date: 24, hour: 0, min: 0 }, end: { month: 5, date: 1, hour: 23, min: 59 }, label: "May Day Special <span class='free-blink'>Offer</span>" },
-            { name: "Independence Day", start: { month: 8, date: 8, hour: 0, min: 0 }, end: { month: 8, date: 15, hour: 23, min: 59 }, label: "Independence Day <span class='free-blink'>Offer</span>" },
-            { name: "Onam", start: { month: 8, date: 19, hour: 0, min: 0 }, end: { month: 8, date: 27, hour: 23, min: 59 }, label: "Onam Special <span class='free-blink'>Offer</span>" },
-            { name: "Vinayagar Chaturthi", start: { month: 9, date: 7, hour: 0, min: 0 }, end: { month: 9, date: 14, hour: 23, min: 59 }, label: "விநாயகர் சதுர்த்தி <span class='free-blink'>Offer</span>" },
-            { name: "Ayudha & Saraswathi Puja", start: { month: 10, date: 12, hour: 0, min: 0 }, end: { month: 10, date: 21, hour: 23, min: 59 }, label: "ஆயுத பூஜை <span class='free-blink'>Special Sale</span>" },
-            { name: "Deepavali", start: { month: 11, date: 1, hour: 0, min: 0 }, end: { month: 11, date: 9, hour: 23, min: 59 }, label: "தீபாவளி <span class='free-blink'>Mega Dhamaka</span>" },
-            { name: "Christmas", start: { month: 12, date: 18, hour: 0, min: 0 }, end: { month: 12, date: 26, hour: 23, min: 59 }, label: "Christmas <span class='free-blink'>Special Offer</span>" },
-            { name: "New Year 2027", start: { month: 12, date: 27, hour: 0, min: 0 }, end: { month: 1, date: 2, hour: 23, min: 59 }, label: "New Year 2027 <span class='free-blink'>Offer</span>" }
-        ];
+
+
+      { 
+        name: "Festivel", 
+        start: { month: 2, date: 7, hour: 9, min: 45 }, // 1 week before Apr 5
+        end:   { month: 2, date: 8, hour: 23, min: 59 }, 
+        label: "Easter Special <span class='free-blink'>Offer</span>" 
+    },
+
+
+
+    { 
+        name: "Easter", 
+        start: { month: 3, date: 29, hour: 0, min: 0 }, // 1 week before Apr 5
+        end:   { month: 4, date: 5, hour: 23, min: 59 }, 
+        label: "Easter Special <span class='free-blink'>Offer</span>" 
+    },
+    { 
+        name: "Tamil New Year & Vishu", 
+        start: { month: 4, date: 7, hour: 0, min: 0 }, // 1 week before Apr 14
+        end:   { month: 4, date: 15, hour: 23, min: 59 }, 
+        label: "புத்தாண்டு & விஷு <span class='free-blink'>Mega Offer</span>" 
+    },
+    { 
+        name: "Workers Day", 
+        start: { month: 4, date: 24, hour: 0, min: 0 }, // 1 week before May 1
+        end:   { month: 5, date: 1, hour: 23, min: 59 }, 
+        label: "May Day Special <span class='free-blink'>Offer</span>" 
+    },
+    { 
+        name: "Independence Day", 
+        start: { month: 8, date: 8, hour: 0, min: 0 }, // 1 week before Aug 15
+        end:   { month: 8, date: 15, hour: 23, min: 59 }, 
+        label: "Independence Day <span class='free-blink'>Offer</span>" 
+    },
+    { 
+        name: "Onam", 
+        start: { month: 8, date: 19, hour: 0, min: 0 }, // 1 week before Aug 26
+        end:   { month: 8, date: 27, hour: 23, min: 59 }, 
+        label: "Onam Special <span class='free-blink'>Offer</span>" 
+    },
+    { 
+        name: "Vinayagar Chaturthi", 
+        start: { month: 9, date: 7, hour: 0, min: 0 }, // 1 week before Sep 14
+        end:   { month: 9, date: 14, hour: 23, min: 59 }, 
+        label: "விநாயகர் சதுர்த்தி <span class='free-blink'>Offer</span>" 
+    },
+    { 
+        name: "Ayudha & Saraswathi Puja", 
+        start: { month: 10, date: 12, hour: 0, min: 0 }, // Starts 1 week before Oct 19
+        end:   { month: 10, date: 21, hour: 23, min: 59 }, 
+        label: "ஆயுத பூஜை <span class='free-blink'>Special Sale</span>" 
+    },
+    { 
+        name: "Deepavali", 
+        start: { month: 11, date: 1, hour: 0, min: 0 }, // 1 week before Nov 8
+        end:   { month: 11, date: 9, hour: 23, min: 59 }, 
+        label: "தீபாவளி <span class='free-blink'>Mega Dhamaka</span>" 
+    },
+    { 
+        name: "Christmas", 
+        start: { month: 12, date: 18, hour: 0, min: 0 }, // 1 week before Dec 25
+        end:   { month: 12, date: 26, hour: 23, min: 59 }, 
+        label: "Christmas <span class='free-blink'>Special Offer</span>" 
+    },
+    { 
+        name: "New Year 2027", 
+        start: { month: 12, date: 27, hour: 0, min: 0 }, // Starts Dec 27
+        end:   { month: 1, date: 2, hour: 23, min: 59 }, 
+        label: "New Year 2027 <span class='free-blink'>Offer</span>" 
+    }
+];
 
         const images = {
             p0: "WhatsApp Image 2026-02-03 at 8.24.55 PM.jpeg",
@@ -239,16 +272,109 @@
             renderButtons();
         }
 
-        function getCurrentComboData() {
-            const R = isFestMode ? FESTIVAL_RATES : NORMAL_RATES;
-            return {
-                'c1': { p: R.c1, h: "Wish Poster", d: 1, count: 1, free: 0, norm: ['HD Design', 'Same Day Delivery', 'JPG Image', 'Mobile Layout'], fest: ['Special Wish', 'Name & Photo Included', 'JPG High Quality', '1 Hour Delivery'] },
-                'c2': { p: R.c2, h: "Single HD", d: 0, count: 1, free: 0, norm: ['Single HD Poster', 'Express Delivery', 'JPG Image', 'Standard Revisions'], fest: ['Premium HD Poster', 'Festival Frame', 'High Quality JPG', 'Unlimited Revisions'] },
-                'c3': { p: R.c3, h: "Premium Duo", d: 2, count: 2, free: 1, norm: ['2 Premium Posters', 'Super Fast Delivery', 'HD Digital', 'High Resolution'], fest: ['2 Premium Posters', '1 Poster <span class="free-blink">FREE</span>', 'Festival Colors', 'Unlimited Revisions'] },
-                'c4': { p: R.c4, h: "Pro Combo", d: 3, count: 5, free: 2, norm: ['5 Pro Posters', 'Business Fast Delivery', 'Agency Grade', 'Premium Quality'], fest: ['5 Pro Posters', '2 Posters <span class="free-blink">FREE</span>', 'Full HD Quality', 'Unlimited Revisions'] },
-                'c5': { p: R.c5, h: "Mega Pack", d: 4, count: 10, free: 2, norm: ['10 Mega Pack Posters', 'Priority Delivery', 'Ultra HD Quality', 'Branding Kit'], fest: ['10 Mega Pack Posters', '2 Posters <span class="free-blink">FREE</span>', '1 Video <span class="free-blink">FREE</span>', 'VIP Support'] }
-            };
+       
+       // Generate the Combo Data based on current mode
+function getCurrentComboData() {
+    // பண்டிகை காலமா இல்லையா என்பதைப் பொறுத்து விலையைத் தீர்மானிக்கிறது
+    const R = isFestMode ? FESTIVAL_RATES : NORMAL_RATES;
+
+    return {
+        // --- COMBO 1 ---
+        'c1': { 
+            p: R.c1, 
+            h: "Wish Poster", 
+            d: 1, 
+            norm: [
+                'HD Design', 
+                'Same Day Delivery', 
+                'JPG Image', 
+                'Mobile Layout'
+            ], 
+            fest: [
+                'Special Wish', 
+                'Name & Photo Included', 
+                'JPG High Quality', 
+                '1 Hour Delivery'
+            ] 
+        },
+
+        // --- COMBO 2 ---
+        'c2': { 
+            p: R.c2, 
+            h: "Single HD", 
+            d: 0, 
+            norm: [
+                'Single HD Poster', 
+                'Express Delivery', 
+                'JPG Image', 
+                'Standard Revisions'
+            ], 
+            fest: [
+                'Premium HD Poster', 
+                'Festival Frame', 
+                'High Quality JPG', 
+                'Unlimited Revisions'
+            ] 
+        },
+
+        // --- COMBO 3 ---
+        'c3': { 
+            p: R.c3, 
+            h: "Premium Duo", 
+            d: 2, 
+            norm: [
+                '2 Premium Posters', 
+                'Super Fast Delivery', 
+                'HD Digital', 
+                'High Resolution'
+            ], 
+            fest: [
+                '2 Premium Posters', 
+                '1 Poster <span class="free-blink">FREE</span>', 
+                'Festival Colors', 
+                'Unlimited Revisions'
+            ] 
+        },
+
+        // --- COMBO 4 ---
+        'c4': { 
+            p: R.c4, 
+            h: "Pro Combo", 
+            d: 3, 
+            norm: [
+                '5 Pro Posters', 
+                'Business Fast Delivery', 
+                'Agency Grade', 
+                'Premium Quality'
+            ], 
+            fest: [
+                '5 Pro Posters', 
+                '2 Posters <span class="free-blink">FREE</span>', 
+                'Full HD Quality', 
+                'Unlimited Revisions'
+            ] 
+        },
+
+        // --- COMBO 5 ---
+        'c5': { 
+            p: R.c5, 
+            h: "Mega Pack", 
+            d: 4, 
+            norm: [
+                '10 Mega Pack Posters', 
+                'Priority Delivery', 
+                'Ultra HD Quality', 
+                'Branding Kit'
+            ], 
+            fest: [
+                '10 Mega Pack Posters', 
+                '2 Posters <span class="free-blink">FREE</span>', 
+                '1 Video <span class="free-blink">FREE</span>', 
+                'VIP Support'
+            ] 
         }
+    };
+}
 
         function renderButtons() {
             const grid = document.getElementById('comboButtonGrid');
@@ -365,28 +491,36 @@ function openSummary() {
     document.getElementById('summaryModal').style.display = 'flex';
 }
 
-function closeSummary() { 
-    document.getElementById('summaryModal').style.display = 'none'; 
-}
 
-function sendToWA() {
+
+
+
+
+function openSummary() {
     const data = getCurrentComboData()[currentSelectedKey];
-    const qty = (currentSelectedKey === 'c1' || currentSelectedKey === 'c2') ? document.getElementById('qtyVal').innerText : 1;
+    const qty = (currentSelectedKey === 'c1' || currentSelectedKey === 'c2') ? parseInt(document.getElementById('qtyVal').innerText) : 1;
     const total = parseInt(data.p) * qty;
-    
-    // Get details for the text message
-    const activeDetails = isFestMode ? data.fest : data.norm;
-    const detailsText = activeDetails.join(', ').replace(/<[^>]*>?/gm, ''); // Remove any HTML like <span>
+    const imgPath = document.getElementById('displayImg').src;
 
-    const text = `*New Order Detail*\n\n` +
-                 `Package: ${isFestMode ? 'Festival Offer' : data.h}\n` +
-                 `Total Price: ${total} /-\n` +
-                 `Included: ${detailsText}\n` +
-                 `Size: ${selectedSize}\n` +
-                 `Delivery: ${document.getElementById('deliveryText').innerText}`;
+    // Save selection for the next page
+    localStorage.setItem('selectedOrder', JSON.stringify({
+        title: data.h,
+        price: data.p,
+        total: total,
+        image: imgPath,
+        details: isFestMode ? data.fest : data.norm,
+        size: selectedSize,
+        delivery: document.getElementById('deliveryText').innerText,
+        mode: isFestMode ? "Festivel Combos" : "Standard Pack"
+    }));
 
-    window.open(`https://wa.me/910000000000?text=${encodeURIComponent(text)}`); 
+    window.location.href = "poster-book.html";
 }
+
+       
+
+
+
 
 
 
