@@ -2020,9 +2020,41 @@ a
 
 
 
+/* --- 400px AND UP - BUTTON POSITION ADJUSTMENT --- */
+@media (min-width: 400px) {
+    
+    /* 1. Ensure internal items stay on one line (as fixed before) */
+    .box h2, .details, .price-row-equal {
+        white-space: nowrap;
+        flex-wrap: nowrap;
+    }
 
+    /* Scaling internal text (Small-Big) */
+    .box h2 { font-size: 13px; }
+    .details { font-size: 11px; }
+    .only-txt { font-size: 11px; }
+    .orange-num { font-size: 10px; }
+    .cut-price { font-size: 11px; }
 
+    /* 2. Button Adjustment - Move 1 point down */
+    .btn-book {
+        margin-top: auto;   /* Pushes to bottom area */
+        position: relative; 
+        top: 1px;           /* Moves the button exactly 1 point down */
+        height: 38px;
+        font-size: 12px;
+        font-weight: 700;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
 
+    /* Ensure the box padding doesn't cut off the button move */
+    .box {
+        padding-bottom: 11px; /* Increased by 1px to accommodate the move */
+    }
+}
 
 
 
