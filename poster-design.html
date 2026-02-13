@@ -98,8 +98,45 @@
 
 
 
-      .app-container { 
-        margin-top: 80px; /* Increased from 60px to move image down */
+      /* 1. Navbar & Toggle Button */
+    .navbar { 
+        height: 70px; /* Taller navbar */
+    }
+    .logo { 
+        font-size: 1.2rem; 
+    }
+    .logo-icon-rotate { 
+        font-size: 1.7rem; 
+    }
+    .toggle-btn { 
+        font-size: 2rem; /* Larger "Hamburger" menu icon */
+    }
+
+    /* 2. Content Position (Moved Down) */
+    .app-container { 
+        margin-top: 80px; /* Pushes everything down further from top */
+    }
+
+    /* 3. Image Box Size */
+    .image-box { 
+        max-width: 350px; 
+    }
+
+    /* 4. Footer Buttons (Back & Next) */
+    .footer-btns { 
+        padding: 15px 25px 20px 25px; /* More padding around buttons */
+        gap: 15px; 
+    }
+    .footer-btn { 
+        height: 48px;      /* Taller, easier to tap */
+        font-size: 16px;    /* Larger text */
+        border-radius: 10px;
+    }
+
+    /* Keep the Large Top Badge */
+    .status-badge { 
+        font-size: 14px; 
+        padding: 6px 15px; 
     }
 
    
@@ -131,7 +168,7 @@
     .details-card ul li i { font-size: 12px; margin-right: 10px; }
 
     /* SIZE PILLS - FIXED SIZE */
-    .bottom-selection { margin-top: 20px; padding-top: 25px; border-top: 1px solid #eee; }
+    .bottom-selection { margin-top: 10px; padding-top: 25px; border-top: 1px solid #eee; }
     .select-group { margin-bottom: 22px; gap: 12px; }
     .select-title { font-size: 16px; font-weight: 600; } /* Bigger Size Title */
     .size-pill { 
