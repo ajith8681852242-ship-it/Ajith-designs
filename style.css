@@ -2228,7 +2228,7 @@ html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
 
     /* --- 1. Banner Scaling (No Changes) --- */
     .banner {
-        height: 260px !important;
+        height: 280px !important;
     }
 
     .main-heading {
@@ -2257,7 +2257,7 @@ html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
     /* --- 3. Social Icons: Bottom Move & Size Reduce --- */
     .social-stock-container {
         position: absolute !important;
-        margin-top: 35px;
+        margin-top: 50px;
         bottom: 12px !important;    /* Moved further down (Reduced from 20px) */
         left: 30px !important;
         display: flex !important;
@@ -2295,3 +2295,33 @@ html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
         margin: 0 !important;
     }
 }
+
+
+
+          @media (min-width: 400px) {
+            .navbar { height: 70px; }
+            .logo { font-size: 1.2rem; }
+            .logo-icon-rotate { font-size: 1.7rem; }
+            .toggle-btn { font-size: 2rem; }
+
+            .app-container { margin-top: 90px; }
+            .image-box { max-width: 330px; }
+            .status-badge { font-size: 14px; padding: 6px 15px; top: 12px; left: 12px; border-radius: 4px; }
+
+            .header-row { margin-top: 20px; margin-bottom: 12px; }
+            .title { font-size: 24px; } 
+            .qty-box { height: 40px; min-width: 130px; }
+            #qtyVal { font-size: 18px; }
+
+            .details-section { margin-top: 15px; }
+            .details-section h4 { font-size: 16px; margin-bottom: 10px; } 
+            .details-section ul { font-size: 14.5px; } 
+            .details-section ul li { margin-bottom: 8px; }
+
+            .total-price-section { margin-top: 15px; padding-top: 15px; }
+            .total-price-text { font-size: 18px; } 
+            .total-price-text span { font-size: 26px; } 
+
+            .footer-btns { padding: 15px 25px 20px 25px; gap: 15px; }
+            .footer-btn { height: 48px; font-size: 16px; border-radius: 10px; }
+        }
