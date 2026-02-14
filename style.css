@@ -2209,7 +2209,7 @@ html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
 
     /* --- 1. Banner Scaling (No Changes) --- */
     .banner {
-        height: 275px !important;
+        height: 270px !important;
     }
 
     .main-heading {
@@ -2238,7 +2238,7 @@ html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
     /* --- 3. Social Icons: Bottom Move & Size Reduce --- */
     .social-stock-container {
         position: absolute !important;
-        margin-top: 55px;
+        margin-top: 50px;
         bottom: 12px !important;    /* Moved further down (Reduced from 20px) */
         left: 30px !important;
         display: flex !important;
