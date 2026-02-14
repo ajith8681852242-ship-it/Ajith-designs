@@ -195,7 +195,7 @@ html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
 }
 
 /* --- Mobile Device Adjustments --- */
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 399px) {
     .header-mini-bar {
         top: 70px !important; /* மொபைலில் இன்னும் உச்சிக்கு */
         justify-content: flex-start !important; /* இடது ஓரம் */
@@ -206,6 +206,10 @@ html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
         font-size: 6px !important;
     }
 }
+
+
+
+
 
 /* Main Title Style */
 .main-title-small {
@@ -598,8 +602,6 @@ html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
 
 
 
-
-
 /* 3 Service icon view - Laptop view */
 
 
@@ -970,7 +972,6 @@ html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
 }
 
 
-
 @media (min-width: 1024px) {
     /* 1. Container remains stretched to keep text aligned */
     .layout-wrapper {
@@ -1035,15 +1036,6 @@ html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
 
 
 }
-
-
-
-
-
-
-
-
-
 
 
 
@@ -2294,9 +2286,9 @@ html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
         display: block !important;
         margin: 0 !important;
     }
-}
+}               
 
-
+          
 
           @media (min-width: 400px) {
             .navbar { height: 70px; }
@@ -2325,3 +2317,73 @@ html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
             .footer-btns { padding: 15px 25px 20px 25px; gap: 15px; }
             .footer-btn { height: 48px; font-size: 16px; border-radius: 10px; }
         }
+
+
+/* The 'min-width: 400px' stops this code from messing up small phones */
+@media screen and (min-width: 400px) and (max-width: 768px) {
+    .header-mini-bar {
+        top: 80px !important;
+        justify-content: flex-start !important;
+        padding-left: 28px !important;
+      
+    }
+    
+    .header-mini-bar span {
+        font-size: 8px !important;
+    }
+}
+
+
+
+
+
+
+
+
+/* --- Optimized for 400px and Upwards --- */
+@media screen and (min-width: 400px) and (max-width: 992px) {
+    
+    .f-box {
+        height: 65px !important; /* Slightly taller for the 'Big' feel */
+        min-height: 65px !important;
+        display: grid !important;
+        place-items: center !important;
+        padding: 5px 0 !important;
+        box-sizing: border-box !important;
+    }
+
+    .f-content {
+        display: flex !important;
+        /* Moves Icon to the Bottom visually */
+        flex-direction: column-reverse !important; 
+        justify-content: center !important;
+        align-items: center !important;
+        height: 100% !important;
+        gap: 2px !important;
+    }
+
+    .f-content i {
+        font-size: 20px !important; /* Bigger Icon for 400px+ */
+        color: #ffffff !important;
+        margin-top: 4px !important; 
+        line-height: 1 !important;
+    }
+
+    .f-text {
+        margin-bottom: 0px !important;
+    }
+
+    .f-title {
+        font-size: 10px !important; /* 'Bige' Text size */
+        color: #ffffff !important;
+        font-weight: 800 !important; /* Extra Bold */
+        text-transform: uppercase !important;
+        margin: 0 !important;
+        line-height: 1.2 !important;
+    }
+
+    /* Keep description hidden for clean mobile look */
+    .f-desc {
+        display: none !important;
+    }
+}
