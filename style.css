@@ -2224,7 +2224,7 @@ html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
     }
 
     .main-heading {
-        font-size: 1.2rem !important;
+        font-size: 1.3rem !important;
         margin-bottom: 0 !important; /* Reset margin for tighter gap */
     }
 
