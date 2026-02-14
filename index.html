@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ta">
 <head>
@@ -328,7 +327,7 @@ document.addEventListener('DOMContentLoaded', function() {
     transform: translateX(-50%);
     
     /* Small Move to Bottom */
-    bottom: 12px !important; 
+    bottom: 8px !important; 
     top: auto !important; 
     
     z-index: 9999;
@@ -337,39 +336,23 @@ document.addEventListener('DOMContentLoaded', function() {
     pointer-events: none;
 }
 
-@media (min-width: 400px) {
-    /* Just Small Size */
-    .status-text {
-        font-size: 15px !important; 
-        font-weight: 800;
-        text-transform: uppercase;
-        letter-spacing: 0.3px;
-        line-height: 1;
-    }
+    
 
-    /* Smallest Time Text */
-    .daily-time {
-        font-size: 6px !important;
-        color: #000000; 
-        font-weight: 700;
-        margin-top: 2px !important; 
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-    }
-
-    /* Minimal Icon */
-    .icon-box {
-        width: 8px !important;
-        height: 8px !important;
-    }
-
-    .dot { 
-        width: 5px !important; 
-        height: 5px !important; 
-    }
+       :host { 
+    position: absolute; 
+    left: 50%;
+    transform: translateX(-50%);
+    
+    /* Clean Bottom Positioning */
+    bottom: 15px; 
+    top: auto !important; 
+    
+    z-index: 9999;
+    width: 100%;
+    display: block;
+    pointer-events: none;
 }
 
-/* Base Layout & Clean Ripple */
 .container {
     display: flex;
     flex-direction: column;
@@ -381,32 +364,77 @@ document.addEventListener('DOMContentLoaded', function() {
 .row {
     display: flex;
     align-items: center;
-    gap: 5px; /* Minimal gap */
+    gap: 6px; /* Tighter gap for smaller text */
+}
+
+/* REDUCED SIZE - Professional & Sharp */
+.status-text {
+    font-size: 15px; /* Desktop: Reduced by 3pt */
+    font-weight: 700;
+    text-transform: uppercase;
+    line-height: 1;
+    letter-spacing: 0.3px;
 }
 
 .icon-box {
     position: relative;
+    width: 12px; 
+    height: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.dot { background-color: currentColor; border-radius: 50%; }
+.dot { 
+    width: 6px; 
+    height: 6px; 
+    background-color: currentColor; 
+    border-radius: 50%; 
+}
 
 .ring {
     position: absolute; 
     width: 100%; 
     height: 100%;
-    border: 1px solid currentColor; 
+    border: 1.2px solid currentColor; 
     border-radius: 50%;
     animation: ripple 2s infinite ease-out;
 }
 
 @keyframes ripple {
     0% { transform: scale(1); opacity: 1; }
-    100% { transform: scale(2.2); opacity: 0; }
+    100% { transform: scale(3.5); opacity: 0; }
 }
-        
+
+/* Time text - Minimalist */
+.daily-time {
+    font-size: 8px; /* Slightly smaller to match */
+    color: #000000; 
+    font-weight: 600;
+    margin-top: 3px;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+}
+
+/* Mobile View: Reduced by 3pt */
+@media (max-width: 768px) {
+    :host { 
+        bottom: 12px; 
+    }
+    .status-text { 
+        font-size: 11px; /* Mobile: Clean and reduced */
+    }
+    .daily-time { 
+        font-size: 7px; 
+    }
+    .icon-box { 
+        width: 10px; 
+        height: 10px; 
+    }
+}
+
+
+
 
 
 
