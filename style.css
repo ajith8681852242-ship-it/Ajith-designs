@@ -2213,18 +2213,18 @@ html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
 
     .banner-content {
 
-    margin: 15px;
+    margin: 25px;
 }
 
      
 
     /* --- 1. Banner Scaling (No Changes) --- */
     .banner {
-        height: 280px !important;
+        height: 270px !important;
     }
 
     .main-heading {
-        font-size: 1.1rem !important;
+        font-size: 1.0rem !important;
         margin-bottom: 0 !important; /* Reset margin for tighter gap */
     }
 
