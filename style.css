@@ -2004,7 +2004,7 @@ html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
 
 
 /* --- 400px AND UP - BUTTON POSITION ADJUSTMENT --- */
-@media (min-width: 380px) {
+@media (min-width: 400px) {
     
     /* 1. Ensure internal items stay on one line (as fixed before) */
     .box h2, .details, .price-row-equal {
@@ -2208,7 +2208,7 @@ html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
     JOINED STYLES: 400px AND UP (SMALL -> BIG)
    ============================================================ */
 
-@media (min-width: 380px) {
+@media (min-width: 400px) {
 
 
     .banner-content {
@@ -2224,7 +2224,7 @@ html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
     }
 
     .main-heading {
-        font-size: 1.0rem !important;
+        font-size: 1.2rem !important;
         margin-bottom: 0 !important; /* Reset margin for tighter gap */
     }
 
@@ -2290,7 +2290,7 @@ html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
 
           
 
-          @media (min-width: 380px) {
+          @media (min-width: 400px) {
             .navbar { height: 70px; }
             .logo { font-size: 1.2rem; }
             .logo-icon-rotate { font-size: 1.7rem; }
@@ -2320,7 +2320,7 @@ html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
 
 
 /* The 'min-width: 400px' stops this code from messing up small phones */
-@media screen and (min-width: 380px) and (max-width: 768px) {
+@media screen and (min-width: 400px) and (max-width: 768px) {
     .header-mini-bar {
         top: 80px !important;
         justify-content: flex-start !important;
@@ -2341,7 +2341,7 @@ html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
 
 
 /* --- Optimized for 400px and Upwards --- */
-@media screen and (min-width: 380px) and (max-width: 992px) {
+@media screen and (min-width: 400px) and (max-width: 992px) {
     
     .f-box {
         height: 65px !important; /* Slightly taller for the 'Big' feel */
