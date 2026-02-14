@@ -94,6 +94,7 @@ html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
     /* 1. முதலில் பேனருக்கு எல்லை வகுக்கவும் (கட்டாயம் தேவை) */
     .banner {
         position: relative !important;
+        
     }
 
     .header-mini-bar {
@@ -582,7 +583,7 @@ html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
 
     /* ஐகான் அளவு */
     .whatsapp-btn-live i {
-        font-size: 0.7rem !important;
+        font-size: 0.9rem !important;
     }
 }
 
@@ -2041,11 +2042,6 @@ html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
 
 
 
-
-
-
-
-
 .timer-float-right { 
                 position: absolute; 
                 left: 235px; /* பழைய ஹெடர் இருந்த இடத்திற்கு தள்ளி வைக்கிறது */
@@ -2100,13 +2096,6 @@ html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
     font-size: 10px; 
     font-weight: 900; 
 }
-
-
-
-
-
-
-
 
 
 
@@ -2220,7 +2209,7 @@ html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
 
     /* --- 1. Banner Scaling (No Changes) --- */
     .banner {
-        height: 270px !important;
+        height: 275px !important;
     }
 
     .main-heading {
@@ -2249,7 +2238,7 @@ html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
     /* --- 3. Social Icons: Bottom Move & Size Reduce --- */
     .social-stock-container {
         position: absolute !important;
-        margin-top: 50px;
+        margin-top: 55px;
         bottom: 12px !important;    /* Moved further down (Reduced from 20px) */
         left: 30px !important;
         display: flex !important;
@@ -2387,3 +2376,6 @@ html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
         display: none !important;
     }
 }
+
+
+
