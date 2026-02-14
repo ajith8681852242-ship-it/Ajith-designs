@@ -2224,7 +2224,7 @@ html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
     }
 
     .main-heading {
-        font-size: 1.0rem !important;
+        font-size: 1.1rem !important;
         margin-bottom: 0 !important; /* Reset margin for tighter gap */
     }
 
@@ -2237,7 +2237,7 @@ html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
 
     .whatsapp-btn-live {
         width: 130px !important;
-        height: 32px !important;
+        height: 30px !important;
         font-size: 0.8rem !important;
         margin-top: 4px !important;  /* Reduced from 6px for tighter gap */
         display: flex !important;
