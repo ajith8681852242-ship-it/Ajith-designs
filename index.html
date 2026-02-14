@@ -307,44 +307,23 @@ document.addEventListener('DOMContentLoaded', function() {
             letter-spacing: 1px;
         }
 
-        /* மொபைல் வியூ (Small Size for Mobile) */
-        @media (max-width: 768px) {
-            :host { top: 190px; left: 50%; z-index: 1000;}
-            .status-text { font-size: 10px; }
-            .daily-time { font-size: 3px; margin-top: 3px; }
-            .icon-box { width: 10px; height: 10px; }
-            .dot { width: 5px; height: 5px; }
-            .row { gap: 5px; }
-        }
 
          /* ============================================================
     FIX: JUST SMALL (Minimalist & Bottom Move)
    ============================================================ */
 
+
+      @media (max-width: 400px)  {}
+
+
+      
 :host { 
     position: absolute; 
     left: 50%;
     transform: translateX(-50%);
     
-    /* Small Move to Bottom */
-    bottom: 8px !important; 
-    top: auto !important; 
-    
-    z-index: 9999;
-    width: 100%;
-    display: block;
-    pointer-events: none;
-}
-
-    
-
-       :host { 
-    position: absolute; 
-    left: 50%;
-    transform: translateX(-50%);
-    
     /* Clean Bottom Positioning */
-    bottom: 15px; 
+    bottom: 8px; 
     top: auto !important; 
     
     z-index: 9999;
@@ -369,7 +348,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 /* REDUCED SIZE - Professional & Sharp */
 .status-text {
-    font-size: 15px; /* Desktop: Reduced by 3pt */
+    font-size: 11px; /* Desktop: Reduced by 3pt */
     font-weight: 700;
     text-transform: uppercase;
     line-height: 1;
@@ -408,16 +387,17 @@ document.addEventListener('DOMContentLoaded', function() {
 
 /* Time text - Minimalist */
 .daily-time {
-    font-size: 8px; /* Slightly smaller to match */
+    font-size: 7px; /* Slightly smaller to match */
     color: #000000; 
     font-weight: 600;
     margin-top: 3px;
     text-transform: uppercase;
     letter-spacing: 0.8px;
 }
+    }
 
 /* Mobile View: Reduced by 3pt */
-@media (max-width: 768px) {
+@media (max-width: 399px) {
     :host { 
         bottom: 12px; 
     }
@@ -432,6 +412,20 @@ document.addEventListener('DOMContentLoaded', function() {
         height: 10px; 
     }
 }
+
+
+
+   /* மொபைல் வியூ (Small Size for Mobile) */
+        @media (max-width: 399px) {
+            :host { top: 180px; left: 50%; z-index: 1000;}
+            .status-text { font-size: 10px; }
+            .daily-time { font-size: 5px; margin-top: 3px; }
+            .icon-box { width: 10px; height: 10px; }
+            .dot { width: 5px; height: 5px; }
+            .row { gap: 5px; }
+        }
+
+
 
 
 
