@@ -1041,495 +1041,14 @@ html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
 
 
 
+/* --- ORIGINAL CODE (For 399px and below) --- */
 
-
-
-
-
-
-
-
-
-
-/* All service items - Price list  Mobile view */
-
-
-
-
-
-
-@media (max-width: 360px) {
-    .layout-wrapper { gap: 5px; }
-    .list li { padding-left: 6px; }
-    .outer-box-top { width: 40px; }
-}
-
-
-
-/* Universal Reseting */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-.design-section {
-    padding: 20px 5px;
-    font-family: 'Poppins', sans-serif;
-    width: 100%;
-    background: #fff;
-    overflow-x: hidden;
-}
-
-/* Force Same Line for All Devices */
-.layout-wrapper {
-    display: flex !important;
-    flex-wrap: nowrap !important; 
-    gap: 10px;
-    align-items: stretch;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-/* Image Column (35% fixed) */
-.visual-column {
-    flex: 0 0 35%;
-    position: relative;
-    padding: 10px 0;
-}
-
-.main-image-box {
-    width: 100%;
-    height: 90%;
-    min-height: 10px;
-    background: #f0f0f0;
-    z-index: 2;
-    position: relative;
-}
-
-.main-image-box img {
-    width: 100%;
-    height: 90%;
-    object-fit: cover;
-    display: block;
-}
-
-/* Outer Purple Boxes */
-.outer-box-top {
-    position: absolute;
-    top: -9px; left: -0px;
-    width: 50%; height: 10%;
-    background: #8e44ad;
-    z-index: 1;
-}
-
-.outer-box-bottom {
-    position: absolute;
-    bottom: 15px; left: 50%;
-    
-    width: 50%; height: 10%;
-    background: #8e44ad;
-    z-index: 1;
-}
-
-/* Text Column (65% fixed) */
-.text-column {
-    flex: 0 0 65%;
-    display: flex;
-    flex-direction: column;
-}
-
-.content-between {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 100%;
-}
-
-/* Main Title - Increased for Mobile Clarity */
-.main-title {
-    font-size: clamp(16px, 4.5vw, 24px); 
-    font-weight: 800;
-    margin-bottom: 8px;
-    line-height: 1.1;
-    white-space: nowrap; /* Keeps title on one line */
-    color: #000;
-}
-
-.pink { color: #ff2d75; }
-
-/* Grid Layouts - Forced 2-column for side-by-side items */
-.graphics-grid, .bottom-grids, .bottom-grid {
-    display: grid !important;
-    grid-template-columns: 1fr 1fr !important;
-    gap: 10px 8px;
-    width: 100%;
-}
-
-/* Group Labels (Graphics, Motion, Web) - Size Increased */
-
-
-
-
-/* List Items - Increased from 5px to readable 9px+ */
-.list { 
-    list-style: none; 
-    padding: 0; 
-}
-
-.list li {
-    font-size: clamp(9px, 2.2vw, 11px); 
-    color: #333;
-    margin-bottom: 4px;
-    position: relative;
-    padding-left: 12px;
-    font-weight: 600;
-    text-transform: uppercase;
-    white-space: nowrap; /* Prevents text from breaking and looking damaged */
-}
-
-/* Blue Tick Icon Size */
-.list li::before {
-    content: '✔';
-    position: absolute;    left: 0;
-    color: #007bff;
-    font-size: 1.1em;
-    font-weight: bold;
-}
-
-/* Price Button - Proportional Increase */
-.rate-btn-inline, .price-btn {
-    background: #ff6600;
-    color: #fff;
-    padding: 6px 15px;
-    font-size: clamp(10px, 2.5vw, 12px);
-    font-weight: 800;
-    border-radius: 4px;
-    display: inline-block;
-    margin-top: 10px;
-    text-transform: uppercase;
-    border: none;
-}
-
-
-
-/* Heading Resize based on screen width */
-.main-title {
-    font-size: clamp(12px, 3.5vw, 26px);
-    font-weight: 800;
-    margin-bottom: 5px;
-    line-height: 1.2;
-}
-
-.pink { color: #ff2d75; }
-
-/* Grid Layout for Desktop & Mobile */
-.graphics-grid, .bottom-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 4px;
-}
-
-
-
-.no-label { margin-top: 15px; }
-
-/* List Item Auto-Shrink */
-.list { list-style: none; padding: 0; }
-.list li {
-    font-size: clamp(5px, 1.4vw, 9px);
-    color: #444;
-    margin-bottom: 2px;
-    position: relative;
-    padding-left: 8px;
-    font-weight: 600;
-    text-transform: uppercase;
-    white-space: nowrap;
-}
-
-.list li::before {
-    content: '✔';
-    position: absolute;
-    left: 0;
-    color: #007bff;
-    font-size: clamp(4.5px, 1.4vw, 9px);
-}
-
-/* Rate Us Button - Shrink with screen */
-.relative-pos { position: relative; }
-
-
-
-.rate-btn-inline {
-    background: #ff6600;
-    color: #fff;
-    padding: 2px 6px;
-    font-size: clamp(5.5px, 1.5vw, 10px);
-    font-weight: 700;
-    border-radius: 2px;
-    cursor: pointer;
-    display: inline-block;
-    margin-top: 0px;
-    transition: transform 0.1s;
-}
-
-.rate-btn-inline:active {
-    transform: scale(0.85);
-}
-
-
-/* Motion & Web கண்டென்ட்டை மொத்தமாக மேலெழும்பச் செய்ய */
-.bottom-content-area {
-    display: flex;
-    align-items: flex-start; /* கண்டென்ட் மேலே இருக்க (Top moving) */
-    gap: 15px;
-    margin-top: 10px; /* Graphics Design-ல் இருந்து சிறிய இடைவெளி */
-    width: 100%;
-}
-
-/* Rate Us பட்டன் கண்டென்ட் ஏரியா (Left Side) */
-.rate-us-container {
-    flex: 0 0 25%; /* பட்டனுக்கான அகலம் */
-    display: flex;
-    align-items: flex-start; /* பட்டன் மேலே இருக்க */
-    padding-top: 5px; /* தலைப்புக்கு நேராக வர சிறிய அட்ஜஸ்ட்மென்ட் */
-}
-
-.rate-btn-inline {
-    background: #ff6600;
-    color: #fff;
-    padding: 4px 10px;
-    font-size: clamp(6px, 1.8vw, 11px);
-    font-weight: 700;
-    border-radius: 3px;
-    cursor: pointer;
-    white-space: nowrap;
-    transition: transform 0.1s;
-}
-
-.rate-btn-inline:active {
-    transform: scale(0.9);
-}
-
-/* Motion & Web கண்டென்ட் ஏரியா (Right Side) */
-.bottom-grids {
-    flex: 1;
-    display: grid;
-    grid-template-columns: 1fr 1fr; /* Motion மற்றும் Web இரண்டு நெடுவரிசைகள் */
-    gap: 10px;
-    
-}
-
-/* மற்ற அலைன்மென்ட்கள் (முந்தையது போலவே) */
-.group-label {
-    font-size: clamp(6px, 1.8vw, 11px);
-    font-weight: 700;
-    text-transform: uppercase;
-    margin-bottom: 4px;
-    color: #333;
-}
-
-.list { list-style: none; padding: 0; }
-.list li {
-    font-size: clamp(5.5px, 1.5vw, 9px);
-    color: #444;
-    margin-bottom: 2px;
-    padding-left: 10px;
-    position: relative;            
-}
-
-.list li::before {
-    content: '✔';
-    position: absolute;
-    left: 0;
-    color: #007bff;
-}
-
-
-.content-between {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start; 
-    gap: 10px; /* இடைவெளியை இன்னும் குறைத்துள்ளேன் */
-    height: auto; /* 100% என்பதற்கு பதில் auto கொடுத்துப் பார்க்கவும் */
-    padding-top: 0; /* மேல் இடைவெளியைத் தவிர்க்க */
-    margin-top: 0;
-}
-
-
-.content-between {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start; 
-    gap: 5px; /* இடைவெளியை இன்னும் குறைத்துள்ளேன் */
-    height: auto; /* 100% என்பதற்கு பதில் auto கொடுத்துப் பார்க்கவும் */
-    padding-top: 0; /* மேல் இடைவெளியைத் தவிர்க்க */
-    margin-top: 0;
-}
-
-
-.group-label {
-    font-size: clamp(6px, 1.8vw, 11px);
-    font-weight: 700;
-    margin-top: 0; /* கட்டாயம் 0 ஆக இருக்க வேண்டும் */
-    margin-bottom: 3px; 
-    line-height: 1;
-    display: block; /* லேபிள் முழுமையாக மேலே நகர உதவும் */
-}
-.bottom-grid-col 
-
-
-
-
-.group-label {
-    font-size: clamp(6px, 1.8vw, 11px);
-    font-weight: 700;
-    margin-top: 0;      /* மேலே உள்ள இடைவெளியை நீக்க */
-    margin-bottom: 7px; /* லிஸ்டுக்கும் லேபிளுக்கும் உள்ள இடைவெளி */
-    line-height: 1;
-    padding: 0;
-}
-
-/* ஒருவேளை உங்கள் லிஸ்ட் <ul> ஆக இருந்தால் */
-.bottom-grids ul {
-    margin-top: 0;      /* லிஸ்ட் மேலே ஒட்ட */
-    padding-left: 15px; /* புல்லட் பாயிண்ட்ஸ்க்கு மட்டும் */
-    list-style-position: inside;
-}
-
-.bottom-grids li {
-    margin-bottom: 2px; /* ஒவ்வொரு வரிக்கும் இடையே உள்ள கேப் */
-}
-
-
-.rate-us-section {
-
-    margin-left: 0px;
-    
-}
-
-/* இமேஜ் மற்றும் டெக்ஸ்ட் கண்டெய்னருக்கு இடையே மட்டும் இடைவெளியை அதிகரிக்க */
-.layout-wrapper {
-    display: flex !important;
-    flex-wrap: nowrap !important; 
-    gap: 50px; /* இந்த அளவை (10px-லிருந்து 50px-ஆக) மாற்றியுள்ளேன். இன்னும் தேவை எனில் 60px வைக்கலாம். */
-    align-items: stretch;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-/* மொபைலில் இடைவெளி அதிகமாக இருந்தால் டெக்ஸ்ட் பகுதி மிகவும் சுருங்கிவிடும், 
-எனவே மொபைலுக்கு மட்டும் இதை அட்ஜஸ்ட் செய்யவும் */
-@media (max-width: 480px) {
-    .layout-wrapper {
-        gap: 15px; /* மொபைல் திரைக்கு ஏற்ற இடைவெளி */
-    }
-}
-
-.graphics-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-    align-items: start; /* அனைத்தும் மேலிருந்து சமமாகத் தொடங்கும் */
-}
-
-/* லேபிள் இல்லாத இடங்களிலும் உயரத்தைச் சமப்படுத்த */
-.invisible-label {
-    visibility: hidden;
-    margin-bottom: 3px;
-}
-
-.group-label {
-    font-size: clamp(6px, 1.8vw, 11px);
-    font-weight: 700;
-    margin-bottom: 5px;
-    line-height: 1;
-}
-
-/* 4. லிஸ்ட் வரிகள் உடையாமல் இருக்க */
-.list li {
-    font-size: clamp(5px, 1.4vw, 8.5px);
-    white-space: nowrap;
-    margin-bottom: 3px;
-}
-
-.main-title {
-    font-size: clamp(17px, 3.5vw, 26px);
-    font-weight: 800;
-    
-    
-    /* இந்த மூன்று வரிகள் கட்டாயமாக தலைப்பை மேலே உயர்த்தும் */
-    margin-top: -25px !important;  /* எதிர்மறை மார்ஜின் மூலம் மேலே தள்ளுதல் */
-    padding-top: 0 !important;
-    position: relative;
-    top: 0;
-    
-    line-height: 1;
-    margin-bottom: 8px; /* தலைப்புக்கும் கீழே உள்ளவற்றுக்கும் இடைவெளி */
-    display: inline-block; /* மார்ஜின் சரியாக வேலை செய்ய இது உதவும் */
-}
-
-/* 2. தலைப்பு இருக்கும் கண்டெய்னரில் உள்ள தேவையற்ற இடைவெளியை நீக்க */
-.top-content {
-    padding-top: 0 !important;
-    margin-top: 0 !important;
-}
-
-
-.group-label {
-    font-size: clamp(8px, 2vw, 12px); /* Increased size for mobile readability */
-    font-weight: 700;
-    text-transform: uppercase;
-    margin-bottom: 4px;
-    color: #333;
-    display: block;
-}
-
-.group-label {
-    font-size: clamp(10px, 3vw, 10px) !important;
-    font-weight: 700;
-    text-transform: uppercase;
-    margin-bottom: 6px;
-    color: #333;
-    line-height: 1;
-}
-
-.list li {
-    font-size: clamp(5px, 2.5vw, 6px) !important; /* Fixed "too small" issue */
-    color: #333;
-    margin-bottom: 4px;
-    position: relative;
-    padding-left: 14px; /* Space for the blue tick */
-    font-weight: 600;
-    text-transform: uppercase;
-    white-space: nowrap; /* Ensures items like "Social Media Poster" stay on one line */
-}
-
-/* 5. Checkmark Icon Resize */
-.list li::before {
-    content: '✔';
-    position: absolute;
-    left: 0;
-    color: #007bff;
-    font-size: 1.1em;
-    font-weight: bold;
-}
-
-/* three Service icons - All Small mobile  */
-
-
-
-
-@media screen and (max-width: 992px) {}
-
-/* Container & Fonts */
 .services-pink-theme {
     padding: 20px 5px;
     font-family: 'Poppins', sans-serif;
     overflow: hidden;
 }
 
-/* Two-Tone Heading with Animation */
 .main-title-small {
     font-size: 14px;
     font-weight: 700;
@@ -1541,10 +1060,9 @@ html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
     gap: 5px;
 }
 
-.txt-our { color: #333; } /* Our - Dark Color */
-.txt-svc { color: #ff2d75; } /* Services - Pink Color */
+.txt-our { color: #333; }
+.txt-svc { color: #ff2d75; }
 
-/* Entry Animation for Title */
 .animated-title {
     animation: fadeInRight 1s ease-out;
 }
@@ -1554,24 +1072,22 @@ html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
     100% { opacity: 1; transform: translateX(0); }
 }
 
-/* Desktop & Mobile: Fixed 3 Columns Layout */
 .row-flex-mobile {
     display: flex !important;
-    flex-wrap: nowrap !important; /* Prevents wrapping on any screen */
+    flex-wrap: nowrap !important;
     justify-content: space-between;
     gap: 5px; 
     width: 100%;
 }
 
 .service-card {
-    flex: 0 0 32%; /* Fixed width for all screens */
+    flex: 0 0 32%;
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
 }
 
-/* Hexagon Shape - Fixed Size */
 .hex-shape {
     width: 30px;
     height: 35px;
@@ -1588,7 +1104,6 @@ html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
 .blue-bg   { background-color: #2980b9; }
 .orange-bg { background-color: #ff6600; }
 
-/* Content Small Size */
 .service-card h3 {
     font-size: 9px;
     font-weight: 700;
@@ -1608,7 +1123,6 @@ html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
     overflow: hidden;
 }
 
-/* View Button - Pink Text Only & Animation */
 .view-btn-text {
     font-size: 8px;
     font-weight: 700;
@@ -1622,7 +1136,6 @@ html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
     transform: scale(0.9);
 }
 
-/* Card Load Animation */
 .slide-up {
     animation: fadeInUp 0.8s ease forwards;
 }
@@ -1632,8 +1145,43 @@ html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
     to { opacity: 1; transform: translateY(0); }
 }
 
+/* ==========================================
+   SCALING FOR 400px AND UP (Small Big Size)
+   ========================================== */
+@media screen and (min-width: 400px) {
+    .services-pink-theme {
+        padding: 30px 15px;
+    }
 
+    .main-title-small {
+        font-size: 18px; /* Bigger Title */
+        margin-bottom: 15px;
+    }
 
+    .row-flex-mobile {
+        gap: 15px; /* Increased center gap */
+    }
+
+    .hex-shape {
+        width: 50px; /* Bigger Hexagon */
+        height: 55px;
+        font-size: 20px; /* Bigger Icon */
+        margin-bottom: 10px;
+    }
+
+    .service-card h3 {
+        font-size: 13px; /* Bigger Service Name */
+    }
+
+    .service-card p {
+        font-size: 10.5px; /* Bigger Description */
+        -webkit-line-clamp: 3;
+    }
+
+    .view-btn-text {
+        font-size: 11px; /* Bigger Button Text */
+    }
+}
 
 
 
@@ -1655,10 +1203,6 @@ html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
 
 
 /* --- 1. Global & Wrapper --- */
-
-
-
-
 
 
 
