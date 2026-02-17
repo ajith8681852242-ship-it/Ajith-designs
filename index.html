@@ -622,7 +622,7 @@ document.addEventListener('DOMContentLoaded', function() {
         <div class="box reveal">
             <div class="img-area"> 
                 <div class="top-left-offer" id="v_off1">20% OFF</div>
-                <img id="v_img1" src="c:\Users\ASUS\OneDrive\Pictures\HTML\new web site\WhatsApp Image 2026-02-03 at 8.24.55 PM.jpeg">
+               <img id="v_img1" src="Poster design box 1.jpg">
             </div>
             <h2 id="v_tit1">Poster <span>Design</span></h2>
             <p class="details">Size: <b id="v_siz1">1080x1350</b></p>
@@ -637,7 +637,7 @@ document.addEventListener('DOMContentLoaded', function() {
         <div class="box reveal">
             <div class="img-area">
                 <div class="top-left-offer" id="v_off2">20% OFF</div>
-                <img id="v_img2" src="https://via.placeholder.com/1000">
+                <img id="v_img2" src="Flyer design box 2.jpg">
             </div>
             <h2 id="v_tit2">Flyer <span>Design</span></h2>
             <p class="details">Size: <b id="v_siz2">A4 Sheet</b></p>
@@ -665,7 +665,7 @@ document.addEventListener('DOMContentLoaded', function() {
         <div class="box reveal">
             <div class="img-area">
                 <div class="top-left-offer" id="v_off4">20% OFF</div>
-                <img id="v_img3" src="https://via.placeholder.com/1000">
+                <img id="v_img3" src="Business Card box 3.jpg">
             </div>
             <h2 id="v_tit3">Business <span>Cards</span></h2>
             <p class="details">Size: <b id="v_siz3">1000X1000</b></p>
@@ -1420,12 +1420,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-    <footer class="footer">
-        <div class="footer-grid">
-            <div class="footer-logo">Ajith <span class="logo-blue">studio</span></div>
-            <div class="footer-text">&copy; 2026 All Rights Reserved</div>
-        </div>
-    </footer>
 
     <div class="form-overlay" id="formOverlay">
         <div class="contact-form">
@@ -1445,7 +1439,49 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
+    
 
+    <footer style="background-color: #6a3093; color: #ffffff; padding: 40px 25px 20px 25px; margin-top: 40px; font-family: 'Poppins', sans-serif;">
+        <div style="max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; align-items: start;">
+            
+            <div>
+                <div style="font-weight: 600; font-size: 18px; display: flex; align-items: center; color: #ffffff;">
+                    <i class="fas fa-layer-group" style="margin-right: 10px; font-size: 16px;"></i>
+                    Ajith Graphics
+                </div>
+            </div>
+
+            <div>
+                <h4 style="font-size: 14px; margin-bottom: 15px; color: rgba(255,255,255,0.7); text-transform: uppercase; letter-spacing: 1px;">Contact</h4>
+                <div style="font-size: 13px;">
+                    <p style="margin-bottom: 10px; display: flex; align-items: center;">
+                        <i class="fab fa-whatsapp" style="width: 25px; font-size: 16px;"></i> 
+                        <span>78451 88347</span>
+                    </p>
+                    <p style="margin-bottom: 10px; display: flex; align-items: center;">
+                        <i class="far fa-envelope" style="width: 25px; font-size: 14px;"></i> 
+                        <span>Ajith@8681852242@gmail.com</span>
+                    </p>
+                </div>
+            </div>
+
+            <div>
+                <h4 style="font-size: 14px; margin-bottom: 15px; color: rgba(255,255,255,0.7); text-transform: uppercase; letter-spacing: 1px;">Links</h4>
+                <ul style="list-style: none; padding: 0; font-size: 13px; line-height: 2;">
+                    <li><a href="#" style="text-decoration: none; color: #ffffff; opacity: 0.9;">Home</a></li>
+                    <li><a href="#" style="text-decoration: none; color: #ffffff; opacity: 0.9;">About</a></li>
+                    <li><a href="#" style="text-decoration: none; color: #ffffff; opacity: 0.9;">Services</a></li>
+                    <li><a href="#" style="text-decoration: none; color: #ffffff; opacity: 0.9;">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 40px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1);">
+            <p style="font-size: 11px; color: rgba(255,255,255,0.5); letter-spacing: 2px; text-transform: uppercase;">
+                Design by <span style="font-weight: 700; color: #ffffff;">Ajith</span>
+            </p>
+        </div>
+    </footer>
 
 
 
@@ -1455,25 +1491,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-
-
-    function sync() {
-        for(let i=1; i<=3; i++) {
-            const off = localStorage.getItem(`b${i}_off`);
-            const tit = localStorage.getItem(`b${i}_tit`);
-            const siz = localStorage.getItem(`b${i}_siz`);
-            const pri = localStorage.getItem(`b${i}_pri`);
-            const img = localStorage.getItem(`b${i}_img`);
-
-            if(off) document.getElementById(`v_off${i}`).innerText = off;
-            if(tit) document.getElementById(`v_tit${i}`).innerHTML = tit + " <span>Design</span>";
-            if(siz) document.getElementById(`v_siz${i}`).innerText = siz;
-            if(pri) document.getElementById(`v_pri${i}`).innerText = pri;
-            if(img) document.getElementById(`v_img${i}`).src = img;
-        }
-    }
-    window.onload = sync;
-    window.addEventListener('storage', sync); // அட்மின் எடிட் செய்தவுடன் தானாக அப்டேட் ஆகும்
 
 
 
