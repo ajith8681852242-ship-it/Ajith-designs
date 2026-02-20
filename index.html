@@ -533,30 +533,40 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-
-
-
 <div class="services-wrapper">
-    <div class="header-left">
-        <h2 class="small-title">OUR <span class="accent">SERVICES</span></h2>
+    <div class="header-row">
+        <div class="header-left">
+            <h2 class="small-title">OUR <span class="accent">SERVICES</span></h2>
+        </div>
+
+        <div class="mini-timer-right">
+            <span class="fest-tag">Diwali Offer Start:</span>
+            <div class="t-item"><span id="days">30</span><small>d</small></div>
+            <div class="t-sep">:</div>
+            <div class="t-item"><span id="hours">18</span><small>h</small></div>
+            <div class="t-sep">:</div>
+            <div class="t-item"><span id="minutes">22</span><small>m</small></div>
+            <div class="t-sep">:</div>
+            <div class="t-item"><span id="seconds">53</span><small>s</small></div>
+        </div>
     </div>
 
     <div class="mini-story-tray">
-        <div class="mini-card" onclick="openDetails('Graphic Design', 'We create stunning visuals, logos, and branding materials tailored for your business.')">
+        <div class="mini-card" onclick="openDetails('Graphic Design', '...')">
             <div class="thin-ring">
                 <div class="gap"><img src="c:\Users\ASUS\Downloads\reshape (1).png" alt="Graphic"></div>
             </div>
             <span class="mini-label">Graphic design</span>
         </div>
 
-        <div class="mini-card" onclick="openDetails('Motion Graphics', 'Bringing your ideas to life with professional animation and video effects.')">
+        <div class="mini-card" onclick="openDetails('Motion Graphics', '...')">
             <div class="thin-ring">
                 <div class="gap"><img src="c:\Users\ASUS\Downloads\reshape (1).png" alt="Motion"></div>
             </div>
             <span class="mini-label">Motion graphics</span>
         </div>
 
-        <div class="mini-card" onclick="openDetails('Web Design', 'Modern, responsive, and fast-loading websites built with the latest technology.')">
+        <div class="mini-card" onclick="openDetails('Web Design', '...')">
             <div class="thin-ring">
                 <div class="gap"><img src="c:\Users\ASUS\Downloads\reshape (1).png" alt="Web"></div>
             </div>
@@ -564,18 +574,6 @@ document.addEventListener('DOMContentLoaded', function() {
         </div>
     </div>
 </div>
-
-<div id="detailPage" class="detail-page">
-    <button class="close-btn" onclick="closeDetails()">&times; Close</button>
-    <div class="content">
-        <h1 id="detailTitle">Service Name</h1>
-        <p id="detailDesc">Service details go here...</p>
-    </div>
-</div>
-
-
-
-
 
 
 
@@ -588,21 +586,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 <div class="main-wrapper">
-        
-
-        <div class="timer-float-right" id="timer_container" style="position: static; width: 95px;">
-            <div class="tm-head">OFFER ENDS 🔥</div>
-            <div class="tm-flex">
-                <div class="tm-unit"><div class="tm-box" id="d_fix">00</div><div class="tm-lab">D</div></div>
-                <div class="tm-sep">:</div>
-                <div class="tm-unit"><div class="tm-box" id="h_fix">00</div><div class="tm-lab">H</div></div>
-                <div class="tm-sep">:</div>
-                <div class="tm-unit"><div class="tm-box" id="m_fix">00</div><div class="tm-lab">M</div></div>
-                <div class="tm-sep">:</div>
-                <div class="tm-unit"><div class="tm-box" id="s_fix">00</div><div class="tm-lab">S</div></div>
-            </div>
-        </div>
-    </div>
+   
 
     <div class="sprite-grid">
         <div class="box reveal">
@@ -874,49 +858,44 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-
-   <script>
-    
- 
-    document.addEventListener('DOMContentLoaded', function() {
-
-    const now = new Date();
-    const year = now.getFullYear();
-
-    // --- 1. ALL FESTIVALS ---
-    const FESTIVAL_LIST = [
-        { name: "VALENTINE OFFER", sM: 2, sD: 3, sH: 11, sMi: 28, eM: 2, eD: 3, eH: 11, eMi: 29 },
-        { name: "TAMIL NEW YEAR",  sM: 4, sD: 7, sH: 0, sMi: 0, eM: 4, eD: 14, eH: 23, eMi: 59 },
-        { name: "ONAM SPECIAL",    sM: 8, sD: 18, sH: 0, sMi: 0, eM: 8, eD: 27, eH: 23, eMi: 59 },
-        { name: "DIWALI OFFER",    sM: 10, sD: 25, sH: 0, sMi: 0, eM: 11, eD: 2, eH: 23, eMi: 59 },
-        { name: "NEW YEAR 2027",   sM: 12, sD: 26, sH: 0, sMi: 0, eM: 1, eD: 1, eH: 23, eMi: 59 }
-    ];
-
-    // --- 2. CALENDAR SEASON (Place Change Settings) ---
-    // The calendar will move to the 2nd position ONLY between these two times
-    const CAL_SEASON = { 
-        sM: 2, sD: 8, sH: 9, sMi: 48, 
-        eM: 2, eD: 8, eH: 9, eMi: 49, 
-        off: "30% OFF", pri: "Just ₹399", sav: "Save ₹199" 
-    };
-
-    // --- 3. EDITABLE PRICES ---
-    const NORMAL_PRICES = {
-        "v_off1": { off: "10% OFF", pri: "Just ₹190", sav: "Save ₹20" },
-        "v_off2": { off: "15% OFF", pri: "Just ₹170", sav: "Save ₹30" },
-        "v_off3": { off: "10% OFF", pri: "Just ₹300", sav: "Save ₹50" }, // Cal Box
-        "v_off4": { off: "10% OFF", pri: "Just ₹150", sav: "Save ₹15" }
-    };
-
-    const FEST_PRICES = {
-        "v_off1": { off: "Buy 2 Get 1", pri: "Just ₹199",  sav: "Save ₹200" },
-        "v_off2": { off: "40% OFF", pri: "Just ₹110", sav: "Save ₹100" },
-        "v_off3": { off: "45% OFF", pri: "Just ₹210", sav: "Save ₹180" }, // Cal Box
-        "v_off4": { off: "50% OFF", pri: "Just ₹130", sav: "Save ₹120" }
-    };
+<script>
+document.addEventListener('DOMContentLoaded', function() {
 
     function updateLogic() {
-        const currentTime = new Date();
+        const now = new Date();
+        const year = now.getFullYear();
+
+        // --- 1. ALL FESTIVALS ---
+        const FESTIVAL_LIST = [
+            { name: "VALENTINE OFFER", sM: 2, sD: 20, sH: 17, sMi: 53, eM: 2, eD: 21, eH: 11, eMi: 29 },
+            { name: "TAMIL NEW YEAR",  sM: 4, sD: 7, sH: 0, sMi: 0, eM: 4, eD: 14, eH: 23, eMi: 59 },
+            { name: "ONAM SPECIAL",    sM: 8, sD: 18, sH: 0, sMi: 0, eM: 8, eD: 27, eH: 23, eMi: 59 },
+            { name: "DIWALI OFFER",    sM: 10, sD: 25, sH: 0, sMi: 0, eM: 11, eD: 2, eH: 23, eMi: 59 },
+            { name: "NEW YEAR 2027",   sM: 12, sD: 26, sH: 0, sMi: 0, eM: 1, eD: 1, eH: 23, eMi: 59 }
+        ];
+
+        // --- 2. CALENDAR SEASON (Place Change Settings) ---
+        const CAL_SEASON = { 
+            sM: 2, sD: 20, sH: 17, sMi: 30, // Example Start: Feb 20, 5:30 PM
+            eM: 2, eD: 20, eH: 18, sMi: 30, // Example End: Feb 20, 6:30 PM
+            off: "30% OFF", pri: "Just ₹399", sav: "Save ₹199" 
+        };
+
+        // --- 3. EDITABLE PRICES ---
+        const NORMAL_PRICES = {
+            "v_off1": { off: "10% OFF", pri: "Just ₹190", sav: "Save ₹20" },
+            "v_off2": { off: "15% OFF", pri: "Just ₹170", sav: "Save ₹30" },
+            "v_off3": { off: "10% OFF", pri: "Just ₹300", sav: "Save ₹50" },
+            "v_off4": { off: "10% OFF", pri: "Just ₹150", sav: "Save ₹15" }
+        };
+
+        const FEST_PRICES = {
+            "v_off1": { off: "Buy 2 Get 1", pri: "Just ₹199",  sav: "Save ₹200" },
+            "v_off2": { off: "40% OFF", pri: "Just ₹110", sav: "Save ₹100" },
+            "v_off3": { off: "45% OFF", pri: "Just ₹210", sav: "Save ₹180" },
+            "v_off4": { off: "50% OFF", pri: "Just ₹130", sav: "Save ₹120" }
+        };
+
         let activeFest = null;
         let targetTime = null;
 
@@ -924,66 +903,65 @@ document.addEventListener('DOMContentLoaded', function() {
         FESTIVAL_LIST.forEach(f => {
             const start = new Date(year, f.sM - 1, f.sD, f.sH, f.sMi);
             const end = new Date(year, f.eM - 1, f.eD, f.eH, f.eMi);
-            if (currentTime >= start && currentTime <= end) {
+            if (now >= start && now <= end) {
                 activeFest = f;
                 targetTime = end;
             }
         });
 
-        const timerUI = document.getElementById('timer_container');
-        const headingUI = document.getElementById('timer_heading');
+        // Target the Timer Container only
+        const miniTimer = document.querySelector('.mini-timer-right');
+        const festTag = document.querySelector('.fest-tag');
 
         // --- TIMER VISIBILITY ---
         if (activeFest) {
-            if (timerUI) timerUI.style.display = 'block';
-            if (headingUI) headingUI.innerText = activeFest.name + " ENDS IN";
-            renderTimer(targetTime - currentTime);
+            if (miniTimer) miniTimer.style.display = 'flex'; // Use flex to keep row layout
+            if (festTag) festTag.innerText = activeFest.name + " ENDS IN:";
+            renderTimer(targetTime - now);
         } else {
-            if (timerUI) timerUI.style.display = 'none';
+            if (miniTimer) miniTimer.style.display = 'none'; // Only the timer hides
         }
 
-        // --- CALENDAR SEASON TIME CALCULATION ---
+        // --- CALENDAR SEASON CALCULATION ---
         const calStart = new Date(year, CAL_SEASON.sM - 1, CAL_SEASON.sD, CAL_SEASON.sH, CAL_SEASON.sMi);
         const calEnd = new Date(year, CAL_SEASON.eM - 1, CAL_SEASON.eD, CAL_SEASON.eH, CAL_SEASON.eMi);
-        const isCalSeasonActive = (currentTime >= calStart && currentTime <= calEnd);
+        const isCalSeasonActive = (now >= calStart && now <= calEnd);
 
         // --- BOX & PRICE LOGIC ---
         const grid = document.querySelector('.sprite-grid');
         const boxes = document.querySelectorAll('.box');
         let calBox = null;
-        let secondBox = boxes[1]; // Reference to the box currently in 2nd place
+        let secondBox = (boxes.length > 1) ? boxes[1] : null;
 
         boxes.forEach(box => {
             const badge = box.querySelector('.top-left-offer');
             if (!badge) return;
+            
             const isCal = box.innerText.includes("Calendar");
             if (isCal) calBox = box;
 
+            // Set Price Data: Festival vs Normal
             let data = activeFest ? FEST_PRICES[badge.id] : NORMAL_PRICES[badge.id];
             
-            // Special Season Price
+            // Override if Calendar Season is active
             if (isCal && isCalSeasonActive) data = CAL_SEASON;
 
             if (data) {
                 badge.innerText = data.off;
-                box.querySelector('.orange-num').innerText = data.pri;
-                box.querySelector('.cut-price').innerText = data.sav;
+                const p = box.querySelector('.orange-num');
+                const s = box.querySelector('.cut-price');
+                if (p) p.innerText = data.pri;
+                if (s) s.innerText = data.sav;
                 badge.style.display = 'block';
             }
         });
 
-        // --- DYNAMIC POSITIONING (THE FIX) ---
+        // --- DYNAMIC POSITIONING ---
         if (calBox && grid && secondBox) {
             if (isCalSeasonActive) {
-                // Time is running: Move Calendar to 2nd position
-                if (grid.children[1] !== calBox) {
-                    grid.insertBefore(calBox, secondBox);
-                }
+                if (grid.children[1] !== calBox) grid.insertBefore(calBox, secondBox);
             } else {
-                // Time finished: Move Calendar back to the end (old place)
-                if (grid.lastElementChild !== calBox) {
-                    grid.appendChild(calBox);
-                }
+                if (grid.lastElementChild !== calBox) grid.appendChild(calBox);
             }
         }
     }
@@ -991,21 +969,23 @@ document.addEventListener('DOMContentLoaded', function() {
     function renderTimer(diff) {
         const f = (n) => n.toString().padStart(2, '0');
         if (diff < 0) diff = 0;
-        document.getElementById('d_fix').innerText = f(Math.floor(diff / 86400000));
-        document.getElementById('h_fix').innerText = f(Math.floor((diff % 86400000) / 3600000));
-        document.getElementById('m_fix').innerText = f(Math.floor((diff % 3600000) / 60000));
-        document.getElementById('s_fix').innerText = f(Math.floor((diff % 60000) / 1000));
+        
+        // Update your HTML IDs: days, hours, minutes, seconds
+        const d = document.getElementById('days');
+        const h = document.getElementById('hours');
+        const m = document.getElementById('minutes');
+        const s = document.getElementById('seconds');
+
+        if(d) d.innerText = f(Math.floor(diff / 86400000));
+        if(h) h.innerText = f(Math.floor((diff % 86400000) / 3600000));
+        if(m) m.innerText = f(Math.floor((diff % 3600000) / 60000));
+        if(s) s.innerText = f(Math.floor((diff % 60000) / 1000));
     }
 
     setInterval(updateLogic, 1000);
     updateLogic();
 });
-
-    
-    
-    
-    </script>
-
+</script>
     
 
 
