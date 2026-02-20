@@ -1814,3 +1814,84 @@ html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
 .content p { font-size: 16px; color: #666; line-height: 1.6; }
 
 @keyframes smoothSpin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+
+
+
+
+/* Align Heading and Timer in one row */
+.header-row {
+    display: flex;
+    justify-content: space-between; /* Heading left, Timer right */
+    align-items: center;
+    padding: 0 10px;
+    margin-bottom: 12px;
+}
+
+/* Timer Styling (No background) */
+.mini-timer-right {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+}
+
+.fest-tag {
+    font-size: 8px;
+    font-weight: 800;
+    color: #333;
+    margin-right: 4px;
+    text-transform: uppercase;
+}
+
+.t-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.t-item span {
+    color: #ff8c00; /* Orange numbers from your image */
+    font-size: 11px;
+    font-weight: 800;
+    line-height: 1;
+}
+
+.t-item small {
+    color: #888;
+    font-size: 6px;
+    text-transform: lowercase;
+}
+
+.t-sep {
+    color: #ff8c00;
+    font-size: 10px;
+    font-weight: 800;
+    margin-top: -6px; /* Adjusts colon alignment */
+}
+
+/* Ensure original title stays small */
+.small-title {
+    font-size: 11px;
+    margin: 0;
+}
+
+@media (min-width: 400px) {
+    .services-wrapper { max-width: 100%; padding-top: 0px; } 
+    
+    .small-title { 
+        font-size: 15px; 
+        border-left-width: 4px; 
+    }
+    
+    /* Timer stays small/medium */
+    .fest-tag { font-size: 9px; } 
+    .t-item span { font-size: 13px; } 
+    .t-item small { font-size: 7px; }
+    .t-sep { font-size: 12px; }
+
+    /* Circle Upsize to 60px */
+    .thin-ring {
+        width: 60px; 
+        height: 60px;
+    }
+}
