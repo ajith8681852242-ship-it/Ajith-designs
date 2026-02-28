@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Ajith Studio | Order View</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        /* BASE DESIGN */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        ::-webkit-scrollbar { display: none; }
+        body { background-color: #ffffff; padding-bottom: 120px; font-size: 13px; scroll-behavior: smooth; }
+        .navbar { background: #ffffff; height: 60px; display: flex; align-items: center; position: fixed; width: 100%; top: 0; z-index: 1000; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .nav-container { width: 92%; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-weight: 600; font-size: 1rem; margin-left: 15px; display: flex; align-items: center; }
+        .logo-blue { color: #1e90ff; }
+        .logo-icon-rotate { display: inline-block; animation: rotateLogo 5s linear infinite; margin-right: 10px; font-size: 1.4rem; color: #1e90ff !important; }
+        @keyframes rotateLogo { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        .toggle-btn { font-size: 1.6rem; color: #333; cursor: pointer; margin-right: 15px; display: flex; align-items: center; }
+
+        .app-container { margin-top: 70px; padding: 0 20px; max-width: 500px; margin-left: auto; margin-right: auto; }
+
+        .image-box { position: relative; width: 100%; aspect-ratio: 1/1; border: 1px solid #eee; border-radius: 4px; padding: 3px; background: #fff; }
+        .image-box img { width: 100%; height: 100%; object-fit: contain; }
+
+        .dots-wrapper { display: flex; justify-content: center; gap: 8px; margin-top: 10px; }
+        .dot { width: 6px; height: 6px; background: #e0e0e0; border-radius: 50%; transition: 0.3s; }
+        .dot.active { background: #6a3093; }
+        
+        .status-box { position: absolute; top: 10px; left: 10px; padding: 6px 12px; font-weight: 700; font-size: 10px; text-transform: uppercase; border-radius: 4px; color: white; z-index: 10; }
+        .best-price-box { background: #2196F3; }
+        .festival-offer-box { background: #FF0000; display: none; }
+
+        .free-blink { animation: blink 1s linear infinite; color: #FF0000; font-weight: 800; }
+        @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0.2; } 100% { opacity: 1; } }
+
+        .title-row { display: flex; justify-content: space-between; align-items: center; margin-top: 15px; }
+        .design-mention-big { font-size: 16px; font-weight: 600; color: #000; }
+        .design-mention-big span { color: #6a3093; }
+
+        .qty-selector { display: flex; align-items: center; background: #fff; border: 1px solid #ddd; border-radius: 4px; padding: 0 4px; height: 28px; width: 85px; justify-content: space-between; }
+        .qty-btn { background: none; border: none; font-size: 16px; font-weight: 700; color: #6a3093; width: 20px; cursor: pointer; }
+        .qty-number { font-size: 14px; font-weight: 600; display: flex; align-items: center; justify-content: center; }
+
+        .combo-header-row { display: flex; justify-content: space-between; align-items: center; margin-top: 7px; margin-bottom: 8px; min-height: 30px; }
+        #mainHeading { font-size: 11px; font-weight: 700; color: #333; text-transform: uppercase; }
+        
+        .timer-wrapper { text-align: right; display: none; flex-direction: column; }
+        #timerStatus { font-size: 9px; font-weight: 700; color: #6a3093; text-transform: uppercase; }
+        #timerClock { font-size: 11px; font-weight: 700; color: #ff0000; }
+
+        .combo-grid { display: flex; justify-content: flex-start; gap: 8px; margin-bottom: 15px; }
+        .btn-combo { border: 1px solid #ccc; border-radius: 4px; font-size: 10px; font-weight: 600; height: 30px; padding: 0 12px; display: flex; align-items: center; justify-content: center; background: #fff; text-transform: uppercase; min-width: 90px; cursor: pointer; }
+        .btn-combo.active { background: #6a3093; color: #fff; border-color: #6a3093; }
+
+        .details-card { margin-top: 10px; border-bottom: 1px dashed #eee; padding-bottom: 12px; scroll-margin-top: 80px; }
+        .details-card h4 { font-size: 11px; color: #449330; margin-bottom: 8px; text-transform: uppercase; font-weight: 700; }
+        .details-card li { display: flex; align-items: center; font-size: 11px; color: #555; margin-bottom: 6px; }
+        
+        /* 399 SMALL: Tick icon only small reduce */
+        .details-card i { color: #6a3093; margin-right: 8px; font-size: 9px; } 
+
+        .input-row { margin-top: 15px; display: flex; align-items: center; gap: 12px; }
+        .input-label { font-size: 11px; font-weight: 700; color: #333; text-transform: uppercase; width: 110px; }
+        .input-field { width: 100px; height: 32px; border: 1px solid #ddd; border-radius: 4px; padding: 0 8px; font-size: 11px; outline: none; background: #fff; }
+
+        .total-price-section { display: flex; justify-content: space-between; align-items: center; margin-top: 25px; padding: 10px 5px; border-top: 1px solid #f9f9f9; }
+        .total-text { font-size: 12px; font-weight: 600; color: #333; text-transform: uppercase; }
+        .price-display { font-size: 15px; font-weight: 700; color: #6a3093; }
+
+        .footer-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; position: fixed; bottom: 0; left: 0; width: 100%; background: #ffffff; padding: 15px 20px; box-shadow: 0 -2px 10px rgba(0,0,0,0.05); }
+        .footer-btn { height: 42px; border-radius: 6px; font-size: 13px; font-weight: 600; border: none; display: flex; align-items: center; justify-content: center; cursor: pointer; }
+        .back-btn { background: #f0f0f0; color: #333; }
+        .whatsapp-btn { background: #6a3093; color: #fff; }
+
+        /* BIG SIZE DESIGN (400px+) */
+        @media (min-width: 400px) {
+            .details-card i { font-size: 14px; } /* Big size tick */
+            .navbar { height: 70px; }
+            .logo { font-size: 1.2rem; }
+            .logo-icon-rotate { font-size: 1.7rem; }
+            .toggle-btn { font-size: 2rem; }
+            .app-container { margin-top: 90px; padding: 0 35px; }
+            .status-box { font-size: 13px; padding: 10px 20px; }
+            .design-mention-big { font-size: 22px; }
+            .dot { width: 7px; height: 7px; } 
+            .qty-selector { height: 40px; width: 120px; }
+            .qty-number { font-size: 18px; }
+            #mainHeading { font-size: 16px; }
+            #timerStatus { font-size: 11px; }
+            #timerClock { font-size: 15px; }
+            .btn-combo { height: 40px; font-size: 13px; min-width: 130px; }
+            .details-card h4 { font-size: 14px; }
+            .details-card li { font-size: 14px; }
+            .input-label { font-size: 14px; width: 150px; }
+            .input-field { width: 150px; height: 40px; font-size: 14px; }
+            .total-text { font-size: 15px; }
+            .price-display { font-size: 25px; }
+            .footer-btn { height: 50px; font-size: 16px; }
+        }
+
+        @media (max-width: 992px) {
+            .nav-links { position: fixed; right: -100%; list-style: none; top: 60px; background: #ffffff; width: 240px; height: 100vh; flex-direction: column; padding: 30px; transition: 0.4s ease; z-index: 2000; box-shadow: -5px 0 15px rgba(0,0,0,0.1); }
+            .nav-links.active { right: 0 !important; }
+            .nav-links li { margin-bottom: 18px; }
+            .nav-links li a { font-size: 0.9rem; font-weight: 600; text-decoration: none; display: block; color: #333; }
+        }
+    </style>
+</head>
+<body onload="initApp()">
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-palette logo-icon-rotate"></i>
+                <span>Ajith <span class="logo-blue">studio</span></span>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">HOME</a></li> 
+                <li><a href="index.html#about">ABOUT</a></li>
+                <li><a href="index.html#services">SERVICES</a></li>
+                <li><a href="index.html#contact">CONTACT</a></li>
+            </ul>
+            <div class="toggle-btn" id="menuToggle"><i class="fas fa-bars"></i></div>
+        </div>
+    </nav>
+
+    <div class="app-container">
+        <div class="image-box">
+            <div id="best-price" class="status-box best-price-box">Best Price</div>
+            <div id="fest-offer" class="status-box festival-offer-box">Offer</div>
+            <img id="displayImg" src="" alt="Preview">
+        </div>
+
+        <div class="dots-wrapper">
+            <div id="dot-simple" class="dot active"></div>
+            <div id="dot-creative" class="dot"></div>
+        </div>
+
+        <div class="title-row">
+            <div class="design-mention-big">Flex & Banner <span>Design</span></div>
+            <div class="qty-selector">
+                <button class="qty-btn" onclick="changeQty(-1)">−</button>
+                <div class="qty-number" id="qtyDisplay">1</div>
+                <button class="qty-btn" onclick="changeQty(1)">+</button>
+            </div>
+        </div>
+
+        <div class="combo-header-row">
+            <div id="mainHeading">Choose Your Style</div>
+            <div class="timer-wrapper" id="timerBox">
+                <span id="timerStatus">OFFER ENDS IN</span>
+                <span id="timerClock">00d 00h 00m 00s</span>
+            </div>
+        </div>
+
+        <div class="combo-grid">
+            <div class="btn-combo active" id="btn-simple" onclick="selectStyle('simple')">Simple</div>
+            <div class="btn-combo" id="btn-creative" onclick="selectStyle('creative')">Creative</div>
+        </div>
+        
+        <div class="details-card" id="detailsSection">
+            <h4>Details</h4>
+            <ul id="detailsList"></ul>
+        </div>
+
+        <div class="input-row">
+            <span class="input-label">Banner Size:</span>
+            <input type="text" id="sizeInput" class="input-field" placeholder="00x00">
+        </div>
+
+        <div class="input-row">
+            <span class="input-label">Max Delivery:</span>
+            <select id="deliveryInput" class="input-field" onchange="handleDeliveryClick()">
+                <option value="1 Day">1 Day</option>
+                <option value="2 Days">2 Days</option>
+                <option value="3 Days">3 Days</option>
+                <option value="4 Days">4 Days</option>
+                <option value="5 Days">5 Days</option>
+                <option value="6 Days">6 Days</option>
+                <option value="7 Days">7 Days</option>
+            </select>
+        </div>
+
+        <div class="total-price-section">
+            <span class="total-text">Total Price</span>
+            <div class="price-display">₹<span id="totalPrice">0</span></div>
+        </div>
+
+        <div class="footer-btns">
+            <button class="footer-btn back-btn" onclick="history.back()">Back</button>
+            <button class="footer-btn whatsapp-btn" onclick="sendToWhatsApp()">WhatsApp</button>
+        </div>
+    </div>
+
+<script>
+    const IMAGE_PATHS = { simple: "simple banner.jpg", creative: "creative banner.jpg" };
+
+    const FESTIVAL_DB = [
+        { name: "Easter", start: { month: 2, date: 26, hour: 15, min: 5}, end: { month: 2, date: 26, hour: 16, min: 49 }, label: "Easter Special <span class='free-blink'>Offer</span>" },
+        { name: "Tamil New Year & Vishu", start: { month: 4, date: 7, hour: 0, min: 0 }, end: { month: 4, date: 15, hour: 23, min: 59 }, label: "புத்தாண்டு & விஷு <span class='free-blink'>Mega Offer</span>" },
+        { name: "Workers Day", start: { month: 4, date: 24, hour: 0, min: 0 }, end: { month: 5, date: 1, hour: 23, min: 59 }, label: "May Day Special <span class='free-blink'>Offer</span>" },
+        { name: "Independence Day", start: { month: 8, date: 8, hour: 0, min: 0 }, end: { month: 8, date: 15, hour: 23, min: 59 }, label: "Independence Day <span class='free-blink'>Offer</span>" },
+        { name: "Onam", start: { month: 8, date: 19, hour: 0, min: 0 }, end: { month: 8, date: 27, hour: 23, min: 59 }, label: "Onam Special <span class='free-blink'>Offer</span>" },
+        { name: "Vinayagar Chaturthi", start: { month: 9, date: 7, hour: 0, min: 0 }, end: { month: 9, date: 14, hour: 23, min: 59 }, label: "விநாயகர் சதுர்த்தி <span class='free-blink'>Offer</span>" },
+        { name: "Ayudha & Saraswathi Puja", start: { month: 10, date: 12, hour: 0, min: 0 }, end: { month: 10, date: 21, hour: 23, min: 59 }, label: "ஆயுத பூஜை <span class='free-blink'>Special Sale</span>" },
+        { name: "Deepavali", start: { month: 11, date: 1, hour: 0, min: 0 }, end: { month: 11, date: 9, hour: 23, min: 59 }, label: "தீபாவளி <span class='free-blink'>Mega Dhamaka</span>" },
+        { name: "Christmas", start: { month: 12, date: 18, hour: 0, min: 0 }, end: { month: 12, date: 26, hour: 23, min: 59 }, label: "Christmas <span class='free-blink'>Special Offer</span>" },
+        { name: "New Year 2027", start: { month: 12, date: 27, hour: 0, min: 0 }, end: { month: 1, date: 2, hour: 23, min: 59 }, label: "New Year 2027 <span class='free-blink'>Offer</span>" }
+    ];
+
+    const PRICES_NORMAL = { 
+        simple: 250, creative: 400, 
+        list_s: ["Simple Banner Design", "High Quality Print Files", "Limited Revisions", "Fast Delivery"], 
+        list_c: ["Creative Banner Design", "High Quality Print Files", "Un Limited Revisions", "Fast Delivery"] 
+    };
+    
+    const PRICES_OFFER = { 
+        simple: 200, creative: 350, 
+        list_s: ["Simple Banner Design", "High Quality Print Files", "Limited Revisions", "Fast Delivery"], 
+        list_c: ["Creative Banner Design", "High Quality Print Files", "Un Limited Revisions", "Fast Delivery"] 
+    };
+
+    let activeStyle = 'simple';
+    let qty = 1;
+    let currentFestival = null;
+    let timerInterval;
+
+    function initApp() {
+        setInterval(checkFestivalRealTime, 1000);
+        updateUI();
+    }
+
+    function checkFestivalRealTime() {
+        const now = new Date();
+        const year = now.getFullYear();
+        const foundFestival = FESTIVAL_DB.find(f => {
+            let startYear = year;
+            let endYear = year;
+            if (f.name.includes("New Year 2027") && f.end.month === 1) endYear = year + 1;
+            const start = new Date(startYear, f.start.month - 1, f.start.date, f.start.hour, f.start.min);
+            const end = new Date(endYear, f.end.month - 1, f.end.date, f.end.hour, f.end.min);
+            return now >= start && now <= end;
+        });
+
+        if (JSON.stringify(foundFestival) !== JSON.stringify(currentFestival)) {
+            currentFestival = foundFestival;
+            const timerBox = document.getElementById('timerBox');
+            const mainHeading = document.getElementById('mainHeading');
+
+            if (currentFestival) {
+                mainHeading.innerHTML = currentFestival.label;
+                timerBox.style.display = "flex";
+                startCountdown(currentFestival);
+                document.getElementById('best-price').style.display = "none";
+                document.getElementById('fest-offer').style.display = "block";
+            } else {
+                mainHeading.innerText = "Choose Your Style";
+                timerBox.style.display = "none";
+                clearInterval(timerInterval);
+                document.getElementById('best-price').style.display = "block";
+                document.getElementById('fest-offer').style.display = "none";
+            }
+            updateUI();
+        }
+    }
+
+    function startCountdown(fest) {
+        clearInterval(timerInterval);
+        function update() {
+            const now = new Date();
+            let endYear = now.getFullYear();
+            if (fest.name.includes("New Year 2027") && fest.end.month === 1) endYear = now.getFullYear() + 1;
+            const target = new Date(endYear, fest.end.month - 1, fest.end.date, fest.end.hour, fest.end.min);
+            const diff = target - now;
+            if (diff <= 0) { clearInterval(timerInterval); checkFestivalRealTime(); return; }
+            const d = Math.floor(diff / 86400000);
+            const h = Math.floor((diff % 86400000) / 3600000);
+            const m = Math.floor((diff % 3600000) / 60000);
+            const s = Math.floor((diff % 60000) / 1000);
+            document.getElementById('timerClock').innerText = `${d}d ${h.toString().padStart(2,'0')}h ${m.toString().padStart(2,'0')}m ${s.toString().padStart(2,'0')}s`;
+        }
+        update();
+        timerInterval = setInterval(update, 1000);
+    }
+
+    function selectStyle(s) {
+        activeStyle = s;
+        document.querySelectorAll('.btn-combo').forEach(b => b.classList.remove('active'));
+        document.getElementById('btn-' + s).classList.add('active');
+        document.querySelectorAll('.dot').forEach(d => d.classList.remove('active'));
+        document.getElementById('dot-' + s).classList.add('active');
+        updateUI();
+    }
+
+    function changeQty(v) {
+        qty = Math.max(1, qty + v);
+        document.getElementById('qtyDisplay').innerText = qty;
+        updateUI();
+    }
+
+    function handleDeliveryClick() {
+        updateUI();
+        document.getElementById('detailsSection').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function updateUI() {
+        const data = currentFestival ? PRICES_OFFER : PRICES_NORMAL;
+        document.getElementById('displayImg').src = IMAGE_PATHS[activeStyle];
+        document.getElementById('totalPrice').innerText = data[activeStyle] * qty;
+        
+        const list = activeStyle === 'simple' ? [...data.list_s] : [...data.list_c];
+        document.getElementById('detailsList').innerHTML = list.map(item => `<li><i class="fa-solid fa-circle-check"></i> ${item}</li>`).join('');
+    }
+
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+    menuToggle.onclick = () => navLinks.classList.toggle('active');
+
+    function sendToWhatsApp() {
+        const sizeVal = document.getElementById('sizeInput').value.trim();
+        const deliveryVal = document.getElementById('deliveryInput').value;
+        const data = currentFestival ? PRICES_OFFER : PRICES_NORMAL;
+        const total = data[activeStyle] * qty;
+        const typeText = activeStyle === 'simple' ? "Simple Design" : "Creative Design";
+        const msg = `%20%20%20%20%20%20%20%20%20%20*DESIGN ORDER*%0A%0A` +
+                    `*Services* : Banner Design%0A` +
+                    `*Type* : ${typeText}%0A` +
+                    (sizeVal !== "" ? `*Size* : ${sizeVal}%0A` : "") + 
+                    `*Delivery* : ${deliveryVal}%0A` +
+                    `*Qty* : ${qty} nos%0A` +
+                    `----------------------------------%0A` +
+                    `*Total Price : ₹${total}/-*%0A` +
+                    `----------------------------------`;
+        window.open(`https://wa.me/7845188347?text=${msg}`, '_blank');
+    }
+</script>
+</body>
+</html>
