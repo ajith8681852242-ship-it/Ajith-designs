@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Ajith Studio | Order View</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        ::-webkit-scrollbar { display: none; }
+        body { background-color: #ffffff; padding-bottom: 120px; font-size: 13px; scroll-behavior: smooth; }
+        .navbar { background: #ffffff; height: 60px; display: flex; align-items: center; position: fixed; width: 100%; top: 0; z-index: 1000; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .nav-container { width: 92%; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-weight: 600; font-size: 1rem; margin-left: 15px; display: flex; align-items: center; }
+        .logo-blue { color: #1e90ff; }
+        .logo-icon-rotate { display: inline-block; animation: rotateLogo 5s linear infinite; margin-right: 10px; font-size: 1.4rem; color: #1e90ff !important; }
+        @keyframes rotateLogo { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        .toggle-btn { font-size: 1.6rem; color: #333; cursor: pointer; margin-right: 15px; display: flex; align-items: center; }
+
+        /* Main Container */
+        .app-container { margin-top: 60px; padding: 0 15px; }
+        
+        /* IMAGE BOX & INCREASED BADGE */
+        .image-box { position: relative; width: 100%; aspect-ratio: 1/1; border: 1px solid #eee; border-radius: 4px; padding: 3px; background: #fff; margin: 0 auto; }
+        .image-box img { width: 100%; height: 100%; object-fit: contain; }
+        
+        .top-badge { position: absolute; top: 10px; left: 10px; padding: 5px 12px; border-radius: 4px; font-size: 10px; font-weight: 700; color: white; text-transform: uppercase; z-index: 10; box-shadow: 0 3px 6px rgba(0,0,0,0.15); }
+        .bg-blue { background: #1e90ff; }
+        .bg-red { background: #ff0000; }
+        .blink-badge { animation: badgeBlink 1.2s infinite; }
+        @keyframes badgeBlink { 50% { opacity: 0.4; } }
+
+        /* Header Row - Bottom Line Removed */
+        .header-row { display: flex; justify-content: space-between; align-items: center; margin-top: 15px; border-bottom: none; }
+        .title { font-size: 17px; font-weight: 600; color: #333; }
+        .title span { color: #6a3093; }
+
+        .qty-box { display: flex; align-items: center; justify-content: space-between; border: 1.5px solid #eee; border-radius: 8px; min-width: 85px; height: 32px; padding: 0 5px; }
+        .qty-btn { background: none; color: #6a3093; border: none; width: 22px; font-size: 16px; font-weight: 700; cursor: pointer; }
+
+        /* Festival Heading & Timer */
+        .offer-timer-container { display: flex; justify-content: space-between; align-items: flex-end; margin-top: 0px; padding: 10px 0; }
+        .offer-heading { font-size: 12px; font-weight: 800; color: #333; }
+        .offer-red-blink { color: #ff0000; animation: slowBlinker 2s step-start infinite; }
+        .timer-side { text-align: right; }
+        .timer-label { font-size: 8px; font-weight: 700; color: #6a3093; display: block; }
+        .timer-count { font-size: 13px; font-weight: 800; color: #ff0000; }
+        @keyframes slowBlinker { 50% { opacity: 0; } }
+
+        /* Package Details with Top & Bottom Lines */
+        .details-section { margin-top: 5px; padding: 12px 0; border-top: 1px solid #f0f0f0; border-bottom: 1px solid #f0f0f0; }
+        .details-section h4 { font-size: 13px; color: #449330; margin-bottom: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
+        .details-list li { margin-bottom: 7px; display: flex; align-items: center; color: #555; font-size: 12px; font-weight: 500; }
+        .details-list li i { color: #6a3093; margin-right: 10px; font-size: 13px; }
+
+        /* Delivery Input */
+        .input-row { margin-top: 15px; display: flex; align-items: center; gap: 8px; }
+        .input-label { font-size: 10px; font-weight: 700; color: #444; }
+        .input-field { width: 80px; height: 32px; border: 1.5px solid #eee; border-radius: 5px; font-size: 11px; font-weight: 600; padding: 0 5px; }
+
+        .price-label { font-size: 12px; }
+           
+        .price-row { display: flex; justify-content: space-between; align-items: center; margin-top: 15px; }
+        .price-amount { font-size: 15px; font-weight: 700; color: #6a3093; }
+
+        /* Footer Buttons */
+        .footer-btns { position: fixed; bottom: 0; left: 0; width: 100%; background: #fff; padding: 12px 15px; display: flex; gap: 10px; box-shadow: 0 -5px 15px rgba(0,0,0,0.05); z-index: 1000; }
+        .footer-btn { flex: 1; height: 48px; border-radius: 8px; font-size: 14px; font-weight: 600; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; text-decoration: none; }
+        .back-btn { background: #f5f5f5; color: #333; }
+        .wa-btn { background: #6a3093; color: #fff; }
+
+     /* ------------------------------------------- */
+/* 360px - MEDIUM SIZING FOR ALL ITEMS */
+/* ------------------------------------------- */
+@media (min-width: 360px) {
+.navbar { height: 60px; }
+    .logo { font-size: 1.1rem; }
+    .logo-icon-rotate { font-size: 1.4rem; }
+    .toggle-btn { font-size: 1.7rem; }
+    
+    /* Container Padding */
+    .app-container { margin-top: 70px; padding: 0 20px; }
+    
+    /* Badges & Titles */
+    .top-badge { font-size: 11px; padding: 6px 14px; }
+    .title { font-size: 20px; }
+    
+    /* Quantity Box & Number Count */
+    .qty-box { min-width: 110px; height: 42px; border: 1.5px solid #ddd; }
+    .qty-btn { font-size: 22px; width: 30px; }
+    #qtyVal { font-size: 20px; font-weight: 700; } /* Larger Number */
+
+    /* Offer & Timer */
+    .offer-heading { font-size: 14px; }
+    .timer-label { font-size: 9px; }
+    .timer-count { font-size: 16px; }
+
+    /* Package Details List */
+    .details-section h4 { font-size: 14px; margin-bottom: 12px; }
+    .details-list li { font-size: 14px; margin-bottom: 9px; }
+    .details-list li i { font-size: 14px; }
+
+    /* Delivery Dropdown */
+    .input-label { font-size: 12px; }
+    .input-field { width: 115px; height: 42px; font-size: 15px; border-color: #eee; }
+
+  .price-row { margin-top: 20px; }
+            .price-label { font-size: 16px; }
+            .price-amount { font-size: 20px; font-weight: 800; color: #6a3093; }
+
+    /* Footer Buttons */
+    .footer-btn { height: 56px; font-size: 16px; border-radius: 10px; }
+}
+
+       /* ------------------------------------------- */
+/* 400px - BIG SIZING FOR ALL ITEMS */
+/* ------------------------------------------- */
+@media (min-width: 400px) {
+     .navbar { height: 70px; }
+            .logo { font-size: 1.2rem; }
+            .logo-icon-rotate { font-size: 1.7rem; }
+            .toggle-btn { font-size: 2rem; }
+    .app-container { margin-top: 85px; padding: 0 25px; }
+    
+    /* Badges & Titles */
+    .top-badge { font-size: 13px; padding: 8px 18px; top: 15px; left: 15px; }
+    .title { font-size: 22px; }
+    
+    /* Quantity Box & Number Count */
+    .qty-box { min-width: 130px; height: 50px; border-width: 2px; }
+    .qty-btn { font-size: 26px; width: 35px; }
+    #qtyVal { font-size: 24px; font-weight: 700; } /* Bigger Number */
+
+    /* Offer & Timer */
+    .offer-heading { font-size: 14px; }
+    .timer-label { font-size: 11px; }
+    .timer-count { font-size: 16px; }
+
+    /* Package Details */
+    .details-section h4 { font-size: 16px; margin-bottom: 15px; }
+    .details-list li { font-size: 15px; margin-bottom: 12px; }
+    .details-list li i { font-size: 16px; }
+
+    /* Delivery Dropdown */
+    .input-label { font-size: 14px; }
+    .input-field { width: 140px; height: 50px; font-size: 18px; border-width: 2px; }
+
+   .price-row { margin-top: 20px; }
+            .price-label { font-size: 16px; }
+            .price-amount { font-size: 22px; font-weight: 800; color: #6a3093; }
+
+    /* Footer Buttons */
+    .footer-btns { padding: 15px 25px; }
+    .footer-btn { height: 65px; font-size: 18px; border-radius: 12px; }
+}
+
+
+      @media (max-width: 992px) {
+            .nav-links { position: fixed; right: -100%; list-style: none; top: 60px; background: #ffffff; width: 240px; height: 100vh; flex-direction: column; padding: 30px; transition: 0.4s ease; z-index: 2000; box-shadow: -5px 0 15px rgba(0,0,0,0.1); }
+            .nav-links.active { right: 0 !important; }
+            .nav-links li { margin-bottom: 18px; }
+            .nav-links li a { font-size: 0.9rem; font-weight: 600; text-decoration: none; display: block; color: #333; }
+        }
+    </style>
+</head>
+<body onload="initApp()">
+ <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-palette logo-icon-rotate"></i>
+                <span>Ajith <span class="logo-blue">studio</span></span>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">HOME</a></li> 
+                <li><a href="index.html#about">ABOUT</a></li>
+                <li><a href="index.html#services">SERVICES</a></li>
+                <li><a href="index.html#contact">CONTACT</a></li>
+            </ul>
+            <div class="toggle-btn" id="menuToggle"><i class="fas fa-bars"></i></div>
+        </div>
+    </nav>
+
+    <div class="app-container">
+        <div class="image-box">
+            <div id="imageBadge" class="top-badge bg-blue">Best Price</div>
+            <img src="c:\Users\ASUS\Downloads\Brochure design.jpg" alt="Design Preview">
+        </div>
+
+        <div class="header-row">
+            <h2 class="title">Brochure <span>Design</span></h2>
+            <div class="qty-box">
+                <button class="qty-btn" onclick="changeQty(-1)">−</button>
+                <span id="qtyVal">1</span>
+                <button class="qty-btn" onclick="changeQty(1)">+</button>
+            </div>
+        </div>
+
+        <div class="offer-timer-container" id="offerSection" style="display:none;">
+            <div class="offer-heading">
+                RAMADAN SPECIAL <span class="offer-red-blink">OFFER</span>
+            </div>
+            <div class="timer-side">
+                <span class="timer-label">OFFER ENDS IN</span>
+                <span id="timerClock" class="timer-count">00d 00h 00m 00s</span>
+            </div>
+        </div>
+
+        <div class="details-section">
+            <h4>Package Details</h4>
+            <ul class="details-list" id="detailsList"></ul>
+        </div>
+
+        <div class="input-row">
+            <span class="input-label">MAX DELIVERY:</span>
+            <select id="deliveryInput" class="input-field">
+                <option value="1 Day">2 Day</option>
+                <option value="2 Days">3 Days</option>
+                <option value="3 Days">4 Days</option>
+            </select>
+        </div>
+
+        <div class="price-row">
+            <div class="price-label" style="font-weight:700;">Total Price</div>
+            <div class="price-amount" id="finalTotal">0 /-</div>
+        </div>
+    </div>
+
+    <div class="footer-btns">
+        <button class="footer-btn back-btn" onclick="history.back()">Back</button>
+        <button class="footer-btn wa-btn" onclick="sendWhatsApp()">
+            <i class="fab fa-whatsapp" style="margin-right:8px;"></i> WhatsApp
+        </button>
+    </div>
+
+    <script>
+        const NORMAL_PRICE = 150;
+        const OFFER_PRICE = 99;
+        const offerEndTime = new Date("March 30, 2026 23:59:59").getTime();
+
+        function updateTimer() {
+            const now = new Date().getTime();
+            const distance = offerEndTime - now;
+            const offerEl = document.getElementById('offerSection');
+            const badgeEl = document.getElementById('imageBadge');
+
+            if (distance > 0) {
+                offerEl.style.display = "flex";
+                badgeEl.innerText = "Special Offer";
+                badgeEl.className = "top-badge bg-red blink-badge";
+                
+                const d = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const s = Math.floor((distance % (1000 * 60)) / 1000);
+                document.getElementById("timerClock").innerHTML = `${d}d ${h}h ${m}m ${s}s`;
+                updateUI(true);
+            } else {
+                offerEl.style.display = "none";
+                badgeEl.innerText = "Best Price";
+                badgeEl.className = "top-badge bg-blue";
+                updateUI(false);
+            }
+        }
+
+        function changeQty(n) {
+            let q = document.getElementById('qtyVal');
+            let v = parseInt(q.innerText) + n;
+            if(v > 0) { q.innerText = v; updateTimer(); }
+        }
+
+        function updateUI(isOffer) {
+            const qty = parseInt(document.getElementById('qtyVal').innerText);
+            const price = isOffer ? OFFER_PRICE : NORMAL_PRICE;
+            document.getElementById('finalTotal').innerText = (price * qty) + " /-";
+            
+            const list = document.getElementById('detailsList');
+            const items = isOffer ? 
+                ["Ramadan Special Theme", "Ultra HD Print Ready", "Priority Fast Support", "Source Files Included"] : 
+                ["Professional Layout", "Standard Print File", "2 Major Revisions", "Standard Delivery"];
+            
+            list.innerHTML = items.map(i => `<li><i class="fas fa-check-circle"></i> ${i}</li>`).join('');
+        }
+
+          const menuToggle = document.getElementById('menuToggle'), navLinks = document.getElementById('navLinks');
+    menuToggle.onclick = () => navLinks.classList.toggle('active');
+
+
+        function initApp() {
+            setInterval(updateTimer, 1000);
+            updateTimer();
+        }
+
+        function sendWhatsApp() {
+            const qty = document.getElementById('qtyVal').innerText;
+            const total = document.getElementById('finalTotal').innerText;
+            window.open(`https://wa.me/7845188347?text=Order: Brochure Design%0AQty: ${qty}%0ATotal: ${total}`, '_blank');
+        }
+    </script>
+</body>
+</html>
