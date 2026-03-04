@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Ajith Studio | Menu Card Order</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        ::-webkit-scrollbar { display: none; }
+        body { background-color: #ffffff; padding-bottom: 120px; font-size: 13px; scroll-behavior: smooth; }
+         .navbar { background: #ffffff; height: 60px; display: flex; align-items: center; position: fixed; width: 100%; top: 0; z-index: 1000; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .nav-container { width: 92%; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-weight: 600; font-size: 1rem; margin-left: 15px; display: flex; align-items: center; }
+        .logo-blue { color: #1e90ff; }
+        .logo-icon-rotate { display: inline-block; animation: rotateLogo 5s linear infinite; margin-right: 10px; font-size: 1.4rem; color: #1e90ff !important; }
+        @keyframes rotateLogo { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        .toggle-btn { font-size: 1.6rem; color: #333; cursor: pointer; margin-right: 15px; display: flex; align-items: center; }
+
+        .app-container { margin-top: 70px; padding: 0 20px; max-width: 500px; margin-left: auto; margin-right: auto; }
+
+        /* Image Box & Dots */
+        .image-box { position: relative; width: 100%; aspect-ratio: 1/1; border: 1px solid #eee; border-radius: 4px; padding: 3px; background: #fff; overflow: hidden; }
+        .image-box img { width: 100%; height: 100%; object-fit: contain; transition: 0.3s ease-in-out; }
+        
+        .dots-wrapper { display: flex; justify-content: center; gap: 8px; margin-top: 10px; }
+        .dot { width: 7px; height: 7px; background: #e0e0e0; border-radius: 50%; transition: 0.3s; }
+        .dot.active { background: #6a3093; transform: scale(1.2); }
+
+        /* Offer & Blink Animations */
+        .status-box { position: absolute; top: 10px; left: 10px; padding: 6px 12px; font-weight: 700; font-size: 10px; text-transform: uppercase; border-radius: 4px; color: white; z-index: 10; }
+        .best-price-box { background: #2196F3; }
+        .special-offer-box { background: #FF0000; display: none; }
+        .offer-blink { color: #FF0000; font-weight: 800; animation: slowBlink 1.5s linear infinite; }
+        .status-blink { animation: slowBlink 1s linear infinite; }
+        @keyframes slowBlink { 0% { opacity: 1; } 50% { opacity: 0.2; } 100% { opacity: 1; } }
+
+        /* General UI Styles */
+        .title-row { display: flex; justify-content: space-between; align-items: center; margin-top: 15px; }
+        .design-mention-big { font-size: 16px; font-weight: 600; color: #000; }
+        .design-mention-big span { color: #6a3093; }
+
+        .qty-selector { display: flex; align-items: center; background: #fff; border: 1px solid #ddd; border-radius: 4px; padding: 0 4px; height: 28px; width: 85px; justify-content: space-between; }
+        .qty-btn { background: none; border: none; font-size: 16px; font-weight: 700; color: #6a3093; width: 20px; cursor: pointer; }
+        .qty-number { font-size: 14px; font-weight: 600; display: flex; align-items: center; justify-content: center; }
+
+        .combo-header-row { margin-top: 15px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: flex-end; }
+        #mainHeading { font-size: 11px; font-weight: 700; color: #333; text-transform: uppercase; }
+        .timer-wrapper { text-align: right; display: none; flex-direction: column; }
+        #timerStatus { font-size: 9px; font-weight: 700; color: #6a3093; text-transform: uppercase; }
+        #timerClock { font-size: 11px; font-weight: 700; color: #ff0000; }
+
+        .combo-grid { display: flex; justify-content: flex-start; gap: 8px; margin-bottom: 15px; }
+        .btn-combo { border: 1px solid #ccc; border-radius: 4px; font-size: 10px; font-weight: 600; height: 30px; padding: 0 12px; display: flex; align-items: center; justify-content: center; background: #fff; text-transform: uppercase; min-width: 90px; cursor: pointer; }
+        .btn-combo.active { background: #6a3093; color: #fff; border-color: #6a3093; }
+
+        .details-card { margin-top: 10px; border-bottom: 1px dashed #eee; padding-bottom: 12px; }
+        .details-card h4 { font-size: 11px; color: #449330; margin-bottom: 8px; text-transform: uppercase; font-weight: 700; }
+        .details-card li { display: flex; align-items: center; font-size: 11px; color: #555; margin-bottom: 6px; }
+        .details-card i { color: #6a3093; margin-right: 8px; font-size: 10px; } 
+
+        .input-row { margin-top: 15px; display: flex; align-items: center; gap: 12px; }
+        .input-label { font-size: 11px; font-weight: 700; color: #333; text-transform: uppercase; width: 110px; }
+        .input-field { width: 130px; height: 32px; border: 1px solid #ddd; border-radius: 4px; padding: 0 8px; font-size: 11px; outline: none; background: #fff; }
+
+        .total-price-section { display: flex; justify-content: space-between; align-items: center; margin-top: 25px; padding: 10px 5px; border-top: 1px solid #f9f9f9; }
+        .total-text { font-size: 12px; font-weight: 600; color: #333; text-transform: uppercase; }
+        .price-display { font-size: 15px; font-weight: 700; color: #6a3093; }
+
+       .footer-btns { 
+    display: grid; 
+    grid-template-columns: 1fr 1fr; 
+    gap: 10px; 
+    position: fixed; 
+    bottom: 0; 
+    left: 0; 
+    width: 100%; 
+    background: #ffffff; 
+    padding: 15px 20px; 
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.05); 
+    z-index: 2000;
+}
+
+.footer-btn { 
+    height: 42px; 
+    border-radius: 6px; 
+    font-size: 13px; 
+    font-weight: 600; 
+    border: none; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    cursor: pointer; 
+    gap: 8px; /* This creates space between icon and text */
+}
+
+.footer-btn i {
+    font-size: 16px; /* Icon size */
+}
+
+.back-btn { background: #f0f0f0; color: #333; }
+.whatsapp-btn { background: #6a3093; color: #fff; } /* Changed to WhatsApp Green for better look */
+        @media (min-width: 360px) {
+            .app-container { margin-top: 75px; }
+            .design-mention-big { font-size: 19px; }
+            .dot { width: 6px; height: 6px; } 
+            .qty-selector { height: 35px; width: 105px; }
+            .btn-combo { height: 35px; font-size: 11.5px; min-width: 110px; }
+            .input-label { font-size: 13px; width: 130px; }
+            .input-field { height: 35px; font-size: 13px; }
+            .price-display { font-size: 22px; }
+            .details-card h4 { font-size: 14px; }
+            .details-card li { font-size: 13px; margin-bottom: 5px; }
+            .details-card i { font-size: 12px; } /* Scaled down tick icon */
+             #timerStatus { font-size: 9px; }
+             #timerClock { font-size: 13px; }
+             .total-text { font-size: 14px; }
+             .price-display { font-size: 22px; }
+
+
+              .navbar { height: 60px; }
+    .logo { font-size: 1.1rem; }
+    .logo-icon-rotate { font-size: 1.4rem; }
+    .toggle-btn { font-size: 1.7rem; }
+    
+
+
+    }
+
+     @media (min-width: 400px) {
+    .app-container { margin-top: 85px; padding: 0 25px; }
+
+       .navbar { height: 70px; }
+            .logo { font-size: 1.2rem; }
+            .logo-icon-rotate { font-size: 1.7rem; }
+            .toggle-btn { font-size: 2rem; }
+
+
+
+
+    
+    /* Title and Image Dots */
+    .design-mention-big { font-size: 22px; }
+    .dot { width: 8px; height: 8px; } 
+    
+    /* Quantity Selector */
+    .qty-selector { height: 42px; width: 120px; }
+    .qty-btn { font-size: 20px; }
+    .qty-number { font-size: 16px; }
+
+    /* Buttons and Inputs */
+    .btn-combo { height: 42px; font-size: 13px; min-width: 130px; }
+    .input-label { font-size: 15px; width: 150px; }
+    .input-field { height: 42px; font-size: 15px; width: 160px; }
+
+    /* Details Card (List Items) */
+    .details-card h4 { font-size: 15px; margin-bottom: 10px; }
+    .details-card li { font-size: 14px; margin-bottom: 8px; }
+    .details-card i { font-size: 13px; } 
+
+    /* Timer and Pricing */
+    
+     #mainHeading { font-size: 16px; }
+    #timerStatus { font-size: 11px; }
+    #timerClock { font-size: 15px; }
+    .total-text { font-size: 16px; }
+    .price-display { font-size: 28px; }
+
+    /* Footer Buttons (Including WhatsApp) */
+    .footer-btns { padding: 20px 25px; gap: 15px; }
+    .footer-btn { height: 52px; font-size: 15px; gap: 10px; }
+    .footer-btn i { font-size: 18px; }
+}
+
+   @media (max-width: 992px) {
+            .nav-links { position: fixed; right: -100%; list-style: none; top: 60px; background: #ffffff; width: 240px; height: 100vh; flex-direction: column; padding: 30px; transition: 0.4s ease; z-index: 2000; box-shadow: -5px 0 15px rgba(0,0,0,0.1); }
+            .nav-links.active { right: 0 !important; }
+            .nav-links li { margin-bottom: 18px; }
+            .nav-links li a { font-size: 0.9rem; font-weight: 600; text-decoration: none; display: block; color: #333; }
+        }
+
+
+    </style>
+</head>
+<body onload="initApp()">
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-palette logo-icon-rotate"></i>
+                <span>Ajith <span class="logo-blue">studio</span></span>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">HOME</a></li> 
+                <li><a href="index.html#about">ABOUT</a></li>
+                <li><a href="index.html#services">SERVICES</a></li>
+                <li><a href="index.html#contact">CONTACT</a></li>
+            </ul>
+            <div class="toggle-btn" id="menuToggle"><i class="fas fa-bars"></i></div>
+        </div>
+    </nav>
+
+    <div class="app-container">
+        <div class="image-box">
+            <div id="best-price" class="status-box best-price-box">Best Price</div>
+            <div id="fest-offer" class="status-box special-offer-box status-blink">Special Offer</div>
+            <img id="mainImg" src="creative_menu.jpg" alt="Preview">
+        </div>
+
+        <div class="dots-wrapper">
+            <div id="dot-creative" class="dot active"></div>
+            <div id="dot-branding" class="dot"></div>
+        </div>
+
+        <div class="title-row">
+            <div class="design-mention-big">Menu Card <span>Design</span></div>
+            <div class="qty-selector">
+                <button class="qty-btn" onclick="changeQty(-1)">−</button>
+                <div class="qty-number" id="qtyDisplay">1</div>
+                <button class="qty-btn" onclick="changeQty(1)">+</button>
+            </div>
+        </div>
+
+        <div class="combo-header-row">
+            <div id="mainHeading">Choose Your Style</div>
+            <div class="timer-wrapper" id="timerBox">
+                <span id="timerStatus">OFFER ENDS IN</span>
+                <span id="timerClock">00d 00h 00m 00s</span>
+            </div>
+        </div>
+
+        <div class="combo-grid">
+            <div class="btn-combo active" id="btn-creative" onclick="selectStyle('creative')">Creative</div>
+            <div class="btn-combo" id="btn-branding" onclick="selectStyle('branding')">Branding</div>
+        </div>
+        
+        <div class="details-card">
+            <h4>Details</h4>
+            <ul id="detailsList">
+                <li><i class="fa-solid fa-circle-check"></i> Creative Menu Card Design</li>
+                <li><i class="fa-solid fa-circle-check"></i> High Quality Print Ready Files</li>
+                <li><i class="fa-solid fa-circle-check"></i> Modern & Unique Layouts</li>
+                <li><i class="fa-solid fa-circle-check"></i> Unlimited Revisions Support</li>
+            </ul>
+        </div>
+
+        <div class="input-row">
+            <span class="input-label">Select Page:</span>
+            <select id="pageSelect" class="input-field" onchange="updateUI()">
+                <option value="1">1 Page</option>
+                <option value="2">2 Pages</option>
+                <option value="3">3 Pages</option>
+                <option value="4">4 Pages</option>
+                <option value="5">5 Pages</option>
+                <option value="6">6 Pages</option>
+                <option value="7">7 Pages</option>
+                <option value="8">8 Pages</option>
+            </select>
+        </div>
+
+        <div class="input-row">
+            <span class="input-label">Max Delivery:</span>
+            <select id="deliverySelect" class="input-field"></select>
+        </div>
+
+        <div class="total-price-section">
+            <span class="total-text">Total Price</span>
+            <div class="price-display">₹<span id="totalPrice">0</span></div>
+        </div>
+
+        <div class="footer-btns">
+    <button class="footer-btn back-btn" onclick="history.back()">
+        <i class="fa-solid fa-arrow-left"></i> Back
+    </button>
+    <button class="footer-btn whatsapp-btn" onclick="sendToWhatsApp()">
+        <i class="fa-brands fa-whatsapp"></i> WhatsApp
+    </button>
+</div>
+    </div>
+
+<script>
+    // Images for styles
+    const STYLE_IMAGES = {
+        creative: "creative_menu.jpg", // Replace with your Creative image URL
+        branding: "branding_menu.jpg"  // Replace with your Branding image URL
+    };
+
+    const FESTIVAL_DB = [
+        { name: "Easter", start: "2026-03-01", end: "2026-04-20T23:59:59", label: "Easter Special <span class='offer-blink'>Offer</span>" },
+        { name: "Tamil New Year", start: "2026-04-10", end: "2026-04-15T23:59:59", label: "New Year Special <span class='offer-blink'>Offer</span>" }
+    ];
+
+    const PRICES = { creative: 150, branding: 200 };
+    let activeStyle = 'creative';
+    let qty = 1;
+    let festivalTimer = null;
+
+    function initApp() {
+        checkFestivalStatus();
+        updateUI();
+    }
+
+    function checkFestivalStatus() {
+        const now = new Date();
+        const activeFest = FESTIVAL_DB.find(f => {
+            const startDate = new Date(f.start);
+            const endDate = new Date(f.end);
+            return now >= startDate && now <= endDate;
+        });
+
+        const heading = document.getElementById('mainHeading');
+        const timerBox = document.getElementById('timerBox');
+        const bestPriceTag = document.getElementById('best-price');
+        const festOfferTag = document.getElementById('fest-offer');
+
+        if (activeFest) {
+            heading.innerHTML = activeFest.label;
+            timerBox.style.display = "flex";
+            bestPriceTag.style.display = "none";
+            festOfferTag.style.display = "block";
+            startTimer(activeFest.end);
+        } else {
+            heading.innerText = "Choose Your Style";
+            timerBox.style.display = "none";
+            bestPriceTag.style.display = "block";
+            festOfferTag.style.display = "none";
+        }
+    }
+
+    function startTimer(endTime) {
+        if (festivalTimer) clearInterval(festivalTimer);
+        const end = new Date(endTime).getTime();
+        festivalTimer = setInterval(() => {
+            const now = new Date().getTime();
+            const distance = end - now;
+            if (distance < 0) { clearInterval(festivalTimer); checkFestivalStatus(); return; }
+            const d = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const s = Math.floor((distance % (1000 * 60)) / 1000);
+            document.getElementById("timerClock").innerText = `${d}d ${h.toString().padStart(2, '0')}h ${m.toString().padStart(2, '0')}m ${s.toString().padStart(2, '0')}s`;
+        }, 1000);
+    }
+
+    function selectStyle(s) {
+        activeStyle = s;
+        // Update Buttons
+        document.querySelectorAll('.btn-combo').forEach(b => b.classList.remove('active'));
+        document.getElementById('btn-' + s).classList.add('active');
+        
+        // Update Image
+        document.getElementById('mainImg').src = STYLE_IMAGES[s];
+        
+        // Update Dots
+        document.querySelectorAll('.dot').forEach(d => d.classList.remove('active'));
+        document.getElementById('dot-' + s).classList.add('active');
+        
+        updateUI();
+    }
+
+    function changeQty(v) {
+        qty = Math.max(1, qty + v);
+        document.getElementById('qtyDisplay').innerText = qty;
+        updateUI();
+    }
+
+    function updateUI() {
+        const pages = parseInt(document.getElementById('pageSelect').value);
+        const deliverySelect = document.getElementById('deliverySelect');
+        const total = (PRICES[activeStyle] * pages) * qty;
+        document.getElementById('totalPrice').innerText = total;
+
+        let startDay = pages <= 2 ? 1 : (pages <= 4 ? 2 : (pages <= 6 ? 3 : 4));
+        deliverySelect.innerHTML = "";
+        for (let i = startDay; i <= 7; i++) {
+            let opt = document.createElement("option");
+            opt.value = i + (i === 1 ? " Day" : " Days");
+            opt.text = i + (i === 1 ? " Day" : " Days");
+            deliverySelect.appendChild(opt);
+        }
+    }
+
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+    menuToggle.onclick = () => navLinks.classList.toggle('active');
+
+
+    function sendToWhatsApp() {
+        const pages = document.getElementById('pageSelect').value;
+        const delivery = document.getElementById('deliverySelect').value;
+        const total = document.getElementById('totalPrice').innerText;
+        const styleText = activeStyle.charAt(0).toUpperCase() + activeStyle.slice(1);
+        const msg = `*MENU CARD ORDER*%0A%0A*Style* : ${styleText}%0A*Pages* : ${pages}%0A*Qty* : ${qty}%0A*Delivery* : ${delivery}%0A-----------------------------%0A*Total Price : ₹${total}/-*`;
+        window.open(`https://wa.me/7845188347?text=${msg}`, '_blank');
+    }
+</script>
+</body>
+</html>
