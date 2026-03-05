@@ -32,87 +32,47 @@
         .dot { width: 6px; height: 6px; background: #e0e0e0; border-radius: 50%; transition: 0.3s; }
         .dot.active { background: #6a3093; }
         
-        /* Slightly larger than original, but not bulky */
-.status-box { 
-    position: absolute; 
-    top: 10px; 
-    left: 10px; 
-    padding: 7px 13px; 
-    font-weight: 700; 
-    font-size: 11px; /* 1pt increase */
-    text-transform: uppercase; 
-    border-radius: 4px; 
-    color: white; 
-    z-index: 10; 
-}
-.best-price-box { background: #2196F3; }
-.festival-offer-box { background: #FF0000; display: none; animation: blink 1s linear infinite; }
+        .status-box { position: absolute; top: 10px; left: 10px; padding: 6px 12px; font-weight: 700; font-size: 10px; text-transform: uppercase; border-radius: 4px; color: white; z-index: 10; }
+        .best-price-box { background: #2196F3; }
+        .festival-offer-box { background: #FF0000; display: none; animation: blink 1s linear infinite; }
 
-.free-blink { 
-    animation: blink 1s linear infinite; 
-    color: #FF0000; 
-    font-weight: 800; 
-    margin-left: 10px; 
-    font-size: 12px; 
-}
-@keyframes blink { 0% { opacity: 1; } 50% { opacity: 0.2; } 100% { opacity: 1; } }
+        /* Free text with Gap and Blink */
+        .free-blink { animation: blink 1s linear infinite; color: #FF0000; font-weight: 800; margin-left: 10px; }
+        @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0.2; } 100% { opacity: 1; } }
 
-.title-row { display: flex; justify-content: space-between; align-items: center; margin-top: 15px; }
-.design-mention-big { font-size: 17px; font-weight: 600; color: #000; } /* 1pt increase */
-.design-mention-big span { color: #6a3093; }
+        .title-row { display: flex; justify-content: space-between; align-items: center; margin-top: 15px; }
+        .design-mention-big { font-size: 16px; font-weight: 600; color: #000; }
+        .design-mention-big span { color: #6a3093; }
 
-.qty-selector { 
-    display: flex; 
-    align-items: center; 
-    background: #fff; 
-    border: 1px solid #ddd; 
-    border-radius: 4px; 
-    padding: 0 5px; 
-    height: 30px; /* 2pt increase */
-    width: 90px; 
-    justify-content: space-between; 
-}
-.qty-btn { background: none; border: none; font-size: 17px; font-weight: 700; color: #6a3093; width: 22px; cursor: pointer; }
-.qty-number { font-size: 15px; font-weight: 600; }
+        .qty-selector { display: flex; align-items: center; background: #fff; border: 1px solid #ddd; border-radius: 4px; padding: 0 4px; height: 28px; width: 85px; justify-content: space-between; }
+        .qty-btn { background: none; border: none; font-size: 16px; font-weight: 700; color: #6a3093; width: 20px; cursor: pointer; }
+        .qty-number { font-size: 14px; font-weight: 600; display: flex; align-items: center; justify-content: center; }
 
-.combo-header-row { display: flex; justify-content: space-between; align-items: center; margin-top: 8px; margin-bottom: 8px; min-height: 32px; }
-#mainHeading { font-size: 12px; font-weight: 700; color: #333; text-transform: uppercase; }
+        .combo-header-row { display: flex; justify-content: space-between; align-items: center; margin-top: 7px; margin-bottom: 8px; min-height: 30px; }
+        #mainHeading { font-size: 11px; font-weight: 700; color: #333; text-transform: uppercase; }
+        
+        .timer-wrapper { text-align: right; display: none; flex-direction: column; }
+        #timerStatus { font-size: 9px; font-weight: 700; color: #6a3093; text-transform: uppercase; }
+        #timerClock { font-size: 11px; font-weight: 700; color: #ff0000; }
+          
+        .combo-grid { display: flex; justify-content: flex-start; gap: 8px; margin-bottom: 15px; }
+        .btn-combo { border: 1px solid #ccc; border-radius: 4px; font-size: 10px; font-weight: 600; height: 30px; padding: 0 12px; display: flex; align-items: center; justify-content: center; background: #fff; text-transform: uppercase; min-width: 90px; cursor: pointer; }
+        .btn-combo.active { background: #6a3093; color: #fff; border-color: #6a3093; }
+        
+        .details-card { margin-top: 10px; border-bottom: 1px dashed #eee; padding-bottom: 12px; scroll-margin-top: 80px; }
+        .details-card h4 { font-size: 11px; color: #449330; margin-bottom: 8px; text-transform: uppercase; font-weight: 700; }
+        .details-card li { display: flex; align-items: center; font-size: 11px; color: #555; margin-bottom: 6px; }
+        .details-card i { color: #6a3093; margin-right: 8px; font-size: 9px; } 
+        
+        .input-row { margin-top: 15px; display: flex; align-items: center; gap: 12px; }
+        .input-label { font-size: 11px; font-weight: 700; color: #333; text-transform: uppercase; width: 110px; }
+        .input-field { width: 115px; height: 32px; border: 1px solid #ddd; border-radius: 4px; padding: 0 8px; font-size: 11px; outline: none; background: #fff; }
 
-.timer-wrapper { text-align: right; display: none; flex-direction: column; }
-#timerStatus { font-size: 10px; font-weight: 700; color: #6a3093; text-transform: uppercase; }
-#timerClock { font-size: 12px; font-weight: 700; color: #ff0000; }
-
-.combo-grid { display: flex; justify-content: flex-start; gap: 8px; margin-bottom: 15px; }
-.btn-combo { 
-    border: 1px solid #ccc; 
-    border-radius: 4px; 
-    font-size: 11px; /* 1pt increase */
-    font-weight: 600; 
-    height: 32px; /* 2pt increase */
-    padding: 0 14px; 
-    display: flex; 
-    align-items: center; 
-    justify-content: center; 
-    background: #fff; 
-    text-transform: uppercase; 
-    min-width: 95px; 
-    cursor: pointer; 
-}
-.btn-combo.active { background: #6a3093; color: #fff; border-color: #6a3093; }
-
-.details-card { margin-top: 10px; border-bottom: 1px dashed #eee; padding-bottom: 12px; }
-.details-card h4 { font-size: 12px; color: #449330; margin-bottom: 8px; text-transform: uppercase; font-weight: 700; }
-.details-card li { display: flex; align-items: center; font-size: 12px; color: #555; margin-bottom: 6px; }
-.details-card i { color: #6a3093; margin-right: 8px; font-size: 10px; } 
-
-.input-row { margin-top: 15px; display: flex; align-items: center; gap: 12px; }
-.input-label { font-size: 12px; font-weight: 700; color: #333; text-transform: uppercase; width: 115px; }
-.input-field { width: 120px; height: 34px; border: 1px solid #ddd; border-radius: 4px; padding: 0 8px; font-size: 12px; outline: none; background: #fff; }
-
-.total-price-section { display: flex; justify-content: space-between; align-items: center; margin-top: 25px; padding: 10px 5px; border-top: 1px solid #f9f9f9; }
-.total-text { font-size: 13px; font-weight: 700; color: #333; text-transform: uppercase; }
-
-.price-display { font-weight: 600; color: #6a3093; font-size: 20px; } /* 2pt increase */
+        .total-price-section { display: flex; justify-content: space-between; align-items: center; margin-top: 25px; padding: 10px 5px; border-top: 1px solid #f9f9f9; }
+        .total-text { font-size: 12px; font-weight: 700; color: #333; text-transform: uppercase; }
+        
+        /* PRICE DISPLAY DEFAULT */
+        .price-display { font-weight: 600; color: #6a3093; font-size: 18px; }
 
         .footer-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; position: fixed; bottom: 0; left: 0; width: 100%; background: #ffffff; padding: 15px 20px; box-shadow: 0 -2px 10px rgba(0,0,0,0.05); }
         .footer-btn { height: 42px; border-radius: 6px; font-size: 13px; font-weight: 600; border: none; display: flex; align-items: center; justify-content: center; cursor: pointer; }
@@ -123,7 +83,7 @@
         .whatsapp-btn i { margin-right: 10px; font-size: 1.2rem; }
 
         /* RESPONSIVE BREAKPOINTS (ALL SIZES) */
-        @media (min-width: 370px) {
+        @media (min-width: 360px) {
             .navbar { height: 60px; }
             .logo { font-size: 1.1rem; }
             .app-container { margin-top: 75px; padding: 0 20px; }
