@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ta">
 <head>
@@ -85,14 +84,20 @@
             .qty-selector { height: 35px; width: 105px; }
             .btn-combo { height: 35px; font-size: 11.5px; min-width: 110px; }
             .input-label { font-size: 13px; width: 130px; }
-            .input-field { height: 35px; font-size: 13px; }
+            .input-field { width: 130px; height: 35px; font-size: 13px; }
             .details-card h4 { font-size: 14px; }
             .details-card li { font-size: 13px; }
-            .price-display { font-size: 22px; }
+            .total-text { font-size: 14px; }
+    .price-display { font-size: 22px; }
             .navbar { height: 60px; }
             .logo { font-size: 1.1rem; }
             .logo-icon-rotate { font-size: 1.4rem; }
             .toggle-btn { font-size: 1.7rem; }
+
+             #mainHeading { font-size: 14px; }
+    #timerStatus { font-size: 9px; }
+    #timerClock { font-size: 13px; }
+     .footer-btn { height: 45px; font-size: 15px; border-radius: 8px; }
 
             .status-box { 
         font-size: 12px; 
@@ -107,20 +112,20 @@
             .toggle-btn { font-size: 2rem; }
             .design-mention-big { font-size: 22px; }
              .dot { width: 6px; height: 6px; } 
-            .qty-selector { height: 42px; width: 120px; }
+            .qty-selector { height: 40px; width: 120px; }
             .btn-combo { height: 42px; font-size: 13px; min-width: 130px; }
-            .input-label { font-size: 15px; width: 150px; }
-            .input-field { height: 42px; font-size: 15px; width: 160px; }
-            .price-display { font-size: 28px; }
+            .input-label { font-size: 14px; width: 150px; }
+            .input-field { width: 150px; height: 40px; font-size: 14px; }
+            .price-display { font-size: 25px; }
             .footer-btn { height: 52px; font-size: 15px; }
-            .details-card h4 { font-size: 15px; margin-bottom: 10px; }
+            .details-card h4 { font-size: 14px; margin-bottom: 10px; }
             .details-card li { font-size: 14px; margin-bottom: 8px; }
             .details-card i { font-size: 13px; } 
             #mainHeading { font-size: 16px; }
             #timerStatus { font-size: 11px; }
             #timerClock { font-size: 15px; }
-            .total-text { font-size: 16px; }
-            .footer-btns { padding: 20px 25px; gap: 15px; }
+            .total-text { font-size: 15px; }
+            .footer-btn { height: 50px; font-size: 16px; }
             .footer-btn { height: 52px; font-size: 15px; gap: 10px; }
             .footer-btn i { font-size: 18px; }
 
@@ -223,74 +228,164 @@
     </div>
 
 <script>
-    const GALLERY = {
-        creative: "Flyer Design inner.jpg",
-        branding: "shool flyer.jpg"
-    };
+    // 1. Data Configurations
+    const GALLERY = { creative: "shool flyer.jpg", branding: "Flyer Design inner.jpg" };
 
     const NORMAL_CONFIG = {
         prices: { creative: { 1: 200, 2: 300 }, branding: { 1: 300, 2: 400 } },
         details: {
-            1: ["High Quality Print Ready Files", "Single Side Layout Design", "Unlimited Revisions Support", "24 Hours Express Delivery"],
-            2: ["Double Sided Premium Design", "Source File Included", "Unlimited Revisions Support", "High Resolution PDF & PNG"]
+            1: ["High Quality Print Ready Files", "Single Side Layout Design", "Unlimited Revisions", "24 Hours Express Delivery"],
+            2: ["Double Sided Premium Design", "Source File Included", "Unlimited Revisions", "High Resolution PDF & PNG"]
         }
     };
 
     const FESTIVAL_CONFIG = {
         prices: { creative: { 1: 150, 2: 250 }, branding: { 1: 250, 2: 350 } },
         details: {
-            1: ["High Quality Print Ready Files", "Modern & Unique Layouts", "Unlimited Revisions Support", "1 Creative Poster <span class='offer-blink'>FREE</span>"],
-            2: ["Double Sided Premium Design", "Source File Included", "Unlimited Revisions Support", "1 Creative Poster <span class='offer-blink'>FREE</span>"]
+            1: ["High Quality Print Ready Files", "Modern & Unique Layouts", "Unlimited Revisions", "1 Creative Poster <span class='offer-blink'>FREE</span>"],
+            2: ["Double Sided Premium Design", "Source File Included", "Unlimited Revisions", "1 Creative Poster <span class='offer-blink'>FREE</span>"]
         }
     };
 
     const FESTIVAL_DB = [
-        { name: "Deepavali", start: { month: 2, date: 1, hour: 0, min: 0 }, end: { month: 11, date: 9, hour: 23, min: 59 }, label: "Eastet Special<span class='offer-blink'>Offer</span>" }
+        { name: "Easter", start: { month: 3, date: 5, hour: 19, min: 54 }, end: { month: 4, date: 26, hour: 19, min: 35 }, label: "Easter Special <span class='offer-blink'>Offer</span>" },
+        { name: "Tamil New Year & Vishu", start: { month: 4, date: 7, hour: 0, min: 0 }, end: { month: 4, date: 15, hour: 23, min: 59 }, label: "புத்தாண்டு & விஷு <span class='offer-blink'>Mega Offer</span>" },
+        { name: "Workers Day", start: { month: 5, date: 1, hour: 0, min: 0 }, end: { month: 5, date: 1, hour: 23, min: 59 }, label: "May Day Special <span class='offer-blink'>Offer</span>" },
+        { name: "Independence Day", start: { month: 8, date: 8, hour: 0, min: 0 }, end: { month: 8, date: 15, hour: 23, min: 59 }, label: "Independence Day <span class='offer-blink'>Offer</span>" },
+        { name: "Onam", start: { month: 8, date: 19, hour: 0, min: 0 }, end: { month: 8, date: 27, hour: 23, min: 59 }, label: "Onam Special <span class='offer-blink'>Offer</span>" },
+        { name: "Vinayagar Chaturthi", start: { month: 9, date: 7, hour: 0, min: 0 }, end: { month: 9, date: 14, hour: 23, min: 59 }, label: "விநாயகர் சதுர்த்தி <span class='offer-blink'>Offer</span>" },
+        { name: "Ayudha & Saraswathi Puja", start: { month: 10, date: 12, hour: 0, min: 0 }, end: { month: 10, date: 21, hour: 23, min: 59 }, label: "ஆயுத பூஜை <span class='offer-blink'>Special Sale</span>" },
+        { name: "Deepavali", start: { month: 11, date: 1, hour: 0, min: 0 }, end: { month: 11, date: 9, hour: 23, min: 59 }, label: "தீபாவளி <span class='offer-blink'>Mega Dhamaka</span>" },
+        { name: "Christmas", start: { month: 12, date: 18, hour: 0, min: 0 }, end: { month: 12, date: 26, hour: 23, min: 59 }, label: "Christmas <span class='offer-blink'>Special Offer</span>" },
+        { name: "New Year 2027", start: { month: 12, date: 27, hour: 0, min: 0 }, end: { month: 1, date: 2, hour: 23, min: 59 }, label: "New Year 2027 <span class='offer-blink'>Offer</span>" }
     ];
 
     let activeStyle = 'creative';
     let qty = 1;
     let isFestivalActive = false;
-    let festivalTimer = null;
+    let currentActiveFest = null;
 
-    function initApp() { checkFestivalStatus(); updateUI(); }
+    // --- REAL-TIME CORE LOGIC ---
 
-    function checkFestivalStatus() {
+    function syncFestivalEngine() {
         const now = new Date();
         const year = now.getFullYear();
-        const activeFest = FESTIVAL_DB.find(f => {
+        let foundFest = null;
+
+        FESTIVAL_DB.forEach(f => {
             const startDate = new Date(year, f.start.month - 1, f.start.date, f.start.hour, f.start.min);
-            const endDate = new Date(year, f.end.month - 1, f.end.date, f.end.hour, f.end.min);
-            return now >= startDate && now <= endDate;
+            let endYear = (f.end.month < f.start.month) ? year + 1 : year;
+            const endDate = new Date(endYear, f.end.month - 1, f.end.date, f.end.hour, f.end.min);
+
+            if (now >= startDate && now <= endDate) {
+                foundFest = { ...f, endTimeObj: endDate };
+            }
         });
 
-        if (activeFest) {
+        // Detect State Change (Started or Ended)
+        if (foundFest && !isFestivalActive) {
+            // Offer just started!
             isFestivalActive = true;
-            document.getElementById('mainHeading').innerHTML = activeFest.label;
-            document.getElementById('timerBox').style.display = "flex";
-            document.getElementById('best-price').style.display = "none";
-            document.getElementById('fest-offer').style.display = "block";
-            startTimer(new Date(year, activeFest.end.month - 1, activeFest.end.date, activeFest.end.hour, activeFest.end.min));
+            currentActiveFest = foundFest;
+            applyFestivalUI(true);
+        } else if (!foundFest && isFestivalActive) {
+            // Offer just ended!
+            isFestivalActive = false;
+            currentActiveFest = null;
+            applyFestivalUI(false);
+        }
+
+        // Always update clock if active
+        if (isFestivalActive && currentActiveFest) {
+            updateCountdownClock(currentActiveFest.endTimeObj);
         }
     }
 
-    function startTimer(endTime) {
-        if (festivalTimer) clearInterval(festivalTimer);
-        festivalTimer = setInterval(() => {
-            const now = new Date().getTime();
-            const distance = endTime - now;
-            if (distance < 0) { clearInterval(festivalTimer); checkFestivalStatus(); updateUI(); return; }
-            const d = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const s = Math.floor((distance % (1000 * 60)) / 1000);
-            document.getElementById("timerClock").innerText = `${d}d ${h}h ${m}m ${s}s`;
-        }, 1000);
+    function applyFestivalUI(active) {
+        const heading = document.getElementById('mainHeading');
+        const timerBox = document.getElementById('timerBox');
+        const bestPrice = document.getElementById('best-price');
+        const festOffer = document.getElementById('fest-offer');
+
+        if (active) {
+            heading.innerHTML = currentActiveFest.label;
+            timerBox.style.display = "flex";
+            bestPrice.style.display = "none";
+            festOffer.style.display = "block";
+        } else {
+            heading.innerText = "Flyer Design Services";
+            timerBox.style.display = "none";
+            bestPrice.style.display = "block";
+            festOffer.style.display = "none";
+        }
+        updateUI(); // Refresh prices and details
     }
+
+    function updateCountdownClock(endTime) {
+        const distance = endTime.getTime() - new Date().getTime();
+        const clockElem = document.getElementById("timerClock");
+        if (!clockElem) return;
+
+        if (distance < 0) {
+            clockElem.innerText = "OFFER ENDED";
+            return;
+        }
+
+        const d = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const s = Math.floor((distance % (1000 * 60)) / 1000);
+        clockElem.innerText = `${d}d ${h}h ${m}m ${s}s`;
+    }
+
+    // --- UI UPDATES ---
+
+    function updateUI() {
+        document.getElementById('mainImg').src = GALLERY[activeStyle];
+        const pages = document.getElementById('pageSelect').value;
+        const currentConfig = isFestivalActive ? FESTIVAL_CONFIG : NORMAL_CONFIG;
+        
+        // Update Price
+        document.getElementById('totalPrice').innerText = currentConfig.prices[activeStyle][pages] * qty;
+
+        // Update Details List
+        const listContainer = document.getElementById('detailsList');
+        listContainer.innerHTML = "";
+        currentConfig.details[pages].forEach(item => {
+            const li = document.createElement('li');
+            li.innerHTML = `<i class="fa-solid fa-circle-check"></i> ${item}`;
+            listContainer.appendChild(li);
+        });
+
+        // Update Delivery Dropdown
+        const delivery = document.getElementById('deliverySelect');
+        const currentSelection = delivery.value;
+        delivery.innerHTML = "";
+        let startDay = (pages == 1) ? 1 : 2;
+        for (let i = startDay; i <= 5; i++) {
+            let opt = document.createElement("option");
+            opt.value = i + " Day" + (i > 1 ? "s" : "");
+            opt.text = i + " Day" + (i > 1 ? "s" : "");
+            delivery.appendChild(opt);
+        }
+        if (currentSelection) delivery.value = currentSelection;
+    }
+
+    // --- INITIALIZATION ---
+
+    window.onload = function() {
+        // Run once immediately
+        syncFestivalEngine();
+        updateUI();
+        
+        // Run "Engine" every 1 second for real-time automatic switching
+        setInterval(syncFestivalEngine, 1000);
+    };
+
+    // --- EVENT HANDLERS ---
 
     function selectStyle(style) {
         activeStyle = style;
-        document.getElementById('mainImg').src = GALLERY[style];
         document.querySelectorAll('.btn-combo').forEach(b => b.classList.remove('active'));
         document.getElementById('btn-' + style).classList.add('active');
         document.querySelectorAll('.dot').forEach(d => d.classList.remove('active'));
@@ -304,39 +399,28 @@
         updateUI();
     }
 
-    function updateUI() {
-        const pages = document.getElementById('pageSelect').value;
-        const currentConfig = isFestivalActive ? FESTIVAL_CONFIG : NORMAL_CONFIG;
-        document.getElementById('totalPrice').innerText = currentConfig.prices[activeStyle][pages] * qty;
-
-        const listContainer = document.getElementById('detailsList');
-        listContainer.innerHTML = "";
-        currentConfig.details[pages].forEach(item => {
-            const li = document.createElement('li');
-            li.innerHTML = `<i class="fa-solid fa-circle-check"></i> ${item}`;
-            listContainer.appendChild(li);
-        });
-
-        const delivery = document.getElementById('deliverySelect');
-        delivery.innerHTML = "";
-        let start = pages == 1 ? 1 : 2;
-        for (let i = start; i <= 5; i++) {
-            let opt = document.createElement("option");
-            opt.value = i + " Day" + (i > 1 ? "s" : "");
-            opt.text = i + " Day" + (i > 1 ? "s" : "");
-            delivery.appendChild(opt);
-        }
-    }
-
-    const menuToggle = document.getElementById('menuToggle');
+     const menuToggle = document.getElementById('menuToggle');
     const navLinks = document.getElementById('navLinks');
     menuToggle.onclick = () => navLinks.classList.toggle('active');
 
-    function sendToWhatsApp() {
-        const pages = document.getElementById('pageSelect').value;
-        const total = document.getElementById('totalPrice').innerText;
-        const delivery = document.getElementById('deliverySelect').value;
-        const msg = `*FLYER ORDER*%0AStyle: ${activeStyle.toUpperCase()}%0APages: ${pages}%0AQty: ${qty}%0ADelivery: ${delivery}%0A*Total: ₹${total}*`;
+
+    window.sendToWhatsApp = function() {
+        const getType = activeStyle.charAt(0).toUpperCase() + activeStyle.slice(1);
+        const getPages = document.getElementById('pageSelect').value;
+        const getDelivery = document.getElementById('deliverySelect').value;
+        const getSize = document.getElementById('sizeInput') ? document.getElementById('sizeInput').value : "A4 Sheet";
+
+        const msg = `%20%20%20%20%20%20%20%20%20%20*DESIGN ORDER*%0A%0A` +
+                    `*Service* : Flyer Design%0A` +
+                    `*Type* : ${getType}%0A` +
+                    `*Size* : ${getSize}%0A` +
+                    `*Pages* : ${getPages}%0A` +
+                    `*Qty* : ${qty} nos%0A` +
+                    `*Delivery* : ${getDelivery}%0A` +
+                    (isFestivalActive ? `*Offer* : 1 Creative Poster Free%0A` : "") + 
+                    `%0A` + 
+                    `----------------------------------`;
+
         window.open(`https://wa.me/7845188347?text=${msg}`, '_blank');
     }
 </script>
