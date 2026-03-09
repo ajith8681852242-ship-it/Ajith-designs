@@ -2031,3 +2031,99 @@ html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
 
 
 
+#preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.8s ease, visibility 0.8s ease;
+}
+
+/* 2 வினாடிக்குப் பின் இதைச் சேர்க்க ஜாவாஸ்கிரிப்ட் உதவும் */
+#preloader.fade-out {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.rotating-icon {
+    animation: rotateIcon 2s linear infinite;
+}
+
+@keyframes rotateIcon {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* லோடிங் புள்ளிகள் வடிவமைப்பு */
+.bottom-content {
+    position: absolute;
+    bottom: 60px;
+    text-align: center;
+}
+
+/* லோடிங் புள்ளிகள் வடிவமைப்பு */
+.loading-dots {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.loading-dots span {
+    width: 6px;
+    height: 6px;
+    background-color: #e0e0e0; /* ஆரம்ப நிறம்: Light Gray */
+    border-radius: 50%;
+    display: inline-block;
+    /* அனிமேஷன்: நிறம் மற்றும் ஓளிர்வு (Opacity) மட்டும் மாறும் */
+    animation: stepLoading 1.5s infinite ease-in-out both;
+}
+
+/* புள்ளிகள் ஒவ்வொன்றாக நிறம் மாறும் டைமிங் */
+.loading-dots span:nth-child(1) { animation-delay: 0s; }
+.loading-dots span:nth-child(2) { animation-delay: 0.2s; }
+.loading-dots span:nth-child(3) { animation-delay: 0.4s; }
+.loading-dots span:nth-child(4) { animation-delay: 0.6s; }
+
+/* Step by Step Loading Animation */
+@keyframes stepLoading {
+    0%, 100% { 
+        background-color: #e0e0e0; /* Light Gray */
+        opacity: 0.4;
+    }
+    50% { 
+        background-color: #2196F3; /* லோடிங் ஆகும் போது மாறும் நிறம் (Blue) */
+        opacity: 1;
+        transform: scale(1.1); /* சிறிய அளவில் விரிவடையும் (துள்ளாது) */
+    }
+}
+
+.footer-text {
+    font-size: 10px;
+    color: #888;
+    letter-spacing: 1px;
+}
+
+
+
+
+
+
+
+
+
