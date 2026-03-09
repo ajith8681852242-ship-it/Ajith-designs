@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Ajith Studio | Graphics Designer</title>
+    <title>Ajith Designs | Graphics Designer</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
@@ -11,13 +11,36 @@
 <body>
 
 
+<div id="preloader">
+    <div class="center-content">
+        <div class="logo-container">
+            <i class="fas fa-palette rotating-icon blue-clr" style="font-size: 22px;"></i>
+            <h1 class="brand-name" style="font-size: 18px; margin: 0;">Ajith <span class="logo-blue">Graphics</span></h1>
+        </div>
+    </div>
+
+    <div class="bottom-content">
+        <div class="loading-dots">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <p class="footer-text">Design by Ajith</p>
+    </div>
+</div>
+
+
+ 
+    
+
     <nav class="navbar">
         <div class="nav-container">
             <div class="logo">
                 <div class="nav-logo">
     <i id="secret-icon" onclick="handleSecretClick()" class="fas fa-palette logo-icon-rotate blue-clr" style="cursor: pointer;"></i>
     
-    <span>Ajith <span class="logo-blue">studio</span></span>
+    <span>Ajith <span class="logo-blue">Graphics</span>
 </div>
 
 <script>
@@ -67,135 +90,35 @@
         </div>
 
         <div class="banner-content">
-            <h1 class="main-heading">Hi i m <span class="blue-clr">Ajith</span><br><span class="white-clr">Graphics Designer</span></h1>
+            <h1 class="main-heading"><span class="blue-clr">Freelancing</span><br><span class="white-clr">Graphics Designer</span></h1>
             
          
 
             <p class="thin-p one-line-p">Creative designs for your professional needs</p>
-            <button class="whatsapp-btn-live" id="chatBtn">
-                <i class="fab fa-whatsapp"></i> Chat Live Now
-            </button>
+          <button class="whatsapp-btn-live" id="chatBtn" onclick="openWhatsApp()">
+    <i class="fab fa-whatsapp"></i> Chat Live Now
+</button>
         </div>
 
     
 
 
-<style>
-    .form-overlay {
-        display: none; /* ஆரம்பத்தில் மறைந்திருக்கும் */
-        position: fixed;
-        top: 0; left: 0;
-        width: 100%; height: 100%;
-        background: rgba(0, 0, 0, 0.6);
-        z-index: 10000;
-        justify-content: center;
-        align-items: center;
-        backdrop-filter: blur(5px);
-    }
-    .contact-form {
-        background: #ffffff !important; /* முழு வெள்ளை பின்னணி */
-        padding: 30px;
-        border-radius: 15px;
-        width: 85%;
-        max-width: 340px;
-        position: relative;
-        box-shadow: 0 15px 40px rgba(0,0,0,0.2);
-    }
-    .contact-form h4 {
-        margin: 0 0 20px;
-        color: #000;
-        font-family: 'Poppins', sans-serif;
-        text-align: center;
-        font-size: 20px;
-    }
-    .contact-form input, .contact-form select, .contact-form textarea {
-        width: 100%;
-        padding: 12px;
-        margin-bottom: 15px;
-        border: 1px solid #ddd;
-        border-radius: 8px;
-        font-family: 'Poppins', sans-serif;
-        box-sizing: border-box; /* ஓரங்களில் ஒட்டாமல் இருக்க */
-        outline: none;
-    }
-    .contact-form textarea { height: 90px; resize: none; }
-    .send-btn {
-        width: 100%;
-        padding: 15px;
-        background: #000; /* Black Button */
-        color: #fff;
-        border: none;
-        border-radius: 8px;
-        font-weight: bold;
-        cursor: pointer;
-        font-size: 14px;
-    }
-    .close-btn {
-        position: absolute;
-        right: 15px;
-        top: 10px;
-        font-size: 24px;
-        cursor: pointer;
-        color: #999;
-    }
-</style>
 
-<div class="form-overlay" id="formOverlay">
-    <div class="contact-form">
-        <span class="close-btn" id="closeForm">&times;</span>
-        <h4>Quick Inquiry</h4>
-        <input type="text" id="userName" placeholder="Your Name">
-        <select id="userService">
-            <option value="Logo Design">Logo Design</option>
-            <option value="Poster Design">Poster Design</option>
-            <option value="Ads Design">Ads Design</option>
-            <option value="Branding">Branding</option>
-        </select>
-        <textarea id="userMsg" placeholder="Write your message..."></textarea>
-        <button class="send-btn" id="submitToWA">Send via WhatsApp</button>
-    </div>
-</div>
 
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    const chatBtn = document.getElementById('chatBtn');
-    const formOverlay = document.getElementById('formOverlay');
-    const closeForm = document.getElementById('closeForm');
-    const submitBtn = document.getElementById('submitToWA');
-
-    // Chat Live Now பட்டனை கிளிக் செய்தால் Form திறக்க
-    if (chatBtn) {
-        chatBtn.onclick = function() {
-            formOverlay.style.display = 'flex';
-        };
-    }
-
-    // Close (X) பட்டனை கிளிக் செய்தால் மூட
-    if (closeForm) {
-        closeForm.onclick = function() {
-            formOverlay.style.display = 'none';
-        };
-    }
-
-    // WhatsApp-க்கு தகவல்களை அனுப்ப
-    if (submitBtn) {
-        submitBtn.onclick = function() {
-            const name = document.getElementById('userName').value;
-            const service = document.getElementById('userService').value;
-            const msg = document.getElementById('userMsg').value;
-            const phone = "917845188347"; // உங்கள் வாட்ஸ்அப் எண்
-
-            if (name.trim() === "") {
-                alert("Please enter your name!");
-                return;
-            }
-
-            const text = `*New Inquiry*%0A*Name:* ${name}%0A*Service:* ${service}%0A*Message:* ${msg}`;
-            window.open(`https://wa.me/${phone}?text=${text}`, '_blank');
-            formOverlay.style.display = 'none';
-        };
-    }
-});
+function openWhatsApp() {
+    // 1. Enter your number (e.g., 91 for India + 10 digits)
+    const phoneNumber = "7845188347"; 
+    
+    // 2. Your custom starting message
+    const message = "Hi Ajith, I'm interested in your Graphic Design services!";
+    
+    // 3. Create the direct link
+    const waUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+    
+    // 4. Open in a new tab
+    window.open(waUrl, '_blank');
+}
 </script>
 
 
@@ -886,6 +809,8 @@ document.addEventListener('DOMContentLoaded', function() {
 #timer_container, .top-left-offer {
     display: none;
 }
+
+
 </style>
 
 
@@ -1023,6 +948,12 @@ document.addEventListener('DOMContentLoaded', function() {
     setInterval(updateLogic, 1000);
     updateLogic();
 });
+
+
+
+
+
+
 </script>
     
 
@@ -1198,33 +1129,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-
-
-
-
-
-
-      
-                 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     </script>
 </div>
 
@@ -1268,11 +1172,13 @@ document.addEventListener('DOMContentLoaded', function() {
             overflow-x: auto;
             gap: 17px; 
             padding: 5px 20px 15px 20px; 
-            scrollbar-width: none;
-            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none; /* Hides scrollbar in Firefox */
+            -webkit-overflow-scrolling: touch; /* Smooth scroll for iOS */
             z-index: 1;
+            scroll-snap-type: x proximity; /* Optional: adds a snapping feel */
         }
         
+        /* Hides scrollbar for Chrome, Safari and Opera */
         .works-scroller::-webkit-scrollbar { display: none; }
 
         .work-box {
@@ -1282,7 +1188,7 @@ document.addEventListener('DOMContentLoaded', function() {
             border: 1px solid #eee;
             border-radius: 8px;
             overflow: hidden;
-            cursor: pointer;
+            scroll-snap-align: start;
         }
 
         .work-box img {
@@ -1321,57 +1227,19 @@ document.addEventListener('DOMContentLoaded', function() {
             50% { transform: scale(1.05); }
             100% { transform: scale(1); }
         }
-
-        /* LIGHTBOX */
-        #work-lightbox {
-            display: none;
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: rgba(255, 255, 255, 0.6);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            z-index: 99999;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .lightbox-content {
-            width: 82%;
-            max-width: 350px;
-            aspect-ratio: 1080 / 1350;
-            background: #fff;
-            border-radius: 12px;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
-            overflow: hidden;
-        }
-
-        .lightbox-content img { width: 100%; height: 100%; object-fit: cover; }
-
-        .lightbox-close-btn {
-            margin-top: 15px;
-            width: 40px; height: 40px;
-            background: #ff7b00; color: white;
-            border-radius: 50%; display: flex;
-            align-items: center; justify-content: center;
-            font-size: 20px; cursor: pointer;
-        }
     </style>
 
     <div class="works-scroller reveal">
-      <div class="work-box" onclick="openWork(this)">
-        <img src="Images/Artboard 1.png" alt="Artboard 1"></div>
-    <div class="work-box" onclick="openWork(this)">
-        <img src="Images/d logo moucups.jpg" alt="Logo Mockup"></div>
-        <div class="work-box" onclick="openWork(this)"><img src="https://via.placeholder.com/1080x1350?text=3"></div>
-        <div class="work-box" onclick="openWork(this)"><img src="https://via.placeholder.com/1080x1350?text=4"></div>
-        <div class="work-box" onclick="openWork(this)"><img src="https://via.placeholder.com/1080x1350?text=5"></div>
-        <div class="work-box" onclick="openWork(this)"><img src="https://via.placeholder.com/1080x1350?text=6"></div>
-        <div class="work-box" onclick="openWork(this)"><img src="https://via.placeholder.com/1080x1350?text=7"></div>
-        <div class="work-box" onclick="openWork(this)"><img src="https://via.placeholder.com/1080x1350?text=8"></div>
-        <div class="work-box" onclick="openWork(this)"><img src="https://via.placeholder.com/1080x1350?text=9"></div>
-        <div class="work-box" onclick="openWork(this)"><img src="https://via.placeholder.com/1080x1350?text=10"></div>
+        <div class="work-box"><img src="Images/Artboard 1.png" alt="Artboard 1"></div>
+        <div class="work-box"><img src="Images/d logo moucups.jpg" alt="Logo Mockup"></div>
+        <div class="work-box"><img src="https://via.placeholder.com/1080x1350?text=3"></div>
+        <div class="work-box"><img src="https://via.placeholder.com/1080x1350?text=4"></div>
+        <div class="work-box"><img src="https://via.placeholder.com/1080x1350?text=5"></div>
+        <div class="work-box"><img src="https://via.placeholder.com/1080x1350?text=6"></div>
+        <div class="work-box"><img src="https://via.placeholder.com/1080x1350?text=7"></div>
+        <div class="work-box"><img src="https://via.placeholder.com/1080x1350?text=8"></div>
+        <div class="work-box"><img src="https://via.placeholder.com/1080x1350?text=9"></div>
+        <div class="work-box"><img src="https://via.placeholder.com/1080x1350?text=10"></div>
     </div>
 
     <div class="see-more-btn-container reveal">
@@ -1379,44 +1247,22 @@ document.addEventListener('DOMContentLoaded', function() {
     </div>
 </div>
 
-<div id="work-lightbox" onclick="closeWork()">
-    <div class="lightbox-content" onclick="event.stopPropagation()">
-        <img id="lightbox-img" src="" alt="View">
-    </div>
-    <div class="lightbox-close-btn" onclick="closeWork()">✕</div>
-</div>
-
 <script>
-    // Reveal function with instant check
     function reveal() {
         var reveals = document.querySelectorAll(".reveal");
         for (var i = 0; i < reveals.length; i++) {
             var windowHeight = window.innerHeight;
             var elementTop = reveals[i].getBoundingClientRect().top;
-            var elementVisible = 50; // Trigger earlier
+            var elementVisible = 50; 
             if (elementTop < windowHeight - elementVisible) {
                 reveals[i].classList.add("active");
             }
         }
     }
 
-    // Run on scroll
     window.addEventListener("scroll", reveal);
-    // Run on page load
     window.addEventListener("DOMContentLoaded", reveal);
-    // Run after a tiny delay to catch mobile rendering
     setTimeout(reveal, 500);
-
-    function openWork(element) {
-        const fullImg = element.getElementsByTagName('img')[0].src;
-        document.getElementById('lightbox-img').src = fullImg;
-        document.getElementById('work-lightbox').style.display = 'flex';
-        document.body.style.overflow = 'hidden';
-    }
-    function closeWork() {
-        document.getElementById('work-lightbox').style.display = 'none';
-        document.body.style.overflow = 'auto';
-    }
 </script>
 
 
@@ -1590,7 +1436,30 @@ function identifyAndNavigate(productName) {
     // 3. புதிய பக்கத்திற்கு அழைத்துச் செல்லுதல்
     window.location.href = "poster-design.html";
 }
-</script>
+
+
+
+
+
+
+
+document.addEventListener("DOMContentLoaded", function() {
+    const loader = document.getElementById("preloader");
+
+    // சரியாக 2 வினாடிகள் (2000ms) கழித்து மறையும்
+    setTimeout(() => {
+        loader.classList.add("fade-out");
+        
+        // மெமரியிலிருந்து முழுமையாக நீக்க (Optional)
+        setTimeout(() => {
+            loader.style.display = "none";
+        }, 800); 
+        
+    }, 2000); 
+});
+
+
+
 
 
 
@@ -1628,4 +1497,3 @@ function identifyAndNavigate(productName) {
     <script src="script.js"></script>
 </body>
 </html>
-
