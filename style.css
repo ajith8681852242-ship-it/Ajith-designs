@@ -478,17 +478,18 @@ html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
         position: absolute !important;
         right: 10px !important; /* வலது ஓரம் */
         bottom: 10px !important; /* கீழே லாக் */
-        width: 140px !important; /* அளவு */
+        width: 150px !important; /* அளவு */
         justify-content: flex-end !important;
         z-index: 5 !important;
         background: transparent !important;
     }
 
     .banner-image img {
-        width: 140px !important; /* படத்தின் அகலத்தை உறுதி செய்கிறது */
+        width: 100px !important; /* படத்தின் அகலத்தை உறுதி செய்கிறது */
         height: auto !important;
         object-fit: contain !important;
-        margin-bottom: 25px;
+        margin-bottom: 15px;
+        margin-right: 25px;
         display: block !important;
     }
 
@@ -1850,20 +1851,20 @@ html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
 }
 
 .t-item span {
-    color: #ff8c00; /* Orange numbers from your image */
+    color: #ff0000; /* Orange numbers from your image */
     font-size: 11px;
     font-weight: 800;
     line-height: 1;
 }
 
 .t-item small {
-    color: #888;
+    color: #242424;
     font-size: 6px;
     text-transform: lowercase;
 }
 
 .t-sep {
-    color: #ff8c00;
+    color: #ff5100;
     font-size: 10px;
     font-weight: 800;
     margin-top: -6px; /* Adjusts colon alignment */
