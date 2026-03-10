@@ -94,6 +94,7 @@ html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
     /* 1. முதலில் பேனருக்கு எல்லை வகுக்கவும் (கட்டாயம் தேவை) */
     .banner {
         position: relative !important;
+     
         
     }
 
@@ -289,10 +290,6 @@ html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
 
 
 
-
-
-
-
 /* Social media icons (Laptop View) */
 
   
@@ -408,51 +405,7 @@ html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
 /* --- All Mobile Devices View --- */
 @media screen and (max-width: 992px) {
     
-    .f-box {
-        height: 50px !important;
-        min-height: 50px !important;
-        display: grid !important; /* கிரிட் முறை துல்லியமாக வேலை செய்யும் */
-        place-items: center !important;
-        padding: 2px 0 !important;
-        box-sizing: border-box !important;
-    }
 
-    .f-content {
-        display: flex !important;
-        flex-direction: column !important;
-        /* ஐகானை மட்டும் கீழே தள்ள (Move Icon Bottom) */
-        justify-content: flex-end !important; 
-        height: 100% !important;
-        gap: 0px !important; /* ஐகான் மற்றும் உரை ஒட்டி இருக்க */
-    }
-
-    .f-content i {
-        font-size: 16px !important;
-        color: #ffffff !important;
-        /* ஐகானுக்கு மேலே அதிக இடைவெளி கொடுத்து கீழே தள்ளுதல் */
-        margin-top: 5px !important; 
-        line-height: 1 !important;
-    }
-    .f-text {
-
-      margin-bottom: 0px;  
-    }
-
-    .f-title {
-        font-size: 8px !important;
-        color: #ffffff !important;
-        font-weight: bold !important;
-        text-transform: uppercase !important;
-        margin: 0 !important;
-        padding-bottom: 2px !important; /* அடியில் சிறிய இடைவெளி */
-        line-height: 1.2 !important;
-    }
-
-    /* தேவையற்ற டிஸ்கிரிப்ஷன் நீக்க */
-    .f-desc {
-        display: none !important;
-    }
-}
 
 
 
@@ -1571,18 +1524,18 @@ html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
 
     .banner-content {
 
-    margin: 25px;
+    margin: 15px;
 }
 
      
 
     /* --- 1. Banner Scaling (No Changes) --- */
     .banner {
-        height: 270px !important;
+        height: 260px !important;
     }
 
     .main-heading {
-        font-size: 1.2rem !important;
+        font-size: 1.1rem !important;
         margin-bottom: 0 !important; /* Reset margin for tighter gap */
     }
 
@@ -1594,9 +1547,9 @@ html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
     }
 
     .whatsapp-btn-live {
-        width: 130px !important;
-        height: 32px !important;
-        font-size: 0.8rem !important;
+        width: 120px !important;
+        height: 30px !important;
+        font-size: 0.7rem !important;
         margin-top: 4px !important;  /* Reduced from 6px for tighter gap */
         display: flex !important;
         justify-content: center !important;
@@ -1607,7 +1560,7 @@ html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
     /* --- 3. Social Icons: Bottom Move & Size Reduce --- */
     .social-stock-container {
         position: absolute !important;
-        margin-top: 50px;
+        margin-top: 40px;
         bottom: 12px !important;    /* Moved further down (Reduced from 20px) */
         left: 30px !important;
         display: flex !important;
@@ -1697,62 +1650,59 @@ html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
 
 
 
-
-/* --- Optimized for 400px and Upwards --- */
+/* --- Optimized for 400px and Upwards: Icon Top / Text Bottom --- */
 @media screen and (min-width: 400px) and (max-width: 992px) {
     
     .f-box {
-        height: 65px !important; /* Slightly taller for the 'Big' feel */
-        min-height: 65px !important;
-        display: grid !important;
-        place-items: center !important;
-        padding: 5px 0 !important;
+        height: 60px !important; 
+        min-height: 60px !important;
+        display: flex !important; 
+        justify-content: center !important;
+        align-items: center !important;
+        padding: 0 !important;
         box-sizing: border-box !important;
     }
 
     .f-content {
         display: flex !important;
-        /* Moves Icon to the Bottom visually */
-        flex-direction: column-reverse !important; 
+        /* FLIPPED: Icon will now be on top, Text on bottom */
+        flex-direction: column !important; 
         justify-content: center !important;
         align-items: center !important;
-        height: 100% !important;
-        gap: 2px !important;
+        height: auto !important;
+        gap: 2px !important; /* Reduced gap for a tighter look */
+        width: 100% !important;
     }
 
     .f-content i {
-        font-size: 20px !important; /* Bigger Icon for 400px+ */
+        font-size: 20px !important; 
         color: #ffffff !important;
-        margin-top: 4px !important; 
+        margin: 0 !important;
         line-height: 1 !important;
+        display: block !important;
     }
 
     .f-text {
-        margin-bottom: 0px !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        display: flex !important;
+        justify-content: center !important;
     }
 
     .f-title {
-        font-size: 10px !important; /* 'Bige' Text size */
+        font-size: 10px !important; 
         color: #ffffff !important;
-        font-weight: 800 !important; /* Extra Bold */
+        font-weight: 800 !important; 
         text-transform: uppercase !important;
         margin: 0 !important;
-        line-height: 1.2 !important;
+        line-height: 1.1 !important; /* Slightly adjusted for bottom spacing */
+        text-align: center !important;
     }
 
-    /* Keep description hidden for clean mobile look */
     .f-desc {
         display: none !important;
     }
 }
-
-
-
-
-
-
-
-
 
 
 
@@ -2127,3 +2077,55 @@ html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
 
 
 
+/* --- Ultra-Compact for 399px and Below --- */
+@media screen and (max-width: 399px) {
+    
+    .f-box {
+        height: 45px !important; /* Slimmer height for small screens */
+        min-height: 45px !important;
+        display: flex !important; 
+        flex-direction: column !important;
+        justify-content: center !important;
+        align-items: center !important;
+        padding: 0 !important;
+        box-sizing: border-box !important;
+    }
+
+    .f-content {
+        display: flex !important;
+        flex-direction: column !important; /* Text top, Icon bottom */
+        justify-content: center !important;
+        align-items: center !important;
+        height: 100% !important;
+        gap: 5px !important; /* Zero gap between text and icon */
+    }
+
+    .f-title {
+        font-size: 8px !important; /* Micro-sized text */
+        color: #ffffff !important;
+        font-weight: 800 !important; /* Heavy weight for readability */
+        text-transform: uppercase !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        line-height: 1 !important; /* Tight line height */
+    }
+
+    .f-content i {
+        font-size: 14px !important; /* Smaller icon for 399px */
+        color: #ffffff !important;
+        margin-top: 1px !important; /* Micro-adjustment to push icon slightly down */
+        line-height: 1 !important;
+        display: block !important;
+    }
+
+    .f-text {
+        margin: 0 !important;
+        padding: 0 !important;
+        display: flex !important;
+        justify-content: center !important;
+    }
+
+    .f-desc {
+        display: none !important; /* Hide description for clean look */
+    }
+}
