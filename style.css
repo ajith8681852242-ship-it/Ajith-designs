@@ -2129,3 +2129,62 @@ html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
         display: none !important; /* Hide description for clean look */
     }
 }
+
+
+
+
+
+@media screen and (max-width: 399px) {
+    /* Container: Remove extra bulk */
+    .services-pink-theme {
+        padding: 8px 4px !important;
+    }
+
+    /* 1. The Header: Small but Bold */
+    .main-title-small {
+        font-size: 12px !important;
+        margin-bottom: 6px !important;
+        border-left-width: 2px !important;
+    }
+
+    /* 2. The Grid: Perfect 3-Column Fit */
+    .row-flex-mobile {
+        display: flex !important;
+        flex-direction: row !important;
+        justify-content: space-between !important;
+        gap: 4px !important;
+    }
+
+    .service-card {
+        flex: 0 0 32% !important;
+        text-align: center !important;
+    }
+
+    /* 3. The Icon: Small Hexagon */
+    .hex-shape {
+        width: 24px !important; /* Balanced size */
+        height: 28px !important;
+        font-size: 10px !important;
+        margin: 0 auto 4px auto !important;
+    }
+
+    /* Text Adjustments */
+    .service-card h3 {
+        font-size: 8.5px !important;
+        line-height: 1 !important;
+        margin-bottom: 2px !important;
+        letter-spacing: -0.2px !important;
+    }
+
+    .service-card p {
+        font-size: 7.5px !important;
+        line-height: 1.1 !important;
+        height: 18px !important; /* Keeps row height even */
+        overflow: hidden;
+    }
+
+    .view-btn-text {
+        font-size: 7.5px !important;
+        font-weight: 700 !important;
+    }
+}
