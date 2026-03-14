@@ -249,7 +249,7 @@ function openWhatsApp() {
     bottom: 8px; 
     top: auto !important; 
     
-    z-index: 9999;
+    z-index: 1000;
     width: 100%;
     display: block;
     pointer-events: none;
@@ -521,7 +521,7 @@ function openWhatsApp() {
         <div class="box reveal">
             <div class="img-area"> 
                 <div class="top-left-offer" id="v_off1">20% OFF</div>
-               <img id="v_img1" src="Poster design box 1.jpg">
+               <img id="v_img1" src="c:\Users\ASUS\Downloads\Social Media Banner Real Estate House Property Sale Instagram Post _ PSD Free Download - Pikbest.jpg">
             </div>
             <h2 id="v_tit1">Poster <span>Design</span></h2>
             <p class="details">Size: <b id="v_siz1">1080x1350</b></p>
@@ -825,7 +825,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // --- 1. ALL FESTIVALS ---
         const FESTIVAL_LIST = [
-            { name: "VALENTINE OFFER", sM: 2, sD: 20, sH: 17, sMi: 53, eM: 2, eD: 21, eH: 11, eMi: 29 },
+            { name: "VALENTINE OFFER", sM: 3, sD: 10, sH: 21, sMi: 13, eM: 4, eD: 21, eH: 11, eMi: 29 },
             { name: "TAMIL NEW YEAR",  sM: 4, sD: 7, sH: 0, sMi: 0, eM: 4, eD: 14, eH: 23, eMi: 59 },
             { name: "ONAM SPECIAL",    sM: 8, sD: 18, sH: 0, sMi: 0, eM: 8, eD: 27, eH: 23, eMi: 59 },
             { name: "DIWALI OFFER",    sM: 10, sD: 25, sH: 0, sMi: 0, eM: 11, eD: 2, eH: 23, eMi: 59 },
@@ -1147,7 +1147,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-
 <div id="my-works-section" class="rc-main-wrapper" style="margin-top: 10px; padding: 0 0 15px 0; position: relative; width: 100%; font-family: sans-serif;">
     <div class="rc-title-area" style="padding: 0 20px;">
         <h2 style="margin-bottom: 5px; font-size: 18px; font-weight: 700;">My <span style="color: #ff7b00;">Works</span></h2>
@@ -1167,73 +1166,104 @@ document.addEventListener('DOMContentLoaded', function() {
             opacity: 1;
             transform: translateY(0);
         }
+.works-scroller {
+    display: flex;
+    overflow-x: auto;
+    /* 1. Force the Left and Right outer gaps */
+    padding-left: 3px; 
+    padding-right: 3px;
+    /* 2. Create the Center gap */
+    gap: 15px; 
+    margin-left: 20px;
+    scrollbar-width: none;
+   
+    scroll-snap-type: x mandatory;
+    width: 100%;
+    box-sizing: border-box; /* This is critical */
+}
 
-        .works-scroller {
-            display: flex;
-            overflow-x: auto;
-            gap: 17px; 
-            padding: 5px 20px 15px 20px; 
-            scrollbar-width: none; /* Hides scrollbar in Firefox */
-            -webkit-overflow-scrolling: touch; /* Smooth scroll for iOS */
-            z-index: 1;
-            scroll-snap-type: x proximity; /* Optional: adds a snapping feel */
-        }
-        
-        /* Hides scrollbar for Chrome, Safari and Opera */
-        .works-scroller::-webkit-scrollbar { display: none; }
+.works-scroller::-webkit-scrollbar { display: none; }
 
-        .work-box {
-            flex: 0 0 calc(50% - 7.5px); 
-            aspect-ratio: 1080 / 1350;
-            background: #f9f9f9;
-            border: 1px solid #eee;
-            border-radius: 8px;
-            overflow: hidden;
-            scroll-snap-align: start;
-        }
+.work-box {
+    /* 3. The Math for 2 Boxes:
+       (Total Width - (Left Gap + Center Gap + Right Gap)) / 2
+       (100% - 45px) / 2 
+    */
+    flex: 0 0 calc((100vw - 45px) / 2); 
+    
+    /* 4. This ensures the box aligns to your 15px padding, not the screen edge */
+    scroll-snap-align: start; 
+    
+    aspect-ratio: 1080 / 1350;
+    background: #f9f9f9;
+    border: 1px solid #eee;
+    border-radius: 12px;
+    overflow: hidden;
+}
 
-        .work-box img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
+/* 5. If it still touches, this invisible wall will force the gap */
+.works-scroller::before {
+    content: '';
+    flex: 0 0 0px; 
+}
+.work-box {
+    /* 4. The Math: 
+       We need space for 3 gaps of 15px each (Left + Center + Right) = 45px.
+       We divide the remaining space by 2 to show two boxes.
+    */
+    flex: 0 0 calc((100% - 45px) / 2); 
+    
+    /* 5. Snaps the box to the 15px left padding */
+    scroll-snap-align: start; 
+    
+    aspect-ratio: 1080 / 1350;
+    background: #f9f9f9;
+    border: 1px solid #eee;
+    border-radius: 3px;
+    overflow: hidden;
+}
 
-        .see-more-btn-container {
-            display: flex;
-            justify-content: flex-end;
-            padding: 5px 20px;
-            z-index: 100;
-        }
+.work-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+.see-more-btn-container {
+    display: flex;
+    /* Use 'flex-end' for right side, or 'center' for middle */
+    justify-content: flex-end; 
+    padding: 15px 20px; /* Increased top padding to 15px */
+    z-index: 100;
+    width: 100%;
+    box-sizing: border-box;
+}
 
-        .rc-small-btn {
-            background: #ff7b00;
-            color: #ffffff !important;
-            text-decoration: none !important;
-            padding: 6px 14px;
-            font-size: 10px;
-            font-weight: 800;
-            text-transform: uppercase;
-            border-radius: 4px;
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-            box-shadow: 0 3px 8px rgba(255, 123, 0, 0.4);
-            animation: pulse-small 2s infinite;
-            border: none;
-        }
+.rc-small-btn {
+    background: #ff7b00;
+    color: #ffffff !important;
+    text-decoration: none !important;
+    padding: 8px 16px; /* Slightly larger for better touch */
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    border-radius: 4px;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    
+    animation: pulse-small 2s infinite;
+    border: none;
+    cursor: pointer;
+}
 
-        @keyframes pulse-small {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
+
     </style>
 
     <div class="works-scroller reveal">
-        <div class="work-box"><img src="Images/Artboard 1.png" alt="Artboard 1"></div>
-        <div class="work-box"><img src="Images/d logo moucups.jpg" alt="Logo Mockup"></div>
-        <div class="work-box"><img src="https://via.placeholder.com/1080x1350?text=3"></div>
+        <div class="work-box"><img src="d logo moucups.jpg" alt="Artboard 1"></div>
+        <div class="work-box"><img src="bucket insta.jpg" alt="Logo Mockup"></div>
+        <div class="work-box"><img src="Vinodh Kreative\BRO MOU.jpg"></div>
         <div class="work-box"><img src="https://via.placeholder.com/1080x1350?text=4"></div>
         <div class="work-box"><img src="https://via.placeholder.com/1080x1350?text=5"></div>
         <div class="work-box"><img src="https://via.placeholder.com/1080x1350?text=6"></div>
@@ -1270,6 +1300,121 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
+<div id="motion-graphics-section" style="margin-top: 10px; width: 100%; font-family: 'Poppins', sans-serif; background: #ffffff; padding-bottom: 15px;">
+    
+    <div style="padding-left: 20px; padding-top: 5px; margin-bottom: 12px;">
+        <h3 style="margin: 0; font-size: 18px; font-weight: 700; color: #000; letter-spacing: -0.2px;">
+            Motion <span style="color: #ff7b00;">graphics</span>
+        </h3>
+        <p style="margin: 2px 0 0 0; font-size: 11px; color: #666; line-height: 1.4;">
+            Explore our professional motion design and high-quality visual storytelling portfolio.
+        </p>
+    </div>
+
+    <div class="motion-scroller">
+        <div class="vid-wrapper" onclick="playStatus(this)">
+            <video class="preview-vid" autoplay loop muted playsinline>
+                <source src="pizza making.mp4" type="video/mp4">
+            </video>
+        </div>
+
+        <div class="vid-wrapper" onclick="playStatus(this)">
+            <video class="preview-vid" autoplay loop muted playsinline>
+                <source src="HEVO FOOD APP.mp4" type="video/mp4">
+            </video>
+        </div>
+
+        <div class="vid-wrapper" onclick="playStatus(this)">
+            <video class="preview-vid" autoplay loop muted playsinline>
+                <source src="e:\videos\video3.mp4" type="video/mp4">
+            </video>
+        </div>
+
+        <div class="vid-wrapper" onclick="playStatus(this)">
+            <video class="preview-vid" autoplay loop muted playsinline>
+                <source src="e:\videos\video4.mp4" type="video/mp4">
+            </video>
+        </div>
+    </div>
+
+    <style>
+        .motion-scroller {
+            display: flex;
+            overflow-x: auto;
+            gap: 14px;
+            scrollbar-width: none;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            margin-left: 15px;
+        }
+
+        /* Margin Left Gap */
+        .motion-scroller::before {
+            content: '';
+            flex: 0 0 20px; 
+        }
+
+        .motion-scroller::after {
+            content: '';
+            flex: 0 0 20px;
+        }
+
+        .motion-scroller::-webkit-scrollbar { display: none; }
+
+        .vid-wrapper {
+            flex: 0 0 46%; 
+            scroll-snap-align: start;
+            cursor: pointer;
+        }
+
+        .preview-vid { 
+            width: 100%; 
+            aspect-ratio: 1 / 1; 
+            object-fit: cover; 
+            display: block;
+            border-radius: 7px;
+            border: 1px solid #f2f2f2;
+            background: #000;
+        }
+
+        /* Fullscreen WhatsApp Watch Type */
+        video:fullscreen { object-fit: contain; background-color: #000; }
+        video:-webkit-full-screen { object-fit: contain; background-color: #000; }
+    </style>
+
+    <script>
+    function playStatus(container) {
+        const video = container.querySelector('video');
+        video.muted = false;
+        video.currentTime = 0;
+
+        if (video.webkitEnterFullscreen) {
+            video.webkitEnterFullscreen(); 
+        } else if (video.requestFullscreen) {
+            video.requestFullscreen();
+        }
+        video.play();
+
+        const resetVideo = () => {
+            video.muted = true;
+            video.play();
+        };
+
+        video.onended = function() {
+            if (document.exitFullscreen) document.exitFullscreen();
+            else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+            resetVideo();
+        };
+
+        video.addEventListener('webkitfullscreenchange', function() {
+            if (!document.webkitFullscreenElement) resetVideo();
+        });
+        video.addEventListener('fullscreenchange', function() {
+            if (!document.fullscreenElement) resetVideo();
+        });
+    }
+    </script>
+</div>
 
 
     <div class="form-overlay" id="formOverlay">
