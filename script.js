@@ -323,58 +323,5 @@ function closeDetails() {
 
 
 
-<script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-  import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
-  const firebaseConfig = {
-    apiKey: "AIzaSyAMi09iL10cpB1DkmH8h6Nn1a_fHfKopb4",
-    authDomain: "ajith-graphics.firebaseapp.com",
-    projectId: "ajith-graphics",
-    storageBucket: "ajith-graphics.firebasestorage.app",
-    messagingSenderId: "114439633241",
-    appId: "1:114439633241:web:b6b5a6d0bf7a47cca47448",
-    measurementId: "G-J2JRLYGDHD"
-  };
-
-  const app = initializeApp(firebaseConfig);
-  const db = getFirestore(app);
-
-  window.submitFinalReview = async function() {
-    // பட்டன் கிளிக் ஆனதும் இந்த மெசேஜ் வருகிறதா என்று பாருங்கள்
-    console.log("Submit button clicked!"); 
-
-    const name = document.getElementById('rc-user-name').value;
-    const msg = document.getElementById('rc-user-msg').value;
-    
-    // உங்கள் கோடில் currentStars வேரியபிள் வெளியே இருப்பதால் அதை நேரடியாக எடுக்கலாம்
-    const rating = typeof currentStars !== 'undefined' ? currentStars : 0;
-
-    if(!name || rating === 0) {
-      alert("தயவுசெய்து பெயரையும் ஸ்டார் ரேட்டிங்கையும் வழங்கவும்!");
-      return;
-    }
-
-    try {
-      // பட்டனை தற்காலிகமாக டிஸேபிள் செய்யவும் (Double click தவிர்க்க)
-      const btn = event.target;
-      btn.innerText = "Saving...";
-      btn.disabled = true;
-
-      await addDoc(collection(db, "reviews"), {
-        name: name,
-        msg: msg,
-        rate: rating,
-        time: serverTimestamp()
-      });
-
-      alert("நன்றி அஜித்! உங்கள் ரிவியூ Firebase-ல் சேமிக்கப்பட்டது.");
-      location.reload(); 
-    } catch (e) {
-      console.error("Firebase Error: ", e);
-      alert("Error: " + e.message);
-      btn.innerText = "Submit Review";
-      btn.disabled = false;
-    }
-  };
 
