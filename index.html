@@ -1629,130 +1629,162 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 
-
-
-
-
 <script type="module">
-  // 1. அனைத்து Firebase மெத்தட்களையும் ஒரே இடத்தில் இம்போர்ட் செய்யவும்
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-  import { 
-    getFirestore, collection, query, orderBy, onSnapshot, 
-    addDoc, doc, updateDoc, serverTimestamp 
-  } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+    import { getFirestore, collection, query, orderBy, onSnapshot, addDoc, doc, updateDoc, deleteDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
-  const firebaseConfig = {
-    apiKey: "AIzaSyAMi09iL10cpB1DkmH8h6Nn1a_fHfKopb4",
-    authDomain: "ajith-graphics.firebaseapp.com",
-    projectId: "ajith-graphics",
-    storageBucket: "ajith-graphics.firebasestorage.app",
-    messagingSenderId: "114439633241",
-    appId: "1:114439633241:web:b6b5a6d0bf7a47cca47448",
-    measurementId: "G-J2JRLYGDHD"
-  };
+    const firebaseConfig = {
+        apiKey: "AIzaSyAMi09iL10cpB1DkmH8h6Nn1a_fHfKopb4",
+        authDomain: "ajith-graphics.firebaseapp.com",
+        projectId: "ajith-graphics",
+        storageBucket: "ajith-graphics.firebasestorage.app",
+        messagingSenderId: "114439633241",
+        appId: "1:114439633241:web:b6b5a6d0bf7a47cca47448",
+        measurementId: "G-J2JRLYGDHD"
+    };
 
-  const app = initializeApp(firebaseConfig);
-  const db = getFirestore(app);
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
 
-  // --- Firebase-ல் இருந்து டேட்டாவை எடுத்து 'allReviews' பட்டியலில் சேர்க்கும் பகுதி ---
-  const q = query(collection(db, "reviews"), orderBy("time", "desc"));
-  
-  onSnapshot(q, (snapshot) => {
-    // window.allReviews என்று கொடுத்தால் மட்டுமே வெளியே உள்ள refreshUI-க்கு இது கிடைக்கும்
+    // --- Global Variables (அனைத்து மொபைல்களிலும் தெரிய உதவும்) ---
     window.allReviews = []; 
-    snapshot.forEach((doc) => {
-      const data = doc.data();
-      window.allReviews.push({
-        id: doc.id, 
-        ...data,
-        time: data.time ? data.time.toMillis() : Date.now()
-      });
-    });
-    if (typeof refreshUI === "function") refreshUI();
-  });
+    window.activeIdx = -1;
+    window.currentStars = 0;
+    const statusMap = { 
+        1: {t:"Poor", c:"#e74c3c"}, 2: {t:"Average", c:"#f39c12"}, 
+        3: {t:"Ok", c:"#3498db"}, 4: {t:"Good", c:"#2980b9"}, 5: {t:"Excellent", c:"#1b5e20"}
+    };
 
-  <script type="module">
-  // 1. அனைத்து Firebase மெத்தட்களையும் ஒரே இடத்தில் இம்போர்ட் செய்யவும்
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-  import { 
-    getFirestore, collection, query, orderBy, onSnapshot, 
-    addDoc, doc, updateDoc, serverTimestamp 
-  } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
-
-  const firebaseConfig = {
-    apiKey: "AIzaSyAMi09iL10cpB1DkmH8h6Nn1a_fHfKopb4",
-    authDomain: "ajith-graphics.firebaseapp.com",
-    projectId: "ajith-graphics",
-    storageBucket: "ajith-graphics.firebasestorage.app",
-    messagingSenderId: "114439633241",
-    appId: "1:114439633241:web:b6b5a6d0bf7a47cca47448",
-    measurementId: "G-J2JRLYGDHD"
-  };
-
-  const app = initializeApp(firebaseConfig);
-  const db = getFirestore(app);
-
-  // --- Firebase-ல் இருந்து டேட்டாவை எடுத்து 'allReviews' பட்டியலில் சேர்க்கும் பகுதி ---
-  const q = query(collection(db, "reviews"), orderBy("time", "desc"));
-  
-  onSnapshot(q, (snapshot) => {
-    // window.allReviews என்று கொடுத்தால் மட்டுமே வெளியே உள்ள refreshUI-க்கு இது கிடைக்கும்
-    window.allReviews = []; 
-    snapshot.forEach((doc) => {
-      const data = doc.data();
-      window.allReviews.push({
-        id: doc.id, 
-        ...data,
-        time: data.time ? data.time.toMillis() : Date.now()
-      });
-    });
-    if (typeof refreshUI === "function") refreshUI();
-  });
-
-  // --- சேமிக்கும் மற்றும் எடிட் செய்யும் பங்க்ஷன் ---
-  window.submitFinalReview = async function() {
-    const name = document.getElementById('rc-user-name').value.trim();
-    const msg = document.getElementById('rc-user-msg').value.trim();
-    
-    // currentStars என்பது வெளியே உள்ள குளோபல் வேரியபிள்
-    if (!name || window.currentStars === 0) {
-      alert("Please fill all details!");
-      return;
+    // --- Time Ago Function ---
+    window.timeAgo = function(date) {
+        const seconds = Math.floor((new Date() - date) / 1000);
+        if (seconds < 60) return "Just now";
+        const intervals = { year: 31536000, month: 2592000, week: 604800, day: 86400, hour: 3600, minute: 60 };
+        for (const [unit, secondsInUnit] of Object.entries(intervals)) {
+            const interval = Math.floor(seconds / secondsInUnit);
+            if (interval >= 1) return interval + " " + unit + (interval > 1 ? "s" : "") + " ago";
+        }
     }
 
-    try {
-      if (window.activeIdx > -1) {
-        // --- எடிட் மோடு (Edit Mode) ---
-        const reviewId = window.allReviews[window.activeIdx].id;
-        const reviewRef = doc(db, "reviews", reviewId);
+    // --- UI Refresh Function ---
+    window.refreshUI = function() {
+        const list = document.getElementById('rc-feed');
+        if(!list) return;
+        list.innerHTML = '';
+        let counts = {1:0, 2:0, 3:0, 4:0, 5:0};
         
-        await updateDoc(reviewRef, {
-          name: name,
-          msg: msg,
-          rate: window.currentStars,
-          // 'time' மாற்ற வேண்டாம், அது பழைய நேரமாகவே இருக்கட்டும்
-          editTime: serverTimestamp() 
+        window.allReviews.forEach((rev, i) => {
+            counts[rev.rate]++;
+            list.innerHTML += `
+                <div class="rc-card" onclick="if(event.detail===3){window.activeIdx=${i}; document.getElementById('rc-secret-menu').style.display='flex';}">
+                    <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px;">
+                        <div class="rc-avatar"><svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg></div>
+                        <div style="display:flex; flex-direction:column; line-height:1.2;">
+                            <span style="font-weight:800; font-size:10px;">${rev.name}</span>
+                            <span style="font-size:8.5px; color:#bbb; margin-top:3px;">${window.timeAgo(rev.time)}</span>
+                        </div>
+                    </div>
+                    <div class="rc-rating-line">
+                        <span class="rc-stars">${"★".repeat(rev.rate)}${"☆".repeat(5-rev.rate)}</span>
+                        <span class="rc-card-num">${rev.rate}.0</span>
+                        <span class="rc-card-status" style="color:${statusMap[rev.rate].c}">${statusMap[rev.rate].t}</span>
+                    </div>
+                    <p class="rc-para">${rev.msg}</p>
+                </div>`;
         });
-        alert("Review Updated!");
-      } else {
-        // --- புதிய ரிவியூ மோடு (New Mode) ---
-        await addDoc(collection(db, "reviews"), {
-          name: name,
-          msg: msg,
-          rate: window.currentStars,
-          time: serverTimestamp()
-        });
-        alert("Review Submitted!");
-      }
 
-      closeReviewPopup();
-      window.activeIdx = -1; // எடிட் முடிந்ததும் ரீசெட் செய்யவும்
-    } catch (e) {
-      console.error("Error: ", e);
-      alert("Error saving: " + e.message);
+        // Update Stats
+        let maxCount = -1, dominantStar = 5;
+        for(let i=5; i>=1; i--) {
+            if(counts[i] >= maxCount) { maxCount = counts[i]; dominantStar = i; }
+            const bar = document.getElementById('rc-p-'+i);
+            if(bar) bar.style.width = Math.min(counts[i], 100) + "%";
+        }
+        document.getElementById('rc-top-value').innerText = dominantStar + ".0";
+        document.getElementById('rc-top-stars-display').innerText = "★".repeat(dominantStar) + "☆".repeat(5-dominantStar);
+        const statusEl = document.getElementById('rc-top-status');
+        statusEl.innerText = statusMap[dominantStar].t;
+        statusEl.style.color = statusMap[dominantStar].c;
     }
-  };
+
+    // --- Firebase Real-time Listener ---
+    const q = query(collection(db, "reviews"), orderBy("time", "desc"));
+    onSnapshot(q, (snapshot) => {
+        window.allReviews = [];
+        snapshot.forEach((doc) => {
+            const data = doc.data();
+            window.allReviews.push({
+                id: doc.id,
+                ...data,
+                time: data.time ? data.time.toMillis() : Date.now()
+            });
+        });
+        window.refreshUI();
+    });
+
+    // --- Popup Functions ---
+    window.openReviewPopup = () => { window.activeIdx = -1; document.getElementById('rc-form-overlay').style.display = 'flex'; };
+    window.closeReviewPopup = () => { document.getElementById('rc-form-overlay').style.display = 'none'; window.resetForm(); };
+    window.resetForm = () => { 
+        document.getElementById('rc-user-name').value=""; 
+        document.getElementById('rc-user-msg').value=""; 
+        window.setReviewStars(0); 
+    };
+    
+    window.setReviewStars = (n) => { 
+        window.currentStars = n; 
+        document.querySelectorAll('#rc-star-trigger span').forEach((s, i) => s.classList.toggle('selected', i < n)); 
+        const typeText = document.getElementById('rc-form-type-text');
+        if(n > 0) { typeText.innerText = statusMap[n].t; typeText.style.color = statusMap[n].c; } else { typeText.innerText = ""; }
+    };
+
+    // --- Final Submit Function (Button Work) ---
+    window.submitFinalReview = async function() {
+        const name = document.getElementById('rc-user-name').value.trim();
+        const msg = document.getElementById('rc-user-msg').value.trim();
+
+        if (!name || window.currentStars === 0) {
+            alert("Please enter Name and Star Rating!");
+            return;
+        }
+
+        try {
+            if (window.activeIdx > -1) {
+                const reviewId = window.allReviews[window.activeIdx].id;
+                await updateDoc(doc(db, "reviews", reviewId), {
+                    name, msg, rate: window.currentStars, editTime: serverTimestamp()
+                });
+            } else {
+                await addDoc(collection(db, "reviews"), {
+                    name, msg, rate: window.currentStars, time: serverTimestamp()
+                });
+            }
+            window.closeReviewPopup();
+            window.activeIdx = -1;
+        } catch (e) { console.error("Error saving:", e); }
+    };
+
+    window.deleteReview = async function() {
+        if (window.activeIdx > -1) {
+            try {
+                const reviewId = window.allReviews[window.activeIdx].id;
+                await deleteDoc(doc(db, "reviews", reviewId));
+                document.getElementById('rc-secret-menu').style.display = 'none';
+                window.activeIdx = -1;
+            } catch (e) { console.error("Error deleting:", e); }
+        }
+    };
+
+    window.editReview = function() {
+        const rev = window.allReviews[window.activeIdx];
+        document.getElementById('rc-user-name').value = rev.name;
+        document.getElementById('rc-user-msg').value = rev.msg;
+        window.setReviewStars(rev.rate);
+        document.getElementById('rc-secret-menu').style.display = 'none';
+        document.getElementById('rc-form-overlay').style.display = 'flex';
+    };
 </script>
+
 
 
 
