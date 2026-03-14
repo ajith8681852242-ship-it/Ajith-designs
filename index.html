@@ -1102,6 +1102,18 @@ document.addEventListener('DOMContentLoaded', function() {
             if(n > 0) { typeText.innerText = statusMap[n].t; typeText.style.color = statusMap[n].c; } else { typeText.innerText = ""; }
         }
 
+       
+        function openReviewPopup() { activeIdx = -1; document.getElementById('rc-form-overlay').style.display = 'flex'; }
+        function closeReviewPopup() { document.getElementById('rc-form-overlay').style.display = 'none'; resetForm(); }
+        function resetForm() { document.getElementById('rc-user-name').value=""; document.getElementById('rc-user-msg').value=""; setReviewStars(0); }
+        
+        function setReviewStars(n) { 
+            currentStars = n; 
+            document.querySelectorAll('#rc-star-trigger span').forEach((s, i) => s.classList.toggle('selected', i < n)); 
+            const typeText = document.getElementById('rc-form-type-text');
+            if(n > 0) { typeText.innerText = statusMap[n].t; typeText.style.color = statusMap[n].c; } else { typeText.innerText = ""; }
+        }
+
         function submitFinalReview() {
             const name = document.getElementById('rc-user-name').value;
             if(!name || currentStars === 0) return;
@@ -1123,7 +1135,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
         document.addEventListener('DOMContentLoaded', refreshUI);
         setInterval(refreshUI, 60000); 
-
 
 
 
