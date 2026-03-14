@@ -323,7 +323,6 @@ function closeDetails() {
 
 
 
-
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
   import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
@@ -341,28 +340,41 @@ function closeDetails() {
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
 
-  // window. சேர்த்து எழுதினால் தான் பட்டன் கிளிக் வேலை செய்யும்
   window.submitFinalReview = async function() {
+    // பட்டன் கிளிக் ஆனதும் இந்த மெசேஜ் வருகிறதா என்று பாருங்கள்
+    console.log("Submit button clicked!"); 
+
     const name = document.getElementById('rc-user-name').value;
     const msg = document.getElementById('rc-user-msg').value;
+    
+    // உங்கள் கோடில் currentStars வேரியபிள் வெளியே இருப்பதால் அதை நேரடியாக எடுக்கலாம்
+    const rating = typeof currentStars !== 'undefined' ? currentStars : 0;
 
-    if(!name) {
-      alert("தயவுசெய்து பெயரை உள்ளிடவும்!");
+    if(!name || rating === 0) {
+      alert("தயவுசெய்து பெயரையும் ஸ்டார் ரேட்டிங்கையும் வழங்கவும்!");
       return;
     }
 
     try {
+      // பட்டனை தற்காலிகமாக டிஸேபிள் செய்யவும் (Double click தவிர்க்க)
+      const btn = event.target;
+      btn.innerText = "Saving...";
+      btn.disabled = true;
+
       await addDoc(collection(db, "reviews"), {
         name: name,
         msg: msg,
-        rate: typeof currentStars !== 'undefined' ? currentStars : 5,
+        rate: rating,
         time: serverTimestamp()
       });
-      alert("நன்றி! உங்கள் ரிவியூ சேமிக்கப்பட்டது.");
-      location.reload(); // பேஜை ரீலோடு செய்ய
+
+      alert("நன்றி அஜித்! உங்கள் ரிவியூ Firebase-ல் சேமிக்கப்பட்டது.");
+      location.reload(); 
     } catch (e) {
-      console.error("Error: ", e);
-      alert("பிழை ஏற்பட்டது! இன்டர்நெட் செக் செய்யவும்.");
+      console.error("Firebase Error: ", e);
+      alert("Error: " + e.message);
+      btn.innerText = "Submit Review";
+      btn.disabled = false;
     }
   };
-</script>
+
