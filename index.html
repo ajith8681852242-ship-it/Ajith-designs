@@ -1641,44 +1641,52 @@ document.addEventListener("DOMContentLoaded", function() {
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
 
-  // 3. முக்கியமான பங்க்ஷன்
-  window.submitFinalReview = async function() {
-    // HTML-ல் உள்ள Input-களில் இருந்து மதிப்புகளை எடுத்தல்
+ // window. சேர்த்து எழுதினால் தான் HTML-ல் உள்ள onclick="submitFinalReview()" வேலை செய்யும்
+window.submitFinalReview = async function() {
+    console.log("Submit process started...");
+
     const nameInput = document.getElementById('rc-user-name');
     const msgInput = document.getElementById('rc-user-msg');
     
     const name = nameInput ? nameInput.value.trim() : "";
     const msg = msgInput ? msgInput.value.trim() : "";
     
-    // ரேட்டிங் (Global Variable currentStars-ல் இருந்து எடுக்கிறது)
-    const rating = (typeof currentStars !== 'undefined' && currentStars > 0) ? currentStars : 5;
+    // currentStars உங்கள் குளோபல் வேரியபிளில் இருந்து எடுக்கப்படும்
+    const rate = window.currentStars || 5; 
 
     if (!name) {
-      alert("தயவுசெய்து உங்கள் பெயரை உள்ளிடவும்!");
-      return;
+        alert("தயவுசெய்து உங்கள் பெயரை உள்ளிடவும்!");
+        return;
     }
 
     try {
-      console.log("Saving to Firebase...");
-      
-      // Firebase Database-ல் சேமித்தல்
-      await addDoc(collection(db, "reviews"), {
-        name: name,
-        msg: msg,
-        rate: rating,
-        time: serverTimestamp() // சர்வர் நேரத்தை அப்படியே எடுத்துக்கொள்ளும்
-      });
+        // பட்டனை தற்காலிகமாக டிஸேபிள் செய்ய
+        const btn = event.target;
+        const originalText = btn.innerText;
+        btn.innerText = "Saving...";
+        btn.disabled = true;
 
-      alert("அஜித், உங்கள் ரிவியூ வெற்றிகரமாக சேமிக்கப்பட்டது!");
-      
-      // பக்கத்தை புதுப்பித்தல்
-      location.reload(); 
-      
-    } catch (error) {
-      console.error("Firebase error details:", error);
-      alert("பிழை: " + error.message + "\nஇன்டர்நெட் அல்லது Firebase Rules-ஐ சரிபார்க்கவும்.");
+        // Firebase-ல் சேமித்தல்
+        await addDoc(collection(db, "reviews"), {
+            name: name,
+            msg: msg,
+            rate: rate,
+            time: serverTimestamp()
+        });
+
+        alert("நன்றி அஜித்! ரிவியூ வெற்றிகரமாக சேமிக்கப்பட்டது.");
+        location.reload(); 
+
+    } catch (e) {
+        console.error("Firebase Error: ", e);
+        alert("பிழை ஏற்பட்டது: " + e.message);
+        // எரர் வந்தால் பட்டனை மீண்டும் பழைய நிலைக்கு கொண்டு வர
+        if (event.target) {
+            event.target.innerText = "Submit Review";
+            event.target.disabled = false;
+        }
     }
-  };
+};
 </script>
 
 
