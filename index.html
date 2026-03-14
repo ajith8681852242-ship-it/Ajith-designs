@@ -1027,10 +1027,8 @@ document.addEventListener('DOMContentLoaded', function() {
             3: {t:"Ok", c:"#3498db"}, 4: {t:"Good", c:"#2980b9"}, 5: {t:"Excellent", c:"#1b5e20"}
         };
 
-        let allReviews = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [
-            { name: "Leslie A.", msg: "Perfect quality!", rate: 5, time: Date.now() - 60000 },
-            { name: "Dianne R.", msg: "Very good product.", rate: 4, time: Date.now() - 120000 }
-        ];
+       let allReviews = [];
+
 
         // Updated timeAgo function to handle all units
         function timeAgo(date) {
@@ -1102,18 +1100,6 @@ document.addEventListener('DOMContentLoaded', function() {
             if(n > 0) { typeText.innerText = statusMap[n].t; typeText.style.color = statusMap[n].c; } else { typeText.innerText = ""; }
         }
 
-       
-        function openReviewPopup() { activeIdx = -1; document.getElementById('rc-form-overlay').style.display = 'flex'; }
-        function closeReviewPopup() { document.getElementById('rc-form-overlay').style.display = 'none'; resetForm(); }
-        function resetForm() { document.getElementById('rc-user-name').value=""; document.getElementById('rc-user-msg').value=""; setReviewStars(0); }
-        
-        function setReviewStars(n) { 
-            currentStars = n; 
-            document.querySelectorAll('#rc-star-trigger span').forEach((s, i) => s.classList.toggle('selected', i < n)); 
-            const typeText = document.getElementById('rc-form-type-text');
-            if(n > 0) { typeText.innerText = statusMap[n].t; typeText.style.color = statusMap[n].c; } else { typeText.innerText = ""; }
-        }
-
         function submitFinalReview() {
             const name = document.getElementById('rc-user-name').value;
             if(!name || currentStars === 0) return;
@@ -1135,6 +1121,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         document.addEventListener('DOMContentLoaded', refreshUI);
         setInterval(refreshUI, 60000); 
+
 
 
 
@@ -1428,6 +1415,19 @@ document.addEventListener('DOMContentLoaded', function() {
 </div>
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
     <div class="form-overlay" id="formOverlay">
         <div class="contact-form">
             <span class="close-btn" id="closeForm">&times;</span>
@@ -1634,11 +1634,13 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 <script type="module">
-  // 1. Firebase Modules-ஐ லோடு செய்தல்
+  // 1. அனைத்து Firebase மெத்தட்களையும் ஒரே இடத்தில் இம்போர்ட் செய்யவும்
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-  import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+  import { 
+    getFirestore, collection, query, orderBy, onSnapshot, 
+    addDoc, doc, updateDoc, serverTimestamp 
+  } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
-  // 2. உங்கள் Config (இதில் மாற்றம் செய்ய வேண்டாம், இது சரியாக உள்ளது)
   const firebaseConfig = {
     apiKey: "AIzaSyAMi09iL10cpB1DkmH8h6Nn1a_fHfKopb4",
     authDomain: "ajith-graphics.firebaseapp.com",
@@ -1652,53 +1654,106 @@ document.addEventListener("DOMContentLoaded", function() {
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
 
- // window. சேர்த்து எழுதினால் தான் HTML-ல் உள்ள onclick="submitFinalReview()" வேலை செய்யும்
-window.submitFinalReview = async function() {
-    console.log("Submit process started...");
+  // --- Firebase-ல் இருந்து டேட்டாவை எடுத்து 'allReviews' பட்டியலில் சேர்க்கும் பகுதி ---
+  const q = query(collection(db, "reviews"), orderBy("time", "desc"));
+  
+  onSnapshot(q, (snapshot) => {
+    // window.allReviews என்று கொடுத்தால் மட்டுமே வெளியே உள்ள refreshUI-க்கு இது கிடைக்கும்
+    window.allReviews = []; 
+    snapshot.forEach((doc) => {
+      const data = doc.data();
+      window.allReviews.push({
+        id: doc.id, 
+        ...data,
+        time: data.time ? data.time.toMillis() : Date.now()
+      });
+    });
+    if (typeof refreshUI === "function") refreshUI();
+  });
 
-    const nameInput = document.getElementById('rc-user-name');
-    const msgInput = document.getElementById('rc-user-msg');
-    
-    const name = nameInput ? nameInput.value.trim() : "";
-    const msg = msgInput ? msgInput.value.trim() : "";
-    
-    // currentStars உங்கள் குளோபல் வேரியபிளில் இருந்து எடுக்கப்படும்
-    const rate = window.currentStars || 5; 
+  <script type="module">
+  // 1. அனைத்து Firebase மெத்தட்களையும் ஒரே இடத்தில் இம்போர்ட் செய்யவும்
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+  import { 
+    getFirestore, collection, query, orderBy, onSnapshot, 
+    addDoc, doc, updateDoc, serverTimestamp 
+  } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
-    if (!name) {
-        alert("தயவுசெய்து உங்கள் பெயரை உள்ளிடவும்!");
-        return;
+  const firebaseConfig = {
+    apiKey: "AIzaSyAMi09iL10cpB1DkmH8h6Nn1a_fHfKopb4",
+    authDomain: "ajith-graphics.firebaseapp.com",
+    projectId: "ajith-graphics",
+    storageBucket: "ajith-graphics.firebasestorage.app",
+    messagingSenderId: "114439633241",
+    appId: "1:114439633241:web:b6b5a6d0bf7a47cca47448",
+    measurementId: "G-J2JRLYGDHD"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  // --- Firebase-ல் இருந்து டேட்டாவை எடுத்து 'allReviews' பட்டியலில் சேர்க்கும் பகுதி ---
+  const q = query(collection(db, "reviews"), orderBy("time", "desc"));
+  
+  onSnapshot(q, (snapshot) => {
+    // window.allReviews என்று கொடுத்தால் மட்டுமே வெளியே உள்ள refreshUI-க்கு இது கிடைக்கும்
+    window.allReviews = []; 
+    snapshot.forEach((doc) => {
+      const data = doc.data();
+      window.allReviews.push({
+        id: doc.id, 
+        ...data,
+        time: data.time ? data.time.toMillis() : Date.now()
+      });
+    });
+    if (typeof refreshUI === "function") refreshUI();
+  });
+
+  // --- சேமிக்கும் மற்றும் எடிட் செய்யும் பங்க்ஷன் ---
+  window.submitFinalReview = async function() {
+    const name = document.getElementById('rc-user-name').value.trim();
+    const msg = document.getElementById('rc-user-msg').value.trim();
+    
+    // currentStars என்பது வெளியே உள்ள குளோபல் வேரியபிள்
+    if (!name || window.currentStars === 0) {
+      alert("Please fill all details!");
+      return;
     }
 
     try {
-        // பட்டனை தற்காலிகமாக டிஸேபிள் செய்ய
-        const btn = event.target;
-        const originalText = btn.innerText;
-        btn.innerText = "Saving...";
-        btn.disabled = true;
-
-        // Firebase-ல் சேமித்தல்
-        await addDoc(collection(db, "reviews"), {
-            name: name,
-            msg: msg,
-            rate: rate,
-            time: serverTimestamp()
+      if (window.activeIdx > -1) {
+        // --- எடிட் மோடு (Edit Mode) ---
+        const reviewId = window.allReviews[window.activeIdx].id;
+        const reviewRef = doc(db, "reviews", reviewId);
+        
+        await updateDoc(reviewRef, {
+          name: name,
+          msg: msg,
+          rate: window.currentStars,
+          // 'time' மாற்ற வேண்டாம், அது பழைய நேரமாகவே இருக்கட்டும்
+          editTime: serverTimestamp() 
         });
+        alert("Review Updated!");
+      } else {
+        // --- புதிய ரிவியூ மோடு (New Mode) ---
+        await addDoc(collection(db, "reviews"), {
+          name: name,
+          msg: msg,
+          rate: window.currentStars,
+          time: serverTimestamp()
+        });
+        alert("Review Submitted!");
+      }
 
-        alert("நன்றி அஜித்! ரிவியூ வெற்றிகரமாக சேமிக்கப்பட்டது.");
-        location.reload(); 
-
+      closeReviewPopup();
+      window.activeIdx = -1; // எடிட் முடிந்ததும் ரீசெட் செய்யவும்
     } catch (e) {
-        console.error("Firebase Error: ", e);
-        alert("பிழை ஏற்பட்டது: " + e.message);
-        // எரர் வந்தால் பட்டனை மீண்டும் பழைய நிலைக்கு கொண்டு வர
-        if (event.target) {
-            event.target.innerText = "Submit Review";
-            event.target.disabled = false;
-        }
+      console.error("Error: ", e);
+      alert("Error saving: " + e.message);
     }
-};
+  };
 </script>
+
 
 
 
