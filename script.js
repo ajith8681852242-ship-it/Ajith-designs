@@ -297,3 +297,72 @@ document.querySelectorAll('.rev-card').forEach(card => {
 
 
 
+
+
+
+
+
+        function openDetails(title, description) {
+    // 1. Set the text content
+    document.getElementById('detailTitle').innerText = title;
+    document.getElementById('detailDesc').innerText = description;
+    
+    // 2. Show the white page
+    const page = document.getElementById('detailPage');
+    page.style.display = 'flex';
+    
+    // Optional: Add a smooth fade-in effect
+    page.style.opacity = '0';
+    setTimeout(() => { page.style.opacity = '1'; page.style.transition = '0.3s'; }, 10);
+}
+
+function closeDetails() {
+    // Hide the white page
+    document.getElementById('detailPage').style.display = 'none';
+}
+
+
+
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-app.js";
+  import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyAMi09iL10cpB1DkmH8h6Nn1a_fHfKopb4",
+    authDomain: "ajith-graphics.firebaseapp.com",
+    projectId: "ajith-graphics",
+    storageBucket: "ajith-graphics.firebasestorage.app",
+    messagingSenderId: "114439633241",
+    appId: "1:114439633241:web:b6b5a6d0bf7a47cca47448",
+    measurementId: "G-J2JRLYGDHD"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  // Initialize Firestore
+  const db = getFirestore(app);
+
+  // மெசேஜை சேமிக்கும் பங்க்ஷன்
+  window.saveReview = async function() {
+    // உங்கள் HTML Input id-க்கு ஏற்ப மாற்றவும் (உதாரணமாக id="userMsg")
+    const messageInput = document.getElementById('userMsg');
+    const messageValue = messageInput.value;
+
+    if (messageValue === "") {
+        alert("தயவுசெய்து ஏதாவது டைப் செய்யவும்!");
+        return;
+    }
+
+    try {
+      const docRef = await addDoc(collection(db, "reviews"), {
+        message: messageValue,
+        timestamp: new Date()
+      });
+      alert("தகவல் சேமிக்கப்பட்டது! ID: " + docRef.id);
+      messageInput.value = ""; // பாக்ஸை காலியாக்க
+    } catch (e) {
+      console.error("Error adding document: ", e);
+      alert("சேமிப்பதில் பிழை! Firestore Rules-ஐ செக் செய்யவும்.");
+    }
+  }
