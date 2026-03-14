@@ -1633,6 +1633,7 @@ document.addEventListener("DOMContentLoaded", function() {
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
     import { getFirestore, collection, query, orderBy, onSnapshot, addDoc, doc, updateDoc, deleteDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
+    // Firebase Configuration
     const firebaseConfig = {
         apiKey: "AIzaSyAMi09iL10cpB1DkmH8h6Nn1a_fHfKopb4",
         authDomain: "ajith-graphics.firebaseapp.com",
@@ -1646,7 +1647,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
 
-    // --- Global Variables (அனைத்து மொபைல்களிலும் தெரிய உதவும்) ---
+    // --- Global Variables ---
     window.allReviews = []; 
     window.activeIdx = -1;
     window.currentStars = 0;
@@ -1693,18 +1694,28 @@ document.addEventListener("DOMContentLoaded", function() {
                 </div>`;
         });
 
-        // Update Stats
+        // --- Color Bar Fix (100 Reviews target) ---
         let maxCount = -1, dominantStar = 5;
+        const targetLimit = 100; // 100 ரிவியூ வந்தால்தான் பார் 100% நிறையும்
+
         for(let i=5; i>=1; i--) {
             if(counts[i] >= maxCount) { maxCount = counts[i]; dominantStar = i; }
+            
             const bar = document.getElementById('rc-p-'+i);
-            if(bar) bar.style.width = Math.min(counts[i], 100) + "%";
+            if(bar) {
+                // 1 ரிவியூ இருந்தால் 1% மட்டுமே காட்டும்
+                let percentage = (counts[i] / targetLimit) * 100;
+                bar.style.width = Math.min(percentage, 100) + "%";
+            }
         }
+
         document.getElementById('rc-top-value').innerText = dominantStar + ".0";
         document.getElementById('rc-top-stars-display').innerText = "★".repeat(dominantStar) + "☆".repeat(5-dominantStar);
         const statusEl = document.getElementById('rc-top-status');
-        statusEl.innerText = statusMap[dominantStar].t;
-        statusEl.style.color = statusMap[dominantStar].c;
+        if(statusEl) {
+            statusEl.innerText = statusMap[dominantStar].t;
+            statusEl.style.color = statusMap[dominantStar].c;
+        }
     }
 
     // --- Firebase Real-time Listener ---
@@ -1722,7 +1733,7 @@ document.addEventListener("DOMContentLoaded", function() {
         window.refreshUI();
     });
 
-    // --- Popup Functions ---
+    // --- Form & Actions ---
     window.openReviewPopup = () => { window.activeIdx = -1; document.getElementById('rc-form-overlay').style.display = 'flex'; };
     window.closeReviewPopup = () => { document.getElementById('rc-form-overlay').style.display = 'none'; window.resetForm(); };
     window.resetForm = () => { 
@@ -1738,15 +1749,10 @@ document.addEventListener("DOMContentLoaded", function() {
         if(n > 0) { typeText.innerText = statusMap[n].t; typeText.style.color = statusMap[n].c; } else { typeText.innerText = ""; }
     };
 
-    // --- Final Submit Function (Button Work) ---
     window.submitFinalReview = async function() {
         const name = document.getElementById('rc-user-name').value.trim();
         const msg = document.getElementById('rc-user-msg').value.trim();
-
-        if (!name || window.currentStars === 0) {
-            alert("Please enter Name and Star Rating!");
-            return;
-        }
+        if (!name || window.currentStars === 0) return;
 
         try {
             if (window.activeIdx > -1) {
@@ -1761,7 +1767,7 @@ document.addEventListener("DOMContentLoaded", function() {
             }
             window.closeReviewPopup();
             window.activeIdx = -1;
-        } catch (e) { console.error("Error saving:", e); }
+        } catch (e) { console.error("Error:", e); }
     };
 
     window.deleteReview = async function() {
@@ -1771,7 +1777,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 await deleteDoc(doc(db, "reviews", reviewId));
                 document.getElementById('rc-secret-menu').style.display = 'none';
                 window.activeIdx = -1;
-            } catch (e) { console.error("Error deleting:", e); }
+            } catch (e) { console.error(e); }
         }
     };
 
@@ -1784,8 +1790,6 @@ document.addEventListener("DOMContentLoaded", function() {
         document.getElementById('rc-form-overlay').style.display = 'flex';
     };
 </script>
-
-
 
 
 
