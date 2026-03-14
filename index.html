@@ -1622,7 +1622,64 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 
+<script type="module">
+  // 1. Firebase Modules-ஐ லோடு செய்தல்
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+  import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
+  // 2. உங்கள் Config (இதில் மாற்றம் செய்ய வேண்டாம், இது சரியாக உள்ளது)
+  const firebaseConfig = {
+    apiKey: "AIzaSyAMi09iL10cpB1DkmH8h6Nn1a_fHfKopb4",
+    authDomain: "ajith-graphics.firebaseapp.com",
+    projectId: "ajith-graphics",
+    storageBucket: "ajith-graphics.firebasestorage.app",
+    messagingSenderId: "114439633241",
+    appId: "1:114439633241:web:b6b5a6d0bf7a47cca47448",
+    measurementId: "G-J2JRLYGDHD"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  // 3. முக்கியமான பங்க்ஷன்
+  window.submitFinalReview = async function() {
+    // HTML-ல் உள்ள Input-களில் இருந்து மதிப்புகளை எடுத்தல்
+    const nameInput = document.getElementById('rc-user-name');
+    const msgInput = document.getElementById('rc-user-msg');
+    
+    const name = nameInput ? nameInput.value.trim() : "";
+    const msg = msgInput ? msgInput.value.trim() : "";
+    
+    // ரேட்டிங் (Global Variable currentStars-ல் இருந்து எடுக்கிறது)
+    const rating = (typeof currentStars !== 'undefined' && currentStars > 0) ? currentStars : 5;
+
+    if (!name) {
+      alert("தயவுசெய்து உங்கள் பெயரை உள்ளிடவும்!");
+      return;
+    }
+
+    try {
+      console.log("Saving to Firebase...");
+      
+      // Firebase Database-ல் சேமித்தல்
+      await addDoc(collection(db, "reviews"), {
+        name: name,
+        msg: msg,
+        rate: rating,
+        time: serverTimestamp() // சர்வர் நேரத்தை அப்படியே எடுத்துக்கொள்ளும்
+      });
+
+      alert("அஜித், உங்கள் ரிவியூ வெற்றிகரமாக சேமிக்கப்பட்டது!");
+      
+      // பக்கத்தை புதுப்பித்தல்
+      location.reload(); 
+      
+    } catch (error) {
+      console.error("Firebase error details:", error);
+      alert("பிழை: " + error.message + "\nஇன்டர்நெட் அல்லது Firebase Rules-ஐ சரிபார்க்கவும்.");
+    }
+  };
+</script>
 
 
 
