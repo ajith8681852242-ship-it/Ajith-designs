@@ -325,8 +325,8 @@ function closeDetails() {
 
 
 <script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-app.js";
-  import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-firestore.js";
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+  import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
   const firebaseConfig = {
     apiKey: "AIzaSyAMi09iL10cpB1DkmH8h6Nn1a_fHfKopb4",
@@ -338,31 +338,31 @@ function closeDetails() {
     measurementId: "G-J2JRLYGDHD"
   };
 
-  // Initialize Firebase
   const app = initializeApp(firebaseConfig);
-  // Initialize Firestore
   const db = getFirestore(app);
 
-  // மெசேஜை சேமிக்கும் பங்க்ஷன்
-  window.saveReview = async function() {
-    // உங்கள் HTML Input id-க்கு ஏற்ப மாற்றவும் (உதாரணமாக id="userMsg")
-    const messageInput = document.getElementById('userMsg');
-    const messageValue = messageInput.value;
+  // window. சேர்த்து எழுதினால் தான் பட்டன் கிளிக் வேலை செய்யும்
+  window.submitFinalReview = async function() {
+    const name = document.getElementById('rc-user-name').value;
+    const msg = document.getElementById('rc-user-msg').value;
 
-    if (messageValue === "") {
-        alert("தயவுசெய்து ஏதாவது டைப் செய்யவும்!");
-        return;
+    if(!name) {
+      alert("தயவுசெய்து பெயரை உள்ளிடவும்!");
+      return;
     }
 
     try {
-      const docRef = await addDoc(collection(db, "reviews"), {
-        message: messageValue,
-        timestamp: new Date()
+      await addDoc(collection(db, "reviews"), {
+        name: name,
+        msg: msg,
+        rate: typeof currentStars !== 'undefined' ? currentStars : 5,
+        time: serverTimestamp()
       });
-      alert("தகவல் சேமிக்கப்பட்டது! ID: " + docRef.id);
-      messageInput.value = ""; // பாக்ஸை காலியாக்க
+      alert("நன்றி! உங்கள் ரிவியூ சேமிக்கப்பட்டது.");
+      location.reload(); // பேஜை ரீலோடு செய்ய
     } catch (e) {
-      console.error("Error adding document: ", e);
-      alert("சேமிப்பதில் பிழை! Firestore Rules-ஐ செக் செய்யவும்.");
+      console.error("Error: ", e);
+      alert("பிழை ஏற்பட்டது! இன்டர்நெட் செக் செய்யவும்.");
     }
-  }
+  };
+</script>
