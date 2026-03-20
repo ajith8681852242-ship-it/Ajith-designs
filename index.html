@@ -952,12 +952,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-
-
-
 </script>
     
-
 
 
 
@@ -1139,10 +1135,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-
-
-
-
 <div id="my-works-section" class="rc-main-wrapper" style="margin-top: 10px; padding: 0 0 15px 0; position: relative; width: 100%; font-family: sans-serif;">
     <div class="rc-title-area" style="padding: 0 20px;">
         <h2 style="margin-bottom: 5px; font-size: 18px; font-weight: 700;">My <span style="color: #ff7b00;">Works</span></h2>
@@ -1296,126 +1288,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-<div id="motion-graphics-section" style="margin-top: 10px; width: 100%; font-family: 'Poppins', sans-serif; background: #ffffff; padding-bottom: 15px;">
-    
-    <div style="padding-left: 20px; padding-top: 5px; margin-bottom: 12px;">
-        <h3 style="margin: 0; font-size: 18px; font-weight: 700; color: #000; letter-spacing: -0.2px;">
-            Motion <span style="color: #ff7b00;">graphics</span>
-        </h3>
-        <p style="margin: 2px 0 0 0; font-size: 11px; color: #666; line-height: 1.4;">
-            Explore our professional motion design and high-quality visual storytelling portfolio.
-        </p>
-    </div>
-
-    <div class="motion-scroller">
-        <div class="vid-wrapper" onclick="playStatus(this)">
-            <video class="preview-vid" autoplay loop muted playsinline>
-                <source src="pizza making.mp4" type="video/mp4">
-            </video>
-        </div>
-
-        <div class="vid-wrapper" onclick="playStatus(this)">
-            <video class="preview-vid" autoplay loop muted playsinline>
-                <source src="HEVO FOOD APP.mp4" type="video/mp4">
-            </video>
-        </div>
-
-        <div class="vid-wrapper" onclick="playStatus(this)">
-            <video class="preview-vid" autoplay loop muted playsinline>
-                <source src="e:\videos\video3.mp4" type="video/mp4">
-            </video>
-        </div>
-
-        <div class="vid-wrapper" onclick="playStatus(this)">
-            <video class="preview-vid" autoplay loop muted playsinline>
-                <source src="e:\videos\video4.mp4" type="video/mp4">
-            </video>
-        </div>
-    </div>
-
-    <style>
-        .motion-scroller {
-            display: flex;
-            overflow-x: auto;
-            gap: 14px;
-            scrollbar-width: none;
-            scroll-snap-type: x mandatory;
-            -webkit-overflow-scrolling: touch;
-            margin-left: 15px;
-        }
-
-        /* Margin Left Gap */
-        .motion-scroller::before {
-            content: '';
-            flex: 0 0 20px; 
-        }
-
-        .motion-scroller::after {
-            content: '';
-            flex: 0 0 20px;
-        }
-
-        .motion-scroller::-webkit-scrollbar { display: none; }
-
-        .vid-wrapper {
-            flex: 0 0 46%; 
-            scroll-snap-align: start;
-            cursor: pointer;
-        }
-
-        .preview-vid { 
-            width: 100%; 
-            aspect-ratio: 1 / 1; 
-            object-fit: cover; 
-            display: block;
-            border-radius: 7px;
-            border: 1px solid #f2f2f2;
-            background: #000;
-        }
-
-        /* Fullscreen WhatsApp Watch Type */
-        video:fullscreen { object-fit: contain; background-color: #000; }
-        video:-webkit-full-screen { object-fit: contain; background-color: #000; }
-    </style>
-
-    <script>
-    function playStatus(container) {
-        const video = container.querySelector('video');
-        video.muted = false;
-        video.currentTime = 0;
-
-        if (video.webkitEnterFullscreen) {
-            video.webkitEnterFullscreen(); 
-        } else if (video.requestFullscreen) {
-            video.requestFullscreen();
-        }
-        video.play();
-
-        const resetVideo = () => {
-            video.muted = true;
-            video.play();
-        };
-
-        video.onended = function() {
-            if (document.exitFullscreen) document.exitFullscreen();
-            else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
-            resetVideo();
-        };
-
-        video.addEventListener('webkitfullscreenchange', function() {
-            if (!document.webkitFullscreenElement) resetVideo();
-        });
-        video.addEventListener('fullscreenchange', function() {
-            if (!document.fullscreenElement) resetVideo();
-        });
-    }
-    </script>
-</div>
-
-
-
-
-
 
 
 
@@ -1487,6 +1359,11 @@ document.addEventListener('DOMContentLoaded', function() {
             </p>
         </div>
     </footer>
+
+
+
+
+    
 
 
 
@@ -1614,25 +1491,7 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 
-
-
-
-
-
 </script>
-
-
-
-
-
-   
-
-
-
-
-
-
-
 
 
 
