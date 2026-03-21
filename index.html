@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="ta">
 <head>
-    <meta charset="UTF-8"
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Ajith Designs | Graphics Designer</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -957,8 +957,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-
-
 <div class="rc-header">
     <div class="rc-title-area">
         <h2>Our Customer <span>Reviews</span></h2>
@@ -985,77 +983,84 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <div class="rc-scroller" id="rc-feed"></div>
 
-<div id="rc-form-overlay" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); align-items:center; justify-content:center; z-index:9999;">
-    <div class="rc-modal-content" style="background:white; padding:20px; border-radius:10px; width:90%; max-width:400px; text-align:center;">
+<div id="rc-secret-menu" onclick="this.style.display='none'">
+    <div class="rc-modal-content" onclick="event.stopPropagation()">
+        <h4 style="margin:0 0 15px;">Review Options</h4>
+        <button class="rc-menu-btn" style="background:#ff7b00; color:white;" onclick="editReview()">Edit Review</button>
+        <button class="rc-menu-btn" style="background:#e74c3c; color:white;" onclick="deleteReview()">Delete Review</button>
+        <button class="rc-menu-btn" style="background:#eee;" onclick="document.getElementById('rc-secret-menu').style.display='none'">Cancel</button>
+    </div>
+</div>
+
+<div id="rc-form-overlay">
+    <div class="rc-modal-content">
         <h3 style="margin:0 0 10px;">Submit Review</h3>
-        <input type="text" id="rc-user-name" class="rc-input-field" placeholder="Full Name" style="width:100%; padding:10px; margin-bottom:10px; border:1px solid #ddd; border-radius:5px;">
-        <div class="rc-star-selector" id="rc-star-trigger" style="font-size:35px; cursor:pointer; margin-bottom:10px; color:#ccc;">
+        <input type="text" id="rc-user-name" class="rc-input-field" placeholder="Full Name">
+        <div class="rc-star-selector" id="rc-star-trigger">
             <span onclick="setReviewStars(1)">★</span><span onclick="setReviewStars(2)">★</span><span onclick="setReviewStars(3)">★</span><span onclick="setReviewStars(4)">★</span><span onclick="setReviewStars(5)">★</span>
         </div>
-        <div id="rc-form-type-text" style="font-weight:bold; margin-bottom:10px;"></div> 
-        <textarea id="rc-user-msg" class="rc-input-field" rows="3" placeholder="Write your feedback..." style="width:100%; padding:10px; border:1px solid #ddd; border-radius:5px;"></textarea>
-        <button class="rc-small-btn" style="width:100%; margin-top:10px; padding:12px;" onclick="submitFinalReview()">Submit Review</button>
-        <p onclick="closeReviewPopup()" style="color:#e74c3c; cursor:pointer; font-size:12px; margin-top:15px; font-weight:bold;">CANCEL</p>
+        <div id="rc-form-type-text"></div> 
+        <textarea id="rc-user-msg" class="rc-input-field" rows="3" placeholder="Write your feedback..."></textarea>
+        <button class="rc-small-btn" style="width:100%;" onclick="submitFinalReview()">Submit Review</button>
+        <p onclick="closeReviewPopup()" style="color:#bbb; cursor:pointer; font-size:10px; margin-top:15px; font-weight:bold;">CANCEL</p>
     </div>
 </div>
 
 <script>
-    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyGEghOc-jl5Oln1SGJwmuUR9zvbQP4Z8JvOlJiszDJL7ednzKMTOSTmdd3e-itE20b0Q/exec';
     const STORAGE_KEY = 'clint_v29_color_fix';
+    // உங்கள் Google Script URL இங்கே இணைக்கப்பட்டுள்ளது
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyGEghOc-jl5Oln1SGJwmuUR9zvbQP4Z8JvOlJiszDJL7ednzKMTOSTmdd3e-itE20b0Q/exec';
     
-    let currentStars = 0;
-    let allReviews = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+    let currentStars = 0, activeIdx = -1;
     const statusMap = { 
         1: {t:"Poor", c:"#e74c3c"}, 2: {t:"Average", c:"#f39c12"}, 
         3: {t:"Ok", c:"#3498db"}, 4: {t:"Good", c:"#2980b9"}, 5: {t:"Excellent", c:"#1b5e20"}
     };
 
+    let allReviews = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+
     function timeAgo(date) {
-        if(!date) return "Just now";
         const seconds = Math.floor((new Date() - new Date(date)) / 1000);
         if (seconds < 60) return "Just now";
-        const intervals = { year: 31536000, month: 2592000, day: 86400, hour: 3600, minute: 60 };
-        for (const [unit, sec] of Object.entries(intervals)) {
-            const interval = Math.floor(seconds / sec);
+        const intervals = { year: 31536000, month: 2592000, week: 604800, day: 86400, hour: 3600, minute: 60 };
+        for (const [unit, secondsInUnit] of Object.entries(intervals)) {
+            const interval = Math.floor(seconds / secondsInUnit);
             if (interval >= 1) return interval + " " + unit + (interval > 1 ? "s" : "") + " ago";
         }
-        return "Just now";
     }
 
     function refreshUI() {
         const list = document.getElementById('rc-feed');
-        if(!list) return;
         list.innerHTML = '';
         let counts = {1:0, 2:0, 3:0, 4:0, 5:0};
         
-        allReviews.forEach((rev) => {
+        allReviews.forEach((rev, i) => {
             counts[rev.rate]++;
-            list.innerHTML += `<div class="rc-card" style="border:1px solid #eee; padding:15px; margin-bottom:10px; border-radius:8px; font-family:sans-serif;">
+            list.innerHTML += `<div class="rc-card" onclick="if(event.detail===3){activeIdx=${i}; document.getElementById('rc-secret-menu').style.display='flex';}">
                 <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px;">
-                    <div style="width:25px; height:25px; background:#1b5e20; border-radius:50%; color:white; display:flex; align-items:center; justify-content:center; font-size:10px;">${rev.name.charAt(0)}</div>
+                    <div class="rc-avatar"><svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg></div>
                     <div style="display:flex; flex-direction:column; line-height:1.2;">
-                        <span style="font-weight:800; font-size:11px;">${rev.name}</span>
-                        <span style="font-size:9px; color:#bbb;">${timeAgo(rev.time)}</span>
+                        <span style="font-weight:800; font-size:10px;">${rev.name}</span>
+                        <span style="font-size:8.5px; color:#bbb; margin-top:3px;">${timeAgo(rev.time)}</span>
                     </div>
                 </div>
-                <div style="margin:5px 0;">
-                    <span style="color:#f39c12; font-size:14px;">${"★".repeat(rev.rate)}${"☆".repeat(5-rev.rate)}</span>
-                    <span style="font-size:10px; color:${statusMap[rev.rate].c}; font-weight:bold; margin-left:5px;">${statusMap[rev.rate].t}</span>
+                <div class="rc-rating-line">
+                    <span class="rc-stars">${"★".repeat(rev.rate)}${"☆".repeat(5-rev.rate)}</span>
+                    <span class="rc-card-num" style="font-size:10px;">${rev.rate}.0</span>
+                    <span class="rc-card-status" style="color:${statusMap[rev.rate].c}">${statusMap[rev.rate].t}</span>
                 </div>
-                <p style="font-size:12px; color:#444; margin-top:5px; line-height:1.4;">${rev.msg}</p>
+                <p class="rc-para" style="font-size:10px; line-height:1.4; color:#555;">${rev.msg}</p>
             </div>`;
         });
 
-        // Stats Calculation
-        let total = allReviews.length || 1;
-        let dominantStar = 5;
-        let maxC = -1;
-        for(let i=1; i<=5; i++) {
+        let maxCount = -1, dominantStar = 5;
+        for(let i=5; i>=1; i--) {
+            if(counts[i] >= maxCount) { maxCount = counts[i]; dominantStar = i; }
+            let barPercentage = (counts[i] / 100) * 100;
             const bar = document.getElementById('rc-p-'+i);
-            if(bar) bar.style.width = ((counts[i] / allReviews.length) * 100 || 0) + "%";
-            if(counts[i] >= maxC) { maxC = counts[i]; dominantStar = i; }
+            if(bar) bar.style.width = Math.min(barPercentage, 100) + "%";
         }
-        
+
         if(allReviews.length > 0) {
             document.getElementById('rc-top-value').innerText = dominantStar + ".0";
             document.getElementById('rc-top-stars-display').innerText = "★".repeat(dominantStar) + "☆".repeat(5-dominantStar);
@@ -1065,63 +1070,76 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    function loadFromCloud() {
-        fetch(SCRIPT_URL)
-            .then(res => res.json())
-            .then(data => {
-                if(data && Array.isArray(data)) {
-                    allReviews = data;
-                    localStorage.setItem(STORAGE_KEY, JSON.stringify(allReviews));
-                    refreshUI();
-                }
-            })
-            .catch(e => console.log("Fetch error"));
+    function openReviewPopup() { activeIdx = -1; document.getElementById('rc-form-overlay').style.display = 'flex'; }
+    function closeReviewPopup() { document.getElementById('rc-form-overlay').style.display = 'none'; resetForm(); }
+    function resetForm() { document.getElementById('rc-user-name').value=""; document.getElementById('rc-user-msg').value=""; setReviewStars(0); }
+    
+    function setReviewStars(n) { 
+        currentStars = n; 
+        document.querySelectorAll('#rc-star-trigger span').forEach((s, i) => {
+            s.style.color = i < n ? "#f39c12" : "#ccc";
+        }); 
+        const typeText = document.getElementById('rc-form-type-text');
+        if(n > 0) { typeText.innerText = statusMap[n].t; typeText.style.color = statusMap[n].c; } else { typeText.innerText = ""; }
     }
 
     function submitFinalReview() {
         const name = document.getElementById('rc-user-name').value;
         const msg = document.getElementById('rc-user-msg').value;
-        if(!name || currentStars === 0) { alert("Please fill name and stars"); return; }
+        if(!name || currentStars === 0) return;
 
-        const rev = { name, msg, rate: currentStars, time: new Date().toISOString() };
+        const rev = { name, msg, rate: currentStars, time: Date.now() };
 
-        // Post to Google Sheet
-        fetch(SCRIPT_URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify(rev) })
-        .then(() => {
-            setTimeout(loadFromCloud, 2000);
-        });
+        // 1. Local Storage-இல் சேமிக்க
+        if(activeIdx > -1) allReviews[activeIdx] = rev; else allReviews.unshift(rev);
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(allReviews));
 
-        allReviews.unshift(rev);
-        refreshUI();
-        closeReviewPopup();
+        // 2. Google Sheets-க்கு அனுப்ப (Saving to Cloud)
+        fetch(SCRIPT_URL, {
+            method: 'POST',
+            mode: 'no-cors',
+            body: JSON.stringify(rev)
+        }).then(() => console.log("Saved to Google Sheet"));
+
+        refreshUI(); closeReviewPopup();
     }
 
-    // Modal Control Functions
-    function openReviewPopup() { 
-        document.getElementById('rc-form-overlay').style.display = 'flex'; 
-    }
-    
-    function closeReviewPopup() { 
-        document.getElementById('rc-form-overlay').style.display = 'none'; 
-        document.getElementById('rc-user-name').value = "";
-        document.getElementById('rc-user-msg').value = "";
-        setReviewStars(0);
-    }
-
-    function setReviewStars(n) { 
-        currentStars = n; 
-        document.querySelectorAll('#rc-star-trigger span').forEach((s, i) => {
-            s.style.color = i < n ? "#f39c12" : "#ccc";
-        });
-        const txt = document.getElementById('rc-form-type-text');
-        if(n > 0) { txt.innerText = statusMap[n].t; txt.style.color = statusMap[n].c; }
-    }
-
-    document.addEventListener('DOMContentLoaded', () => { 
+    function deleteReview() { 
+        allReviews.splice(activeIdx, 1); 
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(allReviews)); 
         refreshUI(); 
-        loadFromCloud(); 
+        document.getElementById('rc-secret-menu').style.display = 'none'; 
+    }
+
+    function editReview() {
+        const rev = allReviews[activeIdx];
+        document.getElementById('rc-user-name').value = rev.name;
+        document.getElementById('rc-user-msg').value = rev.msg;
+        setReviewStars(rev.rate);
+        document.getElementById('rc-secret-menu').style.display = 'none';
+        document.getElementById('rc-form-overlay').style.display = 'flex';
+    }
+
+    document.addEventListener('DOMContentLoaded', refreshUI);
+
+
+    function doGet() {
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+  var data = sheet.getDataRange().getValues();
+  var result = [];
+  for (var i = 1; i < data.length; i++) {
+    result.push({
+      name: data[i][0],
+      rate: data[i][1],
+      msg: data[i][2],
+      time: data[i][3]
     });
+  }
+  return ContentService.createTextOutput(JSON.stringify(result.reverse()))
+    .setMimeType(ContentService.MimeType.JSON);
+}
 </script>
+
 </div>
 
 
