@@ -959,140 +959,170 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-
-<div class="rc-header" style="font-family: sans-serif; padding: 15px; border-bottom: 1px solid #eee;">
+<div class="rc-header">
     <div class="rc-title-area">
-        <h2 style="margin:0;">Our Customer <span style="color:#1b5e20;">Reviews</span></h2>
-        <p style="color:#666; font-size:13px;">"Thank you for sharing your review."</p>
-        <button onclick="openReviewPopup()" style="background:#1b5e20; color:white; border:none; padding:10px 20px; border-radius:5px; cursor:pointer; font-weight:bold;">Write a Review</button>
+        <h2>Our Customer <span>Reviews</span></h2>
+        <p class="rc-sub-text">"Thank you for sharing your review."</p>
+        <button class="rc-small-btn" onclick="openReviewPopup()">write a review</button>
+    </div>
+    <div class="rc-stats-side">
+        <div class="rc-score-row">
+            <p class="rc-big-num" id="rc-top-value">5.0</p>
+            <div style="text-align: left;">
+                <div class="rc-top-stars" id="rc-top-stars-display">★★★★★</div>
+                <span class="rc-avg-tag" id="rc-top-status">Excellent</span>
+            </div>
+        </div>
+        <div class="rc-bar-stack">
+            <div class="rc-bar-row"><span>5</span><div class="rc-progress-bg"><div id="rc-p-5" class="rc-progress-fill"></div></div></div>
+            <div class="rc-bar-row"><span>4</span><div class="rc-progress-bg"><div id="rc-p-4" class="rc-progress-fill"></div></div></div>
+            <div class="rc-bar-row"><span>3</span><div class="rc-progress-bg"><div id="rc-p-3" class="rc-progress-fill"></div></div></div>
+            <div class="rc-bar-row"><span>2</span><div class="rc-progress-bg"><div id="rc-p-2" class="rc-progress-fill"></div></div></div>
+            <div class="rc-bar-row"><span>1</span><div class="rc-progress-bg"><div id="rc-p-1" class="rc-progress-fill"></div></div></div>
+        </div>
     </div>
 </div>
 
-<div id="rc-feed" style="padding:10px;"></div>
+<div class="rc-scroller" id="rc-feed"></div>
 
 <div id="rc-form-overlay" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); align-items:center; justify-content:center; z-index:9999;">
-    <div style="background:white; padding:20px; border-radius:10px; width:90%; max-width:400px; text-align:center; font-family: sans-serif;">
-        <h3 style="margin-top:0;">Submit Review</h3>
-        <input type="text" id="rc-user-name" style="width:100%; padding:10px; margin-bottom:10px; border:1px solid #ddd; border-radius:5px; box-sizing:border-box;" placeholder="Full Name">
-        
-        <div id="rc-star-trigger" style="font-size:30px; margin-bottom:10px; cursor:pointer; color:#ccc;">
+    <div class="rc-modal-content" style="background:white; padding:20px; border-radius:10px; width:90%; max-width:400px; text-align:center;">
+        <h3 style="margin:0 0 10px;">Submit Review</h3>
+        <input type="text" id="rc-user-name" class="rc-input-field" placeholder="Full Name" style="width:100%; padding:10px; margin-bottom:10px; border:1px solid #ddd; border-radius:5px;">
+        <div class="rc-star-selector" id="rc-star-trigger" style="font-size:35px; cursor:pointer; margin-bottom:10px; color:#ccc;">
             <span onclick="setReviewStars(1)">★</span><span onclick="setReviewStars(2)">★</span><span onclick="setReviewStars(3)">★</span><span onclick="setReviewStars(4)">★</span><span onclick="setReviewStars(5)">★</span>
         </div>
-        
-        <textarea id="rc-user-msg" style="width:100%; padding:10px; border:1px solid #ddd; border-radius:5px; box-sizing:border-box;" rows="3" placeholder="Write your feedback..."></textarea>
-        
-        <button onclick="submitFinalReview()" style="width:100%; background:#1b5e20; color:white; border:none; padding:12px; margin-top:10px; border-radius:5px; font-weight:bold; cursor:pointer;">Submit Review</button>
-        <p onclick="closeReviewPopup()" style="color:#888; cursor:pointer; margin-top:15px; font-size:12px;">CANCEL</p>
+        <div id="rc-form-type-text" style="font-weight:bold; margin-bottom:10px;"></div> 
+        <textarea id="rc-user-msg" class="rc-input-field" rows="3" placeholder="Write your feedback..." style="width:100%; padding:10px; border:1px solid #ddd; border-radius:5px;"></textarea>
+        <button class="rc-small-btn" style="width:100%; margin-top:10px; padding:12px;" onclick="submitFinalReview()">Submit Review</button>
+        <p onclick="closeReviewPopup()" style="color:#e74c3c; cursor:pointer; font-size:12px; margin-top:15px; font-weight:bold;">CANCEL</p>
     </div>
 </div>
 
 <script>
-    // உங்கள் Google Script URL-ஐ இங்கே மாற்றவும்
     const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyGEghOc-jl5Oln1SGJwmuUR9zvbQP4Z8JvOlJiszDJL7ednzKMTOSTmdd3e-itE20b0Q/exec';
-    const STORAGE_KEY = 'global_reviews_data';
+    const STORAGE_KEY = 'clint_v29_color_fix';
     
     let currentStars = 0;
     let allReviews = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+    const statusMap = { 
+        1: {t:"Poor", c:"#e74c3c"}, 2: {t:"Average", c:"#f39c12"}, 
+        3: {t:"Ok", c:"#3498db"}, 4: {t:"Good", c:"#2980b9"}, 5: {t:"Excellent", c:"#1b5e20"}
+    };
 
-    // 1. Popup திறக்க
-    function openReviewPopup() {
-        document.getElementById('rc-form-overlay').style.display = 'flex';
-    }
-
-    // 2. Popup மூட
-    function closeReviewPopup() {
-        document.getElementById('rc-form-overlay').style.display = 'none';
-        document.getElementById('rc-user-name').value = "";
-        document.getElementById('rc-user-msg').value = "";
-        setReviewStars(0);
-    }
-
-    // 3. ஸ்டார் ரேட்டிங் செட் செய்ய
-    function setReviewStars(n) {
-        currentStars = n;
-        const stars = document.querySelectorAll('#rc-star-trigger span');
-        stars.forEach((s, i) => {
-            s.style.color = i < n ? "#f39c12" : "#ccc";
-        });
-    }
-
-    // 4. நேரம் கணக்கிட (Time ago)
     function timeAgo(date) {
         if(!date) return "Just now";
         const seconds = Math.floor((new Date() - new Date(date)) / 1000);
         if (seconds < 60) return "Just now";
         const intervals = { year: 31536000, month: 2592000, day: 86400, hour: 3600, minute: 60 };
-        for (const [unit, secondsInUnit] of Object.entries(intervals)) {
-            const interval = Math.floor(seconds / secondsInUnit);
+        for (const [unit, sec] of Object.entries(intervals)) {
+            const interval = Math.floor(seconds / sec);
             if (interval >= 1) return interval + " " + unit + (interval > 1 ? "s" : "") + " ago";
+        }
+        return "Just now";
+    }
+
+    function refreshUI() {
+        const list = document.getElementById('rc-feed');
+        if(!list) return;
+        list.innerHTML = '';
+        let counts = {1:0, 2:0, 3:0, 4:0, 5:0};
+        
+        allReviews.forEach((rev) => {
+            counts[rev.rate]++;
+            list.innerHTML += `<div class="rc-card" style="border:1px solid #eee; padding:15px; margin-bottom:10px; border-radius:8px; font-family:sans-serif;">
+                <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px;">
+                    <div style="width:25px; height:25px; background:#1b5e20; border-radius:50%; color:white; display:flex; align-items:center; justify-content:center; font-size:10px;">${rev.name.charAt(0)}</div>
+                    <div style="display:flex; flex-direction:column; line-height:1.2;">
+                        <span style="font-weight:800; font-size:11px;">${rev.name}</span>
+                        <span style="font-size:9px; color:#bbb;">${timeAgo(rev.time)}</span>
+                    </div>
+                </div>
+                <div style="margin:5px 0;">
+                    <span style="color:#f39c12; font-size:14px;">${"★".repeat(rev.rate)}${"☆".repeat(5-rev.rate)}</span>
+                    <span style="font-size:10px; color:${statusMap[rev.rate].c}; font-weight:bold; margin-left:5px;">${statusMap[rev.rate].t}</span>
+                </div>
+                <p style="font-size:12px; color:#444; margin-top:5px; line-height:1.4;">${rev.msg}</p>
+            </div>`;
+        });
+
+        // Stats Calculation
+        let total = allReviews.length || 1;
+        let dominantStar = 5;
+        let maxC = -1;
+        for(let i=1; i<=5; i++) {
+            const bar = document.getElementById('rc-p-'+i);
+            if(bar) bar.style.width = ((counts[i] / allReviews.length) * 100 || 0) + "%";
+            if(counts[i] >= maxC) { maxC = counts[i]; dominantStar = i; }
+        }
+        
+        if(allReviews.length > 0) {
+            document.getElementById('rc-top-value').innerText = dominantStar + ".0";
+            document.getElementById('rc-top-stars-display').innerText = "★".repeat(dominantStar) + "☆".repeat(5-dominantStar);
+            const statusEl = document.getElementById('rc-top-status');
+            statusEl.innerText = statusMap[dominantStar].t;
+            statusEl.style.color = statusMap[dominantStar].c;
         }
     }
 
-    // 5. ஸ்கிரீனில் ரிவியூக்களைக் காட்ட
-    function refreshUI() {
-        const list = document.getElementById('rc-feed');
-        list.innerHTML = '';
-        allReviews.forEach(rev => {
-            list.innerHTML += `
-                <div style="border:1px solid #eee; padding:15px; margin-bottom:10px; border-radius:8px; font-family:sans-serif; background:#fff; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
-                    <div style="display:flex; justify-content:space-between; align-items:center;">
-                        <b style="font-size:14px; color:#333;">${rev.name}</b>
-                        <span style="font-size:10px; color:#999;">${timeAgo(rev.time)}</span>
-                    </div>
-                    <div style="color:#f39c12; font-size:12px; margin:5px 0;">${"★".repeat(rev.rate)}${"☆".repeat(5-rev.rate)}</div>
-                    <p style="font-size:13px; color:#555; margin:0; line-height:1.4;">${rev.msg}</p>
-                </div>`;
-        });
-    }
-
-    // 6. Cloud-லிருந்து ரிவியூக்களை எடுக்க (எல்லா மொபைலிலும் தெரிய இது முக்கியம்)
     function loadFromCloud() {
         fetch(SCRIPT_URL)
             .then(res => res.json())
             .then(data => {
-                if(data && data.length > 0) {
+                if(data && Array.isArray(data)) {
                     allReviews = data;
                     localStorage.setItem(STORAGE_KEY, JSON.stringify(allReviews));
                     refreshUI();
                 }
             })
-            .catch(err => console.log("Sync Error"));
+            .catch(e => console.log("Fetch error"));
     }
 
-    // 7. ரிவியூவைச் சேமிக்க
     function submitFinalReview() {
         const name = document.getElementById('rc-user-name').value;
         const msg = document.getElementById('rc-user-msg').value;
-        
-        if(!name || currentStars === 0) {
-            alert("Please provide Name and Stars!");
-            return;
-        }
+        if(!name || currentStars === 0) { alert("Please fill name and stars"); return; }
 
         const rev = { name, msg, rate: currentStars, time: new Date().toISOString() };
 
-        // Cloud-க்கு அனுப்புதல்
-        fetch(SCRIPT_URL, {
-            method: 'POST',
-            mode: 'no-cors',
-            body: JSON.stringify(rev)
-        }).then(() => {
-            console.log("Sent to Sheet");
-            setTimeout(loadFromCloud, 2000); // 2 செகண்ட் கழித்து Cloud-லிருந்து டேட்டாவை புதுப்பிக்கும்
+        // Post to Google Sheet
+        fetch(SCRIPT_URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify(rev) })
+        .then(() => {
+            setTimeout(loadFromCloud, 2000);
         });
 
-        // உடனே ஸ்கிரீனில் காட்ட
         allReviews.unshift(rev);
         refreshUI();
         closeReviewPopup();
     }
 
-    // பக்கம் திறக்கும் போது ரன் ஆகும்
-    document.addEventListener('DOMContentLoaded', () => {
-        refreshUI();
-        loadFromCloud();
+    // Modal Control Functions
+    function openReviewPopup() { 
+        document.getElementById('rc-form-overlay').style.display = 'flex'; 
+    }
+    
+    function closeReviewPopup() { 
+        document.getElementById('rc-form-overlay').style.display = 'none'; 
+        document.getElementById('rc-user-name').value = "";
+        document.getElementById('rc-user-msg').value = "";
+        setReviewStars(0);
+    }
+
+    function setReviewStars(n) { 
+        currentStars = n; 
+        document.querySelectorAll('#rc-star-trigger span').forEach((s, i) => {
+            s.style.color = i < n ? "#f39c12" : "#ccc";
+        });
+        const txt = document.getElementById('rc-form-type-text');
+        if(n > 0) { txt.innerText = statusMap[n].t; txt.style.color = statusMap[n].c; }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => { 
+        refreshUI(); 
+        loadFromCloud(); 
     });
 </script>
+</div>
 
 
 
