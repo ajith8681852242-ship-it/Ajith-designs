@@ -1008,7 +1008,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <script>
     const STORAGE_KEY = 'clint_v29_color_fix';
-    // உங்கள் Google Script URL இங்கே இணைக்கப்பட்டுள்ளது
     const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyGEghOc-jl5Oln1SGJwmuUR9zvbQP4Z8JvOlJiszDJL7ednzKMTOSTmdd3e-itE20b0Q/exec';
     
     let currentStars = 0, activeIdx = -1;
@@ -1018,6 +1017,22 @@ document.addEventListener('DOMContentLoaded', function() {
     };
 
     let allReviews = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+
+    // --- NEW: FETCH FROM ALL MOBILES CODE ---
+    async function fetchCloudReviews() {
+        try {
+            const response = await fetch(SCRIPT_URL);
+            const cloudData = await response.json();
+            if (cloudData && cloudData.length > 0) {
+                allReviews = cloudData;
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(allReviews));
+                refreshUI();
+            }
+        } catch (error) {
+            console.log("Viewing local data only. Cloud sync pending.");
+        }
+    }
+    // ---------------------------------------
 
     function timeAgo(date) {
         const seconds = Math.floor((new Date() - new Date(date)) / 1000);
@@ -1090,16 +1105,17 @@ document.addEventListener('DOMContentLoaded', function() {
 
         const rev = { name, msg, rate: currentStars, time: Date.now() };
 
-        // 1. Local Storage-இல் சேமிக்க
         if(activeIdx > -1) allReviews[activeIdx] = rev; else allReviews.unshift(rev);
         localStorage.setItem(STORAGE_KEY, JSON.stringify(allReviews));
 
-        // 2. Google Sheets-க்கு அனுப்ப (Saving to Cloud)
         fetch(SCRIPT_URL, {
             method: 'POST',
             mode: 'no-cors',
             body: JSON.stringify(rev)
-        }).then(() => console.log("Saved to Google Sheet"));
+        }).then(() => {
+            console.log("Saved to Google Sheet");
+            fetchCloudReviews(); // Refresh cloud data after submitting
+        });
 
         refreshUI(); closeReviewPopup();
     }
@@ -1120,11 +1136,14 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('rc-form-overlay').style.display = 'flex';
     }
 
-    document.addEventListener('DOMContentLoaded', refreshUI);
+    // Call fetchCloudReviews so it loads data for everyone
+    document.addEventListener('DOMContentLoaded', () => {
+        refreshUI();
+        fetchCloudReviews();
+    });
 </script>
 
 </div>
-
 
 
 
