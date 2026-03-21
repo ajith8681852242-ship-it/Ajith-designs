@@ -958,163 +958,142 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-<script>
-    const STORAGE_KEY = 'clint_v29_color_fix';
-    // உங்கள் Google Script URL இங்கே இணைக்கப்பட்டுள்ளது
-    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzDDISB4H6gtaHS8WN_57QVG3TTBV-ySxcqYuCvueMzFTSym19n31tvpB-xbRX6Cvc8/exec';
-    
-    let currentStars = 0, activeIdx = -1;
-    const statusMap = { 
-        1: {t:"Poor", c:"#e74c3c"}, 2: {t:"Average", c:"#f39c12"}, 
-        3: {t:"Ok", c:"#3498db"}, 4: {t:"Good", c:"#2980b9"}, 5: {t:"Excellent", c:"#1b5e20"}
-    };
 
+
+<div class="rc-header" style="font-family: sans-serif; padding: 15px; border-bottom: 1px solid #eee;">
+    <div class="rc-title-area">
+        <h2 style="margin:0;">Our Customer <span style="color:#1b5e20;">Reviews</span></h2>
+        <p style="color:#666; font-size:13px;">"Thank you for sharing your review."</p>
+        <button onclick="openReviewPopup()" style="background:#1b5e20; color:white; border:none; padding:10px 20px; border-radius:5px; cursor:pointer; font-weight:bold;">Write a Review</button>
+    </div>
+</div>
+
+<div id="rc-feed" style="padding:10px;"></div>
+
+<div id="rc-form-overlay" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); align-items:center; justify-content:center; z-index:9999;">
+    <div style="background:white; padding:20px; border-radius:10px; width:90%; max-width:400px; text-align:center; font-family: sans-serif;">
+        <h3 style="margin-top:0;">Submit Review</h3>
+        <input type="text" id="rc-user-name" style="width:100%; padding:10px; margin-bottom:10px; border:1px solid #ddd; border-radius:5px; box-sizing:border-box;" placeholder="Full Name">
+        
+        <div id="rc-star-trigger" style="font-size:30px; margin-bottom:10px; cursor:pointer; color:#ccc;">
+            <span onclick="setReviewStars(1)">★</span><span onclick="setReviewStars(2)">★</span><span onclick="setReviewStars(3)">★</span><span onclick="setReviewStars(4)">★</span><span onclick="setReviewStars(5)">★</span>
+        </div>
+        
+        <textarea id="rc-user-msg" style="width:100%; padding:10px; border:1px solid #ddd; border-radius:5px; box-sizing:border-box;" rows="3" placeholder="Write your feedback..."></textarea>
+        
+        <button onclick="submitFinalReview()" style="width:100%; background:#1b5e20; color:white; border:none; padding:12px; margin-top:10px; border-radius:5px; font-weight:bold; cursor:pointer;">Submit Review</button>
+        <p onclick="closeReviewPopup()" style="color:#888; cursor:pointer; margin-top:15px; font-size:12px;">CANCEL</p>
+    </div>
+</div>
+
+<script>
+    // உங்கள் Google Script URL-ஐ இங்கே மாற்றவும்
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyGEghOc-jl5Oln1SGJwmuUR9zvbQP4Z8JvOlJiszDJL7ednzKMTOSTmdd3e-itE20b0Q/exec';
+    const STORAGE_KEY = 'global_reviews_data';
+    
+    let currentStars = 0;
     let allReviews = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
 
+    // 1. Popup திறக்க
+    function openReviewPopup() {
+        document.getElementById('rc-form-overlay').style.display = 'flex';
+    }
+
+    // 2. Popup மூட
+    function closeReviewPopup() {
+        document.getElementById('rc-form-overlay').style.display = 'none';
+        document.getElementById('rc-user-name').value = "";
+        document.getElementById('rc-user-msg').value = "";
+        setReviewStars(0);
+    }
+
+    // 3. ஸ்டார் ரேட்டிங் செட் செய்ய
+    function setReviewStars(n) {
+        currentStars = n;
+        const stars = document.querySelectorAll('#rc-star-trigger span');
+        stars.forEach((s, i) => {
+            s.style.color = i < n ? "#f39c12" : "#ccc";
+        });
+    }
+
+    // 4. நேரம் கணக்கிட (Time ago)
     function timeAgo(date) {
+        if(!date) return "Just now";
         const seconds = Math.floor((new Date() - new Date(date)) / 1000);
         if (seconds < 60) return "Just now";
-        const intervals = { year: 31536000, month: 2592000, week: 604800, day: 86400, hour: 3600, minute: 60 };
+        const intervals = { year: 31536000, month: 2592000, day: 86400, hour: 3600, minute: 60 };
         for (const [unit, secondsInUnit] of Object.entries(intervals)) {
             const interval = Math.floor(seconds / secondsInUnit);
             if (interval >= 1) return interval + " " + unit + (interval > 1 ? "s" : "") + " ago";
         }
     }
 
+    // 5. ஸ்கிரீனில் ரிவியூக்களைக் காட்ட
     function refreshUI() {
         const list = document.getElementById('rc-feed');
         list.innerHTML = '';
-        let counts = {1:0, 2:0, 3:0, 4:0, 5:0};
-        
-        allReviews.forEach((rev, i) => {
-            counts[rev.rate]++;
-            list.innerHTML += `<div class="rc-card" onclick="if(event.detail===3){activeIdx=${i}; document.getElementById('rc-secret-menu').style.display='flex';}">
-                <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px;">
-                    <div class="rc-avatar"><svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg></div>
-                    <div style="display:flex; flex-direction:column; line-height:1.2;">
-                        <span style="font-weight:800; font-size:10px;">${rev.name}</span>
-                        <span style="font-size:8.5px; color:#bbb; margin-top:3px;">${timeAgo(rev.time)}</span>
+        allReviews.forEach(rev => {
+            list.innerHTML += `
+                <div style="border:1px solid #eee; padding:15px; margin-bottom:10px; border-radius:8px; font-family:sans-serif; background:#fff; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
+                    <div style="display:flex; justify-content:space-between; align-items:center;">
+                        <b style="font-size:14px; color:#333;">${rev.name}</b>
+                        <span style="font-size:10px; color:#999;">${timeAgo(rev.time)}</span>
                     </div>
-                </div>
-                <div class="rc-rating-line">
-                    <span class="rc-stars">${"★".repeat(rev.rate)}${"☆".repeat(5-rev.rate)}</span>
-                    <span class="rc-card-num" style="font-size:10px;">${rev.rate}.0</span>
-                    <span class="rc-card-status" style="color:${statusMap[rev.rate].c}">${statusMap[rev.rate].t}</span>
-                </div>
-                <p class="rc-para" style="font-size:10px; line-height:1.4; color:#555;">${rev.msg}</p>
-            </div>`;
+                    <div style="color:#f39c12; font-size:12px; margin:5px 0;">${"★".repeat(rev.rate)}${"☆".repeat(5-rev.rate)}</div>
+                    <p style="font-size:13px; color:#555; margin:0; line-height:1.4;">${rev.msg}</p>
+                </div>`;
         });
-
-        let maxCount = -1, dominantStar = 5;
-        for(let i=5; i>=1; i--) {
-            if(counts[i] >= maxCount) { maxCount = counts[i]; dominantStar = i; }
-            let barPercentage = (counts[i] / 100) * 100;
-            const bar = document.getElementById('rc-p-'+i);
-            if(bar) bar.style.width = Math.min(barPercentage, 100) + "%";
-        }
-
-        if(allReviews.length > 0) {
-            document.getElementById('rc-top-value').innerText = dominantStar + ".0";
-            document.getElementById('rc-top-stars-display').innerText = "★".repeat(dominantStar) + "☆".repeat(5-dominantStar);
-            const statusEl = document.getElementById('rc-top-status');
-            statusEl.innerText = statusMap[dominantStar].t;
-            statusEl.style.color = statusMap[dominantStar].c;
-        }
     }
 
-    function openReviewPopup() { activeIdx = -1; document.getElementById('rc-form-overlay').style.display = 'flex'; }
-    function closeReviewPopup() { document.getElementById('rc-form-overlay').style.display = 'none'; resetForm(); }
-    function resetForm() { document.getElementById('rc-user-name').value=""; document.getElementById('rc-user-msg').value=""; setReviewStars(0); }
-    
-    function setReviewStars(n) { 
-        currentStars = n; 
-        document.querySelectorAll('#rc-star-trigger span').forEach((s, i) => {
-            s.style.color = i < n ? "#f39c12" : "#ccc";
-        }); 
-        const typeText = document.getElementById('rc-form-type-text');
-        if(n > 0) { typeText.innerText = statusMap[n].t; typeText.style.color = statusMap[n].c; } else { typeText.innerText = ""; }
+    // 6. Cloud-லிருந்து ரிவியூக்களை எடுக்க (எல்லா மொபைலிலும் தெரிய இது முக்கியம்)
+    function loadFromCloud() {
+        fetch(SCRIPT_URL)
+            .then(res => res.json())
+            .then(data => {
+                if(data && data.length > 0) {
+                    allReviews = data;
+                    localStorage.setItem(STORAGE_KEY, JSON.stringify(allReviews));
+                    refreshUI();
+                }
+            })
+            .catch(err => console.log("Sync Error"));
     }
 
+    // 7. ரிவியூவைச் சேமிக்க
     function submitFinalReview() {
         const name = document.getElementById('rc-user-name').value;
         const msg = document.getElementById('rc-user-msg').value;
-        if(!name || currentStars === 0) return;
+        
+        if(!name || currentStars === 0) {
+            alert("Please provide Name and Stars!");
+            return;
+        }
 
-        const rev = { name, msg, rate: currentStars, time: Date.now() };
+        const rev = { name, msg, rate: currentStars, time: new Date().toISOString() };
 
-        // 1. Local Storage-இல் சேமிக்க
-        if(activeIdx > -1) allReviews[activeIdx] = rev; else allReviews.unshift(rev);
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(allReviews));
-
-        // 2. Google Sheets-க்கு அனுப்ப (Saving to Cloud)
+        // Cloud-க்கு அனுப்புதல்
         fetch(SCRIPT_URL, {
             method: 'POST',
             mode: 'no-cors',
             body: JSON.stringify(rev)
-        }).then(() => console.log("Saved to Google Sheet"));
+        }).then(() => {
+            console.log("Sent to Sheet");
+            setTimeout(loadFromCloud, 2000); // 2 செகண்ட் கழித்து Cloud-லிருந்து டேட்டாவை புதுப்பிக்கும்
+        });
 
-        refreshUI(); closeReviewPopup();
+        // உடனே ஸ்கிரீனில் காட்ட
+        allReviews.unshift(rev);
+        refreshUI();
+        closeReviewPopup();
     }
 
-    function deleteReview() { 
-        allReviews.splice(activeIdx, 1); 
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(allReviews)); 
-        refreshUI(); 
-        document.getElementById('rc-secret-menu').style.display = 'none'; 
-    }
-
-    function editReview() {
-        const rev = allReviews[activeIdx];
-        document.getElementById('rc-user-name').value = rev.name;
-        document.getElementById('rc-user-msg').value = rev.msg;
-        setReviewStars(rev.rate);
-        document.getElementById('rc-secret-menu').style.display = 'none';
-        document.getElementById('rc-form-overlay').style.display = 'flex';
-    }
-
-    document.addEventListener('DOMContentLoaded', refreshUI);
-
-
-    function doGet() {
-  var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
-  var data = sheet.getDataRange().getValues();
-  var result = [];
-  for (var i = 1; i < data.length; i++) {
-    result.push({
-      name: data[i][0],
-      rate: data[i][1],
-      msg: data[i][2],
-      time: data[i][3]
+    // பக்கம் திறக்கும் போது ரன் ஆகும்
+    document.addEventListener('DOMContentLoaded', () => {
+        refreshUI();
+        loadFromCloud();
     });
-  }
-  return ContentService.createTextOutput(JSON.stringify(result.reverse()))
-    .setMimeType(ContentService.MimeType.JSON);
-}
-
-
-
-document.addEventListener('DOMContentLoaded', () => {
-    // 1. முதலில் லோக்கல் ஸ்டோரேஜில் உள்ளதைக் காட்டும் (Fast load)
-    refreshUI(); 
-
-    // 2. பிறகு Google Sheets-ல் இருந்து புதிய ரிவியூக்களை எடுக்கும் (Sync all devices)
-    fetch(SCRIPT_URL)
-        .then(response => response.json())
-        .then(data => {
-            if (data && data.length > 0) {
-                allReviews = data; // Google Sheet டேட்டாவை அப்படியே எடுத்துக்கொள்ளும்
-                localStorage.setItem(STORAGE_KEY, JSON.stringify(allReviews));
-                refreshUI(); // எல்லா மொபைல் ரிவியூக்களுடன் ஸ்கிரீனை அப்டேட் செய்யும்
-            }
-        })
-        .catch(err => console.error("டேட்டா எடுப்பதில் பிழை:", err));
-});
-
-
-
 </script>
 
-</div>
 
 
 
