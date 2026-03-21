@@ -958,59 +958,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-<div class="rc-header">
-    <div class="rc-title-area">
-        <h2>Our Customer <span>Reviews</span></h2>
-        <p class="rc-sub-text">"Thank you for sharing your review."</p>
-        <button class="rc-small-btn" onclick="openReviewPopup()">write a review</button>
-    </div>
-    <div class="rc-stats-side">
-        <div class="rc-score-row">
-            <p class="rc-big-num" id="rc-top-value">5.0</p>
-            <div style="text-align: left;">
-                <div class="rc-top-stars" id="rc-top-stars-display">★★★★★</div>
-                <span class="rc-avg-tag" id="rc-top-status">Excellent</span>
-            </div>
-        </div>
-        <div class="rc-bar-stack">
-            <div class="rc-bar-row"><span>5</span><div class="rc-progress-bg"><div id="rc-p-5" class="rc-progress-fill"></div></div></div>
-            <div class="rc-bar-row"><span>4</span><div class="rc-progress-bg"><div id="rc-p-4" class="rc-progress-fill"></div></div></div>
-            <div class="rc-bar-row"><span>3</span><div class="rc-progress-bg"><div id="rc-p-3" class="rc-progress-fill"></div></div></div>
-            <div class="rc-bar-row"><span>2</span><div class="rc-progress-bg"><div id="rc-p-2" class="rc-progress-fill"></div></div></div>
-            <div class="rc-bar-row"><span>1</span><div class="rc-progress-bg"><div id="rc-p-1" class="rc-progress-fill"></div></div></div>
-        </div>
-    </div>
-</div>
-
-<div class="rc-scroller" id="rc-feed"></div>
-
-<div id="rc-secret-menu" onclick="this.style.display='none'">
-    <div class="rc-modal-content" onclick="event.stopPropagation()">
-        <h4 style="margin:0 0 15px;">Review Options</h4>
-        <button class="rc-menu-btn" style="background:#ff7b00; color:white;" onclick="editReview()">Edit Review</button>
-        <button class="rc-menu-btn" style="background:#e74c3c; color:white;" onclick="deleteReview()">Delete Review</button>
-        <button class="rc-menu-btn" style="background:#eee;" onclick="document.getElementById('rc-secret-menu').style.display='none'">Cancel</button>
-    </div>
-</div>
-
-<div id="rc-form-overlay">
-    <div class="rc-modal-content">
-        <h3 style="margin:0 0 10px;">Submit Review</h3>
-        <input type="text" id="rc-user-name" class="rc-input-field" placeholder="Full Name">
-        <div class="rc-star-selector" id="rc-star-trigger">
-            <span onclick="setReviewStars(1)">★</span><span onclick="setReviewStars(2)">★</span><span onclick="setReviewStars(3)">★</span><span onclick="setReviewStars(4)">★</span><span onclick="setReviewStars(5)">★</span>
-        </div>
-        <div id="rc-form-type-text"></div> 
-        <textarea id="rc-user-msg" class="rc-input-field" rows="3" placeholder="Write your feedback..."></textarea>
-        <button class="rc-small-btn" style="width:100%;" onclick="submitFinalReview()">Submit Review</button>
-        <p onclick="closeReviewPopup()" style="color:#bbb; cursor:pointer; font-size:10px; margin-top:15px; font-weight:bold;">CANCEL</p>
-    </div>
-</div>
-
 <script>
     const STORAGE_KEY = 'clint_v29_color_fix';
     // உங்கள் Google Script URL இங்கே இணைக்கப்பட்டுள்ளது
-    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyGEghOc-jl5Oln1SGJwmuUR9zvbQP4Z8JvOlJiszDJL7ednzKMTOSTmdd3e-itE20b0Q/exec';
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzDDISB4H6gtaHS8WN_57QVG3TTBV-ySxcqYuCvueMzFTSym19n31tvpB-xbRX6Cvc8/exec';
     
     let currentStars = 0, activeIdx = -1;
     const statusMap = { 
