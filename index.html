@@ -1139,6 +1139,28 @@ document.addEventListener('DOMContentLoaded', function() {
   return ContentService.createTextOutput(JSON.stringify(result.reverse()))
     .setMimeType(ContentService.MimeType.JSON);
 }
+
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    // 1. முதலில் லோக்கல் ஸ்டோரேஜில் உள்ளதைக் காட்டும் (Fast load)
+    refreshUI(); 
+
+    // 2. பிறகு Google Sheets-ல் இருந்து புதிய ரிவியூக்களை எடுக்கும் (Sync all devices)
+    fetch(SCRIPT_URL)
+        .then(response => response.json())
+        .then(data => {
+            if (data && data.length > 0) {
+                allReviews = data; // Google Sheet டேட்டாவை அப்படியே எடுத்துக்கொள்ளும்
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(allReviews));
+                refreshUI(); // எல்லா மொபைல் ரிவியூக்களுடன் ஸ்கிரீனை அப்டேட் செய்யும்
+            }
+        })
+        .catch(err => console.error("டேட்டா எடுப்பதில் பிழை:", err));
+});
+
+
+
 </script>
 
 </div>
