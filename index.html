@@ -1005,11 +1005,9 @@ document.addEventListener('DOMContentLoaded', function() {
         <p onclick="closeReviewPopup()" style="color:#bbb; cursor:pointer; font-size:10px; margin-top:15px; font-weight:bold;">CANCEL</p>
     </div>
 </div>
-
 <script>
-    const STORAGE_KEY = 'clint_v29_color_fix';
-    // உங்கள் Google Script URL இங்கே இணைக்கப்பட்டுள்ளது
-    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyGEghOc-jl5Oln1SGJwmuUR9zvbQP4Z8JvOlJiszDJL7ednzKMTOSTmdd3e-itE20b0Q/exec';
+    // 1. உங்கள் Node.js சர்வர் முகவரி (API URL)
+    const API_URL = 'http://localhost:5000/api/reviews';
     
     let currentStars = 0, activeIdx = -1;
     const statusMap = { 
@@ -1017,7 +1015,27 @@ document.addEventListener('DOMContentLoaded', function() {
         3: {t:"Ok", c:"#3498db"}, 4: {t:"Good", c:"#2980b9"}, 5: {t:"Excellent", c:"#1b5e20"}
     };
 
-    let allReviews = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+    let allReviews = [];
+
+    // MySQL-லிருந்து தகவல்களை எடுக்க (Fetch from Database)
+    async function loadReviews() {
+        try {
+            const response = await fetch(API_URL);
+            const data = await response.json();
+            
+            // Database-ல் உள்ள பெயர்களை உங்கள் UI-க்கு ஏற்றவாறு மாற்றுதல்
+            allReviews = data.map(r => ({
+                name: r.name,
+                rate: r.rating,
+                msg: r.message,
+                time: r.created_at
+            }));
+            
+            refreshUI();
+        } catch (error) {
+            console.error("Error loading reviews:", error);
+        }
+    }
 
     function timeAgo(date) {
         const seconds = Math.floor((new Date() - new Date(date)) / 1000);
@@ -1036,7 +1054,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         allReviews.forEach((rev, i) => {
             counts[rev.rate]++;
-            list.innerHTML += `<div class="rc-card" onclick="if(event.detail===3){activeIdx=${i}; document.getElementById('rc-secret-menu').style.display='flex';}">
+            list.innerHTML += `<div class="rc-card">
                 <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px;">
                     <div class="rc-avatar"><svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg></div>
                     <div style="display:flex; flex-direction:column; line-height:1.2;">
@@ -1056,9 +1074,9 @@ document.addEventListener('DOMContentLoaded', function() {
         let maxCount = -1, dominantStar = 5;
         for(let i=5; i>=1; i--) {
             if(counts[i] >= maxCount) { maxCount = counts[i]; dominantStar = i; }
-            let barPercentage = (counts[i] / 100) * 100;
+            let barPercentage = (counts[i] / (allReviews.length || 1)) * 100;
             const bar = document.getElementById('rc-p-'+i);
-            if(bar) bar.style.width = Math.min(barPercentage, 100) + "%";
+            if(bar) bar.style.width = barPercentage + "%";
         }
 
         if(allReviews.length > 0) {
@@ -1070,7 +1088,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    function openReviewPopup() { activeIdx = -1; document.getElementById('rc-form-overlay').style.display = 'flex'; }
+    function openReviewPopup() { document.getElementById('rc-form-overlay').style.display = 'flex'; }
     function closeReviewPopup() { document.getElementById('rc-form-overlay').style.display = 'none'; resetForm(); }
     function resetForm() { document.getElementById('rc-user-name').value=""; document.getElementById('rc-user-msg').value=""; setReviewStars(0); }
     
@@ -1083,61 +1101,31 @@ document.addEventListener('DOMContentLoaded', function() {
         if(n > 0) { typeText.innerText = statusMap[n].t; typeText.style.color = statusMap[n].c; } else { typeText.innerText = ""; }
     }
 
-    function submitFinalReview() {
+    // MySQL-க்கு தகவலை அனுப்ப (Submit to Database)
+    async function submitFinalReview() {
         const name = document.getElementById('rc-user-name').value;
         const msg = document.getElementById('rc-user-msg').value;
         if(!name || currentStars === 0) return;
 
-        const rev = { name, msg, rate: currentStars, time: Date.now() };
+        const revData = { name, rating: currentStars, message: msg };
 
-        // 1. Local Storage-இல் சேமிக்க
-        if(activeIdx > -1) allReviews[activeIdx] = rev; else allReviews.unshift(rev);
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(allReviews));
-
-        // 2. Google Sheets-க்கு அனுப்ப (Saving to Cloud)
-        fetch(SCRIPT_URL, {
-            method: 'POST',
-            mode: 'no-cors',
-            body: JSON.stringify(rev)
-        }).then(() => console.log("Saved to Google Sheet"));
-
-        refreshUI(); closeReviewPopup();
+        try {
+            await fetch(API_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(revData)
+            });
+            
+            // சேமித்த பிறகு மீண்டும் டேட்டாவை லோடு செய்யவும்
+            loadReviews();
+            closeReviewPopup();
+        } catch (error) {
+            alert("Error saving review!");
+        }
     }
 
-    function deleteReview() { 
-        allReviews.splice(activeIdx, 1); 
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(allReviews)); 
-        refreshUI(); 
-        document.getElementById('rc-secret-menu').style.display = 'none'; 
-    }
-
-    function editReview() {
-        const rev = allReviews[activeIdx];
-        document.getElementById('rc-user-name').value = rev.name;
-        document.getElementById('rc-user-msg').value = rev.msg;
-        setReviewStars(rev.rate);
-        document.getElementById('rc-secret-menu').style.display = 'none';
-        document.getElementById('rc-form-overlay').style.display = 'flex';
-    }
-
-    document.addEventListener('DOMContentLoaded', refreshUI);
-
-
-    function doGet() {
-  var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
-  var data = sheet.getDataRange().getValues();
-  var result = [];
-  for (var i = 1; i < data.length; i++) {
-    result.push({
-      name: data[i][0],
-      rate: data[i][1],
-      msg: data[i][2],
-      time: data[i][3]
-    });
-  }
-  return ContentService.createTextOutput(JSON.stringify(result.reverse()))
-    .setMimeType(ContentService.MimeType.JSON);
-}
+    // பக்கம் திறக்கும் போது டேட்டாபேஸிலிருந்து தகவல்களை எடுக்க
+    document.addEventListener('DOMContentLoaded', loadReviews);
 </script>
 
 </div>
