@@ -1006,9 +1006,7 @@ document.addEventListener('DOMContentLoaded', function() {
         <p onclick="closeReviewPopup()" style="color:#bbb; cursor:pointer; font-size:10px; margin-top:15px; font-weight:bold;">CANCEL</p>
     </div>
 </div>
-
 <script>
-
 const STORAGE_KEY = 'clint_v29_color_fix';
 const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyGEghOc-jl5Oln1SGJwmuUR9zvbQP4Z8JvOlJiszDJL7ednzKMTOSTmdd3e-itE20b0Q/exec';
 
@@ -1026,7 +1024,7 @@ let allReviews = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
 
 // TIME AGO
 function timeAgo(date) {
-    if(!date) return "Just now"; // தேதி இல்லை என்றால் error வரக் கூடாது
+    if(!date) return "Just now";
     const seconds = Math.floor((new Date() - new Date(date)) / 1000);
     if (isNaN(seconds) || seconds < 60) return "Just now";
     const intervals = { year:31536000, month:2592000, week:604800, day:86400, hour:3600, minute:60 };
@@ -1037,17 +1035,20 @@ function timeAgo(date) {
     return "Just now";
 }
 
-// LOAD FROM GOOGLE SHEET
+// 📌 1. Cache Bypass Fix - FRESH DATA LOAD FROM SERVER
 function loadReviewsFromServer() {
-    refreshUI(); // 1. முந்தைய பழைய data-வை முதலில் காட்டும் (Show cached data immediately)
+    refreshUI(); 
     
-    fetch(SCRIPT_URL)
+    // "?t=" + Time : இது Browser பழைய Data-வை காட்டுவதை தடுத்து, கன்பார்ம் ஆக புது Data-வை Sheet-லிருந்து எடுக்கும்
+    const nocacheUrl = SCRIPT_URL + "?t=" + new Date().getTime();
+    
+    fetch(nocacheUrl, { cache: "no-store", mode: 'cors' }) 
     .then(res => res.json())
     .then(data => {
         if(Array.isArray(data)) {
             allReviews = data.reverse();
             localStorage.setItem(STORAGE_KEY, JSON.stringify(allReviews));
-            refreshUI(); // புது data வந்தவுடன் மீண்டும் update செய்யும்
+            refreshUI(); 
         }
     })
     .catch(err => console.log("Google sheet Load error", err));
@@ -1056,14 +1057,12 @@ function loadReviewsFromServer() {
 // REFRESH UI
 function refreshUI() {
     const list = document.getElementById('rc-feed');
-    if (!list) return; // feed element இல்லை என்றால் crash ஆவதைத் தடுக்கும்
+    if (!list) return; 
     
     list.innerHTML = '';
     let counts = {1:0, 2:0, 3:0, 4:0, 5:0};
 
-    // Filter and display reviews safely
     allReviews.forEach((rev, i) => {
-        // 2. data காலியாகவோ அல்லது rating தவறாகவோ இருந்தால் இந்த review-ஐ தவிர்க்கும் (skips bad data)
         if (!rev || !rev.rate || rev.rate < 1 || rev.rate > 5) return; 
 
         counts[rev.rate]++;
@@ -1168,20 +1167,23 @@ function submitFinalReview() {
     else allReviews.unshift(rev);
 
     localStorage.setItem(STORAGE_KEY, JSON.stringify(allReviews));
-
-    // UI-ஐ உடனடியாக update செய்கிறோம்
     refreshUI();
     closeReviewPopup();
 
+    // 📌 2. POST Header Fix - Google Sheet-க்கு சரியாக அனுப்புதல்
     fetch(SCRIPT_URL, {
         method: 'POST',
         mode: 'no-cors',
+        headers: {
+            'Content-Type': 'text/plain;charset=utf-8' // இது இல்லையென்றால் Server-ல் Save ஆவது கஷ்டம்
+        },
         body: JSON.stringify(rev)
     });
 
+    // புதிய Data-வை Google Sheet-லிருந்து மீண்டும் செக் செய்ய 3 செகண்ட் (3000ms) காத்திருப்போம்
     setTimeout(() => {
         loadReviewsFromServer();
-    }, 1500);
+    }, 3000);
 }
 
 // DELETE
@@ -1202,19 +1204,18 @@ function editReview() {
     document.getElementById('rc-form-overlay').style.display = 'flex';
 }
 
-// LOAD ON START (All Mobile Devices Support Fix)
+// LOAD ON START 
 function initReviewDisplay() {
     loadReviewsFromServer();
 }
 
-// மொபைலில் பிரவுசர் Load ஆகும் முன் அல்லது பின் எப்போது ஓபன் செய்தாலும் வேலை செய்யும்
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initReviewDisplay);
 } else {
     initReviewDisplay();
 }
-
 </script>
+
 
 </div>
 
