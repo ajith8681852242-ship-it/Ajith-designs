@@ -957,6 +957,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
+
 <div class="rc-header">
     <div class="rc-title-area">
         <h2>Our Customer <span>Reviews</span></h2>
@@ -1005,127 +1006,214 @@ document.addEventListener('DOMContentLoaded', function() {
         <p onclick="closeReviewPopup()" style="color:#bbb; cursor:pointer; font-size:10px; margin-top:15px; font-weight:bold;">CANCEL</p>
     </div>
 </div>
+
 <script>
-    // 1. உங்கள் Node.js சர்வர் முகவரி (API URL)
-    const API_URL = 'http://localhost:5000/api/reviews';
+
+const STORAGE_KEY = 'clint_v29_color_fix';
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyGEghOc-jl5Oln1SGJwmuUR9zvbQP4Z8JvOlJiszDJL7ednzKMTOSTmdd3e-itE20b0Q/exec';
+
+let currentStars = 0, activeIdx = -1;
+
+const statusMap = { 
+    1: {t:"Poor", c:"#e74c3c"}, 
+    2: {t:"Average", c:"#f39c12"}, 
+    3: {t:"Ok", c:"#3498db"}, 
+    4: {t:"Good", c:"#2980b9"}, 
+    5: {t:"Excellent", c:"#1b5e20"}
+};
+
+let allReviews = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+
+// TIME AGO
+function timeAgo(date) {
+    if(!date) return "Just now"; // தேதி இல்லை என்றால் error வரக் கூடாது
+    const seconds = Math.floor((new Date() - new Date(date)) / 1000);
+    if (isNaN(seconds) || seconds < 60) return "Just now";
+    const intervals = { year:31536000, month:2592000, week:604800, day:86400, hour:3600, minute:60 };
+    for (const [unit, sec] of Object.entries(intervals)) {
+        const interval = Math.floor(seconds / sec);
+        if (interval >= 1) return interval + " " + unit + (interval > 1 ? "s" : "") + " ago";
+    }
+    return "Just now";
+}
+
+// LOAD FROM GOOGLE SHEET
+function loadReviewsFromServer() {
+    refreshUI(); // 1. முந்தைய பழைய data-வை முதலில் காட்டும் (Show cached data immediately)
     
-    let currentStars = 0, activeIdx = -1;
-    const statusMap = { 
-        1: {t:"Poor", c:"#e74c3c"}, 2: {t:"Average", c:"#f39c12"}, 
-        3: {t:"Ok", c:"#3498db"}, 4: {t:"Good", c:"#2980b9"}, 5: {t:"Excellent", c:"#1b5e20"}
-    };
-
-    let allReviews = [];
-
-    // MySQL-லிருந்து தகவல்களை எடுக்க (Fetch from Database)
-    async function loadReviews() {
-        try {
-            const response = await fetch(API_URL);
-            const data = await response.json();
-            
-            // Database-ல் உள்ள பெயர்களை உங்கள் UI-க்கு ஏற்றவாறு மாற்றுதல்
-            allReviews = data.map(r => ({
-                name: r.name,
-                rate: r.rating,
-                msg: r.message,
-                time: r.created_at
-            }));
-            
-            refreshUI();
-        } catch (error) {
-            console.error("Error loading reviews:", error);
+    fetch(SCRIPT_URL)
+    .then(res => res.json())
+    .then(data => {
+        if(Array.isArray(data)) {
+            allReviews = data.reverse();
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(allReviews));
+            refreshUI(); // புது data வந்தவுடன் மீண்டும் update செய்யும்
         }
+    })
+    .catch(err => console.log("Google sheet Load error", err));
+}
+
+// REFRESH UI
+function refreshUI() {
+    const list = document.getElementById('rc-feed');
+    if (!list) return; // feed element இல்லை என்றால் crash ஆவதைத் தடுக்கும்
+    
+    list.innerHTML = '';
+    let counts = {1:0, 2:0, 3:0, 4:0, 5:0};
+
+    // Filter and display reviews safely
+    allReviews.forEach((rev, i) => {
+        // 2. data காலியாகவோ அல்லது rating தவறாகவோ இருந்தால் இந்த review-ஐ தவிர்க்கும் (skips bad data)
+        if (!rev || !rev.rate || rev.rate < 1 || rev.rate > 5) return; 
+
+        counts[rev.rate]++;
+        const safeRate = rev.rate;
+        const statusDetails = statusMap[safeRate];
+
+        list.innerHTML += `
+        <div class="rc-card" onclick="if(event.detail===3){activeIdx=${i}; document.getElementById('rc-secret-menu').style.display='flex';}">
+            <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px;">
+                <div class="rc-avatar">
+                    <svg viewBox="0 0 24 24" width="24" height="24">
+                        <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                    </svg>
+                </div>
+                <div style="display:flex; flex-direction:column; line-height:1.2;">
+                    <span style="font-weight:800; font-size:10px;">${rev.name || 'User'}</span>
+                    <span style="font-size:8.5px; color:#bbb; margin-top:3px;">${timeAgo(rev.time)}</span>
+                </div>
+            </div>
+            <div class="rc-rating-line">
+                <span class="rc-stars">${"★".repeat(safeRate)}${"☆".repeat(5-safeRate)}</span>
+                <span class="rc-card-num" style="font-size:10px;">${safeRate}.0</span>
+                <span class="rc-card-status" style="color:${statusDetails.c}">${statusDetails.t}</span>
+            </div>
+            <p class="rc-para" style="font-size:10px; line-height:1.4; color:#555;">${rev.msg || ''}</p>
+        </div>`;
+    });
+
+    let maxCount = -1, dominantStar = 5;
+
+    for(let i=5; i>=1; i--) {
+        if(counts[i] >= maxCount) { 
+            maxCount = counts[i]; 
+            dominantStar = i; 
+        }
+
+        let barPercentage = (counts[i] / 80) * 100;
+        if(barPercentage > 100) barPercentage = 100;
+
+        const bar = document.getElementById('rc-p-'+i);
+        if(bar) bar.style.width = barPercentage + "%";
     }
 
-    function timeAgo(date) {
-        const seconds = Math.floor((new Date() - new Date(date)) / 1000);
-        if (seconds < 60) return "Just now";
-        const intervals = { year: 31536000, month: 2592000, week: 604800, day: 86400, hour: 3600, minute: 60 };
-        for (const [unit, secondsInUnit] of Object.entries(intervals)) {
-            const interval = Math.floor(seconds / secondsInUnit);
-            if (interval >= 1) return interval + " " + unit + (interval > 1 ? "s" : "") + " ago";
-        }
-    }
-
-    function refreshUI() {
-        const list = document.getElementById('rc-feed');
-        list.innerHTML = '';
-        let counts = {1:0, 2:0, 3:0, 4:0, 5:0};
+    if(allReviews.length > 0) {
+        const topVal = document.getElementById('rc-top-value');
+        if(topVal) topVal.innerText = dominantStar + ".0";
         
-        allReviews.forEach((rev, i) => {
-            counts[rev.rate]++;
-            list.innerHTML += `<div class="rc-card">
-                <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px;">
-                    <div class="rc-avatar"><svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg></div>
-                    <div style="display:flex; flex-direction:column; line-height:1.2;">
-                        <span style="font-weight:800; font-size:10px;">${rev.name}</span>
-                        <span style="font-size:8.5px; color:#bbb; margin-top:3px;">${timeAgo(rev.time)}</span>
-                    </div>
-                </div>
-                <div class="rc-rating-line">
-                    <span class="rc-stars">${"★".repeat(rev.rate)}${"☆".repeat(5-rev.rate)}</span>
-                    <span class="rc-card-num" style="font-size:10px;">${rev.rate}.0</span>
-                    <span class="rc-card-status" style="color:${statusMap[rev.rate].c}">${statusMap[rev.rate].t}</span>
-                </div>
-                <p class="rc-para" style="font-size:10px; line-height:1.4; color:#555;">${rev.msg}</p>
-            </div>`;
-        });
-
-        let maxCount = -1, dominantStar = 5;
-        for(let i=5; i>=1; i--) {
-            if(counts[i] >= maxCount) { maxCount = counts[i]; dominantStar = i; }
-            let barPercentage = (counts[i] / (allReviews.length || 1)) * 100;
-            const bar = document.getElementById('rc-p-'+i);
-            if(bar) bar.style.width = barPercentage + "%";
-        }
-
-        if(allReviews.length > 0) {
-            document.getElementById('rc-top-value').innerText = dominantStar + ".0";
-            document.getElementById('rc-top-stars-display').innerText = "★".repeat(dominantStar) + "☆".repeat(5-dominantStar);
-            const statusEl = document.getElementById('rc-top-status');
+        const topStars = document.getElementById('rc-top-stars-display');
+        if(topStars) topStars.innerText = "★".repeat(dominantStar) + "☆".repeat(5-dominantStar);
+        
+        const statusEl = document.getElementById('rc-top-status');
+        if(statusEl) {
             statusEl.innerText = statusMap[dominantStar].t;
             statusEl.style.color = statusMap[dominantStar].c;
         }
     }
+}
 
-    function openReviewPopup() { document.getElementById('rc-form-overlay').style.display = 'flex'; }
-    function closeReviewPopup() { document.getElementById('rc-form-overlay').style.display = 'none'; resetForm(); }
-    function resetForm() { document.getElementById('rc-user-name').value=""; document.getElementById('rc-user-msg').value=""; setReviewStars(0); }
-    
-    function setReviewStars(n) { 
-        currentStars = n; 
-        document.querySelectorAll('#rc-star-trigger span').forEach((s, i) => {
-            s.style.color = i < n ? "#f39c12" : "#ccc";
-        }); 
-        const typeText = document.getElementById('rc-form-type-text');
-        if(n > 0) { typeText.innerText = statusMap[n].t; typeText.style.color = statusMap[n].c; } else { typeText.innerText = ""; }
+// POPUP
+function openReviewPopup() {
+    activeIdx = -1;
+    const overlay = document.getElementById('rc-form-overlay');
+    if(overlay) overlay.style.display = 'flex';
+}
+function closeReviewPopup() {
+    const overlay = document.getElementById('rc-form-overlay');
+    if(overlay) overlay.style.display = 'none';
+    resetForm();
+}
+function resetForm() {
+    document.getElementById('rc-user-name').value="";
+    document.getElementById('rc-user-msg').value="";
+    setReviewStars(0);
+}
+
+// STAR SELECT
+function setReviewStars(n) {
+    currentStars = n;
+    document.querySelectorAll('#rc-star-trigger span').forEach((s, i) => {
+        s.style.color = i < n ? "#f39c12" : "#ccc";
+    });
+    const typeText = document.getElementById('rc-form-type-text');
+    if(n > 0) {
+        typeText.innerText = statusMap[n].t;
+        typeText.style.color = statusMap[n].c;
+    } else typeText.innerText = "";
+}
+
+// SUBMIT REVIEW
+function submitFinalReview() {
+    const name = document.getElementById('rc-user-name').value;
+    const msg = document.getElementById('rc-user-msg').value;
+
+    if(!name || currentStars === 0) {
+        alert("Enter name and rating");
+        return;
     }
 
-    // MySQL-க்கு தகவலை அனுப்ப (Submit to Database)
-    async function submitFinalReview() {
-        const name = document.getElementById('rc-user-name').value;
-        const msg = document.getElementById('rc-user-msg').value;
-        if(!name || currentStars === 0) return;
+    const rev = { name, msg, rate: currentStars, time: Date.now() };
 
-        const revData = { name, rating: currentStars, message: msg };
+    if(activeIdx > -1) allReviews[activeIdx] = rev;
+    else allReviews.unshift(rev);
 
-        try {
-            await fetch(API_URL, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(revData)
-            });
-            
-            // சேமித்த பிறகு மீண்டும் டேட்டாவை லோடு செய்யவும்
-            loadReviews();
-            closeReviewPopup();
-        } catch (error) {
-            alert("Error saving review!");
-        }
-    }
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(allReviews));
 
-    // பக்கம் திறக்கும் போது டேட்டாபேஸிலிருந்து தகவல்களை எடுக்க
-    document.addEventListener('DOMContentLoaded', loadReviews);
+    // UI-ஐ உடனடியாக update செய்கிறோம்
+    refreshUI();
+    closeReviewPopup();
+
+    fetch(SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        body: JSON.stringify(rev)
+    });
+
+    setTimeout(() => {
+        loadReviewsFromServer();
+    }, 1500);
+}
+
+// DELETE
+function deleteReview() {
+    allReviews.splice(activeIdx, 1);
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(allReviews));
+    refreshUI();
+    document.getElementById('rc-secret-menu').style.display = 'none';
+}
+
+// EDIT
+function editReview() {
+    const rev = allReviews[activeIdx];
+    document.getElementById('rc-user-name').value = rev.name;
+    document.getElementById('rc-user-msg').value = rev.msg;
+    setReviewStars(rev.rate);
+    document.getElementById('rc-secret-menu').style.display = 'none';
+    document.getElementById('rc-form-overlay').style.display = 'flex';
+}
+
+// LOAD ON START (All Mobile Devices Support Fix)
+function initReviewDisplay() {
+    loadReviewsFromServer();
+}
+
+// மொபைலில் பிரவுசர் Load ஆகும் முன் அல்லது பின் எப்போது ஓபன் செய்தாலும் வேலை செய்யும்
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initReviewDisplay);
+} else {
+    initReviewDisplay();
+}
+
 </script>
 
 </div>
