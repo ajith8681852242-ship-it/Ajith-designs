@@ -1151,7 +1151,7 @@ function setReviewStars(n) {
     } else typeText.innerText = "";
 }
 
-// SUBMIT REVIEW
+// SUBMIT REVIEW (100% Google Sheet Data Save Fix)
 function submitFinalReview() {
     const name = document.getElementById('rc-user-name').value;
     const msg = document.getElementById('rc-user-msg').value;
@@ -1163,6 +1163,7 @@ function submitFinalReview() {
 
     const rev = { name, msg, rate: currentStars, time: Date.now() };
 
+    // மொபைலில் உடனடியாக தெரிவதற்காக Local Storage-ல் Save செய்கிறோம்
     if(activeIdx > -1) allReviews[activeIdx] = rev;
     else allReviews.unshift(rev);
 
@@ -1170,17 +1171,24 @@ function submitFinalReview() {
     refreshUI();
     closeReviewPopup();
 
-    // 📌 2. POST Header Fix - Google Sheet-க்கு சரியாக அனுப்புதல்
+    // 📌 மிக முக்கியம்: Google Sheet-க்கு Data-வை அனுப்பும் முறையை மாற்றியுள்ளோம் (Form Data URL Method)
+    const formData = new URLSearchParams();
+    formData.append("name", rev.name);
+    formData.append("msg", rev.msg);
+    formData.append("rate", rev.rate);
+    formData.append("time", rev.time);
+
     fetch(SCRIPT_URL, {
         method: 'POST',
-        mode: 'no-cors',
+        mode: 'no-cors', // CORS பிழையை தடுக்கும்
         headers: {
-            'Content-Type': 'text/plain;charset=utf-8' // இது இல்லையென்றால் Server-ல் Save ஆவது கஷ்டம்
+            // Google Script எளிதாகப் புரிந்து கொள்ளும் Header முறை
+            'Content-Type': 'application/x-www-form-urlencoded'
         },
-        body: JSON.stringify(rev)
-    });
+        body: formData.toString()
+    }).catch(err => console.log("Google Sheet Save Error: ", err));
 
-    // புதிய Data-வை Google Sheet-லிருந்து மீண்டும் செக் செய்ய 3 செகண்ட் (3000ms) காத்திருப்போம்
+    // சேவ் ஆன பிறகு 3 செகண்ட் கழித்து அத்தனை மொபைலுக்கும் புது டேட்டாவை Load செய்யும்
     setTimeout(() => {
         loadReviewsFromServer();
     }, 3000);
