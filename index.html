@@ -1388,7 +1388,7 @@
         </div>
         <script>
             const STORAGE_KEY = 'clint_v29_color_fix';
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxR1ezgnLU6OXsQnYVEsAzc_rkmpUtOBJo937Bv3J3uR_FeKorCM53Hr3QLSvPb_GV4cw/exec';
+            const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxR1ezgnLU6OXsQnYVEsAzc_rkmpUtOBJo937Bv3J3uR_FeKorCM53Hr3QLSvPb_GV4cw/exec';
 
             let currentStars = 0, activeIdx = -1;
 
@@ -2088,18 +2088,19 @@ const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxR1ezgnLU6OXsQnYVEs
 
 <!-- Analytics Tracker & View Counter Javascript -->
 <script>
-    // 📌 நீங்கள் புதிதாக Deploy செய்த Analytics App Script URL-ஐ உங்களின் லிங்க்க்கு மாற்றுங்கள்!
-    const ANALYTICS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxR1ezgnLU6OXsQnYVEsAzc_rkmpUtOBJo937Bv3J3uR_FeKorCM53Hr3QLSvPb_GV4cw/exec';
+    const ANALYTICS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwAlvqCg8By5lQwTObQGVuXjZvF7XqLqFvKya4Z6KbPVmyteshYnqRPrdS2eE2xXmUq/exec';
+
+    // Session Management for 1 Line Output Details
+    let sessionEnterTime = sessionStorage.getItem('session_start_time') ? new Date(sessionStorage.getItem('session_start_time')) : new Date();
+    if (!sessionStorage.getItem('session_start_time')) sessionStorage.setItem('session_start_time', sessionEnterTime.toISOString());
+    let sessionActivities = JSON.parse(sessionStorage.getItem('client_activities')) || [];
 
     document.addEventListener('DOMContentLoaded', function () {
-        // வெப்சைட் ஓபன் ஆன உடனே "Website Main" வீவ்-ஐ கணக்கில் சேர்க்கும்
-        logViewActivity("Website Main");
-
-        // 1 செகண்ட் கழித்து மொத்த Number-ஐயும் திரையில் காட்டும்
+        fetchIPAndLocation().then(() => {
+            logViewActivity("Website Main");
+        });
         setTimeout(loadPublicViewCounts, 1000);
     });
-
-    let sessionEnterTime = new Date(); // Start time
 
     function getMobileName() {
         let ua = navigator.userAgent;
@@ -2111,50 +2112,61 @@ const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxR1ezgnLU6OXsQnYVEs
         return "Other Device";
     }
 
-    function logViewActivity(targetName) {
-        // 1. SESSION FIX: Track Unique Views per Session (solves refresh bug)
-        let finalTag = targetName;
-        if(sessionStorage.getItem('viewed_' + targetName)) {
-            finalTag = targetName + " (Repeat)"; // Logged in Sheet, ignored by View Count!
-        } else {
-            sessionStorage.setItem('viewed_' + targetName, 'true');
-        }
-
-        // 2. FAST CLICK FIX: Cache IP so clicks don't fail before page navigates
-        let savedIP = sessionStorage.getItem('my_ip');
-        let savedLoc = sessionStorage.getItem('my_loc');
-
-        if(savedIP && savedLoc) {
-            sendToSecretAnalytics(finalTag, savedIP, savedLoc, getMobileName(), "Active");
-        } else {
-            fetch('https://ipinfo.io/json')
-                .then(res => res.json())
-                .then(data => {
-                    const ip = data.ip || "Hidden";
-                    const loc = (data.city || "") + ", " + (data.region || "");
-                    sessionStorage.setItem('my_ip', ip);
-                    sessionStorage.setItem('my_loc', loc);
-                    sendToSecretAnalytics(finalTag, ip, loc, getMobileName(), "Active");
-                })
-                .catch(err => {
-                    sendToSecretAnalytics(finalTag, "Hidden", "Unknown", getMobileName(), "Active");
-                });
+    async function fetchIPAndLocation() {
+        if (!sessionStorage.getItem('my_ip')) {
+            try {
+                let res = await fetch('https://ipinfo.io/json');
+                let data = await res.json();
+                sessionStorage.setItem('my_ip', data.ip || "Hidden");
+                sessionStorage.setItem('my_loc', (data.city || "") + ", " + (data.region || ""));
+            } catch (err) {
+                sessionStorage.setItem('my_ip', "Hidden");
+                sessionStorage.setItem('my_loc', "Unknown");
+            }
         }
     }
 
-    function sendToSecretAnalytics(targetId, ip, loc, device, status, duration = "0 sec") {
+    function logViewActivity(targetName) {
+        // Track the activities and build the full journey string
+        if (!sessionStorage.getItem('viewed_' + targetName)) {
+            sessionStorage.setItem('viewed_' + targetName, 'true');
+            sessionActivities.push(targetName);
+            sessionStorage.setItem('client_activities', JSON.stringify(sessionActivities));
+        }
+
+        // Send Immediately so you can see it working!
+        let allActivitiesStr = sessionActivities.join(" ➔ ");
+        sendToSecretAnalytics("Activities: " + allActivitiesStr, "Active");
+    }
+
+    function getIndianTime(dateObj) {
+        return dateObj.toLocaleTimeString('en-IN', { timeZone: 'Asia/Kolkata', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true });
+    }
+
+    function sendToSecretAnalytics(targetIdStr, status) {
+        let ip = sessionStorage.getItem('my_ip') || "Hidden";
+        let loc = sessionStorage.getItem('my_loc') || "Unknown";
+        let device = getMobileName();
+        
+        // UNIQUE SESSION ID: பல வரிகள் உருவாதைத் தடுக்க 100% பாதுகாப்பான Session ID
+        let sessionId = sessionStorage.getItem('my_session_id');
+        if (!sessionId) {
+            sessionId = "SESS-" + Math.floor(Math.random() * 999999999);
+            sessionStorage.setItem('my_session_id', sessionId);
+        }
+
+        let enterIST = getIndianTime(sessionEnterTime);
+        let leaveIST = status === "Leaving" ? getIndianTime(new Date()) : "Active";
+
         let fd = new URLSearchParams();
-        fd.append("targetId", targetId);
+        fd.append("targetId", targetIdStr);
         fd.append("ip", ip);
         fd.append("loc", loc);
         fd.append("device", device);
+        fd.append("enterTime", enterIST);
+        fd.append("leaveTime", leaveIST);
+        fd.append("sessionId", sessionId);
 
-        let now = new Date();
-        fd.append("enterTime", sessionEnterTime.toLocaleTimeString('en-US'));
-        fd.append("leaveTime", status === "Leaving" ? now.toLocaleTimeString('en-US') : "Active");
-        fd.append("duration", duration); 
-
-        // Always use sendBeacon if available, it avoids getting cancelled by fast navigations!
         if (navigator.sendBeacon) {
             navigator.sendBeacon(ANALYTICS_SCRIPT_URL, fd);
         } else {
@@ -2166,19 +2178,10 @@ const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxR1ezgnLU6OXsQnYVEs
         }
     }
 
-    // 📌 Track exactly when they LEAVE the website (Time Spent Calculation)
+    // 📌 When User Leaves, send final state with exit time
     window.addEventListener("beforeunload", function () {
-        let leaveTime = new Date();
-        let diffSeconds = Math.floor((leaveTime - sessionEnterTime) / 1000);
-
-        let timeSpent = "";
-        if (diffSeconds < 60) timeSpent = diffSeconds + " Secs";
-        else {
-            let min = Math.floor(diffSeconds / 60);
-            timeSpent = min + " Min " + (diffSeconds % 60) + " Secs";
-        }
-
-        sendToSecretAnalytics("Website Left (Session End)", sessionStorage.getItem('my_ip')||"Hidden", sessionStorage.getItem('my_loc')||"Hidden", getMobileName(), "Leaving", timeSpent);
+        let allActivitiesStr = sessionActivities.length > 0 ? sessionActivities.join(" ➔ ") : "Website Main";
+        sendToSecretAnalytics("Activities: " + allActivitiesStr + " (Exit)", "Leaving");
     });
 
     function loadPublicViewCounts() {
