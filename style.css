@@ -27,37 +27,37 @@ html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
 .nav-links li a { color: #000000; margin-left: 25px; text-decoration: none; font-size: 0.75rem; font-weight: 500; }
 
 
-/* 💻 Laptop & Desktop View (993px and UP) - Size Increases */
+/* ðŸ’» Laptop & Desktop View (993px and UP) - Size Increases */
 @media (min-width: 993px) {
     
-    /* 1. Logo மற்றும் அதன் Icon-ஐப் பெரிதாக்க (Logo Big) */
+    /* 1. Logo à®®à®±à¯à®±à¯à®®à¯ à®…à®¤à®©à¯ Icon-à®à®ªà¯ à®ªà¯†à®°à®¿à®¤à®¾à®•à¯à®• (Logo Big) */
     .logo {
-        font-size: 1.0rem !important; /* 0.9 ஆக இருந்ததை 1.4 ஆகப் பெரிதாக்கியுள்ளேன் */
+        font-size: 1.0rem !important; /* 0.9 à®†à®• à®‡à®°à¯à®¨à¯à®¤à®¤à¯ˆ 1.4 à®†à®•à®ªà¯ à®ªà¯†à®°à®¿à®¤à®¾à®•à¯à®•à®¿à®¯à¯à®³à¯à®³à¯‡à®©à¯ */
     }
     .logo-icon-rotate {
-        font-size: 1.0rem !important; /* சுழலும் Palette Icon-ன் அளவு */
+        font-size: 1.0rem !important; /* à®šà¯à®´à®²à¯à®®à¯ Palette Icon-à®©à¯ à®…à®³à®µà¯ */
         margin-right: 8px !important;
     }
 
-    /* 2. Nav Links-களைப் பெரிதாக்க (HOME, ABOUT.. Big) */
+    /* 2. Nav Links-à®•à®³à¯ˆà®ªà¯ à®ªà¯†à®°à®¿à®¤à®¾à®•à¯à®• (HOME, ABOUT.. Big) */
     .nav-links li a {
-        font-size: 0.85rem !important; /* 0.75 ஆக இருந்ததை 0.95 ஆகப் பெரிதாக்கியுள்ளேன் */
+        font-size: 0.85rem !important; /* 0.75 à®†à®• à®‡à®°à¯à®¨à¯à®¤à®¤à¯ˆ 0.95 à®†à®•à®ªà¯ à®ªà¯†à®°à®¿à®¤à®¾à®•à¯à®•à®¿à®¯à¯à®³à¯à®³à¯‡à®©à¯ */
         font-weight: 600 !important;
-        margin-left: 35px !important; /* லிங்குகளுக்கு இடையே உள்ள இடைவெளி */
+        margin-left: 35px !important; /* à®²à®¿à®™à¯à®•à¯à®•à®³à¯à®•à¯à®•à¯ à®‡à®Ÿà¯ˆà®¯à¯‡ à®‰à®³à¯à®³ à®‡à®Ÿà¯ˆà®µà¯†à®³à®¿ */
     }
 
-    /* 3. View Count Number & Icon-ஐப் பெரிதாக்க (View Count Big) */
+    /* 3. View Count Number & Icon-à®à®ªà¯ à®ªà¯†à®°à®¿à®¤à®¾à®•à¯à®• (View Count Big) */
     .navbar-view-minimal {
-        font-size: 1.0rem !important; /* Eye Number-ஐப் பெரிதாக்கியுள்ளேன் */
-        margin-right: 40px !important; /* Nav லிங்குகளுக்கு முன்பாக உள்ள இடைவெளி */
+        font-size: 1.0rem !important; /* Eye Number-à®à®ªà¯ à®ªà¯†à®°à®¿à®¤à®¾à®•à¯à®•à®¿à®¯à¯à®³à¯à®³à¯‡à®©à¯ */
+        margin-right: 40px !important; /* Nav à®²à®¿à®™à¯à®•à¯à®•à®³à¯à®•à¯à®•à¯ à®®à¯à®©à¯à®ªà®¾à®• à®‰à®³à¯à®³ à®‡à®Ÿà¯ˆà®µà¯†à®³à®¿ */
         gap: 6px !important; 
     }
     .navbar-view-minimal svg {
-        width: 20px !important; /* Eye Icon-ஐப் பெரிதாக்கியுள்ளேன் */
+        width: 20px !important; /* Eye Icon-à®à®ªà¯ à®ªà¯†à®°à®¿à®¤à®¾à®•à¯à®•à®¿à®¯à¯à®³à¯à®³à¯‡à®©à¯ */
         height: 20px !important;
     }
     
-    /* லேப்டாப்பில் Menu (Toggle) Button-ஐ கட்டாயம் மறைக்க */
+    /* à®²à¯‡à®ªà¯à®Ÿà®¾à®ªà¯à®ªà®¿à®²à¯ Menu (Toggle) Button-à® à®•à®Ÿà¯à®Ÿà®¾à®¯à®®à¯ à®®à®±à¯ˆà®•à¯à®• */
     .toggle-btn {
         display: none !important;
     }
@@ -93,8 +93,8 @@ html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
 .footer { background: #111; color: #fff; padding: 20px 0; font-size: 0.7rem; }
 .footer-grid { width: 92%; margin: 0 auto; display: flex; justify-content: space-between; }
 .custom-img {
-    width: 100%;       /* டிவ்வின் முழு அகலத்திற்கு ஏற்ப மாறும் */
-    height: auto;      /* உயரத்தை தானாகவே சரி செய்யும் */
+    width: 100%;       /* à®Ÿà®¿à®µà¯à®µà®¿à®©à¯ à®®à¯à®´à¯ à®…à®•à®²à®¤à¯à®¤à®¿à®±à¯à®•à¯ à®à®±à¯à®ª à®®à®¾à®±à¯à®®à¯ */
+    height: auto;      /* à®‰à®¯à®°à®¤à¯à®¤à¯ˆ à®¤à®¾à®©à®¾à®•à®µà¯‡ à®šà®°à®¿ à®šà¯†à®¯à¯à®¯à¯à®®à¯ */
     display: block;
 }
 /* Mobile View & Toggle Fix */
@@ -122,7 +122,7 @@ html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
 .contact-form input, .form-select, .contact-form textarea { width: 100%; padding: 8px; margin: 6px 0; border: 1px solid #ddd; border-radius: 4px; font-size: 0.75rem; }
 .send-btn { width: 100%; background: #25d366; color: #fff; border: none; padding: 10px; font-weight: 600; cursor: pointer; }
 .close-btn { position: absolute; right: 12px; top: 8px; cursor: pointer; font-size: 1.4rem; }
-/* 1. பெரிய திரைகள் (Laptops/Desktops) - இதில் Toggle பட்டன் தெரியாது */
+/* 1. à®ªà¯†à®°à®¿à®¯ à®¤à®¿à®°à¯ˆà®•à®³à¯ (Laptops/Desktops) - à®‡à®¤à®¿à®²à¯ Toggle à®ªà®Ÿà¯à®Ÿà®©à¯ à®¤à¯†à®°à®¿à®¯à®¾à®¤à¯ */
 
 
 
@@ -133,8 +133,8 @@ html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
 
 
 
-@media (min-width: 1024px) {
-    /* 1. முதலில் பேனருக்கு எல்லை வகுக்கவும் (கட்டாயம் தேவை) */
+@media (min-width: 993px) {
+    /* 1. à®®à¯à®¤à®²à®¿à®²à¯ à®ªà¯‡à®©à®°à¯à®•à¯à®•à¯ à®Žà®²à¯à®²à¯ˆ à®µà®•à¯à®•à¯à®•à®µà¯à®®à¯ (à®•à®Ÿà¯à®Ÿà®¾à®¯à®®à¯ à®¤à¯‡à®µà¯ˆ) */
     .banner {
         position: relative !important;
      
@@ -149,10 +149,10 @@ html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
         width: 100% !important;
         left: 0 !important;
         
-        /* அடியில் தள்ள (Corrected Bottom Move) */
+        /* à®…à®Ÿà®¿à®¯à®¿à®²à¯ à®¤à®³à¯à®³ (Corrected Bottom Move) */
         position: absolute !important;
-        bottom: 550px !important;  /* 750px-க்கு பதில் 20px கொடுக்கவும் */
-        top: auto !important;     /* பழைய Top பொசிஷனை ரத்து செய்ய */
+        bottom: 550px !important;  /* 750px-à®•à¯à®•à¯ à®ªà®¤à®¿à®²à¯ 20px à®•à¯Šà®Ÿà¯à®•à¯à®•à®µà¯à®®à¯ */
+        top: auto !important;     /* à®ªà®´à¯ˆà®¯ Top à®ªà¯Šà®šà®¿à®·à®©à¯ˆ à®°à®¤à¯à®¤à¯ à®šà¯†à®¯à¯à®¯ */
         
         padding: 0 !important;
         margin: 0 !important;
@@ -160,7 +160,7 @@ html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
         z-index: 100 !important;
     }
 
-    /* உரை அமைப்புகள் (நீங்கள் கேட்டது போலவே) */
+    /* à®‰à®°à¯ˆ à®…à®®à¯ˆà®ªà¯à®ªà¯à®•à®³à¯ (à®¨à¯€à®™à¯à®•à®³à¯ à®•à¯‡à®Ÿà¯à®Ÿà®¤à¯ à®ªà¯‹à®²à®µà¯‡) */
     .header-mini-bar span {
         color: #000000 !important;
         font-size: 11px !important;
@@ -178,19 +178,19 @@ html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
 
     #festival-wish {
         color: #ff69b4 !important;
-        font-weight: 350 !important; /* உரை தெரியும்படி 350 வைக்கவும் */
+        font-weight: 350 !important; /* à®‰à®°à¯ˆ à®¤à¯†à®°à®¿à®¯à¯à®®à¯à®ªà®Ÿà®¿ 350 à®µà¯ˆà®•à¯à®•à®µà¯à®®à¯ */
         text-transform: none !important;
         animation: slowBlink 4s ease-in-out infinite !important;
     }
 }
 
-/* மெதுவான பிளிங்க் அனிமேஷன் */
+/* à®®à¯†à®¤à¯à®µà®¾à®© à®ªà®¿à®³à®¿à®™à¯à®•à¯ à®…à®©à®¿à®®à¯‡à®·à®©à¯ */
 @keyframes slowBlink {
     0% { opacity: 1; }
     50% { opacity: 0.3; }
     100% { opacity: 1; }
 }
-/* மொபைலில் மேலேயே இருக்க (ஏற்கனவே உள்ள கோட் அப்படியே இருக்கட்டும்) */
+/* à®®à¯Šà®ªà¯ˆà®²à®¿à®²à¯ à®®à¯‡à®²à¯‡à®¯à¯‡ à®‡à®°à¯à®•à¯à®• (à®à®±à¯à®•à®©à®µà¯‡ à®‰à®³à¯à®³ à®•à¯‹à®Ÿà¯ à®…à®ªà¯à®ªà®Ÿà®¿à®¯à¯‡ à®‡à®°à¯à®•à¯à®•à®Ÿà¯à®Ÿà¯à®®à¯) */
 
 
 
@@ -200,18 +200,18 @@ html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
 
 .header-mini-bar {
     position: absolute !important;
-    top: 5px !important; /* மிக உச்சிக்கு நகர்த்தப்பட்டுள்ளது */
+    top: 5px !important; /* à®®à®¿à®• à®‰à®šà¯à®šà®¿à®•à¯à®•à¯ à®¨à®•à®°à¯à®¤à¯à®¤à®ªà¯à®ªà®Ÿà¯à®Ÿà¯à®³à¯à®³à®¤à¯ */
     left: 0;
     width: 100% !important;
     background: transparent !important;
     display: flex !important;
-    justify-content: center !important; /* லேப்டாப் சென்டர் */
+    justify-content: center !important; /* à®²à¯‡à®ªà¯à®Ÿà®¾à®ªà¯ à®šà¯†à®©à¯à®Ÿà®°à¯ */
     align-items: center !important;
     font-family: 'Poppins', sans-serif !important;
     z-index: 100 !important;
 }
 
-/* கருப்பு மற்றும் மெல்லிய எழுத்துரு */
+/* à®•à®°à¯à®ªà¯à®ªà¯ à®®à®±à¯à®±à¯à®®à¯ à®®à¯†à®²à¯à®²à®¿à®¯ à®Žà®´à¯à®¤à¯à®¤à¯à®°à¯ */
 .header-mini-bar span {
     color: #000000 !important;
     font-weight: 400 !important; /* Thin Poppins */
@@ -219,20 +219,20 @@ html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
     letter-spacing: 0.5px !important;
 }
 
-/* பிரிப்பான் கோடு */
+/* à®ªà®¿à®°à®¿à®ªà¯à®ªà®¾à®©à¯ à®•à¯‹à®Ÿà¯ */
 .header-mini-bar .s {
     opacity: 0.3 !important;
     padding: 0 4px !important;
 }
 
-/* Welcome - பிங்க் நிறம் மற்றும் மெதுவான பிளிங்க் (Slow Blink) */
+/* Welcome - à®ªà®¿à®™à¯à®•à¯ à®¨à®¿à®±à®®à¯ à®®à®±à¯à®±à¯à®®à¯ à®®à¯†à®¤à¯à®µà®¾à®© à®ªà®¿à®³à®¿à®™à¯à®•à¯ (Slow Blink) */
 #festival-wish {
     color: #ff3399 !important;
-    font-weight: 400 !important; /* வாசிக்க எளிதாக இருக்க சற்று தடிமன் */
-    animation: slowBlink 3s ease-in-out infinite !important; /* 3 விநாடி மெதுவான அனிமேஷன் */
+    font-weight: 400 !important; /* à®µà®¾à®šà®¿à®•à¯à®• à®Žà®³à®¿à®¤à®¾à®• à®‡à®°à¯à®•à¯à®• à®šà®±à¯à®±à¯ à®¤à®Ÿà®¿à®®à®©à¯ */
+    animation: slowBlink 3s ease-in-out infinite !important; /* 3 à®µà®¿à®¨à®¾à®Ÿà®¿ à®®à¯†à®¤à¯à®µà®¾à®© à®…à®©à®¿à®®à¯‡à®·à®©à¯ */
 }
 
-/* மெதுவான பிளிங்கிங் அனிமேஷன் (Slow Animation) */
+/* à®®à¯†à®¤à¯à®µà®¾à®© à®ªà®¿à®³à®¿à®™à¯à®•à®¿à®™à¯ à®…à®©à®¿à®®à¯‡à®·à®©à¯ (Slow Animation) */
 @keyframes slowBlink {
     0% { opacity: 1; }
     50% { opacity: 0.2; }
@@ -242,8 +242,8 @@ html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
 /* --- Mobile Device Adjustments --- */
 @media screen and (max-width: 399px) {
     .header-mini-bar {
-        top: 70px !important; /* மொபைலில் இன்னும் உச்சிக்கு */
-        justify-content: flex-start !important; /* இடது ஓரம் */
+        top: 70px !important; /* à®®à¯Šà®ªà¯ˆà®²à®¿à®²à¯ à®‡à®©à¯à®©à¯à®®à¯ à®‰à®šà¯à®šà®¿à®•à¯à®•à¯ */
+        justify-content: flex-start !important; /* à®‡à®Ÿà®¤à¯ à®“à®°à®®à¯ */
         padding-left: 28px !important;
     }
     
@@ -337,25 +337,25 @@ html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
 
   
 
-@media (min-width: 1024px) {
+@media (min-width: 993px) {
     
     .social-stock-container {
         display: flex !important;
-        flex-direction: row !important;    /* ஐகான்களை வரிசையாக வைக்க */
-        position: absolute !important;     /* பேனரின் மீது எங்கு வேண்டுமானாலும் வைக்க */
-        left: 150px !important;             /* இடது பக்க விளிம்பிலிருந்து 20px தள்ளி */
-        top: 700px !important;             /* பேனருக்குள் உங்களுக்கு தேவையான உயரம் (இதை மாற்றிக்கொள்ளலாம்) */
-        gap: 15px !important;              /* ஐகான்களுக்கு இடையே உள்ள இடைவெளி */
+        flex-direction: row !important;    /* à®à®•à®¾à®©à¯à®•à®³à¯ˆ à®µà®°à®¿à®šà¯ˆà®¯à®¾à®• à®µà¯ˆà®•à¯à®• */
+        position: absolute !important;     /* à®ªà¯‡à®©à®°à®¿à®©à¯ à®®à¯€à®¤à¯ à®Žà®™à¯à®•à¯ à®µà¯‡à®£à¯à®Ÿà¯à®®à®¾à®©à®¾à®²à¯à®®à¯ à®µà¯ˆà®•à¯à®• */
+        left: 150px !important;             /* à®‡à®Ÿà®¤à¯ à®ªà®•à¯à®• à®µà®¿à®³à®¿à®®à¯à®ªà®¿à®²à®¿à®°à¯à®¨à¯à®¤à¯ 20px à®¤à®³à¯à®³à®¿ */
+        top: 700px !important;             /* à®ªà¯‡à®©à®°à¯à®•à¯à®•à¯à®³à¯ à®‰à®™à¯à®•à®³à¯à®•à¯à®•à¯ à®¤à¯‡à®µà¯ˆà®¯à®¾à®© à®‰à®¯à®°à®®à¯ (à®‡à®¤à¯ˆ à®®à®¾à®±à¯à®±à®¿à®•à¯à®•à¯Šà®³à¯à®³à®²à®¾à®®à¯) */
+        gap: 15px !important;              /* à®à®•à®¾à®©à¯à®•à®³à¯à®•à¯à®•à¯ à®‡à®Ÿà¯ˆà®¯à¯‡ à®‰à®³à¯à®³ à®‡à®Ÿà¯ˆà®µà¯†à®³à®¿ */
         z-index: 100 !important;
     }
 
     .stock-icon {
-        width: 40px !important;            /* ஐகான் பெட்டியின் அகலம் */
-        height: 40px !important;           /* ஐகான் பெட்டியின் உயரம் */
+        width: 40px !important;            /* à®à®•à®¾à®©à¯ à®ªà¯†à®Ÿà¯à®Ÿà®¿à®¯à®¿à®©à¯ à®…à®•à®²à®®à¯ */
+        height: 40px !important;           /* à®à®•à®¾à®©à¯ à®ªà¯†à®Ÿà¯à®Ÿà®¿à®¯à®¿à®©à¯ à®‰à®¯à®°à®®à¯ */
         display: flex !important;
         align-items: center !important;
         justify-content: center !important;
-        border-radius: 15% !important;     /* வட்ட வடிவம் */
+        border-radius: 15% !important;     /* à®µà®Ÿà¯à®Ÿ à®µà®Ÿà®¿à®µà®®à¯ */
         transition: transform 0.3s ease !important;
         text-decoration: none !important;
         
@@ -363,12 +363,12 @@ html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
 
     .stock-icon:hover {
        
-        transform: translateY(-5px) !important; /* சற்று மேலே உயரும் */
+        transform: translateY(-5px) !important; /* à®šà®±à¯à®±à¯ à®®à¯‡à®²à¯‡ à®‰à®¯à®°à¯à®®à¯ */
     }
 
     .stock-icon i {
         font-size: 18px !important;
-        color: #ffffff !important;         /* ஐகான் நிறம் வெள்ளை */
+        color: #ffffff !important;         /* à®à®•à®¾à®©à¯ à®¨à®¿à®±à®®à¯ à®µà¯†à®³à¯à®³à¯ˆ */
     }
     .yt-bg { background-color: #ff0000 !important; } /* YouTube Red */
     .be-bg { background-color: #053eff !important; } /* Behance Blue */
@@ -395,7 +395,7 @@ html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
     min-height: 150px !important;
     display: flex !important;
     flex-direction: column !important;
-    justify-content: center !important; /* மேலேயும் கீழேயும் சமமான கேப் */
+    justify-content: center !important; /* à®®à¯‡à®²à¯‡à®¯à¯à®®à¯ à®•à¯€à®´à¯‡à®¯à¯à®®à¯ à®šà®®à®®à®¾à®© à®•à¯‡à®ªà¯ */
     align-items: center !important;
     box-sizing: border-box !important;
     border: 1px solid rgba(255,255,255,0.1);
@@ -410,7 +410,7 @@ html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
     display: flex !important;
     flex-direction: column !important;
     align-items: center !important;
-    gap: 8px !important; /* லேப்டாப் கேப் */
+    gap: 8px !important; /* à®²à¯‡à®ªà¯à®Ÿà®¾à®ªà¯ à®•à¯‡à®ªà¯ */
 }
 
 /* Icons & Text White Color */
@@ -437,8 +437,8 @@ html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
 .navbar {
         position: fixed !important;
         top: 0 !important;
-        z-index: 9999 !important; /* இது ஐகான்களை விட அதிகம் */
-        background: #ffffff !important; /* பின்புலம் தெரிந்தால் தான் ஐகான் மறையும் */
+        z-index: 9999 !important; /* à®‡à®¤à¯ à®à®•à®¾à®©à¯à®•à®³à¯ˆ à®µà®¿à®Ÿ à®…à®¤à®¿à®•à®®à¯ */
+        background: #ffffff !important; /* à®ªà®¿à®©à¯à®ªà¯à®²à®®à¯ à®¤à¯†à®°à®¿à®¨à¯à®¤à®¾à®²à¯ à®¤à®¾à®©à¯ à®à®•à®¾à®©à¯ à®®à®±à¯ˆà®¯à¯à®®à¯ */
     }
 
 
@@ -458,30 +458,30 @@ html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
 
 
 @media screen and (max-width: 992px) {
-    /* 1. மெயின் பேனர் அமைப்பு */
+    /* 1. à®®à¯†à®¯à®¿à®©à¯ à®ªà¯‡à®©à®°à¯ à®…à®®à¯ˆà®ªà¯à®ªà¯ */
     .banner {
         display: block !important;
         position: relative !important;
         height: 220px !important;
-        background-color: #f1f1f1 !important; /* பின்னணி நிறம் இங்கே லாக் செய்யப்பட்டுள்ளது */
+        background-color: #f1f1f1 !important; /* à®ªà®¿à®©à¯à®©à®£à®¿ à®¨à®¿à®±à®®à¯ à®‡à®™à¯à®•à¯‡ à®²à®¾à®•à¯ à®šà¯†à®¯à¯à®¯à®ªà¯à®ªà®Ÿà¯à®Ÿà¯à®³à¯à®³à®¤à¯ */
         overflow: hidden !important;
         padding: 0 !important;
     }
 
-    /* 2. பேனர் படம் (Visibility & Size Fix) */
+    /* 2. à®ªà¯‡à®©à®°à¯ à®ªà®Ÿà®®à¯ (Visibility & Size Fix) */
     .banner-image {
         display: flex !important;
         position: absolute !important;
-        right: 5px !important; /* வலது ஓரம் */
-        bottom: 5px !important; /* கீழே லாக் */
-        width: 150px !important; /* அளவு */
+        right: 5px !important; /* à®µà®²à®¤à¯ à®“à®°à®®à¯ */
+        bottom: 5px !important; /* à®•à¯€à®´à¯‡ à®²à®¾à®•à¯ */
+        width: 150px !important; /* à®…à®³à®µà¯ */
         justify-content: flex-end !important;
         z-index: 5 !important;
         background: transparent !important;
     }
 
     .banner-image img {
-        width: 150px !important; /* படத்தின் அகலத்தை உறுதி செய்கிறது */
+        width: 150px !important; /* à®ªà®Ÿà®¤à¯à®¤à®¿à®©à¯ à®…à®•à®²à®¤à¯à®¤à¯ˆ à®‰à®±à¯à®¤à®¿ à®šà¯†à®¯à¯à®•à®¿à®±à®¤à¯ */
         height: auto !important;
         object-fit: contain !important;
         margin-bottom: 10px;
@@ -489,7 +489,7 @@ html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
         display: block !important;
     }
 
-    /* 3. பேனர் எழுத்துக்கள் (Position Lock) */
+    /* 3. à®ªà¯‡à®©à®°à¯ à®Žà®´à¯à®¤à¯à®¤à¯à®•à¯à®•à®³à¯ (Position Lock) */
     .banner-content {
         position: absolute !important;
         left: 15px !important;
@@ -509,18 +509,18 @@ html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
         text-align: left !important;
     }
 
-    /* 4. பாராகிராப் (Paragraph Fix) */
+    /* 4. à®ªà®¾à®°à®¾à®•à®¿à®°à®¾à®ªà¯ (Paragraph Fix) */
     .thin-p.one-line-p {
         font-size: 8px !important; 
         white-space: nowrap !important;
         font-weight: 300 !important;
-        text-align: left !important; /* Right-க்கு பதில் Left கொடுத்துள்ளேன், அப்போதுதான் Heading உடன் சேரும் */
+        text-align: left !important; /* Right-à®•à¯à®•à¯ à®ªà®¤à®¿à®²à¯ Left à®•à¯Šà®Ÿà¯à®¤à¯à®¤à¯à®³à¯à®³à¯‡à®©à¯, à®…à®ªà¯à®ªà¯‹à®¤à¯à®¤à®¾à®©à¯ Heading à®‰à®Ÿà®©à¯ à®šà¯‡à®°à¯à®®à¯ */
         margin: 0 !important;
         display: block !important;
         width: auto !important;
     }
 
-    /* 5. வாட்ஸ்அப் பட்டன் (Perfect Size) */
+    /* 5. à®µà®¾à®Ÿà¯à®¸à¯à®…à®ªà¯ à®ªà®Ÿà¯à®Ÿà®©à¯ (Perfect Size) */
     .whatsapp-btn-live {
         display: inline-flex !important;
         width: 135px !important;
@@ -541,44 +541,44 @@ html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
 
 
 @media (max-width: 992px) {
-    /* 1. மெயின் கண்டெய்னர் - இடைவெளியை உறுதி செய்ய */
+    /* 1. à®®à¯†à®¯à®¿à®©à¯ à®•à®£à¯à®Ÿà¯†à®¯à¯à®©à®°à¯ - à®‡à®Ÿà¯ˆà®µà¯†à®³à®¿à®¯à¯ˆ à®‰à®±à¯à®¤à®¿ à®šà¯†à®¯à¯à®¯ */
     .banner-content {
         display: flex !important;
         flex-direction: column !important;
         justify-content: center !important;
-        /* இதுதான் நீங்கள் கேட்ட சிறிய இடைவெளி (Small Gap) */
+        /* à®‡à®¤à¯à®¤à®¾à®©à¯ à®¨à¯€à®™à¯à®•à®³à¯ à®•à¯‡à®Ÿà¯à®Ÿ à®šà®¿à®±à®¿à®¯ à®‡à®Ÿà¯ˆà®µà¯†à®³à®¿ (Small Gap) */
         gap: 5px !important; 
         margin-left: 10px !important;
         padding: 0 !important;
     }
 
-    /* 2. தலைப்பை சிறிதாக்க (Heading) */
+    /* 2. à®¤à®²à¯ˆà®ªà¯à®ªà¯ˆ à®šà®¿à®±à®¿à®¤à®¾à®•à¯à®• (Heading) */
     .main-heading { 
         font-size: 0.9rem !important; 
-        margin: 0 !important; /* தேவையற்ற இடைவெளியை நீக்க */
+        margin: 0 !important; /* à®¤à¯‡à®µà¯ˆà®¯à®±à¯à®± à®‡à®Ÿà¯ˆà®µà¯†à®³à®¿à®¯à¯ˆ à®¨à¯€à®•à¯à®• */
         line-height: 1.1 !important;
     }
 
-    /* 3. பாராகிராப்பை சிறிதாக்க (Paragraph) */
+    /* 3. à®ªà®¾à®°à®¾à®•à®¿à®°à®¾à®ªà¯à®ªà¯ˆ à®šà®¿à®±à®¿à®¤à®¾à®•à¯à®• (Paragraph) */
     .thin-p.one-line-p { 
         font-size: 0.4rem !important; 
-        margin: 0 !important; /* தேவையற்ற இடைவெளியை நீக்க */
+        margin: 0 !important; /* à®¤à¯‡à®µà¯ˆà®¯à®±à¯à®± à®‡à®Ÿà¯ˆà®µà¯†à®³à®¿à®¯à¯ˆ à®¨à¯€à®•à¯à®• */
         padding: 0 !important;
         text-align: left !important;
         white-space: nowrap;
     }
 
-    /* 4. பட்டனை சிறிதாக்க (Button) */
+    /* 4. à®ªà®Ÿà¯à®Ÿà®©à¯ˆ à®šà®¿à®±à®¿à®¤à®¾à®•à¯à®• (Button) */
     .whatsapp-btn-live {
-        font-size: 0.6rem !important; /* மிகச்சிறிய எழுத்து */
-        padding: 4px 10px !important; /* சிறிய பட்டன் அளவு */
+        font-size: 0.6rem !important; /* à®®à®¿à®•à®šà¯à®šà®¿à®±à®¿à®¯ à®Žà®´à¯à®¤à¯à®¤à¯ */
+        padding: 4px 10px !important; /* à®šà®¿à®±à®¿à®¯ à®ªà®Ÿà¯à®Ÿà®©à¯ à®…à®³à®µà¯ */
         width: fit-content !important; 
-        margin: 0 !important; /* தேவையற்ற இடைவெளியை நீக்க */
+        margin: 0 !important; /* à®¤à¯‡à®µà¯ˆà®¯à®±à¯à®± à®‡à®Ÿà¯ˆà®µà¯†à®³à®¿à®¯à¯ˆ à®¨à¯€à®•à¯à®• */
         height: auto !important;
         min-height: unset !important;
     }
 
-    /* ஐகான் அளவு */
+    /* à®à®•à®¾à®©à¯ à®…à®³à®µà¯ */
     .whatsapp-btn-live i {
         font-size: 0.9rem !important;
     }
@@ -591,8 +591,8 @@ html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
 }
 
 .logo-icon-rotate {
-    font-size: clamp(0.8rem, 4vw, 1.1rem) !important; /* ஐகான் அளவு தானாக மாறும் */
-    margin-left: 10px; /* லேசாக வலது பக்கம் நகர்த்த */
+    font-size: clamp(0.8rem, 4vw, 1.1rem) !important; /* à®à®•à®¾à®©à¯ à®…à®³à®µà¯ à®¤à®¾à®©à®¾à®• à®®à®¾à®±à¯à®®à¯ */
+    margin-left: 10px; /* à®²à¯‡à®šà®¾à®• à®µà®²à®¤à¯ à®ªà®•à¯à®•à®®à¯ à®¨à®•à®°à¯à®¤à¯à®¤ */
 }
 
 
@@ -607,70 +607,74 @@ html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
 
 
 
-@media (min-width: 1024px) {
+@media (min-width: 993px) {
 
     .container {
-        max-width: 1400px; /* திரையின் அகலத்தை அதிகரித்தல் */
+        max-width: 1200px; /* à®¤à®¿à®°à¯ˆà®¯à®¿à®©à¯ à®…à®•à®²à®®à¯ */
         margin: 0 auto;
     }
 
-    /* கார்டுகளை வரிசைப்படுத்துதல் */
+    /* à®•à®¾à®°à¯à®Ÿà¯à®•à®³à¯ˆ à®’à®°à¯‡ à®µà®°à®¿à®šà¯ˆà®¯à®¿à®²à¯ à®¨à¯‡à®°à¯à®¤à¯à®¤à®¿à®¯à®¾à®• à®µà¯ˆà®•à¯à®•à¯à®®à¯ */
     .row-flex-mobile {
         display: flex !important;
         justify-content: center;
-        gap: 40px; /* கார்டுகளுக்கு இடையே அதிக இடைவெளி */
+        gap: 30px; /* à®•à®¾à®°à¯à®Ÿà¯à®•à®³à¯à®•à¯à®•à¯ à®‡à®Ÿà¯ˆà®¯à¯‡ à®®à®¿à®¤à®®à®¾à®© à®‡à®Ÿà¯ˆà®µà¯†à®³à®¿ */
     }
 
-    /* சர்வீஸ் கார்டு பாக்ஸ் அளவு அதிகரிப்பு */
+    /* à®²à¯‡à®ªà¯à®Ÿà®¾à®ªà¯à®ªà®¿à®²à¯ à®ªà®¾à®°à¯à®ªà¯à®ªà®¤à®±à¯à®•à¯ à®…à®´à®•à®¾à®• à®…à®³à®µà¯ˆà®•à¯ à®•à¯à®±à¯ˆà®¤à¯à®¤à¯à®³à¯à®³à¯‡à®©à¯ */
     .service-card {
-        flex: 0 0 350px !important; /* பாக்ஸ் அகலத்தை பெரியதாக்க */
-        min-height: 450px !important; /* பாக்ஸ் உயரத்தை பெரியதாக்க */
-        padding: 40px !important;
+        flex: 0 0 200px !important; /* à®ªà®¾à®•à¯à®¸à¯ à®…à®•à®²à®®à¯ à®•à¯à®±à¯ˆà®ªà¯à®ªà¯ */
+        min-height: 180px !important; /* à®ªà®¾à®•à¯à®¸à¯ à®‰à®¯à®°à®®à¯ à®•à¯à®±à¯ˆà®ªà¯à®ªà¯ */
+        padding: 20px !important;
         text-align: center;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.05); /* à®²à¯‡à®šà®¾à®© à®¨à®¿à®´à®²à¯ */
     }
 
-    /* ஐகான் (Icon) அளவை மிகப் பெரியதாக்க */
+    /* à®à®•à®¾à®©à¯ (Icon) à®…à®³à®µà¯ˆ à®•à¯à®±à¯ˆà®¤à¯à®¤à¯ à®•à®šà¯à®šà®¿à®¤à®®à®¾à®•à¯à®•à®¿à®¯à¯à®³à¯à®³à¯‡à®©à¯ */
     .hex-shape {
-        width: 150px !important; 
-        height: 150px !important;
-        font-size: 60px !important; /* ஐகான் சின்னம் பெரியதாக */
-        margin-bottom: 25px !important;
+        width: 80px !important; 
+        height: 80px !important;
+        font-size: 30px !important; /* à®à®•à®¾à®©à¯ à®šà®¿à®©à¯à®©à®®à¯ */
+        margin-bottom: 15px !important;
         display: flex;
         align-items: center;
         justify-content: center;
     }
 
-    /* கார்டு தலைப்பு (Graphics, Motion, Web) */
+    /* à®•à®¾à®°à¯à®Ÿà¯ à®¤à®²à¯ˆà®ªà¯à®ªà¯ (Graphics, Motion, Web) */
     .service-card h3 {
-        font-size: 38px !important; 
-        font-weight: 800;
-        margin-bottom: 20px !important;
-    }
-
-    /* விளக்கம் (Paragraph) */
-    .service-card p {
         font-size: 18px !important; 
-        line-height: 1.6;
-        margin-bottom: 30px !important;
-    }
-
-    /* VIEW பட்டன் அளவு அதிகரிப்பு */
-    .view-btn-text {
-        font-size: 18px !important;
-        padding: 12px 40px !important;
         font-weight: 700;
-        border-radius: 8px;
+        margin-bottom: 10px !important;
+        color: #333;
     }
 
-    /* பிரதான தலைப்பு (Our Services) */
+    /* à®µà®¿à®³à®•à¯à®•à®®à¯ (Paragraph) */
+    .service-card p {
+        font-size: 12px !important; 
+        line-height: 1.4;
+        margin-bottom: 15px !important;
+    }
+
+    /* VIEW à®ªà®Ÿà¯à®Ÿà®©à¯ à®…à®³à®µà¯ à®®à®¾à®±à¯à®±à¯ */
+    .view-btn-text {
+        font-size: 11px !important;
+        padding: 8px 20px !important;
+        font-weight: 700;
+        border-radius: 5px;
+    }
+
+    /* à®ªà®¿à®°à®¤à®¾à®© à®¤à®²à¯ˆà®ªà¯à®ªà¯ (Our Services) */
     .main-title-small {
-        font-size: 55px !important;
-        margin-bottom: 70px;
+        font-size: 30px !important;
+        margin-bottom: 40px;
         text-align: center;
+        justify-content: center;
     }
 }
 
@@ -684,7 +688,7 @@ html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
     position: fixed;
     top: 0; left: 0;
     width: 100%; height: 100%;
-    background: rgba(0,0,0,0.4); /* லேசான கருப்பு நிழல் */
+    background: rgba(0,0,0,0.4); /* à®²à¯‡à®šà®¾à®© à®•à®°à¯à®ªà¯à®ªà¯ à®¨à®¿à®´à®²à¯ */
     z-index: 10000;
     justify-content: center;
     align-items: center;
@@ -718,7 +722,7 @@ html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
     border-radius: 8px;
     background: #ffffff;
     font-family: 'Poppins', sans-serif;
-    box-sizing: border-box; /* ஓரங்களில் ஒட்டாமல் இருக்க */
+    box-sizing: border-box; /* à®“à®°à®™à¯à®•à®³à®¿à®²à¯ à®’à®Ÿà¯à®Ÿà®¾à®®à®²à¯ à®‡à®°à¯à®•à¯à®• */
     outline: none;
 }
 
@@ -757,21 +761,21 @@ html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
 
 
 @media screen and (max-width: 1023px) {
-    /* 1. ஐகான் பெட்டி - நேவ்பாருக்குக் கீழே நகர்த்தப்பட்டுள்ளது */
+    /* 1. à®à®•à®¾à®©à¯ à®ªà¯†à®Ÿà¯à®Ÿà®¿ - à®¨à¯‡à®µà¯à®ªà®¾à®°à¯à®•à¯à®•à¯à®•à¯ à®•à¯€à®´à¯‡ à®¨à®•à®°à¯à®¤à¯à®¤à®ªà¯à®ªà®Ÿà¯à®Ÿà¯à®³à¯à®³à®¤à¯ */
     .social-stock-container {
         display: flex !important;
         flex-direction: row !important;
         position: absolute !important; 
         left: 30px !important; 
         
-        /* நேவ்பாருக்குச் சரியாகக் கீழே லாக் செய்யப்பட்டுள்ளது */
+        /* à®¨à¯‡à®µà¯à®ªà®¾à®°à¯à®•à¯à®•à¯à®šà¯ à®šà®°à®¿à®¯à®¾à®•à®•à¯ à®•à¯€à®´à¯‡ à®²à®¾à®•à¯ à®šà¯†à®¯à¯à®¯à®ªà¯à®ªà®Ÿà¯à®Ÿà¯à®³à¯à®³à®¤à¯ */
         top: 190px !important; 
         
         gap: 6px !important;
         z-index: 2000 !important;
     }
 
-    /* 2. உங்கள் அதே ஐகான் டிசைன் - கோடுகள் நீக்கப்பட்டுள்ளது */
+    /* 2. à®‰à®™à¯à®•à®³à¯ à®…à®¤à¯‡ à®à®•à®¾à®©à¯ à®Ÿà®¿à®šà¯ˆà®©à¯ - à®•à¯‹à®Ÿà¯à®•à®³à¯ à®¨à¯€à®•à¯à®•à®ªà¯à®ªà®Ÿà¯à®Ÿà¯à®³à¯à®³à®¤à¯ */
     .stock-icon {
         width: 15px !important; 
         height: 15px !important;
@@ -780,7 +784,7 @@ html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
         justify-content: center !important;
         border-radius: 2px !important; 
         
-        /* கோடுகளை நீக்க */
+        /* à®•à¯‹à®Ÿà¯à®•à®³à¯ˆ à®¨à¯€à®•à¯à®• */
         text-decoration: none !important; 
         border: none !important;
         box-shadow: none !important;
@@ -794,13 +798,13 @@ html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
         display: block !important;
     }
 
-    /* உங்கள் ஒரிஜினல் நிறங்கள் மாறாது */
+    /* à®‰à®™à¯à®•à®³à¯ à®’à®°à®¿à®œà®¿à®©à®²à¯ à®¨à®¿à®±à®™à¯à®•à®³à¯ à®®à®¾à®±à®¾à®¤à¯ */
     .yt-bg { background-color: #ff0000 !important; }
     .be-bg { background-color: #053eff !important; }
     .ig-bg { background-color: #e4405f !important; }
 }
 
-/* 3. இது இருந்தால் மட்டுமே ஐகான்கள் பேனருக்குள் நிலையாக இருக்கும் */
+/* 3. à®‡à®¤à¯ à®‡à®°à¯à®¨à¯à®¤à®¾à®²à¯ à®®à®Ÿà¯à®Ÿà¯à®®à¯‡ à®à®•à®¾à®©à¯à®•à®³à¯ à®ªà¯‡à®©à®°à¯à®•à¯à®•à¯à®³à¯ à®¨à®¿à®²à¯ˆà®¯à®¾à®• à®‡à®°à¯à®•à¯à®•à¯à®®à¯ */
 .banner {
     position: relative !important;
 }
@@ -816,42 +820,42 @@ html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
 
 
 
-@media (min-width: 1024px) {
+@media (min-width: 993px) {
 
-    /* 1. பிரதான கண்டெய்னர் அகலம் */
+    /* 1. à®ªà®¿à®°à®¤à®¾à®© à®•à®£à¯à®Ÿà¯†à®¯à¯à®©à®°à¯ à®…à®•à®²à®®à¯ */
     .layout-wrapper {
-        gap: 80px !important; /* இமேஜ் மற்றும் டெக்ஸ்ட் இடையே பெரிய கேப் */
+        gap: 80px !important; /* à®‡à®®à¯‡à®œà¯ à®®à®±à¯à®±à¯à®®à¯ à®Ÿà¯†à®•à¯à®¸à¯à®Ÿà¯ à®‡à®Ÿà¯ˆà®¯à¯‡ à®ªà¯†à®°à®¿à®¯ à®•à¯‡à®ªà¯ */
         max-width: 1400px;
         padding: 40px;
     }
 
-    /* 2. இமேஜ் செக்ஷனை பெரிதாக்க */
+    /* 2. à®‡à®®à¯‡à®œà¯ à®šà¯†à®•à¯à®·à®©à¯ˆ à®ªà¯†à®°à®¿à®¤à®¾à®•à¯à®• */
     .visual-column {
         flex: 0 0 40% !important;
     }
 
     .main-image-box {
-        min-height: 450px !important; /* படத்தின் உயரம் அதிகரிப்பு */
+        min-height: 450px !important; /* à®ªà®Ÿà®¤à¯à®¤à®¿à®©à¯ à®‰à®¯à®°à®®à¯ à®…à®¤à®¿à®•à®°à®¿à®ªà¯à®ªà¯ */
     }
 
-    /* 3. பிரதான தலைப்பு (Main Title) */
+    /* 3. à®ªà®¿à®°à®¤à®¾à®© à®¤à®²à¯ˆà®ªà¯à®ªà¯ (Main Title) */
     .main-title {
-        font-size: 50px !important; /* மிகப் பெரிய தலைப்பு */
-        margin-top: 0 !important; /* லேப்டாப்பில் நெகடிவ் மார்ஜின் தேவையில்லை */
+        font-size: 50px !important; /* à®®à®¿à®•à®ªà¯ à®ªà¯†à®°à®¿à®¯ à®¤à®²à¯ˆà®ªà¯à®ªà¯ */
+        margin-top: 0 !important; /* à®²à¯‡à®ªà¯à®Ÿà®¾à®ªà¯à®ªà®¿à®²à¯ à®¨à¯†à®•à®Ÿà®¿à®µà¯ à®®à®¾à®°à¯à®œà®¿à®©à¯ à®¤à¯‡à®µà¯ˆà®¯à®¿à®²à¯à®²à¯ˆ */
         margin-bottom: 30px !important;
         line-height: 1;
     }
 
-    /* 4. Graphics, Motion, Web லேபிள்கள் */
+    /* 4. Graphics, Motion, Web à®²à¯‡à®ªà®¿à®³à¯à®•à®³à¯ */
     .group-label {
-        font-size: 20px !important; /* லேபிள்கள் பெரியதாக */
+        font-size: 20px !important; /* à®²à¯‡à®ªà®¿à®³à¯à®•à®³à¯ à®ªà¯†à®°à®¿à®¯à®¤à®¾à®• */
         margin-bottom: 12px !important;
         letter-spacing: 1px;
     }
 
-    /* 5. லிஸ்ட் வரிகள் (List Items) */
+    /* 5. à®²à®¿à®¸à¯à®Ÿà¯ à®µà®°à®¿à®•à®³à¯ (List Items) */
     .list li {
-        font-size: 16px !important; /* பெரிய எழுத்துக்கள் */
+        font-size: 16px !important; /* à®ªà¯†à®°à®¿à®¯ à®Žà®´à¯à®¤à¯à®¤à¯à®•à¯à®•à®³à¯ */
         margin-bottom: 8px !important;
         padding-left: 20px !important;
     }
@@ -862,17 +866,17 @@ html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
     }
 
 
-@media (min-width: 1024px) {
-    /* 1. கிரிட் அமைப்பை மூன்று சம பாகங்களாகப் பிரித்தல் */
+@media (min-width: 993px) {
+    /* 1. à®•à®¿à®°à®¿à®Ÿà¯ à®…à®®à¯ˆà®ªà¯à®ªà¯ˆ à®®à¯‚à®©à¯à®±à¯ à®šà®® à®ªà®¾à®•à®™à¯à®•à®³à®¾à®•à®ªà¯ à®ªà®¿à®°à®¿à®¤à¯à®¤à®²à¯ */
     .graphics-grid {
         display: grid !important;
-        grid-template-columns: repeat(3, 1fr) !important; /* 3 சமமான நெடுவரிசைகள் */
-        gap: 40px !important; /* நெடுவரிசைகளுக்கு இடையே இடைவெளி */
-        align-items: start !important; /* அனைத்தையும் மேலிருந்து சமமாகத் தொடங்க */
+        grid-template-columns: repeat(3, 1fr) !important; /* 3 à®šà®®à®®à®¾à®© à®¨à¯†à®Ÿà¯à®µà®°à®¿à®šà¯ˆà®•à®³à¯ */
+        gap: 40px !important; /* à®¨à¯†à®Ÿà¯à®µà®°à®¿à®šà¯ˆà®•à®³à¯à®•à¯à®•à¯ à®‡à®Ÿà¯ˆà®¯à¯‡ à®‡à®Ÿà¯ˆà®µà¯†à®³à®¿ */
+        align-items: start !important; /* à®…à®©à¯ˆà®¤à¯à®¤à¯ˆà®¯à¯à®®à¯ à®®à¯‡à®²à®¿à®°à¯à®¨à¯à®¤à¯ à®šà®®à®®à®¾à®•à®¤à¯ à®¤à¯Šà®Ÿà®™à¯à®• */
         width: 100% !important;
     }
 
-    /* 2. தலைப்பு (Graphics Design) அளவு மற்றும் அலைன்மென்ட் */
+    /* 2. à®¤à®²à¯ˆà®ªà¯à®ªà¯ (Graphics Design) à®…à®³à®µà¯ à®®à®±à¯à®±à¯à®®à¯ à®…à®²à¯ˆà®©à¯à®®à¯†à®©à¯à®Ÿà¯ */
     .group-label {
         font-size: 24px !important;
         font-weight: 800;
@@ -880,40 +884,40 @@ html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
         line-height: 1.2;
     }
 
-    /* 3. லேபிள் இல்லாத (no-label) காலம்களை தலைப்புக்கு நேராகக் கீழே தள்ளுதல் */
+    /* 3. à®²à¯‡à®ªà®¿à®³à¯ à®‡à®²à¯à®²à®¾à®¤ (no-label) à®•à®¾à®²à®®à¯à®•à®³à¯ˆ à®¤à®²à¯ˆà®ªà¯à®ªà¯à®•à¯à®•à¯ à®¨à¯‡à®°à®¾à®•à®•à¯ à®•à¯€à®´à¯‡ à®¤à®³à¯à®³à¯à®¤à®²à¯ */
     .graphics-grid .no-label {
-        /* தலைப்பின் உயரத்திற்கு ஈடாக (Font size + Line height) 
-           லிஸ்ட் வரிகளை மட்டும் கீழே தள்ளுகிறது */
+        /* à®¤à®²à¯ˆà®ªà¯à®ªà®¿à®©à¯ à®‰à®¯à®°à®¤à¯à®¤à®¿à®±à¯à®•à¯ à®ˆà®Ÿà®¾à®• (Font size + Line height) 
+           à®²à®¿à®¸à¯à®Ÿà¯ à®µà®°à®¿à®•à®³à¯ˆ à®®à®Ÿà¯à®Ÿà¯à®®à¯ à®•à¯€à®´à¯‡ à®¤à®³à¯à®³à¯à®•à®¿à®±à®¤à¯ */
         padding-top: 48px !important; 
     }
 
-    /* 4. லிஸ்ட் வரிகளைப் பெரிதாக்கி நேர்த்தியாக்குதல் */
+    /* 4. à®²à®¿à®¸à¯à®Ÿà¯ à®µà®°à®¿à®•à®³à¯ˆà®ªà¯ à®ªà¯†à®°à®¿à®¤à®¾à®•à¯à®•à®¿ à®¨à¯‡à®°à¯à®¤à¯à®¤à®¿à®¯à®¾à®•à¯à®•à¯à®¤à®²à¯ */
     .list{
         margin: 0 !important;
         padding: 0 !important;
     }
 
     .list li {
-        font-size: 17px !important; /* வாசிக்க எளிதான பெரிய அளவு */
+        font-size: 17px !important; /* à®µà®¾à®šà®¿à®•à¯à®• à®Žà®³à®¿à®¤à®¾à®© à®ªà¯†à®°à®¿à®¯ à®…à®³à®µà¯ */
         margin-bottom: 12px !important;
-        white-space: nowrap; /* வரிகள் உடையாமல் இருக்க */
+        white-space: nowrap; /* à®µà®°à®¿à®•à®³à¯ à®‰à®Ÿà¯ˆà®¯à®¾à®®à®²à¯ à®‡à®°à¯à®•à¯à®• */
         font-weight: 500;
     }
 
-    /* 5. செக் மார்க் ஐகான் அலைன்மென்ட் */
+    /* 5. à®šà¯†à®•à¯ à®®à®¾à®°à¯à®•à¯ à®à®•à®¾à®©à¯ à®…à®²à¯ˆà®©à¯à®®à¯†à®©à¯à®Ÿà¯ */
     .list li::before {
         font-size: 16px !important;
         margin-right: 10px;
     }
 }
 
-    /* 6. கிரிட் இடைவெளிகள் (Grids) */
+    /* 6. à®•à®¿à®°à®¿à®Ÿà¯ à®‡à®Ÿà¯ˆà®µà¯†à®³à®¿à®•à®³à¯ (Grids) */
     .graphics-grid, .bottom-grids {
-        gap: 30px !important; /* ஒவ்வொரு காலமிற்கும் இடையே அதிக கேப் */
+        gap: 30px !important; /* à®’à®µà¯à®µà¯Šà®°à¯ à®•à®¾à®²à®®à®¿à®±à¯à®•à¯à®®à¯ à®‡à®Ÿà¯ˆà®¯à¯‡ à®…à®¤à®¿à®• à®•à¯‡à®ªà¯ */
         margin-top: 20px;
     }
 
-    /* 7. பிரைஸ் பட்டன் (Price Button) */
+    /* 7. à®ªà®¿à®°à¯ˆà®¸à¯ à®ªà®Ÿà¯à®Ÿà®©à¯ (Price Button) */
     .rate-btn-inline {
         padding: 12px 35px !important;
         font-size: 18px !important;
@@ -921,7 +925,7 @@ html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
         margin-top: 25px;
     }
 
-    /* ஊதா நிற பெட்டிகளின் அளவு (Purple Boxes) */
+    /* à®Šà®¤à®¾ à®¨à®¿à®± à®ªà¯†à®Ÿà¯à®Ÿà®¿à®•à®³à®¿à®©à¯ à®…à®³à®µà¯ (Purple Boxes) */
     .outer-box-top, .outer-box-bottom {
         height: 15px !important;
         width: 60% !important;
@@ -929,48 +933,48 @@ html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
 
 
 
-/* 1024px-க்கு மேல் உள்ள பெரிய திரைகளுக்கான மாற்றம் */
-@media (min-width: 1024px) {
+/* 1024px-à®•à¯à®•à¯ à®®à¯‡à®²à¯ à®‰à®³à¯à®³ à®ªà¯†à®°à®¿à®¯ à®¤à®¿à®°à¯ˆà®•à®³à¯à®•à¯à®•à®¾à®© à®®à®¾à®±à¯à®±à®®à¯ */
+@media (min-width: 993px) {
 
-    /* 1. Motion & Web பிரிவை மொத்தமாக கீழே நகர்த்த (Bottom Move) */
+    /* 1. Motion & Web à®ªà®¿à®°à®¿à®µà¯ˆ à®®à¯Šà®¤à¯à®¤à®®à®¾à®• à®•à¯€à®´à¯‡ à®¨à®•à®°à¯à®¤à¯à®¤ (Bottom Move) */
     .bottom-content-area {
-        margin-top: 60px !important; /* இந்த அளவை கூட்டினால் இன்னும் கீழே நகரும் */
+        margin-top: 60px !important; /* à®‡à®¨à¯à®¤ à®…à®³à®µà¯ˆ à®•à¯‚à®Ÿà¯à®Ÿà®¿à®©à®¾à®²à¯ à®‡à®©à¯à®©à¯à®®à¯ à®•à¯€à®´à¯‡ à®¨à®•à®°à¯à®®à¯ */
         display: flex;
         flex-direction: column;
         width: 100%;
     }
 
-    /* 2. Motion மற்றும் Web பிரிவுகளை பக்கம் பக்கமாக வைக்க */
+    /* 2. Motion à®®à®±à¯à®±à¯à®®à¯ Web à®ªà®¿à®°à®¿à®µà¯à®•à®³à¯ˆ à®ªà®•à¯à®•à®®à¯ à®ªà®•à¯à®•à®®à®¾à®• à®µà¯ˆà®•à¯à®• */
     .bottom-grids {
         display: grid !important;
-        grid-template-columns: 1fr 1fr !important; /* சமமான இரண்டு காலம்கள் */
-        gap: 80px !important; /* இரண்டுக்கும் இடையே உள்ள இடைவெளி */
+        grid-template-columns: 1fr 1fr !important; /* à®šà®®à®®à®¾à®© à®‡à®°à®£à¯à®Ÿà¯ à®•à®¾à®²à®®à¯à®•à®³à¯ */
+        gap: 80px !important; /* à®‡à®°à®£à¯à®Ÿà¯à®•à¯à®•à¯à®®à¯ à®‡à®Ÿà¯ˆà®¯à¯‡ à®‰à®³à¯à®³ à®‡à®Ÿà¯ˆà®µà¯†à®³à®¿ */
         align-items: start;
     }
 
-    /* 3. லேபிள்களைப் பெரிதாக்கி நேர்த்தியாக்க */
+    /* 3. à®²à¯‡à®ªà®¿à®³à¯à®•à®³à¯ˆà®ªà¯ à®ªà¯†à®°à®¿à®¤à®¾à®•à¯à®•à®¿ à®¨à¯‡à®°à¯à®¤à¯à®¤à®¿à®¯à®¾à®•à¯à®• */
     .bottom-grids .group-label {
         font-size: 24px !important; 
         margin-bottom: 20px !important;
-        color: #ff2d75; /* பிங்க் நிற ஹைலைட் */
+        color: #ff2d75; /* à®ªà®¿à®™à¯à®•à¯ à®¨à®¿à®± à®¹à¯ˆà®²à¯ˆà®Ÿà¯ */
         font-weight: 800;
     }
 
-    /* 4. லிஸ்ட் வரிகளைப் பெரிதாக்க */
+    /* 4. à®²à®¿à®¸à¯à®Ÿà¯ à®µà®°à®¿à®•à®³à¯ˆà®ªà¯ à®ªà¯†à®°à®¿à®¤à®¾à®•à¯à®• */
     .bottom-grids .list li {
         font-size: 18px !important;
         margin-bottom: 12px !important;
         padding-left: 25px !important;
     }
 
-    /* 5. பிரைஸ் பட்டனை இன்னும் கீழே தள்ள */
+    /* 5. à®ªà®¿à®°à¯ˆà®¸à¯ à®ªà®Ÿà¯à®Ÿà®©à¯ˆ à®‡à®©à¯à®©à¯à®®à¯ à®•à¯€à®´à¯‡ à®¤à®³à¯à®³ */
     .rate-us-section {
         margin-top: 40px !important;
     }
 }
 
 
-@media (min-width: 1024px) {
+@media (min-width: 993px) {
     /* 1. Container remains stretched to keep text aligned */
     .layout-wrapper {
         display: flex !important;
@@ -1076,7 +1080,7 @@ html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
     max-width: 100vw;
     overflow-x: hidden; 
     position: relative;
-    /* padding குறைக்கப்பட்டுள்ளது - பெட்டிகளை மேலே தள்ள */
+    /* padding à®•à¯à®±à¯ˆà®•à¯à®•à®ªà¯à®ªà®Ÿà¯à®Ÿà¯à®³à¯à®³à®¤à¯ - à®ªà¯†à®Ÿà¯à®Ÿà®¿à®•à®³à¯ˆ à®®à¯‡à®²à¯‡ à®¤à®³à¯à®³ */
     padding: 5px 0 10px 0; 
     font-family: 'Poppins', sans-serif;
 }
@@ -1126,8 +1130,8 @@ html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
     display: flex;
     flex-wrap: nowrap;      
     overflow-x: auto;       
-    gap: 10px;              /* பெட்டிகளுக்கு இடையே உள்ள இடைவெளியை லேசாக குறைத்துள்ளேன் */
-    padding: 10px 15px;     /* இடது மற்றும் வலது ஓரங்களில் 15px */
+    gap: 10px;              /* à®ªà¯†à®Ÿà¯à®Ÿà®¿à®•à®³à¯à®•à¯à®•à¯ à®‡à®Ÿà¯ˆà®¯à¯‡ à®‰à®³à¯à®³ à®‡à®Ÿà¯ˆà®µà¯†à®³à®¿à®¯à¯ˆ à®²à¯‡à®šà®¾à®• à®•à¯à®±à¯ˆà®¤à¯à®¤à¯à®³à¯à®³à¯‡à®©à¯ */
+    padding: 10px 15px;     /* à®‡à®Ÿà®¤à¯ à®®à®±à¯à®±à¯à®®à¯ à®µà®²à®¤à¯ à®“à®°à®™à¯à®•à®³à®¿à®²à¯ 15px */
     scroll-snap-type: x mandatory; 
     -webkit-overflow-scrolling: touch;
     scroll-padding-left: 15px;
@@ -1135,8 +1139,8 @@ html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
 
 /* --- 5. Product Box Design --- */
 .box {
-    /* 2 பெட்டிகள் மட்டும் தெரிய இந்த கணக்கீடு கச்சிதமாக இருக்கும் */
-    /* இது 3-வது பெட்டியை முற்றிலும் வலது ஓரம் வெளியே தள்ளும் */
+    /* 2 à®ªà¯†à®Ÿà¯à®Ÿà®¿à®•à®³à¯ à®®à®Ÿà¯à®Ÿà¯à®®à¯ à®¤à¯†à®°à®¿à®¯ à®‡à®¨à¯à®¤ à®•à®£à®•à¯à®•à¯€à®Ÿà¯ à®•à®šà¯à®šà®¿à®¤à®®à®¾à®• à®‡à®°à¯à®•à¯à®•à¯à®®à¯ */
+    /* à®‡à®¤à¯ 3-à®µà®¤à¯ à®ªà¯†à®Ÿà¯à®Ÿà®¿à®¯à¯ˆ à®®à¯à®±à¯à®±à®¿à®²à¯à®®à¯ à®µà®²à®¤à¯ à®“à®°à®®à¯ à®µà¯†à®³à®¿à®¯à¯‡ à®¤à®³à¯à®³à¯à®®à¯ */
     flex: 0 0 calc(55% - 20px); 
     max-width: calc(55% - 20px);
     
@@ -1245,56 +1249,56 @@ html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 
-/* 20% OFF - பேட்ஜ் அளவு அதிகரிக்கப்பட்டுள்ளது */
+/* 20% OFF - à®ªà¯‡à®Ÿà¯à®œà¯ à®…à®³à®µà¯ à®…à®¤à®¿à®•à®°à®¿à®•à¯à®•à®ªà¯à®ªà®Ÿà¯à®Ÿà¯à®³à¯à®³à®¤à¯ */
 .top-left-offer {
     position: absolute;
-    top: 5px;            /* ஓரத்திலிருந்து லேசான இடைவெளி */
+    top: 5px;            /* à®“à®°à®¤à¯à®¤à®¿à®²à®¿à®°à¯à®¨à¯à®¤à¯ à®²à¯‡à®šà®¾à®© à®‡à®Ÿà¯ˆà®µà¯†à®³à®¿ */
     left: 5px;
     background-color: #ff0000;
     color: #ffffff;
     
-    /* அளவுகள் அதிகரிக்கப்பட்டுள்ளது */
-    font-size: 10px;      /* எழுத்தின் அளவு (முன்பு 6px) */
-    font-weight: 900;     /* தடிமனான எழுத்து */
-    padding: 3px 8px;     /* பேட்ஜின் நீளம் மற்றும் உயரம் அதிகரிப்பு */
+    /* à®…à®³à®µà¯à®•à®³à¯ à®…à®¤à®¿à®•à®°à®¿à®•à¯à®•à®ªà¯à®ªà®Ÿà¯à®Ÿà¯à®³à¯à®³à®¤à¯ */
+    font-size: 10px;      /* à®Žà®´à¯à®¤à¯à®¤à®¿à®©à¯ à®…à®³à®µà¯ (à®®à¯à®©à¯à®ªà¯ 6px) */
+    font-weight: 900;     /* à®¤à®Ÿà®¿à®®à®©à®¾à®© à®Žà®´à¯à®¤à¯à®¤à¯ */
+    padding: 3px 8px;     /* à®ªà¯‡à®Ÿà¯à®œà®¿à®©à¯ à®¨à¯€à®³à®®à¯ à®®à®±à¯à®±à¯à®®à¯ à®‰à®¯à®°à®®à¯ à®…à®¤à®¿à®•à®°à®¿à®ªà¯à®ªà¯ */
     
-    border-radius: 4px;   /* வளைவான ஓரங்கள் */
+    border-radius: 4px;   /* à®µà®³à¯ˆà®µà®¾à®© à®“à®°à®™à¯à®•à®³à¯ */
     z-index: 10;
-    box-shadow: 1px 1px 5px rgba(0,0,0,0.2); /* எடுப்பாகத் தெரிய நிழல் */
+    box-shadow: 1px 1px 5px rgba(0,0,0,0.2); /* à®Žà®Ÿà¯à®ªà¯à®ªà®¾à®•à®¤à¯ à®¤à¯†à®°à®¿à®¯ à®¨à®¿à®´à®²à¯ */
     
     text-transform: uppercase;
-    animation: slowBlink 2.0s infinite ease-in-out; /* வேகம் சற்றே அதிகரிக்கப்பட்டது */
+    animation: slowBlink 2.0s infinite ease-in-out; /* à®µà¯‡à®•à®®à¯ à®šà®±à¯à®±à¯‡ à®…à®¤à®¿à®•à®°à®¿à®•à¯à®•à®ªà¯à®ªà®Ÿà¯à®Ÿà®¤à¯ */
 }
 
-/* மின்னும் அனிமேஷன் (மாற்றமில்லை) */
+/* à®®à®¿à®©à¯à®©à¯à®®à¯ à®…à®©à®¿à®®à¯‡à®·à®©à¯ (à®®à®¾à®±à¯à®±à®®à®¿à®²à¯à®²à¯ˆ) */
 @keyframes slowBlink {
     0%, 100% { opacity: 1; }
     50% { opacity: 0.5; }
 }
 
-/* --- 1. Two-Color Heading (முதல் வார்த்தை கருப்பு, அடுத்தது ஊதா) --- */
+/* --- 1. Two-Color Heading (à®®à¯à®¤à®²à¯ à®µà®¾à®°à¯à®¤à¯à®¤à¯ˆ à®•à®°à¯à®ªà¯à®ªà¯, à®…à®Ÿà¯à®¤à¯à®¤à®¤à¯ à®Šà®¤à®¾) --- */
 .box h2 {
     font-size: 11px;
     margin-top: 8px !important;
     line-height: 1.2;
-    color: #000; /* இயல்பு நிறம் கருப்பு */
+    color: #000; /* à®‡à®¯à®²à¯à®ªà¯ à®¨à®¿à®±à®®à¯ à®•à®°à¯à®ªà¯à®ªà¯ */
     display: -webkit-box;
-    -webkit-line-clamp: 2; /* இரண்டு வரிக்கு மேல் போனால் மறைக்கும் */
+    -webkit-line-clamp: 2; /* à®‡à®°à®£à¯à®Ÿà¯ à®µà®°à®¿à®•à¯à®•à¯ à®®à¯‡à®²à¯ à®ªà¯‹à®©à®¾à®²à¯ à®®à®±à¯ˆà®•à¯à®•à¯à®®à¯ */
     -webkit-box-orient: vertical;
     overflow: hidden;
 }
 
-/* HTML-ல் பெயருக்கு நடுவில் <span> சேர்த்தால் இது வேலை செய்யும் */
+/* HTML-à®²à¯ à®ªà¯†à®¯à®°à¯à®•à¯à®•à¯ à®¨à®Ÿà¯à®µà®¿à®²à¯ <span> à®šà¯‡à®°à¯à®¤à¯à®¤à®¾à®²à¯ à®‡à®¤à¯ à®µà¯‡à®²à¯ˆ à®šà¯†à®¯à¯à®¯à¯à®®à¯ */
 .box h2 span {
-    color: #8e44ad; /* இரண்டாவது பகுதி ஊதா நிறம் */
+    color: #8e44ad; /* à®‡à®°à®£à¯à®Ÿà®¾à®µà®¤à¯ à®ªà®•à¯à®¤à®¿ à®Šà®¤à®¾ à®¨à®¿à®±à®®à¯ */
 }
 
 /* --- 2. Heading, Size, Price - Same Gap Create --- */
-/* பாக்ஸிற்குள் இருக்கும் அனைத்து எலிமெண்ட்களுக்கும் சமமான இடைவெளி */
+/* à®ªà®¾à®•à¯à®¸à®¿à®±à¯à®•à¯à®³à¯ à®‡à®°à¯à®•à¯à®•à¯à®®à¯ à®…à®©à¯ˆà®¤à¯à®¤à¯ à®Žà®²à®¿à®®à¯†à®£à¯à®Ÿà¯à®•à®³à¯à®•à¯à®•à¯à®®à¯ à®šà®®à®®à®¾à®© à®‡à®Ÿà¯ˆà®µà¯†à®³à®¿ */
 .box {
     display: flex;
     flex-direction: column;
-    gap: 4px; /* இதுதான் Heading, Size, Price இடையே சமமான கேப் கொடுக்கும் */
+    gap: 4px; /* à®‡à®¤à¯à®¤à®¾à®©à¯ Heading, Size, Price à®‡à®Ÿà¯ˆà®¯à¯‡ à®šà®®à®®à®¾à®© à®•à¯‡à®ªà¯ à®•à¯Šà®Ÿà¯à®•à¯à®•à¯à®®à¯ */
     padding: 10px;
     flex: 0 0 calc(55% - 20px);
     max-width: calc(55% - 20px);
@@ -1304,12 +1308,12 @@ html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
     scroll-snap-align: start;
 }
 
-/* விவரங்கள் மற்றும் விலை வரிசை */
+/* à®µà®¿à®µà®°à®™à¯à®•à®³à¯ à®®à®±à¯à®±à¯à®®à¯ à®µà®¿à®²à¯ˆ à®µà®°à®¿à®šà¯ˆ */
 .info-row {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 0; /* தேவையற்ற கேப்பை நீக்க */
+    margin: 0; /* à®¤à¯‡à®µà¯ˆà®¯à®±à¯à®± à®•à¯‡à®ªà¯à®ªà¯ˆ à®¨à¯€à®•à¯à®• */
 }
 
 .details {
@@ -1318,7 +1322,7 @@ html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
     margin: 0;
 }
 
-/* --- 3. Scrolling Animation (லேசான என்ட்ரி எஃபெக்ட்) --- */
+/* --- 3. Scrolling Animation (à®²à¯‡à®šà®¾à®© à®Žà®©à¯à®Ÿà¯à®°à®¿ à®Žà®ƒà®ªà¯†à®•à¯à®Ÿà¯) --- */
 @keyframes boxIn {
     from {
         opacity: 0;
@@ -1334,12 +1338,12 @@ html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
     animation: boxIn 0.6s ease-out backwards;
 }
 
-/* ஒவ்வொரு பாக்ஸும் ஒன்றன் பின் ஒன்றாக வர (Delay) */
+/* à®’à®µà¯à®µà¯Šà®°à¯ à®ªà®¾à®•à¯à®¸à¯à®®à¯ à®’à®©à¯à®±à®©à¯ à®ªà®¿à®©à¯ à®’à®©à¯à®±à®¾à®• à®µà®° (Delay) */
 .box:nth-child(1) { animation-delay: 0.1s; }
 .box:nth-child(2) { animation-delay: 0.2s; }
 .box:nth-child(3) { animation-delay: 0.3s; }
 
-/* 20% OFF பேட்ஜ் (பெரியது) */
+/* 20% OFF à®ªà¯‡à®Ÿà¯à®œà¯ (à®ªà¯†à®°à®¿à®¯à®¤à¯) */
 .top-left-offer {
     position: absolute;
     top: 5px;
@@ -1354,14 +1358,14 @@ html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
     animation: slowBlink 2s infinite ease-in-out;
 }
 
-/* "only ₹" என்ற எழுத்துக்களுக்கான ஸ்டைல் */
+/* "only â‚¹" à®Žà®©à¯à®± à®Žà®´à¯à®¤à¯à®¤à¯à®•à¯à®•à®³à¯à®•à¯à®•à®¾à®© à®¸à¯à®Ÿà¯ˆà®²à¯ */
 .only-txt {
     font-size: 8px;
     font-weight: 700;
     color: #333;
 }
 
-/* 99 என்ற எண்ணிற்கு மட்டும் சிறிய ஆரஞ்சு பெட்டி */
+/* 99 à®Žà®©à¯à®± à®Žà®£à¯à®£à®¿à®±à¯à®•à¯ à®®à®Ÿà¯à®Ÿà¯à®®à¯ à®šà®¿à®±à®¿à®¯ à®†à®°à®žà¯à®šà¯ à®ªà¯†à®Ÿà¯à®Ÿà®¿ */
 .orange-num {
     background-color: #ff6600; /* Orange background */
     color: #ffffff !important; /* White text */
@@ -1378,17 +1382,17 @@ html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
 
 
 
-/* இரண்டு விலைகளையும் ஒரே வரியில் சமமாகப் பிரிக்க */
+/* à®‡à®°à®£à¯à®Ÿà¯ à®µà®¿à®²à¯ˆà®•à®³à¯ˆà®¯à¯à®®à¯ à®’à®°à¯‡ à®µà®°à®¿à®¯à®¿à®²à¯ à®šà®®à®®à®¾à®•à®ªà¯ à®ªà®¿à®°à®¿à®•à¯à®• */
 .price-row-equal {
     display: flex;
-    justify-content: space-between; /* ஒன்றை இடதுபுறமும் மற்றொன்றை வலதுபுறமும் தள்ளும் */
-    align-items: center;            /* இரண்டையும் ஒரே நேர்க்கோட்டில் வைக்கும் */
+    justify-content: space-between; /* à®’à®©à¯à®±à¯ˆ à®‡à®Ÿà®¤à¯à®ªà¯à®±à®®à¯à®®à¯ à®®à®±à¯à®±à¯Šà®©à¯à®±à¯ˆ à®µà®²à®¤à¯à®ªà¯à®±à®®à¯à®®à¯ à®¤à®³à¯à®³à¯à®®à¯ */
+    align-items: center;            /* à®‡à®°à®£à¯à®Ÿà¯ˆà®¯à¯à®®à¯ à®’à®°à¯‡ à®¨à¯‡à®°à¯à®•à¯à®•à¯‹à®Ÿà¯à®Ÿà®¿à®²à¯ à®µà¯ˆà®•à¯à®•à¯à®®à¯ */
     
 }
 
 
 
-/* வலதுபுறம்: ₹200 கட் லைன் */
+/* à®µà®²à®¤à¯à®ªà¯à®±à®®à¯: â‚¹200 à®•à®Ÿà¯ à®²à¯ˆà®©à¯ */
 .cut-price {
     font-size: 8px;
     color: #7c7b7b;
@@ -1440,29 +1444,12 @@ html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
         padding-bottom: 11px; /* Increased by 1px to accommodate the move */
     }
 }
-  .box h2, 
-    .box .product-stars, 
-    .box .details, 
-    .box .price-row-equal {
-        margin-top: 0px !important; 
-        
-        /* 📌 இடைவெளியை இன்னும் (Extremely Reduced) கம்மி ஆக்கியுள்ளேன்! */
-        margin-bottom: 1px !important; 
-        
-        padding: 0px !important; 
-        line-height: 1.1 !important; /* எழுத்து உயரத்தை மேலும் சுருக்க */
-    }
 
-    /* 📌 பட்டனுக்கும் (Button) Price-க்கும் இடைவெளி மிகச் சிறியது! */
-    .box .btn-book {
-        margin-top: 3px !important; 
-    }
-}
 
 
 .timer-float-right { 
                 position: absolute; 
-                left: 235px; /* பழைய ஹெடர் இருந்த இடத்திற்கு தள்ளி வைக்கிறது */
+                left: 235px; /* à®ªà®´à¯ˆà®¯ à®¹à¯†à®Ÿà®°à¯ à®‡à®°à¯à®¨à¯à®¤ à®‡à®Ÿà®¤à¯à®¤à®¿à®±à¯à®•à¯ à®¤à®³à¯à®³à®¿ à®µà¯ˆà®•à¯à®•à®¿à®±à®¤à¯ */
                 top: 0; 
                 width: 100px; 
                 text-align: center;
@@ -1481,27 +1468,27 @@ html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
 
 
 
-            /* 1. டைமரை வலதுபுறம் கொண்டு செல்ல (Absolute Position) */
+            /* 1. à®Ÿà¯ˆà®®à®°à¯ˆ à®µà®²à®¤à¯à®ªà¯à®±à®®à¯ à®•à¯Šà®£à¯à®Ÿà¯ à®šà¯†à®²à¯à®² (Absolute Position) */
 .timer-container-fixed {
     position: absolute !important;
-    top: 20px;            /* ஹெடருக்கு இணையான உயரம் */
-    right: 25px;          /* வலது ஓரத்திலிருந்து இடைவெளி */
-    width: 100px;         /* டைமரின் அகலம் */
+    top: 20px;            /* à®¹à¯†à®Ÿà®°à¯à®•à¯à®•à¯ à®‡à®£à¯ˆà®¯à®¾à®© à®‰à®¯à®°à®®à¯ */
+    right: 25px;          /* à®µà®²à®¤à¯ à®“à®°à®¤à¯à®¤à®¿à®²à®¿à®°à¯à®¨à¯à®¤à¯ à®‡à®Ÿà¯ˆà®µà¯†à®³à®¿ */
+    width: 100px;         /* à®Ÿà¯ˆà®®à®°à®¿à®©à¯ à®…à®•à®²à®®à¯ */
     height: auto !important;
     margin: 0 !important;
     z-index: 100;
 }
 
-/* டைமர் உள்ளே இருக்கும் அலைன்மென்ட் */
+/* à®Ÿà¯ˆà®®à®°à¯ à®‰à®³à¯à®³à¯‡ à®‡à®°à¯à®•à¯à®•à¯à®®à¯ à®…à®²à¯ˆà®©à¯à®®à¯†à®©à¯à®Ÿà¯ */
 .timer-float-right {
     position: relative;
-    left: 0 !important;   /* பழைய லெஃப்ட் அலைன்மென்ட்டை நீக்க */
+    left: 0 !important;   /* à®ªà®´à¯ˆà®¯ à®²à¯†à®ƒà®ªà¯à®Ÿà¯ à®…à®²à¯ˆà®©à¯à®®à¯†à®©à¯à®Ÿà¯à®Ÿà¯ˆ à®¨à¯€à®•à¯à®• */
     width: 100%;
 }
 
-/* 2. See All பட்டனை சற்று மேலே நகர்த்த */
+/* 2. See All à®ªà®Ÿà¯à®Ÿà®©à¯ˆ à®šà®±à¯à®±à¯ à®®à¯‡à®²à¯‡ à®¨à®•à®°à¯à®¤à¯à®¤ */
 
-/* மற்ற CSS ஐட்டங்கள் அப்படியே இருக்கும் */
+/* à®®à®±à¯à®± CSS à®à®Ÿà¯à®Ÿà®™à¯à®•à®³à¯ à®…à®ªà¯à®ªà®Ÿà®¿à®¯à¯‡ à®‡à®°à¯à®•à¯à®•à¯à®®à¯ */
 .tm-box { 
     background: #ff3300; 
     color: #fff; 
@@ -1555,14 +1542,14 @@ html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
 .dot {
     width: 5px;
     height: 5px;
-    background-color: #ccc; /* மங்கலான நிறம் */
+    background-color: #ccc; /* à®®à®™à¯à®•à®²à®¾à®© à®¨à®¿à®±à®®à¯ */
     border-radius: 50%;
     transition: 0.3s;
 }
 
 .dot.active {
-    background-color: #ff4500; /* ஆஃபர் நிறம் - ஆரஞ்சு */
-    transform: scale(1.3); /* ஆக்டிவ் டாட் மட்டும் கொஞ்சம் பெரிதாகத் தெரியும் */
+    background-color: #ff4500; /* à®†à®ƒà®ªà®°à¯ à®¨à®¿à®±à®®à¯ - à®†à®°à®žà¯à®šà¯ */
+    transform: scale(1.3); /* à®†à®•à¯à®Ÿà®¿à®µà¯ à®Ÿà®¾à®Ÿà¯ à®®à®Ÿà¯à®Ÿà¯à®®à¯ à®•à¯Šà®žà¯à®šà®®à¯ à®ªà¯†à®°à®¿à®¤à®¾à®•à®¤à¯ à®¤à¯†à®°à®¿à®¯à¯à®®à¯ */
 }
 
 
@@ -2058,7 +2045,7 @@ html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
     transition: opacity 0.8s ease, visibility 0.8s ease;
 }
 
-/* 2 வினாடிக்குப் பின் இதைச் சேர்க்க ஜாவாஸ்கிரிப்ட் உதவும் */
+/* 2 à®µà®¿à®©à®¾à®Ÿà®¿à®•à¯à®•à¯à®ªà¯ à®ªà®¿à®©à¯ à®‡à®¤à¯ˆà®šà¯ à®šà¯‡à®°à¯à®•à¯à®• à®œà®¾à®µà®¾à®¸à¯à®•à®¿à®°à®¿à®ªà¯à®Ÿà¯ à®‰à®¤à®µà¯à®®à¯ */
 #preloader.fade-out {
     opacity: 0;
     visibility: hidden;
@@ -2079,14 +2066,14 @@ html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
     to { transform: rotate(360deg); }
 }
 
-/* லோடிங் புள்ளிகள் வடிவமைப்பு */
+/* à®²à¯‹à®Ÿà®¿à®™à¯ à®ªà¯à®³à¯à®³à®¿à®•à®³à¯ à®µà®Ÿà®¿à®µà®®à¯ˆà®ªà¯à®ªà¯ */
 .bottom-content {
     position: absolute;
     bottom: 60px;
     text-align: center;
 }
 
-/* லோடிங் புள்ளிகள் வடிவமைப்பு */
+/* à®²à¯‹à®Ÿà®¿à®™à¯ à®ªà¯à®³à¯à®³à®¿à®•à®³à¯ à®µà®Ÿà®¿à®µà®®à¯ˆà®ªà¯à®ªà¯ */
 .loading-dots {
     display: flex;
     justify-content: center;
@@ -2097,14 +2084,14 @@ html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
 .loading-dots span {
     width: 6px;
     height: 6px;
-    background-color: #e0e0e0; /* ஆரம்ப நிறம்: Light Gray */
+    background-color: #e0e0e0; /* à®†à®°à®®à¯à®ª à®¨à®¿à®±à®®à¯: Light Gray */
     border-radius: 50%;
     display: inline-block;
-    /* அனிமேஷன்: நிறம் மற்றும் ஓளிர்வு (Opacity) மட்டும் மாறும் */
+    /* à®…à®©à®¿à®®à¯‡à®·à®©à¯: à®¨à®¿à®±à®®à¯ à®®à®±à¯à®±à¯à®®à¯ à®“à®³à®¿à®°à¯à®µà¯ (Opacity) à®®à®Ÿà¯à®Ÿà¯à®®à¯ à®®à®¾à®±à¯à®®à¯ */
     animation: stepLoading 1.5s infinite ease-in-out both;
 }
 
-/* புள்ளிகள் ஒவ்வொன்றாக நிறம் மாறும் டைமிங் */
+/* à®ªà¯à®³à¯à®³à®¿à®•à®³à¯ à®’à®µà¯à®µà¯Šà®©à¯à®±à®¾à®• à®¨à®¿à®±à®®à¯ à®®à®¾à®±à¯à®®à¯ à®Ÿà¯ˆà®®à®¿à®™à¯ */
 .loading-dots span:nth-child(1) { animation-delay: 0s; }
 .loading-dots span:nth-child(2) { animation-delay: 0.2s; }
 .loading-dots span:nth-child(3) { animation-delay: 0.4s; }
@@ -2117,9 +2104,9 @@ html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
         opacity: 0.4;
     }
     50% { 
-        background-color: #2196F3; /* லோடிங் ஆகும் போது மாறும் நிறம் (Blue) */
+        background-color: #2196F3; /* à®²à¯‹à®Ÿà®¿à®™à¯ à®†à®•à¯à®®à¯ à®ªà¯‹à®¤à¯ à®®à®¾à®±à¯à®®à¯ à®¨à®¿à®±à®®à¯ (Blue) */
         opacity: 1;
-        transform: scale(1.1); /* சிறிய அளவில் விரிவடையும் (துள்ளாது) */
+        transform: scale(1.1); /* à®šà®¿à®±à®¿à®¯ à®…à®³à®µà®¿à®²à¯ à®µà®¿à®°à®¿à®µà®Ÿà¯ˆà®¯à¯à®®à¯ (à®¤à¯à®³à¯à®³à®¾à®¤à¯) */
     }
 }
 
@@ -2250,7 +2237,7 @@ html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
 }
 
 
-/* 👁️ Minimalist Black View Counter - Base Size */
+/* ðŸ‘ï¸ Minimalist Black View Counter - Base Size */
 .navbar-view-minimal {
     display: inline-flex;
     align-items: center;
@@ -2259,7 +2246,7 @@ html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
     font-size: 1rem;
     font-weight: 800;
     font-family: Arial, sans-serif;
-    /* 📌 லேசாக இடதுபுறம் (Left) நகர்த்தப் பயன்படுத்திய Margin */
+    /* ðŸ“Œ à®²à¯‡à®šà®¾à®• à®‡à®Ÿà®¤à¯à®ªà¯à®±à®®à¯ (Left) à®¨à®•à®°à¯à®¤à¯à®¤à®ªà¯ à®ªà®¯à®©à¯à®ªà®Ÿà¯à®¤à¯à®¤à®¿à®¯ Margin */
     margin-right: 15px; 
 }
 
@@ -2269,16 +2256,16 @@ html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
 }
 
 
-/* 💻 400px and UP (Large Mobiles, Tablets, PC) */
+/* ðŸ’» 400px and UP (Large Mobiles, Tablets, PC) */
 @media (min-width: 400px) {
     .navbar-view-minimal {
-        font-size: 0.95rem !important; /* நம்பர் சற்று பெரிதாக்கப்பட்டுள்ளது */
-        margin-right: 25px !important; /* இடதுபுறம் (Left Move) தள்ளி நகர்த்த! */
-        gap: 4px !important; /* ஐகானும் நம்பரும் சேர்ந்திருக்க */
+        font-size: 0.95rem !important; /* à®¨à®®à¯à®ªà®°à¯ à®šà®±à¯à®±à¯ à®ªà¯†à®°à®¿à®¤à®¾à®•à¯à®•à®ªà¯à®ªà®Ÿà¯à®Ÿà¯à®³à¯à®³à®¤à¯ */
+        margin-right: 25px !important; /* à®‡à®Ÿà®¤à¯à®ªà¯à®±à®®à¯ (Left Move) à®¤à®³à¯à®³à®¿ à®¨à®•à®°à¯à®¤à¯à®¤! */
+        gap: 4px !important; /* à®à®•à®¾à®©à¯à®®à¯ à®¨à®®à¯à®ªà®°à¯à®®à¯ à®šà¯‡à®°à¯à®¨à¯à®¤à®¿à®°à¯à®•à¯à®• */
     }
     
     .navbar-view-minimal svg {
-        width: 18px !important; /* ஐகான் அளவு சற்று பெரிதாக்கப்பட்டுள்ளது */
+        width: 18px !important; /* à®à®•à®¾à®©à¯ à®…à®³à®µà¯ à®šà®±à¯à®±à¯ à®ªà¯†à®°à®¿à®¤à®¾à®•à¯à®•à®ªà¯à®ªà®Ÿà¯à®Ÿà¯à®³à¯à®³à®¤à¯ */
         height: 18px !important;
     }
 }
@@ -2287,10 +2274,10 @@ html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
 
 
 /* ========================================= */
-/* 1. GLOBAL SETTINGS (பொதுவானது)             */
+/* 1. GLOBAL SETTINGS (à®ªà¯Šà®¤à¯à®µà®¾à®©à®¤à¯)             */
 /* ========================================= */
 
-/* 🖼️ Product Box-ன் Image-க்குள் வரும் கவுண்டர் */
+/* ðŸ–¼ï¸ Product Box-à®©à¯ Image-à®•à¯à®•à¯à®³à¯ à®µà®°à¯à®®à¯ à®•à®µà¯à®£à¯à®Ÿà®°à¯ */
 .img-area { position: relative; }
 
 .bottom-right-view {
@@ -2303,7 +2290,7 @@ html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
 }
 .bottom-right-view svg { width: 13px; height: 13px; }
 
-/* ⭐ Review Stars (Laptop/Tablet-க்கான அளவு) */
+/* â­ Review Stars (Laptop/Tablet-à®•à¯à®•à®¾à®© à®…à®³à®µà¯) */
 .product-stars {
     color: #ffb700;
     font-size: 12px !important; 
@@ -2313,7 +2300,7 @@ html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
     color: #666; font-size: 12px !important; font-weight: bold; margin-left: 4px;
 }
 
-/* 📐 All Items Gap (Laptop/Tablet-க்கான இடைவெளி) */
+/* ðŸ“ All Items Gap (Laptop/Tablet-à®•à¯à®•à®¾à®© à®‡à®Ÿà¯ˆà®µà¯†à®³à®¿) */
 .box h2, .box .product-stars, .box .details, .box .price-row-equal {
     margin-top: 0px !important; 
     margin-bottom: 6px !important; /* Standard Gap */
@@ -2325,7 +2312,7 @@ html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
 /* ========================================= */
 @media (max-width: 399px) {
     
-    /* 📱 Navbar Eyes Counters-க்கானது */
+    /* ðŸ“± Navbar Eyes Counters-à®•à¯à®•à®¾à®©à®¤à¯ */
     .navbar-view-minimal {
         font-size: 0.80rem !important; 
         margin-right: 18px !important; 
@@ -2333,24 +2320,103 @@ html, body { max-width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
     }
     .navbar-view-minimal svg { width: 15px !important; height: 15px !important; }
 
-    /* ⭐ Review Stars (மொபைலில் மட்டும் மிகச் சிறியதாகக் காட்ட) */
+    /* â­ Review Stars (à®®à¯Šà®ªà¯ˆà®²à®¿à®²à¯ à®®à®Ÿà¯à®Ÿà¯à®®à¯ à®®à®¿à®•à®šà¯ à®šà®¿à®±à®¿à®¯à®¤à®¾à®•à®•à¯ à®•à®¾à®Ÿà¯à®Ÿ) */
     .product-stars { font-size: 9px !important; }
     .product-stars span.rating-num { font-size: 9px !important; }
 
-/* 📐 All Box Items - Ultra Tight Gap (மிகவும் நெருக்கமான இடைவெளி) */
+/* ðŸ“ All Box Items - Ultra Tight Gap (à®®à®¿à®•à®µà¯à®®à¯ à®¨à¯†à®°à¯à®•à¯à®•à®®à®¾à®© à®‡à®Ÿà¯ˆà®µà¯†à®³à®¿) */
 .box h2, 
 .box .product-stars, 
 .box .details, 
 .box .price-row-equal {
     margin-top: 0px !important; 
-    margin-bottom: 2px !important; /* இடைவெளி 2px ஆக குறைக்கப்பட்டது! */
-    padding: 0px !important; /* பழைய Padding-ஐ கட்டாயமாக நீக்க! */
-    line-height: 1.1 !important; /* எழுத்துக்களின் உயரத்தை (Line height) சுருக்க! */
+    margin-bottom: 2px !important; /* à®‡à®Ÿà¯ˆà®µà¯†à®³à®¿ 2px à®†à®• à®•à¯à®±à¯ˆà®•à¯à®•à®ªà¯à®ªà®Ÿà¯à®Ÿà®¤à¯! */
+    padding: 0px !important; /* à®ªà®´à¯ˆà®¯ Padding-à® à®•à®Ÿà¯à®Ÿà®¾à®¯à®®à®¾à®• à®¨à¯€à®•à¯à®•! */
+    line-height: 1.1 !important; /* à®Žà®´à¯à®¤à¯à®¤à¯à®•à¯à®•à®³à®¿à®©à¯ à®‰à®¯à®°à®¤à¯à®¤à¯ˆ (Line height) à®šà¯à®°à¯à®•à¯à®•! */
 }
 
-/* பட்டனுக்கு (Button-க்கு) */
+/* à®ªà®Ÿà¯à®Ÿà®©à¯à®•à¯à®•à¯ (Button-à®•à¯à®•à¯) */
 .box .btn-book {
     margin-top: 4px !important; 
 }
+}
 
+
+/* ðŸ’» 400 and UP Screens - "Ultra Tight" Gap Reduce! */
+@media (min-width: 400px) {
+    
+    .box h2, 
+    .box .product-stars, 
+    .box .details, 
+    .box .price-row-equal {
+        margin-top: 0px !important; 
+        
+        /* ðŸ“Œ à®‡à®Ÿà¯ˆà®µà¯†à®³à®¿à®¯à¯ˆ à®‡à®©à¯à®©à¯à®®à¯ (Extremely Reduced) à®•à®®à¯à®®à®¿ à®†à®•à¯à®•à®¿à®¯à¯à®³à¯à®³à¯‡à®©à¯! */
+        margin-bottom: 1px !important; 
+        
+        padding: 0px !important; 
+        line-height: 1.1 !important; /* à®Žà®´à¯à®¤à¯à®¤à¯ à®‰à®¯à®°à®¤à¯à®¤à¯ˆ à®®à¯‡à®²à¯à®®à¯ à®šà¯à®°à¯à®•à¯à®• */
+    }
+
+    /* ðŸ“Œ à®ªà®Ÿà¯à®Ÿà®©à¯à®•à¯à®•à¯à®®à¯ (Button) Price-à®•à¯à®•à¯à®®à¯ à®‡à®Ÿà¯ˆà®µà¯†à®³à®¿ à®®à®¿à®•à®šà¯ à®šà®¿à®±à®¿à®¯à®¤à¯! */
+    .box .btn-book {
+        margin-top: 3px !important; 
+    }
+}
+
+/* ðŸ’» Laptop Display: Fit ALL boxes horizontally compactly! */
+@media (min-width: 993px) {
+    /* à®¸à¯à®•à¯à®°à¯‹à®²à¯ à®‡à®²à¯à®²à®¾à®®à®²à¯ à®…à®©à¯ˆà®¤à¯à®¤à¯ˆà®¯à¯à®®à¯ à®’à®°à¯ à®µà®°à®¿à®šà¯ˆà®¯à®¿à®²à¯ à®•à®¾à®Ÿà¯à®Ÿ (All One Line) */
+    .sprite-grid {
+        justify-content: center !important;
+        gap: 15px !important; /* à®ªà®¾à®•à¯à®¸à¯à®•à®³à¯à®•à¯à®•à¯ à®‡à®Ÿà¯ˆà®¯à¯‡ à®šà®¿à®±à®¿à®¯ à®•à¯‡à®ªà¯ */
+        padding: 20px 0 !important;
+        flex-wrap: nowrap !important; /* à®’à®°à¯ à®µà®°à®¿à®¯à®¿à®²à¯ à®¨à®¿à®±à¯à®• */
+        overflow-x: auto !important; /* à®¤à¯‡à®µà¯ˆà®ªà¯à®ªà®Ÿà¯à®Ÿà®¾à®²à¯ à®®à®Ÿà¯à®Ÿà¯à®®à¯ à®¸à¯à®•à¯à®°à¯‹à®²à¯ */
+    }
+
+    /* à®ªà®¾à®•à¯à®¸à®¿à®©à¯ à®…à®³à®µà¯ˆ à®®à®¿à®•à®µà¯à®®à¯ à®šà¯à®°à¯à®•à¯à®•à®¿à®¯à¯à®³à¯à®³à¯‡à®©à¯ (Small Create) */
+    .box {
+        flex: 0 0 auto !important; 
+        width: 150px !important; /* à®²à¯‡à®ªà¯à®Ÿà®¾à®ªà¯à®ªà®¿à®²à¯ à®ªà®¾à®•à¯à®¸à¯ à®šà®¿à®©à¯à®©à®¤à®¾à®•à®¤à¯ à®¤à¯†à®°à®¿à®¯ */
+        max-width: 150px !important; 
+        padding: 8px !important;
+        gap: 4px !important;
+    }
+
+    /* à®ªà®Ÿà®™à¯à®•à®³à®¿à®©à¯ à®…à®³à®µà¯ (Images) */
+    .img-area {
+        height: 130px !important; /* à®‰à®¯à®°à®®à¯ à®•à¯à®±à¯ˆà®•à¯à®•à®ªà¯à®ªà®Ÿà¯à®Ÿà®¤à¯ */
+    }
+
+    /* à®Žà®´à¯à®¤à¯à®¤à¯à®•à¯à®•à®³à®¿à®©à¯ à®…à®³à®µà¯à®®à¯ (Fonts) à®²à¯‡à®ªà¯à®Ÿà®¾à®ªà¯à®ªà®¿à®±à¯à®•à¯ à®¤à®•à¯à®¨à¯à®¤à®¾à®°à¯ à®ªà¯‹à®²à¯ à®šà¯à®°à¯à®•à¯à®•à®®à¯ */
+    .box h2 {
+        font-size: 11px !important;
+        margin-top: 5px !important;
+    }
+    
+    .details, .cut-price, .only-txt {
+        font-size: 10px !important;
+    }
+    
+    .orange-num {
+        font-size: 9px !important;
+        padding: 2px 4px !important;
+    }
+
+    .btn-book {
+        font-size: 11px !important;
+        padding: 5px 0 !important;
+        height: 30px !important;
+        margin-top: 8px !important;
+    }
+
+    .product-stars {
+        font-size: 10px !important;
+    }
+    .product-stars span.rating-num {
+        font-size: 10px !important;
+    }
+}
+}
 
