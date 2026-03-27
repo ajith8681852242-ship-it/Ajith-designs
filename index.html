@@ -29,50 +29,60 @@
         <p class="footer-text">Design by Ajith</p>
     </div>
 </div>
-
-
- 
-    
-
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="logo">
-                <div class="nav-logo">
-    <i id="secret-icon" onclick="handleSecretClick()" class="fas fa-palette logo-icon-rotate blue-clr" style="cursor: pointer;"></i>
-    
-    <span>Ajith <span class="logo-blue">Graphics</span>
-</div>
-
-<script>
-    let clickCount = 0;
-    let clickTimer;         
-
-    function handleSecretClick() {
-        clickCount++;
+<nav class="navbar">
+    <!-- Navbar Container (Flex: Space Between) -->
+    <div class="nav-container" style="display: flex; justify-content: space-between; align-items: center; width: 92%; margin: 0 auto;">
         
-        // கிளிக் செய்த 2 வினாடிகளுக்குள் அடுத்த கிளிக் செய்ய வேண்டும், இல்லையென்றால் 0 ஆகும்
-        clearTimeout(clickTimer);
-        clickTimer = setTimeout(() => {
-            clickCount = 0;
-        }, 2000);
- 
-        // 5-வது கிளிக் செய்தவுடன் login.html பக்கத்திற்கு அழைத்துச் செல்லும்
-        if (clickCount === 5) {
-            window.location.href = "login.html";
-        }
-    }
-</script>
- 
+        <!-- 1. இடது ஓரம் (Left End): LOGO SECTION -->
+        <div class="logo">
+            <div class="nav-logo" style="display: flex; align-items: center; gap: 5px;">
+                <i id="secret-icon" onclick="handleSecretClick()" class="fas fa-palette logo-icon-rotate blue-clr" style="cursor: pointer;"></i>
+                <span>Ajith <span class="logo-blue">Graphics</span></span>
             </div>
-         <ul class="nav-links" id="navLinks">
-    <li><a href="index.html">HOME</a></li> 
-    <li><a href="index.html#about">ABOUT</a></li>
-    <li><a href="index.html#services">SERVICES</a></li>
-    <li><a href="index.html#contact">CONTACT</a></li>
-</ul>
-            <div class="toggle-btn" id="menuToggle"><i class="fas fa-bars"></i></div>
+            <script>
+                let clickCount = 0;
+                let clickTimer;         
+                function handleSecretClick() {
+                    clickCount++;
+                    clearTimeout(clickTimer);
+                    clickTimer = setTimeout(() => { clickCount = 0; }, 2000);
+                    if (clickCount === 5) { window.location.href = "login.html"; }
+                }
+            </script>
         </div>
-    </nav>
+
+        <!-- 2. வலது ஓரம் (Right End): VIEW COUNTER & NAV LINKS -->
+        <!-- இது இரண்டையும் ஒரே Group-ஆக மாற்றிவிட்டதால், பிளவு படாமல் வலது முனையில் சேரும்! -->
+        <div class="right-nav-items" style="display: flex; align-items: center;">
+            
+            <!-- (A) 👁️ Black Minimalist View Counter -->
+            <div class="navbar-view-minimal" title="Total Website Visitors" style="display: flex; flex-direction: row; align-items: center; gap: 6px;">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>
+                </svg>
+                <span class="view-counter" id="main-view-count" data-target="Website Main">0</span>
+            </div>
+
+            <!-- (B) Nav Links (Laptop-ல் View Count-க்கு அடுத்ததாக (Right) வரும்) -->
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">HOME</a></li> 
+                <li><a href="index.html#about">ABOUT</a></li>
+                <li><a href="index.html#services">SERVICES</a></li>
+                <li><a href="index.html#contact">CONTACT</a></li>
+            </ul>
+
+            <!-- (C) Mobile Menu Toggle Button (Laptop-ல் தானாக மறைந்துவிடும்) -->
+            <div class="toggle-btn" id="menuToggle" style="cursor: pointer; margin-left:15px;">
+                <i class="fas fa-bars"></i>
+            </div>
+            
+        </div> <!-- Right wrapper end -->
+
+    </div> <!-- Nav Container End -->
+</nav>
+
+
+
 
 <section class="banner" id="home">
     <div class="banner-container">
@@ -511,163 +521,193 @@ function openWhatsApp() {
 
 
 
-
-
-
-<div class="main-wrapper">
-   
-
-    <div class="sprite-grid">
-        <div class="box reveal">
-            <div class="img-area"> 
-                <div class="top-left-offer" id="v_off1">20% OFF</div>
-               <img id="v_img1" src="Social Media Banner Real Estate House Property Sale Instagram Post _ PSD Free Download - Pikbest.jpg">
-            </div>
-            <h2 id="v_tit1">Poster <span>Design</span></h2>
-            <p class="details">Size: <b id="v_siz1">1080x1350</b></p>
-            <div class="price-row-equal">
-            <p class="details">Price: <span class="only-txt"><b class="orange-num" id="v_pri1">Just ₹99</b></p>
-            <span class="cut-price">Save ₹100</span>
-            </div>
-            <button class="btn-book" onclick="identifyAndNavigate('Poster_Design_99')">View</button>
+<div class="sprite-grid">
+    
+    <!-- 1. Poster Design -->
+    <div class="box reveal">
+        <div class="img-area"> 
+            <div class="top-left-offer" id="v_off1">20% OFF</div>
+            <img id="v_img1" src="Social Media Banner Real Estate House Property Sale Instagram Post _ PSD Free Download - Pikbest.jpg" onclick="logViewActivity('Poster Design')">
+            <div class="bottom-right-view" title="Total Views"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg><span class="view-counter" data-target="Poster Design">0</span></div>
         </div>
+        <h2 id="v_tit1">Poster <span>Design</span></h2>
         
-
-        <div class="box reveal">
-            <div class="img-area">
-                <div class="top-left-offer" id="v_off2">20% OFF</div>
-                <img id="v_img2" src="flyer thump.jpg">
-            </div>
-            <h2 id="v_tit2">Flyer <span>Design</span></h2>
-            <p class="details">Size: <b id="v_siz2">A4 Sheet</b></p>
-            <div class="price-row-equal">
-            <p class="details">Price: <span class="only-txt"><b class="orange-num" id="v_pri1">Just ₹199</b></p>
+        <!-- ⭐ MODIFIED STAR RATING -->
+        <div class="product-stars">★★★★★ <span class="rating-num">4.5</span></div>
+        
+        <p class="details">Size: <b id="v_siz1">1080x1350</b></p>
+        <div class="price-row-equal">
+            <p class="details">Price: <span class="only-txt"><b class="orange-num" id="v_pri1">Just ₹99</b></span></p>
             <span class="cut-price">Save ₹100</span>
-            </div>
-          <button class="btn-book" onclick="location.href='flyer-design.html'">View</button>
         </div>
+        <button class="btn-book" onclick="logViewActivity('Poster Design'); setTimeout(()=>identifyAndNavigate('Poster_Design_99'), 300);">View</button>
+    </div>
 
-        <div class="box reveal">
-            <div class="img-area">
-                <div class="top-left-offer" id="v_off3">20% OFF</div>
-                <img id="v_img3" src="1 sheet calender.jpg">
-            </div>
-            <h2 id="v_tit3">Calendar <span>Design</span></h2>
-            <p class="details">Size: <b id="v_siz3">A4 Sheet</b></p>
-            <div class="price-row-equal">
-            <p class="details">Price: <span class="only-txt"><b class="orange-num" id="v_pri1">Just ₹499</b></p>
+    <!-- 2. Flyer Design -->
+    <div class="box reveal">
+        <div class="img-area">
+            <div class="top-left-offer" id="v_off2">20% OFF</div>
+            <img id="v_img2" src="flyer thump.jpg" onclick="logViewActivity('Flyer Design')">
+            <div class="bottom-right-view" title="Total Views"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg><span class="view-counter" data-target="Flyer Design">0</span></div>
+        </div>
+        <h2 id="v_tit2">Flyer <span>Design</span></h2>
+        <div class="product-stars">★★★★★ <span class="rating-num">4.8</span></div>
+        
+        <p class="details">Size: <b id="v_siz2">A4 Sheet</b></p>
+        <div class="price-row-equal">
+            <p class="details">Price: <span class="only-txt"><b class="orange-num" id="v_pri2">Just ₹199</b></span></p>
+            <span class="cut-price">Save ₹100</span>
+        </div>
+        <button class="btn-book" onclick="logViewActivity('Flyer Design'); setTimeout(()=>location.href='flyer-design.html', 300);">View</button>
+    </div>
+
+    <!-- 3. Calendar Design -->
+    <div class="box reveal">
+        <div class="img-area">
+            <div class="top-left-offer" id="v_off3">20% OFF</div>
+            <img id="v_img3" src="1 sheet calender.jpg" onclick="logViewActivity('Calendar Design')">
+            <div class="bottom-right-view" title="Total Views"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg><span class="view-counter" data-target="Calendar Design">0</span></div>
+        </div>
+        <h2 id="v_tit3">Calendar <span>Design</span></h2>
+        <div class="product-stars">★★★★★ <span class="rating-num">4.9</span></div>
+        
+        <p class="details">Size: <b id="v_siz3">A4 Sheet</b></p>
+        <div class="price-row-equal">
+            <p class="details">Price: <span class="only-txt"><b class="orange-num" id="v_pri3">Just ₹499</b></span></p>
             <span class="cut-price">Save ₹300</span>
-            </div>
-            <button class="btn-book" onclick="location.href='calendar.html'">View</button>
         </div>
+        <button class="btn-book" onclick="logViewActivity('Calendar Design'); setTimeout(()=>location.href='calendar.html', 300);">View</button>
+    </div>
 
-        <div class="box reveal">
-            <div class="img-area">
-                <div class="top-left-offer" id="v_off4">20% OFF</div>
-                <img id="v_img3" src="bussiness card thump.jpg">
-            </div>
-            <h2 id="v_tit3">Business <span>Cards</span></h2>
-            <p class="details">Size: <b id="v_siz3">1000X1000</b></p>
-             <div class="price-row-equal">
-            <p class="details">Price: <span class="only-txt"><b class="orange-num" id="v_pri1">Just ₹499</b></p>
+    <!-- 4. Business Cards -->
+    <div class="box reveal">
+        <div class="img-area">
+            <div class="top-left-offer" id="v_off4">20% OFF</div>
+            <img id="v_img4" src="bussiness card thump.jpg" onclick="logViewActivity('Business Cards')">
+            <div class="bottom-right-view" title="Total Views"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg><span class="view-counter" data-target="Business Cards">0</span></div>
+        </div>
+        <h2 id="v_tit4">Business <span>Cards</span></h2>
+        <div class="product-stars">★★★★★ <span class="rating-num">4.7</span></div>
+        
+        <p class="details">Size: <b id="v_siz4">1000X1000</b></p>
+        <div class="price-row-equal">
+            <p class="details">Price: <span class="only-txt"><b class="orange-num" id="v_pri4">Just ₹499</b></span></p>
             <span class="cut-price">Save ₹300</span>
-            </div>
-             <button class="btn-book" onclick="location.href='business-card.html'">View</button>
         </div>
+        <button class="btn-book" onclick="logViewActivity('Business Cards'); setTimeout(()=>location.href='business-card.html', 300);">View</button>
+    </div>
 
-
-        <div class="box reveal">
-            <div class="img-area">
-                <div class="top-left-offer" id="v_off5">20% OFF</div>
-                <img id="v_img3" src="banner thump.jpg">
-            </div>
-            <h2 id="v_tit3">Flex & Banner <span>Design</span></h2>
-            <p class="details">Size: <b id="v_siz3">1000X1000</b></p>
-             <div class="price-row-equal">
-            <p class="details">Price: <span class="only-txt"><b class="orange-num" id="v_pri1">Just ₹199</b></p>
-            <span class="cut-price">Save ₹100</span>
-            </div>
-             <button class="btn-book" onclick="location.href='banner.html'">View</button>
+    <!-- 5. Flex & Banner Design -->
+    <div class="box reveal">
+        <div class="img-area">
+            <div class="top-left-offer" id="v_off5">20% OFF</div>
+            <img id="v_img5" src="banner thump.jpg" onclick="logViewActivity('Flex Banner Design')">
+            <div class="bottom-right-view" title="Total Views"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg><span class="view-counter" data-target="Flex Banner Design">0</span></div>
         </div>
-
-
-
-        <div class="box reveal">
-            <div class="img-area">
-                <div class="top-left-offer" id="v_off6">20% OFF</div>
-                <img id="v_img3" src="Brochure creative.jpg">
-            </div>
-            <h2 id="v_tit3">Brochure <span>Designs</span></h2>
-            <p class="details">Size: <b id="v_siz3">Custom Size</b></p>
-             <div class="price-row-equal">
-            <p class="details">Price: <span class="only-txt"><b class="orange-num" id="v_pri1">Just ₹199</b></p>
-            <span class="cut-price">Save ₹100</span>
-            </div>
-            <button class="btn-book" onclick="location.href='brochure.html'">View</button>
-        </div>
-
+        <h2 id="v_tit5">Flex & Banner <span>Design</span></h2>
+        <div class="product-stars">★★★★★ <span class="rating-num">4.5</span></div>
         
-
-        
-        <div class="box reveal">
-            <div class="img-area">
-                <div class="top-left-offer" id="v_off7">20% OFF</div>
-                <img id="v_img3" src="Menu Design thump.jpg">
-            </div>
-            <h2 id="v_tit3">Menu Cards <span>Designs</span></h2>
-            <p class="details">Size: <b id="v_siz3">A4 sheet</b></p>
-             <div class="price-row-equal">
-            <p class="details">Price: <span class="only-txt"><b class="orange-num" id="v_pri1">Just ₹99</b></p>
+        <p class="details">Size: <b id="v_siz5">1000X1000</b></p>
+        <div class="price-row-equal">
+            <p class="details">Price: <span class="only-txt"><b class="orange-num" id="v_pri5">Just ₹199</b></span></p>
             <span class="cut-price">Save ₹100</span>
-            </div>
-            <button class="btn-book" onclick="location.href='menu.html'">View</button>
         </div>
+        <button class="btn-book" onclick="logViewActivity('Flex Banner Design'); setTimeout(()=>location.href='banner.html', 300);">View</button>
+    </div>
 
+    <!-- 6. Brochure Designs -->
+    <div class="box reveal">
+        <div class="img-area">
+            <div class="top-left-offer" id="v_off6">20% OFF</div>
+            <img id="v_img6" src="Brochure creative.jpg" onclick="logViewActivity('Brochure Designs')">
+            <div class="bottom-right-view" title="Total Views"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg><span class="view-counter" data-target="Brochure Designs">0</span></div>
+        </div>
+        <h2 id="v_tit6">Brochure <span>Designs</span></h2>
+        <div class="product-stars">★★★★★ <span class="rating-num">4.8</span></div>
         
-        <div class="box reveal">
-            <div class="img-area">
-                <div class="top-left-offer" id="v_off8">20% OFF</div>
-                <img id="v_img3" src="packaging thump.jpg">
-            </div>
-            <h2 id="v_tit3">Packaging <span>Designs</span></h2>
-            <p class="details">Size: <b id="v_siz3">A4 sheet</b></p>
-             <div class="price-row-equal">
-            <p class="details">Price: <span class="only-txt"><b class="orange-num" id="v_pri1">Just ₹299</b></p>
+        <p class="details">Size: <b id="v_siz6">Custom Size</b></p>
+        <div class="price-row-equal">
+            <p class="details">Price: <span class="only-txt"><b class="orange-num" id="v_pri6">Just ₹199</b></span></p>
             <span class="cut-price">Save ₹100</span>
-            </div>
-            <button class="btn-book" onclick="location.href='packaging.html'">View</button>
         </div>
+        <button class="btn-book" onclick="logViewActivity('Brochure Designs'); setTimeout(()=>location.href='brochure.html', 300);">View</button>
+    </div>
 
+    <!-- 7. Menu Cards Designs -->
+    <div class="box reveal">
+        <div class="img-area">
+            <div class="top-left-offer" id="v_off7">20% OFF</div>
+            <img id="v_img7" src="Menu Design thump.jpg" onclick="logViewActivity('Menu Cards')">
+            <div class="bottom-right-view" title="Total Views"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg><span class="view-counter" data-target="Menu Cards">0</span></div>
+        </div>
+        <h2 id="v_tit7">Menu Cards <span>Designs</span></h2>
+        <div class="product-stars">★★★★★ <span class="rating-num">4.9</span></div>
+        
+        <p class="details">Size: <b id="v_siz7">A4 sheet</b></p>
+        <div class="price-row-equal">
+            <p class="details">Price: <span class="only-txt"><b class="orange-num" id="v_pri7">Just ₹99</b></span></p>
+            <span class="cut-price">Save ₹100</span>
+        </div>
+        <button class="btn-book" onclick="logViewActivity('Menu Cards'); setTimeout(()=>location.href='menu.html', 300);">View</button>
+    </div>
 
-        <div class="box reveal">
-            <div class="img-area">
-                <div class="top-left-offer" id="v_off9">20% OFF</div>
-                <img id="v_img3" src="Label Packaging Design 1.png">
-            </div>
-            <h2 id="v_tit3">Label <span>Designs</span></h2>
-            <p class="details">Size: <b id="v_siz3">Custom Size</b></p>
-             <div class="price-row-equal">
-            <p class="details">Price: <span class="only-txt"><b class="orange-num" id="v_pri1">Just ₹399</b></p>
+    <!-- 8. Packaging Designs -->
+    <div class="box reveal">
+        <div class="img-area">
+            <div class="top-left-offer" id="v_off8">20% OFF</div>
+            <img id="v_img8" src="packaging thump.jpg" onclick="logViewActivity('Packaging Designs')">
+            <div class="bottom-right-view" title="Total Views"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg><span class="view-counter" data-target="Packaging Designs">0</span></div>
+        </div>
+        <h2 id="v_tit8">Packaging <span>Designs</span></h2>
+        <div class="product-stars">★★★★★ <span class="rating-num">5.0</span></div>
+        
+        <p class="details">Size: <b id="v_siz8">A4 sheet</b></p>
+        <div class="price-row-equal">
+            <p class="details">Price: <span class="only-txt"><b class="orange-num" id="v_pri8">Just ₹299</b></span></p>
+            <span class="cut-price">Save ₹100</span>
+        </div>
+        <button class="btn-book" onclick="logViewActivity('Packaging Designs'); setTimeout(()=>location.href='packaging.html', 300);">View</button>
+    </div>
+
+    <!-- 9. Label Designs -->
+    <div class="box reveal">
+        <div class="img-area">
+            <div class="top-left-offer" id="v_off9">20% OFF</div>
+            <img id="v_img9" src="Label Packaging Design 1.png" onclick="logViewActivity('Label Designs')">
+            <div class="bottom-right-view" title="Total Views"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg><span class="view-counter" data-target="Label Designs">0</span></div>
+        </div>
+        <h2 id="v_tit9">Label <span>Designs</span></h2>
+        <div class="product-stars">★★★★★ <span class="rating-num">4.5</span></div>
+        
+        <p class="details">Size: <b id="v_siz9">Custom Size</b></p>
+        <div class="price-row-equal">
+            <p class="details">Price: <span class="only-txt"><b class="orange-num" id="v_pri9">Just ₹399</b></span></p>
             <span class="cut-price">Save ₹200</span>
-            </div>
-            <button class="btn-book" onclick="location.href='label.html'">View</button>
         </div>
+        <button class="btn-book" onclick="logViewActivity('Label Designs'); setTimeout(()=>location.href='label.html', 300);">View</button>
+    </div>
 
-
-         
-        <div class="box reveal">
-            <div class="img-area">
-                <div class="top-left-offer" id="v_off10">20% OFF</div>
-                <img id="v_img3" src="product design thump.jpg">
-            </div>
-            <h2 id="v_tit3">Product box<span> Designs</span></h2>
-            <p class="details">Design: <b id="v_siz3">Custom Design</b></p>
-             <div class="price-row-equal">
-            <p class="details">Price: <span class="only-txt"><b class="orange-num" id="v_pri1">Just ₹299</b></p>
+    <!-- 10. Product box Designs -->
+    <div class="box reveal">
+        <div class="img-area">
+            <div class="top-left-offer" id="v_off10">20% OFF</div>
+            <img id="v_img10" src="product design thump.jpg" onclick="logViewActivity('Product Box Designs')">
+            <div class="bottom-right-view" title="Total Views"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg><span class="view-counter" data-target="Product Box Designs">0</span></div>
+        </div>
+        <h2 id="v_tit10">Product box<span> Designs</span></h2>
+        <div class="product-stars">★★★★★ <span class="rating-num">4.8</span></div>
+        
+        <p class="details">Design: <b id="v_siz10">Custom Design</b></p>
+        <div class="price-row-equal">
+            <p class="details">Price: <span class="only-txt"><b class="orange-num" id="v_pri10">Just ₹299</b></span></p>
             <span class="cut-price">Save ₹200</span>
-            </div>
-            <button class="btn-book" onclick="location.href='product.html'">View</button>
         </div>
+        <button class="btn-book" onclick="logViewActivity('Product Box Designs'); setTimeout(()=>location.href='product.html', 300);">View</button>
+    </div>
+
+</div>
+
+
 
     </div>
     <div class="scroll-dots">
@@ -739,17 +779,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
 </script>
 
+
+
+
+
+
+
+
 <div class="rc-main-wrapper">
     <style>
-
-
-
-  
-
-
-
-
-
 
         .rc-main-wrapper { 
             font-family: 'Segoe UI', system-ui, sans-serif;
@@ -954,7 +992,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 </script>
     
-
 
 
 
@@ -1228,6 +1265,15 @@ if (document.readyState === 'loading') {
 
 
 </div>
+
+
+
+
+
+
+    
+</body>   
+</html>
 
 
 
@@ -1600,6 +1646,60 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 
+<!-- Analytics Tracker & View Counter Javascript -->
+<script>
+// 📌 நீங்கள் புதிதாக Deploy செய்த Analytics App Script URL-ஐ உங்களின் லிங்க்க்கு மாற்றுங்கள்!
+const ANALYTICS_SCRIPT_URL = 'https://script.google.com/macros/s/உங்கள்-புதிய-லிங்க்/exec';
+
+document.addEventListener('DOMContentLoaded', function() {
+    // வெப்சைட் ஓபன் ஆன உடனே "Website Main" வீவ்-ஐ கணக்கில் சேர்க்கும்
+    logViewActivity("Website Main");
+    
+    // 1 செகண்ட் கழித்து மொத்த Number-ஐயும் திரையில் காட்டும்
+    setTimeout(loadPublicViewCounts, 1000); 
+});
+
+function logViewActivity(targetName) {
+    fetch('https://ipinfo.io/json')
+    .then(res => res.json())
+    .then(data => {
+        const ip = data.ip || "Hidden";
+        const loc = (data.city || "") + ", " + (data.region || "");
+        const device = navigator.userAgent; 
+        
+        sendToSecretAnalytics(targetName, ip, loc, device);
+    })
+    .catch(err => sendToSecretAnalytics(targetName, "Hidden", "Unknown", navigator.userAgent));
+}
+
+function sendToSecretAnalytics(targetId, ip, loc, device) {
+    let fd = new URLSearchParams();
+    fd.append("targetId", targetId);
+    fd.append("ip", ip);
+    fd.append("loc", loc);
+    fd.append("device", device);
+    
+    fetch(ANALYTICS_SCRIPT_URL, {
+        method: "POST", mode: "no-cors",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: fd.toString()
+    });
+}
+
+function loadPublicViewCounts() {
+    fetch(ANALYTICS_SCRIPT_URL + "?t=" + new Date().getTime())
+    .then(res => res.json())
+    .then(countsData => {
+        document.querySelectorAll('.view-counter').forEach(el => {
+            const lookFor = el.getAttribute('data-target');
+            if(countsData[lookFor]) {
+                // 📌 Number-ஐ மட்டும் வெப்சைட்டில் காட்டும் (HTML-லேயே கண்ணின் ஐகான் இருப்பதால்)
+                el.innerText = countsData[lookFor]; 
+            }
+        });
+    }).catch(err => console.log("View count load error", err));
+}
+</script>
 
 
     
