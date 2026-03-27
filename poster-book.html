@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Order Summary | Ajith Studio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Poppins', sans-serif; background-color: #ffffff; color: #333; overflow-x: hidden; }
+
+        /* NAVBAR */
+        .navbar { background: #ffffff; height: 60px; display: flex; align-items: center; position: fixed; width: 100%; top: 0; z-index: 1000; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .nav-container { width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 0 5px; }
+        
+        /* Logo: Stay on Left, but move right inside */
+        .logo { font-weight: 600; font-size: 1rem; display: flex; align-items: center; margin-left: 15px; } /* Increased margin-left */
+        .logo-blue { color: #1e90ff; }
+        .logo-icon-rotate { display: inline-block; animation: rotateLogo 5s linear infinite; margin-right: 10px; font-size: 1.4rem; color: #1e90ff !important; }
+        
+        /* Toggle: Stay on Right, but move left inside */
+        .toggle-btn { font-size: 1.6rem; color: #333; cursor: pointer; display: flex; align-items: center; z-index: 2100; margin-right: 15px; } /* Increased margin-right */
+
+        /* --- [SMALL STYLE: UP TO 399px] --- */
+        .container { width: 100%; max-width: 399px; margin: 70px auto 0; padding: 0 25px 110px 25px; }
+        .summary-image-box { width: 100%; max-width: 350px; aspect-ratio: 1/1; margin: 0 auto 15px auto; border: 1px solid #eee; border-radius: 10px; padding: 4px; background: #fafafa; position: relative; overflow: hidden; }
+        .summary-image-box img { width: 100%; height: 100%; object-fit: contain; border-radius: 6px; }
+        
+        /* Badge Small (399 style) */
+        .status-badge { position: absolute; top: 10px; left: 10px; padding: 4px 10px; border-radius: 4px; font-size: 10px; font-weight: 700; color: white; text-transform: uppercase; z-index: 10; }
+        .bg-best { background: #1e90ff !important; animation: none !important; }
+        .bg-offer { background: #ff0000 !important; animation: slowBlinker 2s linear infinite !important; }
+
+        .item-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid #f2f2f2; }
+        .label { font-weight: 600; color: #666; font-size: 13px; }
+        .value { font-weight: 600; color: #000; font-size: 13px; }
+        .total-price-val { font-size: 22px; font-weight: 700; color: #1e90ff; }
+
+        /* REDUCED BUTTON HEIGHT (399 style) */
+        .footer-btns { position: fixed; bottom: 0; left: 0; width: 100%; background: #fff; padding: 10px 20px 15px 20px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; border-top: 1px solid #eee; z-index: 900; }
+        .btn { height: 35px; border-radius: 6px; border: none; font-weight: 600; font-size: 13px; cursor: pointer; display: flex; align-items: center; justify-content: center; text-decoration: none; }
+        .btn-edit { background: #f5f5f5; color: #333; }
+        .btn-whatsapp { background: #25d366; color: white; }
+
+        /* --- [BIG STYLE: 400px AND ABOVE] --- */
+        @media (min-width: 400px) {
+            .navbar { height: 70px; }
+            .logo { font-size: 1.2rem; margin-left: 30px; }
+            .toggle-btn { font-size: 2rem; margin-right: 30px; }
+            
+            .container { max-width: 550px; margin-top: 90px; padding: 0 40px 140px 40px; }
+            .status-badge { font-size: 14px; padding: 6px 18px; border-radius: 6px; }
+            
+            .item-row { padding: 15px 0; }
+            .label, .value { font-size: 16px; }
+            .total-price-val { font-size: 30px; }
+            
+            /* Big Button Style */
+            .footer-btns { padding: 20px 50px 30px 50px; gap: 20px; }
+            .btn { height: 55px; font-size: 17px; border-radius: 12px; }
+        }
+
+        /* Menu Sidebar */
+        .nav-links { position: fixed; right: -100%; list-style: none; top: 0; background: #ffffff; width: 260px; height: 100vh; flex-direction: column; padding: 80px 30px; transition: 0.4s ease; z-index: 2000; box-shadow: -5px 0 15px rgba(0,0,0,0.1); }
+        .nav-links.active { right: 0; }
+        .nav-links li { margin-bottom: 25px; }
+        .nav-links li a { font-size: 1rem; font-weight: 600; text-decoration: none; color: #333; }
+
+        @keyframes rotateLogo { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        @keyframes slowBlinker { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
+        .free-text { color: #ff0000; font-weight: 700; font-size: 11px; display: block; animation: blinker 2s linear infinite; }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-palette logo-icon-rotate"></i>
+                <span>Ajith <span class="logo-blue">studio</span></span>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">HOME</a></li> 
+                <li><a href="index.html#about">ABOUT</a></li>
+                <li><a href="index.html#services">SERVICES</a></li>
+                <li><a href="index.html#contact">CONTACT</a></li>
+            </ul>
+            <div class="toggle-btn" id="menuToggle"><i class="fas fa-bars"></i></div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="summary-image-box">
+            <div id="sumBadge" class="status-badge"></div>
+            <img id="sumImg" src="" alt="Package Image">
+        </div>
+
+        <div class="info-section">
+            <div class="item-row"><span class="label">Package</span><span class="value" id="sumPackage">---</span></div>
+            <div class="item-row"><span class="label">Size</span><span class="value" id="sumSize">---</span></div>
+            <div class="item-row"><span class="label">Delivery</span><span class="value" id="sumDelivery">---</span></div>
+            <div class="item-row">
+                <span class="label">Total Posters</span>
+                <div style="text-align: right;">
+                    <span class="value" id="sumPosterCount">0 Nos</span>
+                    <span id="freeOfferText" class="free-text"></span>
+                </div>
+            </div>
+            
+            <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 25px;">
+                <span style="font-size: 18px; font-weight: 600;">Final Total</span>
+                <span class="total-price-val" id="sumTotal">₹0</span>
+            </div>
+            <p style="text-align: center; font-size: 11px; color: #25d366; font-weight: 600; margin-top: 15px;">Click WhatsApp to complete order</p>
+        </div>
+    </div>
+
+    <div class="footer-btns">
+        <a href="javascript:history.back()" class="btn btn-edit">Edit</a>
+        <button onclick="sendToWhatsApp()" class="btn btn-whatsapp"><i class="fab fa-whatsapp" style="margin-right:8px;"></i> WhatsApp</button>
+    </div>
+
+<script>
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+
+    menuToggle.onclick = () => navLinks.classList.toggle('active');
+
+    const images = {
+        "Creative Poster": "Poster design box 1.jpg",
+        "combo": "Modern Social Media Design Tips by RSMAT for Engaging Visuals.jpg",
+        "Premium Duo": "Naturatta - Agência Let's Rock.jpg",
+        "Pro Combo": "social media post.jpg",
+        "Mega Pack": "FEED SOSIAL MEDIA TEMPLATE.jpg"
+    };
+
+    function displayOrder() {
+        const orderData = JSON.parse(localStorage.getItem('selectedOrder'));
+        if (!orderData) return;
+
+        document.getElementById('sumImg').src = images[orderData.title] || "Poster design box 1.jpg";
+        document.getElementById('sumPackage').innerText = `${orderData.price}/- ${orderData.title}`;
+        document.getElementById('sumSize').innerText = orderData.size;
+        document.getElementById('sumDelivery').innerText = orderData.delivery;
+        document.getElementById('sumTotal').innerText = "₹" + orderData.total;
+
+        const badge = document.getElementById('sumBadge');
+        if (orderData.isFestMode) {
+            badge.innerText = "Offer";
+            badge.className = "status-badge bg-offer";
+        } else {
+            badge.innerText = "Best Price";
+            badge.className = "status-badge bg-best";
+        }
+
+        const offerLabel = document.getElementById('freeOfferText');
+        document.getElementById('sumPosterCount').innerText = orderData.posterCount + " Nos";
+        
+        if (orderData.isFestMode) {
+            if (orderData.title === "Premium Duo") offerLabel.innerText = "+ 1 FREE";
+            else if (orderData.title === "Pro Combo") offerLabel.innerText = "+ 2 FREE";
+            else if (orderData.title === "Mega Pack") offerLabel.innerText = "+ 2 FREE & Video";
+        }
+    }
+
+    function sendToWhatsApp() {
+        const data = JSON.parse(localStorage.getItem('selectedOrder'));
+        const msg = `*AJITH STUDIO ORDER*%0A*Package:* ${data.title}%0A*Total:* ₹${data.total}`;
+        window.location.href = `https://wa.me/911234567890?text=${msg}`;
+    }
+
+    window.onload = displayOrder;
+</script>
+</body> 
+</html>

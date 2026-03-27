@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Ajith Studio | Calendar Order</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        /* BASE STYLES */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        ::-webkit-scrollbar { display: none; }
+        body { background-color: #ffffff; padding-bottom: 120px; font-size: 13px; }
+        
+        .navbar { background: #ffffff; height: 60px; display: flex; align-items: center; position: fixed; width: 100%; top: 0; z-index: 1000; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .nav-container { width: 92%; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-weight: 600; font-size: 1rem; margin-left: 15px; display: flex; align-items: center; }
+        .logo-blue { color: #1e90ff; }
+        .logo-icon-rotate { display: inline-block; animation: rotateLogo 5s linear infinite; margin-right: 10px; font-size: 1.4rem; color: #1e90ff !important; }
+        @keyframes rotateLogo { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        .toggle-btn { font-size: 1.6rem; color: #333; cursor: pointer; margin-right: 15px; display: flex; align-items: center; }
+
+        .app-container { margin-top: 70px; padding: 0 20px; max-width: 500px; margin-left: auto; margin-right: auto; }
+
+        /* FULL IMAGE SLIDER BOX */
+        .image-box { 
+            position: relative; 
+            width: 100%; 
+            aspect-ratio: 1/1; 
+            border: 1px solid #eee; 
+            border-radius: 4px; 
+            padding: 3px; 
+            background: #fff; 
+            overflow: hidden; 
+        }
+        
+        .image-strip {
+            display: flex;
+            width: 300%; 
+            height: 100%;
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .image-strip img { 
+            width: 33.3333%; 
+            height: 100%; 
+            object-fit: cover; 
+        }
+
+        .dots-wrapper { display: flex; justify-content: center; gap: 8px; margin-top: 10px; }
+        .dot { width: 6px; height: 6px; background: #e0e0e0; border-radius: 50%; transition: 0.3s; }
+        .dot.active { background: #6a3093; transform: scale(1.2); }
+
+        .status-box { position: absolute; top: 10px; left: 10px; padding: 6px 12px; font-weight: 700; font-size: 10px; text-transform: uppercase; border-radius: 4px; color: white; z-index: 10; }
+        .best-price-box { background: #2196F3; }
+        .festival-offer-box { background: #FF0000; display: none; }
+
+        .free-blink { color: #FF0000; font-weight: 800; animation: blink 1.2s linear infinite; }
+        @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
+
+        .title-row { display: flex; justify-content: space-between; align-items: center; margin-top: 15px; }
+        .design-mention-big { font-size: 18px; font-weight: 600; }
+        .design-mention-big span { color: #6a3093; }
+
+        .qty-selector { display: flex; align-items: center; background: #fff; border: 1px solid #ddd; border-radius: 4px; padding: 0 4px; height: 28px; width: 85px; justify-content: space-between; }
+        .qty-btn { background: none; border: none; font-size: 16px; font-weight: 700; color: #6a3093; width: 20px; cursor: pointer; }
+        .qty-number { font-size: 14px; font-weight: 600; display: flex; align-items: center; justify-content: center; }
+
+        .festival-timer-row { display: none; justify-content: space-between; align-items: center; margin-top: 10px; padding: 8px 0; border-bottom: 1px solid #f5f5f5; }
+        #mainHeading { font-size: 11px; font-weight: 700; color: #333; text-transform: uppercase; }
+        .timer-box { text-align: right; }
+        #timerStatus { font-size: 8px; font-weight: 700; color: #6a3093; display: block; }
+        #timerClock { font-size: 11px; font-weight: 700; color: #ff0000; }
+
+        .select-heading { font-size: 11px; font-weight: 700; color: #333; text-transform: uppercase; margin-top: 12px; margin-bottom: 8px; }
+
+        .combo-grid { display: flex; justify-content: flex-start; gap: 8px; margin-bottom: 20px; width: 80%; }
+        .btn-combo { border: 1px solid #ccc; border-radius: 3px; font-size: 11px; font-weight: 600; height: 32px; flex: 1; display: flex; align-items: center; justify-content: center; cursor: pointer; text-transform: uppercase; }
+        .btn-combo.active { background: #6a3093; color: #fff; border-color: #6a3093; }
+
+        .details-card { margin-top: 10px; border-bottom: 1px dashed #eee; padding-bottom: 12px; }
+        .details-card h4 { font-size: 11px; color: #449330; margin-bottom: 8px; text-transform: uppercase; }
+        .details-card li { display: flex; align-items: center; font-size: 11px; color: #555; margin-bottom: 6px; list-style: none; }
+        .details-card i { color: #6a3093; margin-right: 8px; font-size: 9px; }
+
+        .input-row { margin-top: 15px; display: flex; align-items: center; gap: 12px; }
+        .input-label { font-size: 11px; font-weight: 700; color: #333; text-transform: uppercase; width: 110px; }
+        .input-field { width: 130px; height: 32px; border: 1px solid #ddd; border-radius: 4px; padding: 0 8px; font-size: 11px; outline: none; background: #fff; }
+
+        .total-price-section { display: flex; justify-content: space-between; align-items: center; margin-top: 25px; padding: 10px 5px; border-top: 1px solid #f9f9f9; }
+        .total-text { font-size: 12px; font-weight: 600; color: #333; text-transform: uppercase; }
+        .price-display { font-size: 15px; font-weight: 700; color: #6a3093; }
+
+        .footer-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; position: fixed; bottom: 0; left: 0; width: 100%; background: #fff; padding: 15px 20px; box-shadow: 0 -2px 10px rgba(0,0,0,0.05); }
+        .footer-btn { height: 45px; border-radius: 6px; font-size: 14px; font-weight: 600; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+        .back-btn { background: #f0f0f0; color: #333; }
+        .whatsapp-btn { background: #6a3093; color: #fff; gap: 10px; text-decoration: none; } 
+
+        @media (min-width: 360px) {
+            .navbar { height: 60px; }
+            .logo { font-size: 1.1rem; }
+            .logo-icon-rotate { font-size: 1.4rem; }
+            .toggle-btn { font-size: 1.7rem; }
+            .app-container { margin-top: 85px; padding: 0 30px; }
+            .status-box { font-size: 12px; padding: 8px 16px; }
+            .design-mention-big { font-size: 21px; }
+            .qty-selector { height: 35px; width: 105px; }
+            .qty-number { font-size: 16px; }
+            #mainHeading { font-size: 14px; }
+            #timerStatus { font-size: 10px; }
+            #timerClock { font-size: 14px; }
+            .select-heading { font-size: 12px; font-weight: 600; text-transform: uppercase; margin-top: 12px; margin-bottom: 8px; }
+           
+            .details-card h4 { font-size: 13px; }
+            .details-card li { font-size: 13px; margin-bottom: 8px; }
+            .details-card i { font-size: 12px; }
+            .input-label { font-size: 13px; }
+            .input-field { width: 140px; height: 38px; font-size: 13px; }
+            .total-text { font-size: 14px; }
+            .price-display { font-size: 22px; }
+            .footer-btn { height: 50px; font-size: 16px; }
+        }
+
+        @media (min-width: 400px) {
+            .navbar { height: 70px; }
+            .logo { font-size: 1.2rem; }
+            .logo-icon-rotate { font-size: 1.7rem; }
+            .toggle-btn { font-size: 2rem; }
+            .app-container { margin-top: 90px; padding: 0 35px; }
+            .design-mention-big { font-size: 23px; }
+            .qty-selector { height: 40px; width: 120px; }
+            .qty-number { font-size: 18px; }
+             .select-heading { font-size: 11px; font-weight: 700; color: #333; text-transform: uppercase; margin-top: 12px; margin-bottom: 8px; }
+              .dot { width: 7px; height: 7px; } 
+             .btn-combo { height: 38px; font-size: 12px; }
+            .input-label { font-size: 14px; width: 150px; }
+            .input-field { width: 150px; height: 40px; font-size: 14px; }
+            .footer-btn { height: 55px; font-size: 18px; }
+            .details-card h4 { font-size: 14px; }
+            .details-card li { font-size: 14px; }
+            #timerStatus { font-size: 11px; }
+            #timerClock { font-size: 15px; }
+            .total-text { font-size: 15px; }
+            .price-display { font-size: 25px; }
+            .footer-btn { height: 50px; font-size: 16px; }
+        }
+
+        @media (max-width: 992px) {
+            .nav-links { position: fixed; right: -100%; list-style: none; top: 60px; background: #ffffff; width: 240px; height: 100vh; flex-direction: column; padding: 30px; transition: 0.4s ease; z-index: 2000; box-shadow: -5px 0 15px rgba(0,0,0,0.1); }
+            .nav-links.active { right: 0 !important; }
+            .nav-links li { margin-bottom: 18px; }
+            .nav-links li a { font-size: 0.9rem; font-weight: 600; text-decoration: none; display: block; color: #333; }
+        }
+    </style>
+</head>
+<body onload="initApp()">
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-palette logo-icon-rotate"></i>
+                <span>Ajith <span class="logo-blue">studio</span></span>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">HOME</a></li> 
+                <li><a href="index.html#about">ABOUT</a></li>
+                <li><a href="index.html#services">SERVICES</a></li>
+                <li><a href="index.html#contact">CONTACT</a></li>
+            </ul>
+            <div class="toggle-btn" id="menuToggle"><i class="fas fa-bars"></i></div>
+        </div>
+    </nav>
+
+    <div class="app-container">
+        <div class="image-box">
+            <div id="best-price" class="status-box best-price-box">Best Price</div>
+            <div id="fest-offer" class="status-box festival-offer-box">Special Offer</div>
+            
+            <div class="image-strip" id="imageStrip">
+                <img src="1 sheet calender.jpg" alt="1 Page Calendar">
+                <img src="1 sheet calender.jpg" alt="12 Page Calendar">
+                <img src="1 sheet calender.jpg" alt="Desk Calendar">
+            </div>
+        </div>
+
+        <div class="dots-wrapper">
+            <div id="dot1" class="dot active"></div>
+            <div id="dot2" class="dot"></div>
+            <div id="dot3" class="dot"></div>
+        </div>
+
+        <div class="title-row">
+            <div class="design-mention-big">Calendar <span>Design</span></div>
+            <div class="qty-selector">
+                <button class="qty-btn" onclick="changeQty(-1)">−</button>
+                <div class="qty-number" id="qtyDisplay">1</div>
+                <button class="qty-btn" onclick="changeQty(1)">+</button>
+            </div>
+        </div>
+
+        <div class="festival-timer-row" id="festivalRow">
+            <div id="mainHeading">Festival Offer</div>
+            <div class="timer-box">
+                <span id="timerStatus">OFFER ENDS IN</span>
+                <span id="timerClock">00d 00h 00m 00s</span>
+            </div>
+        </div>
+
+        <div class="select-heading">Select Your Calendar</div>
+
+        <div class="combo-grid">
+            <div class="btn-combo active" id="btn-1page" onclick="selectType('1page', 0)">1 Page</div>
+            <div class="btn-combo" id="btn-12page" onclick="selectType('12page', 1)">12 Page</div>
+            <div class="btn-combo" id="btn-desk" onclick="selectType('desk', 2)">Desk</div>
+        </div>
+        
+        <div class="details-card">
+            <h4>Package Details</h4>
+            <ul id="detailsList"></ul>
+        </div>
+
+        <div class="input-row">
+            <span class="input-label">Calendar Size:</span>
+            <input type="text" id="sizeInput" class="input-field">
+        </div>
+
+        <div class="input-row">
+            <span class="input-label">Max Delivery:</span>
+            <select id="deliveryInput" class="input-field"></select>
+        </div>
+
+        <div class="total-price-section">
+            <span class="total-text">Total Price</span>
+            <div class="price-display">₹<span id="totalPrice">0</span></div>
+        </div>
+
+        <div class="footer-btns">
+            <button class="footer-btn back-btn" onclick="history.back()">Back</button>
+            <a class="footer-btn whatsapp-btn" href="javascript:void(0)" onclick="sendToWhatsApp()">
+                <i class="fab fa-whatsapp"></i> WhatsApp
+            </a>
+        </div>
+    </div>
+
+<script>
+    // 1. All Festival Data (Month 1 = Jan, Month 12 = Dec)
+    const FESTIVAL_DB = [
+        { name: "Special Sale", start: { month: 3, date: 6, hour: 11, min: 35 }, end: { month: 4, date: 30, hour: 23, min: 59 }, label: "Limited Time <span class='free-blink'>Offer</span>" },
+        { name: "Tamil New Year", start: { month: 4, date: 10, hour: 0, min: 0 }, end: { month: 4, date: 16, hour: 23, min: 59 }, label: "புத்தாண்டு <span class='free-blink'>Mega Offer</span>" }
+    ];
+
+    // 2. Product Data
+    const CALENDAR_DATA = {
+        '1page': { normal: 400, offer: 350, size: "A4 Sheet", delivery: ["7 Days", "10 Days"], details: ["Single Page View", "High Quality Print", "Wall Mountable", "Full Custom Design"] },
+        '12page': { normal: 700, offer: 600, size: "A4 Sheet", delivery: ["14 Days", "20 Days", "30 Days"], details: ["12 Months Separate", "Premium Binding", "Monthly Photos", "Holiday Markings"] },
+        'desk': { normal: 700, offer: 650, size: "6x8 Inch", delivery: ["14 Days", "20 Days"], details: ["Desk Table Stand", "Both Side Print", "Compact Design", "Matte Finish"] }
+    };
+
+    let activeType = '1page', qty = 1, isFestival = false;
+
+    // 3. App Initialization
+    window.onload = function() {
+        initApp();
+    };
+
+    function initApp() {
+        // Run Real-Time Check every second
+        setInterval(checkFestival, 1000);
+        checkFestival(); 
+        updateUI();
+
+        const menuToggle = document.getElementById('menuToggle');
+        if(menuToggle) {
+            menuToggle.onclick = () => document.getElementById('navLinks').classList.toggle('active');
+        }
+    }
+
+    // 4. Real-Time Connection Engine
+    function checkFestival() {
+        const now = new Date();
+        const year = now.getFullYear();
+        
+        const activeFest = FESTIVAL_DB.find(f => {
+            // JS months are 0-11, so we use month - 1
+            const start = new Date(year, f.start.month - 1, f.start.date, f.start.hour, f.start.min);
+            const end = new Date(year, f.end.month - 1, f.end.date, f.end.hour, f.end.min);
+            return now >= start && now <= end;
+        });
+
+        const row = document.getElementById('festivalRow');
+        const badgeFest = document.getElementById('fest-offer');
+        const badgeBest = document.getElementById('best-price');
+        const heading = document.getElementById('mainHeading');
+
+        if (activeFest) {
+            isFestival = true;
+            if(row) row.style.display = "flex";
+            if(badgeFest) badgeFest.style.display = "block";
+            if(badgeBest) badgeBest.style.display = "none";
+            if(heading) heading.innerHTML = activeFest.label;
+            
+            // Countdown Logic
+            const end = new Date(year, activeFest.end.month - 1, activeFest.end.date, activeFest.end.hour, activeFest.end.min);
+            const diff = end - now;
+            
+            if (diff > 0) {
+                const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                const s = Math.floor((diff % (1000 * 60)) / 1000);
+                
+                const timerClock = document.getElementById('timerClock');
+                if(timerClock) timerClock.innerText = `${d}d ${h}h ${m}m ${s}s`;
+            }
+        } else {
+            isFestival = false;
+            if(row) row.style.display = "none";
+            if(badgeFest) badgeFest.style.display = "none";
+            if(badgeBest) badgeBest.style.display = "block";
+            if(heading) heading.innerText = "Choose Your Style";
+        }
+        
+        // Refresh pricing real-time
+        updateUI();
+    }
+
+    // 5. User Interaction Logic
+    function selectType(t, index) {
+        activeType = t;
+        document.querySelectorAll('.btn-combo').forEach(b => b.classList.remove('active'));
+        const activeBtn = document.getElementById('btn-' + t);
+        if(activeBtn) activeBtn.classList.add('active');
+        
+        const imageStrip = document.getElementById('imageStrip');
+        if(imageStrip) {
+            const movePercent = index * 33.3333;
+            imageStrip.style.transform = `translateX(-${movePercent}%)`;
+        }
+
+        // Update dots
+        for(let i=1; i<=3; i++) {
+            const dot = document.getElementById('dot'+i);
+            if(dot) dot.classList.toggle('active', (i === index + 1));
+        }
+        
+        updateUI();
+    }
+
+    function changeQty(v) { 
+        qty = Math.max(1, qty + v); 
+        const qtyDisplay = document.getElementById('qtyDisplay');
+        if(qtyDisplay) qtyDisplay.innerText = qty; 
+        updateUI(); 
+    }
+
+    function updateUI() {
+        const data = CALENDAR_DATA[activeType];
+        const totalPrice = document.getElementById('totalPrice');
+        if(totalPrice) {
+            totalPrice.innerText = (isFestival ? data.offer : data.normal) * qty;
+        }
+        
+        const sizeInput = document.getElementById('sizeInput');
+        if(sizeInput) sizeInput.value = data.size;
+        
+        const deliveryInput = document.getElementById('deliveryInput');
+        if(deliveryInput) {
+            deliveryInput.innerHTML = data.delivery.map(d => `<option value="${d}">${d}</option>`).join('');
+        }
+
+        const detailsList = document.getElementById('detailsList');
+        if(detailsList) {
+            detailsList.innerHTML = data.details.map(item => `<li><i class="fa-solid fa-circle-check"></i> ${item}</li>`).join('');
+        }
+    }
+
+    function sendToWhatsApp() {
+        const sizeVal = document.getElementById('sizeInput').value;
+        const delVal = document.getElementById('deliveryInput').value;
+        const total = document.getElementById('totalPrice').innerText;
+        const festivalNote = isFestival ? "%0A*Festival Offer Applied!*" : "";
+
+        const msg = `*CALENDAR ORDER*${festivalNote}%0A*Type*: ${activeType.toUpperCase()}%0A*Size*: ${sizeVal}%0A*Delivery*: ${delVal}%0A*Qty*: ${qty}%0A*Total*: ₹${total}/-`;
+        window.open(`https://wa.me/7845188347?text=${msg}`, '_blank');
+    }
+</script>
+</body>
+</html>

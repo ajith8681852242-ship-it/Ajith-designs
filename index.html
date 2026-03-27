@@ -1,0 +1,2206 @@
+<!DOCTYPE html>
+<html lang="ta">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Ajith Designs | Graphics Designer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+
+    <div id="preloader">
+        <div class="center-content">
+            <div class="logo-container">
+                <i class="fas fa-palette rotating-icon blue-clr" style="font-size: 22px;"></i>
+                <h1 class="brand-name" style="font-size: 18px; margin: 0;">Ajith <span class="logo-blue">Graphics</span>
+                </h1>
+            </div>
+        </div>
+
+        <div class="bottom-content">
+            <div class="loading-dots">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <p class="footer-text">Design by Ajith</p>
+        </div>
+    </div>
+    <nav class="navbar">
+        <!-- Navbar Container (Flex: Space Between) -->
+        <div class="nav-container"
+            style="display: flex; justify-content: space-between; align-items: center; width: 92%; margin: 0 auto;">
+
+            <!-- 1. இடது ஓரம் (Left End): LOGO SECTION -->
+            <div class="logo">
+                <div class="nav-logo" style="display: flex; align-items: center; gap: 5px;">
+                    <i id="secret-icon" onclick="handleSecretClick()" class="fas fa-palette logo-icon-rotate blue-clr"
+                        style="cursor: pointer;"></i>
+                    <span>Ajith <span class="logo-blue">Graphics</span></span>
+                </div>
+                <script>
+                    let clickCount = 0;
+                    let clickTimer;
+                    function handleSecretClick() {
+                        clickCount++;
+                        clearTimeout(clickTimer);
+                        clickTimer = setTimeout(() => { clickCount = 0; }, 2000);
+                        if (clickCount === 5) { window.location.href = "login.html"; }
+                    }
+                </script>
+            </div>
+
+            <!-- 2. வலது ஓரம் (Right End): VIEW COUNTER & NAV LINKS -->
+            <!-- இது இரண்டையும் ஒரே Group-ஆக மாற்றிவிட்டதால், பிளவு படாமல் வலது முனையில் சேரும்! -->
+            <div class="right-nav-items" style="display: flex; align-items: center;">
+
+                <!-- (A) 👁️ Black Minimalist View Counter -->
+                <div class="navbar-view-minimal" title="Total Website Visitors"
+                    style="display: flex; flex-direction: row; align-items: center; gap: 6px;">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z" />
+                    </svg>
+                    <span class="view-counter" id="main-view-count" data-target="Website Main">0</span>
+                </div>
+
+                <!-- (B) Nav Links (Laptop-ல் View Count-க்கு அடுத்ததாக (Right) வரும்) -->
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="index.html">HOME</a></li>
+                    <li><a href="index.html#about">ABOUT</a></li>
+                    <li><a href="index.html#services">SERVICES</a></li>
+                    <li><a href="index.html#contact">CONTACT</a></li>
+                </ul>
+
+                <!-- (C) Mobile Menu Toggle Button (Laptop-ல் தானாக மறைந்துவிடும்) -->
+                <div class="toggle-btn" id="menuToggle" style="cursor: pointer; margin-left:15px;">
+                    <i class="fas fa-bars"></i>
+                </div>
+
+            </div> <!-- Right wrapper end -->
+
+        </div> <!-- Nav Container End -->
+    </nav>
+
+
+
+
+    <section class="banner" id="home">
+        <div class="banner-container">
+
+            <div class="header-mini-bar">
+                <span id="live-time">00:00:00 PM</span>
+                <span class="s">|</span>
+                <span id="live-day">Sun</span>
+                <span class="s">|</span>
+                <span id="live-month">Jan</span>
+                <span class="s">|</span>
+                <span id="live-date-year">04 - 2026</span>
+                <span class="s">|</span>
+                <span id="festival-wish" class="pink-blink">Welcome</span>
+            </div>
+
+            <div class="banner-content">
+                <h1 class="main-heading"><span class="blue-clr">Freelancing</span><br><span class="white-clr">Graphics
+                        Designer</span></h1>
+
+
+
+                <p class="thin-p one-line-p">Creative designs for your professional needs</p>
+                <button class="whatsapp-btn-live" id="chatBtn" onclick="openWhatsApp()">
+                    <i class="fab fa-whatsapp"></i> Chat Live Now
+                </button>
+            </div>
+
+
+
+
+
+
+            <script>
+                function openWhatsApp() {
+                    // 1. Enter your number (e.g., 91 for India + 10 digits)
+                    const phoneNumber = "7845188347";
+
+                    // 2. Your custom starting message
+                    const message = "Hi Ajith, I'm interested in your Graphic Design services!";
+
+                    // 3. Create the direct link
+                    const waUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+
+                    // 4. Open in a new tab
+                    window.open(waUrl, '_blank');
+                }
+            </script>
+
+
+
+
+
+
+
+
+
+
+
+
+            <div class="social-stock-container">
+                <a href="https://youtube.com/yourchannel" target="_blank" class="stock-icon yt-bg" title="YouTube">
+                    <i class="fab fa-youtube"></i>
+                </a>
+                <a href="https://behance.net/yourprofile" target="_blank" class="stock-icon be-bg" title="Behance">
+                    <i class="fab fa-behance"></i>
+                </a>
+                <a href="https://instagram.com/yourprofile" target="_blank" class="stock-icon ig-bg" title="Instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
+            </div>
+
+
+
+
+            <div class="banner-image">
+                <img src="all product  banner img (1).png" alt="Banner Image" class="custom-img">
+            </div>
+        </div>
+        <div id="status-final-safe-layer"></div>
+
+        <div id="status-final-safe-layer"></div>
+        <script>
+            (function () {
+                const host = document.querySelector('#status-final-safe-layer');
+                if (!host) return;
+                const shadow = host.attachShadow({ mode: 'closed' });
+
+                shadow.innerHTML = `
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700;800&display=swap');
+        
+        :host { 
+            /* இது பேனரைத் தொடவே தொடாது - No Disturbance */
+            position: absolute; 
+            left: 50%;
+            transform: translateX(-50%);
+            /* "Small top move" - பேனரின் மேல்பகுதிக்குக் கொண்டு செல்ல */
+            top: 705px; 
+            z-index: 9999;
+            width: 100%;
+            display: block;
+            pointer-events: none;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-family: 'Poppins', sans-serif;
+            pointer-events: auto;
+        }
+
+        .row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        /* லேப்டாப்பில் பெரிய அளவு (Big Size) */
+        .status-text {
+            font-size: 25px; 
+            font-weight: 800;
+            text-transform: uppercase;
+            line-height: 1;
+        }
+
+        .icon-box {
+            position: relative;
+            width: 16px;
+            height: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .dot { width: 10px; height: 10px; background-color: currentColor; border-radius: 50%; }
+        .ring {
+            position: absolute; width: 100%; height: 100%;
+            border: 2px solid currentColor; border-radius: 50%;
+            animation: ripple 2s infinite ease-out;
+        }
+
+        @keyframes ripple {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(3); opacity: 0; }
+        }
+
+        /* நேரம் அடுத்த வரியில் கறுப்பு நிறத்தில் */
+        .daily-time {
+            font-size: 10px;
+            color: #000000; 
+            font-weight: 700;
+            margin-top: 6px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+
+         /* ============================================================
+    FIX: JUST SMALL (Minimalist & Bottom Move)
+   ============================================================ */
+
+
+      @media (max-width: 400px)  {}
+
+
+      
+:host { 
+    position: absolute; 
+    left: 50%;
+    transform: translateX(-50%);
+    
+    /* Clean Bottom Positioning */
+    bottom: 8px; 
+    top: auto !important; 
+    
+    z-index: 1000;
+    width: 100%;
+    display: block;
+    pointer-events: none;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Poppins', sans-serif;
+    pointer-events: auto;
+}
+
+.row {
+    display: flex;
+    align-items: center;
+    gap: 6px; /* Tighter gap for smaller text */
+}
+
+/* REDUCED SIZE - Professional & Sharp */
+.status-text {
+    font-size: 11px; /* Desktop: Reduced by 3pt */
+    font-weight: 700;
+    text-transform: uppercase;
+    line-height: 1;
+    letter-spacing: 0.3px;
+}
+
+.icon-box {
+    position: relative;
+    width: 12px; 
+    height: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dot { 
+    width: 6px; 
+    height: 6px; 
+    background-color: currentColor; 
+    border-radius: 50%; 
+}
+
+.ring {
+    position: absolute; 
+    width: 100%; 
+    height: 100%;
+    border: 1.2px solid currentColor; 
+    border-radius: 50%;
+    animation: ripple 2s infinite ease-out;
+}
+
+@keyframes ripple {
+    0% { transform: scale(1); opacity: 1; }
+    100% { transform: scale(3.5); opacity: 0; }
+}
+
+/* Time text - Minimalist */
+.daily-time {
+    font-size: 7px; /* Slightly smaller to match */
+    color: #000000; 
+    font-weight: 600;
+    margin-top: 3px;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+}
+    }
+
+/* Mobile View: Reduced by 3pt */
+@media (max-width: 399px) {
+    :host { 
+        bottom: 12px; 
+    }
+    .status-text { 
+        font-size: 11px; /* Mobile: Clean and reduced */
+    }
+    .daily-time { 
+        font-size: 7px; 
+    }
+    .icon-box { 
+        width: 10px; 
+        height: 10px; 
+    }
+}
+
+
+
+   /* மொபைல் வியூ (Small Size for Mobile) */
+        @media (max-width: 399px) {
+            :host { top: 180px; left: 50%; z-index: 1000;  bottom: 8px; }
+                  
+          .status-text { font-size: 10px; }
+            .daily-time { font-size: 5px; margin-top: 3px; }
+            .icon-box { width: 10px; height: 10px; }
+            .dot { width: 5px; height: 5px; }
+            .row { gap: 5px; }
+        }
+
+
+
+
+
+
+
+
+    </style>
+    
+    <div class="container">
+        <div class="row" id="ui-wrap">
+            <div class="icon-box">
+                <span class="dot"></span>
+                <span class="ring"></span>
+            </div>
+            <span class="status-text" id="ui-label">...</span>
+        </div>
+        <div class="daily-time">9:00 AM - 7:00 PM</div>
+    </div>
+    `;
+
+                function update() {
+                    const h = new Date().getHours();
+                    const wrap = shadow.querySelector('#ui-wrap');
+                    const label = shadow.querySelector('#ui-label');
+
+                    // 9 AM - 7 PM 
+                    const isOpen = (h >= 9 && h < 19);
+
+                    const color = isOpen ? '#2ecc71' : '#e74c3c';
+                    wrap.style.color = color;
+                    label.textContent = isOpen ? 'OPEN' : 'CLOSED';
+                }
+                update();
+                setInterval(update, 30000);
+            })();
+        </script>
+    </section>
+    <div class="feature-strip">
+        <div class="f-box purple">
+            <div class="f-content">
+                <i class="fas fa-tags"></i>
+                <div class="f-text">
+                    <span class="f-title">Best Price</span>
+                    <span class="f-desc">Top savings guaranteed.</span>
+                </div>
+            </div>
+        </div>
+        <div class="f-box yellow">
+            <div class="f-content">
+                <i class="fas fa-award"></i>
+                <div class="f-text">
+                    <span class="f-title">High Quality</span>
+                    <span class="f-desc">Premium standards always.</span>
+                </div>
+            </div>
+        </div>
+        <div class="f-box red">
+            <div class="f-content">
+                <i class="fas fa-shipping-fast"></i>
+                <div class="f-text">
+                    <span class="f-title">Fast Delivery</span>
+                    <span class="f-desc">Super quick turnaround.</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="services-wrapper">
+        <div class="header-row">
+            <div class="header-left">
+                <h2 class="small-title">OUR <span class="accent">SERVICES</span></h2>
+            </div>
+
+            <div class="mini-timer-right">
+                <span class="fest-tag">Diwali Offer Start:</span>
+                <div class="t-item"><span id="days">30</span><small>d</small></div>
+                <div class="t-sep">:</div>
+                <div class="t-item"><span id="hours">18</span><small>h</small></div>
+                <div class="t-sep">:</div>
+                <div class="t-item"><span id="minutes">22</span><small>m</small></div>
+                <div class="t-sep">:</div>
+                <div class="t-item"><span id="seconds">53</span><small>s</small></div>
+            </div>
+        </div>
+
+
+
+        <div class="row-flex-mobile">
+            <div class="service-card">
+                <div class="hex-shape purple-bg">
+                    <i class="fas fa-palette"></i>
+                </div>
+                <h3>Graphics</h3>
+
+            </div>
+
+            <div class="service-card">
+                <div class="hex-shape blue-bg">
+                    <i class="fas fa-film"></i>
+                </div>
+                <h3>Motion</h3>
+
+            </div>
+
+            <div class="service-card">
+                <div class="hex-shape orange-bg">
+                    <i class="fas fa-laptop-code"></i>
+                </div>
+                <h3>Web</h3>
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+    <div class="sprite-grid">
+
+        <!-- 1. Poster Design -->
+        <div class="box reveal">
+            <div class="img-area">
+                <div class="top-left-offer" id="v_off1">20% OFF</div>
+                <img id="v_img1"
+                    src="Social Media Banner Real Estate House Property Sale Instagram Post _ PSD Free Download - Pikbest.jpg"
+                    onclick="logViewActivity('Poster Design')">
+                <div class="bottom-right-view" title="Total Views"><svg viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z" />
+                    </svg><span class="view-counter" data-target="Poster Design">0</span></div>
+            </div>
+            <h2 id="v_tit1">Poster <span>Design</span></h2>
+
+            <!-- ⭐ MODIFIED STAR RATING -->
+            <div class="product-stars" data-product="Poster Design"><span class="stars-fill">☆☆☆☆☆</span> <span
+                    class="rating-num-box">0.0</span></div>
+
+            <p class="details">Size: <b id="v_siz1">1080x1350</b></p>
+            <div class="price-row-equal">
+                <p class="details">Price: <span class="only-txt"><b class="orange-num" id="v_pri1">Just ₹99</b></span>
+                </p>
+                <span class="cut-price">Save ₹100</span>
+            </div>
+            <button class="btn-book"
+                onclick="logViewActivity('Poster Design'); setTimeout(()=>identifyAndNavigate('Poster_Design_99'), 300);">View</button>
+        </div>
+
+        <!-- 2. Flyer Design -->
+        <div class="box reveal">
+            <div class="img-area">
+                <div class="top-left-offer" id="v_off2">20% OFF</div>
+                <img id="v_img2" src="flyer thump.jpg" onclick="logViewActivity('Flyer Design')">
+                <div class="bottom-right-view" title="Total Views"><svg viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z" />
+                    </svg><span class="view-counter" data-target="Flyer Design">0</span></div>
+            </div>
+            <h2 id="v_tit2">Flyer <span>Design</span></h2>
+            <div class="product-stars" data-product="Flyer Design"><span class="stars-fill">☆☆☆☆☆</span> <span
+                    class="rating-num-box">0.0</span></div>
+
+            <p class="details">Size: <b id="v_siz2">A4 Sheet</b></p>
+            <div class="price-row-equal">
+                <p class="details">Price: <span class="only-txt"><b class="orange-num" id="v_pri2">Just ₹199</b></span>
+                </p>
+                <span class="cut-price">Save ₹100</span>
+            </div>
+            <button class="btn-book"
+                onclick="logViewActivity('Flyer Design'); setTimeout(()=>location.href='flyer-design.html', 300);">View</button>
+        </div>
+
+        <!-- 3. Calendar Design -->
+        <div class="box reveal">
+            <div class="img-area">
+                <div class="top-left-offer" id="v_off3">20% OFF</div>
+                <img id="v_img3" src="1 sheet calender.jpg" onclick="logViewActivity('Calendar Design')">
+                <div class="bottom-right-view" title="Total Views"><svg viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z" />
+                    </svg><span class="view-counter" data-target="Calendar Design">0</span></div>
+            </div>
+            <h2 id="v_tit3">Calendar <span>Design</span></h2>
+            <div class="product-stars" data-product="Calendar Design"><span class="stars-fill">☆☆☆☆☆</span> <span
+                    class="rating-num-box">0.0</span></div>
+
+            <p class="details">Size: <b id="v_siz3">A4 Sheet</b></p>
+            <div class="price-row-equal">
+                <p class="details">Price: <span class="only-txt"><b class="orange-num" id="v_pri3">Just ₹499</b></span>
+                </p>
+                <span class="cut-price">Save ₹300</span>
+            </div>
+            <button class="btn-book"
+                onclick="logViewActivity('Calendar Design'); setTimeout(()=>location.href='calendar.html', 300);">View</button>
+        </div>
+
+        <!-- 4. Business Cards -->
+        <div class="box reveal">
+            <div class="img-area">
+                <div class="top-left-offer" id="v_off4">20% OFF</div>
+                <img id="v_img4" src="bussiness card thump.jpg" onclick="logViewActivity('Business Cards')">
+                <div class="bottom-right-view" title="Total Views"><svg viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z" />
+                    </svg><span class="view-counter" data-target="Business Cards">0</span></div>
+            </div>
+            <h2 id="v_tit4">Business <span>Cards</span></h2>
+            <div class="product-stars" data-product="Business Cards"><span class="stars-fill">☆☆☆☆☆</span> <span
+                    class="rating-num-box">0.0</span></div>
+
+            <p class="details">Size: <b id="v_siz4">1000X1000</b></p>
+            <div class="price-row-equal">
+                <p class="details">Price: <span class="only-txt"><b class="orange-num" id="v_pri4">Just ₹499</b></span>
+                </p>
+                <span class="cut-price">Save ₹300</span>
+            </div>
+            <button class="btn-book"
+                onclick="logViewActivity('Business Cards'); setTimeout(()=>location.href='business-card.html', 300);">View</button>
+        </div>
+
+        <!-- 5. Flex & Banner Design -->
+        <div class="box reveal">
+            <div class="img-area">
+                <div class="top-left-offer" id="v_off5">20% OFF</div>
+                <img id="v_img5" src="banner thump.jpg" onclick="logViewActivity('Flex Banner Design')">
+                <div class="bottom-right-view" title="Total Views"><svg viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z" />
+                    </svg><span class="view-counter" data-target="Flex Banner Design">0</span></div>
+            </div>
+            <h2 id="v_tit5">Flex & Banner <span>Design</span></h2>
+            <div class="product-stars" data-product="Flex Banner Design"><span class="stars-fill">☆☆☆☆☆</span> <span
+                    class="rating-num-box">0.0</span></div>
+
+            <p class="details">Size: <b id="v_siz5">1000X1000</b></p>
+            <div class="price-row-equal">
+                <p class="details">Price: <span class="only-txt"><b class="orange-num" id="v_pri5">Just ₹199</b></span>
+                </p>
+                <span class="cut-price">Save ₹100</span>
+            </div>
+            <button class="btn-book"
+                onclick="logViewActivity('Flex Banner Design'); setTimeout(()=>location.href='banner.html', 300);">View</button>
+        </div>
+
+        <!-- 6. Brochure Designs -->
+        <div class="box reveal">
+            <div class="img-area">
+                <div class="top-left-offer" id="v_off6">20% OFF</div>
+                <img id="v_img6" src="Brochure creative.jpg" onclick="logViewActivity('Brochure Designs')">
+                <div class="bottom-right-view" title="Total Views"><svg viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z" />
+                    </svg><span class="view-counter" data-target="Brochure Designs">0</span></div>
+            </div>
+            <h2 id="v_tit6">Brochure <span>Designs</span></h2>
+            <div class="product-stars" data-product="Brochure Designs"><span class="stars-fill">☆☆☆☆☆</span> <span
+                    class="rating-num-box">0.0</span></div>
+
+            <p class="details">Size: <b id="v_siz6">Custom Size</b></p>
+            <div class="price-row-equal">
+                <p class="details">Price: <span class="only-txt"><b class="orange-num" id="v_pri6">Just ₹199</b></span>
+                </p>
+                <span class="cut-price">Save ₹100</span>
+            </div>
+            <button class="btn-book"
+                onclick="logViewActivity('Brochure Designs'); setTimeout(()=>location.href='brochure.html', 300);">View</button>
+        </div>
+
+        <!-- 7. Menu Cards Designs -->
+        <div class="box reveal">
+            <div class="img-area">
+                <div class="top-left-offer" id="v_off7">20% OFF</div>
+                <img id="v_img7" src="Menu Design thump.jpg" onclick="logViewActivity('Menu Cards')">
+                <div class="bottom-right-view" title="Total Views"><svg viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z" />
+                    </svg><span class="view-counter" data-target="Menu Cards">0</span></div>
+            </div>
+            <h2 id="v_tit7">Menu Cards <span>Designs</span></h2>
+            <div class="product-stars" data-product="Menu Cards"><span class="stars-fill">☆☆☆☆☆</span> <span
+                    class="rating-num-box">0.0</span></div>
+
+            <p class="details">Size: <b id="v_siz7">A4 sheet</b></p>
+            <div class="price-row-equal">
+                <p class="details">Price: <span class="only-txt"><b class="orange-num" id="v_pri7">Just ₹99</b></span>
+                </p>
+                <span class="cut-price">Save ₹100</span>
+            </div>
+            <button class="btn-book"
+                onclick="logViewActivity('Menu Cards'); setTimeout(()=>location.href='menu.html', 300);">View</button>
+        </div>
+
+        <!-- 8. Packaging Designs -->
+        <div class="box reveal">
+            <div class="img-area">
+                <div class="top-left-offer" id="v_off8">20% OFF</div>
+                <img id="v_img8" src="packaging thump.jpg" onclick="logViewActivity('Packaging Designs')">
+                <div class="bottom-right-view" title="Total Views"><svg viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z" />
+                    </svg><span class="view-counter" data-target="Packaging Designs">0</span></div>
+            </div>
+            <h2 id="v_tit8">Packaging <span>Designs</span></h2>
+            <div class="product-stars" data-product="Packaging Designs"><span class="stars-fill">☆☆☆☆☆</span> <span
+                    class="rating-num-box">0.0</span></div>
+
+            <p class="details">Size: <b id="v_siz8">A4 sheet</b></p>
+            <div class="price-row-equal">
+                <p class="details">Price: <span class="only-txt"><b class="orange-num" id="v_pri8">Just ₹299</b></span>
+                </p>
+                <span class="cut-price">Save ₹100</span>
+            </div>
+            <button class="btn-book"
+                onclick="logViewActivity('Packaging Designs'); setTimeout(()=>location.href='packaging.html', 300);">View</button>
+        </div>
+
+        <!-- 9. Label Designs -->
+        <div class="box reveal">
+            <div class="img-area">
+                <div class="top-left-offer" id="v_off9">20% OFF</div>
+                <img id="v_img9" src="Label Packaging Design 1.png" onclick="logViewActivity('Label Designs')">
+                <div class="bottom-right-view" title="Total Views"><svg viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z" />
+                    </svg><span class="view-counter" data-target="Label Designs">0</span></div>
+            </div>
+            <h2 id="v_tit9">Label <span>Designs</span></h2>
+            <div class="product-stars" data-product="Label Designs"><span class="stars-fill">☆☆☆☆☆</span> <span
+                    class="rating-num-box">0.0</span></div>
+
+            <p class="details">Size: <b id="v_siz9">Custom Size</b></p>
+            <div class="price-row-equal">
+                <p class="details">Price: <span class="only-txt"><b class="orange-num" id="v_pri9">Just ₹399</b></span>
+                </p>
+                <span class="cut-price">Save ₹200</span>
+            </div>
+            <button class="btn-book"
+                onclick="logViewActivity('Label Designs'); setTimeout(()=>location.href='label.html', 300);">View</button>
+        </div>
+
+        <!-- 10. Product box Designs -->
+        <div class="box reveal">
+            <div class="img-area">
+                <div class="top-left-offer" id="v_off10">20% OFF</div>
+                <img id="v_img10" src="product design thump.jpg" onclick="logViewActivity('Product Box Designs')">
+                <div class="bottom-right-view" title="Total Views"><svg viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z" />
+                    </svg><span class="view-counter" data-target="Product Box Designs">0</span></div>
+            </div>
+            <h2 id="v_tit10">Product box<span> Designs</span></h2>
+            <div class="product-stars" data-product="Product Box Designs"><span class="stars-fill">☆☆☆☆☆</span> <span
+                    class="rating-num-box">0.0</span></div>
+
+            <p class="details">Design: <b id="v_siz10">Custom Design</b></p>
+            <div class="price-row-equal">
+                <p class="details">Price: <span class="only-txt"><b class="orange-num" id="v_pri10">Just ₹299</b></span>
+                </p>
+                <span class="cut-price">Save ₹200</span>
+            </div>
+            <button class="btn-book"
+                onclick="logViewActivity('Product Box Designs'); setTimeout(()=>location.href='product.html', 300);">View</button>
+        </div>
+
+    </div>
+
+
+
+    </div>
+    <div class="scroll-dots">
+        <span class="dot active"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+
+    </div>
+
+    <div class="see-all reveal">
+        <button class="see-all-btn">See all</button>
+    </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+
+            const scrollContainer = document.querySelector('.sprite-grid');
+            const dots = document.querySelectorAll('.dot');
+            const boxes = document.querySelectorAll('.box');
+
+            // --- 1. SCROLL DOTS LOGIC ---
+            scrollContainer.addEventListener('scroll', () => {
+                let currentSection = 0;
+
+                boxes.forEach((box, index) => {
+                    const boxLeft = box.offsetLeft - scrollContainer.offsetLeft;
+                    const scrollLeft = scrollContainer.scrollLeft;
+
+                    // If the box is roughly in the center of the scroll area
+                    if (scrollLeft >= (boxLeft - scrollContainer.offsetWidth / 2)) {
+                        currentSection = index;
+                    }
+                });
+
+                // Update dots
+                dots.forEach((dot, index) => {
+                    if (index === currentSection) {
+                        dot.classList.add('active');
+                    } else {
+                        dot.classList.remove('active');
+                    }
+                });
+            });
+
+            // --- 2. SCROLL REVEAL ANIMATION (Existing) ---
+            const observerOptions = {
+                threshold: 0.15,
+                rootMargin: "0px 0px -50px 0px"
+            };
+
+            const revealObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+        });
+
+    </script>
+
+
+
+
+
+
+
+
+    <div class="rc-main-wrapper">
+        <style>
+            .rc-main-wrapper {
+                font-family: 'Segoe UI', system-ui, sans-serif;
+                background: #ffffff;
+                padding: 15px 20px;
+                color: #333;
+                max-width: 450px;
+                width: 100%;
+                margin: auto;
+                box-sizing: border-box;
+            }
+
+            .rc-card {
+                min-width: calc(50% - 6px);
+                max-width: calc(50% - 6px);
+                background: #fff;
+                padding: 12px;
+                border: 1.1px solid #f2f2f2;
+                flex-shrink: 0;
+                min-height: 120px;
+                display: flex;
+                flex-direction: column;
+                border-radius: 6px !important;
+                cursor: pointer;
+            }
+
+            .rc-avatar {
+                width: 28px;
+                height: 28px;
+                border: 1.2px solid #ff7b00;
+                padding: 4px;
+                flex-shrink: 0;
+                border-radius: 4px !important;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .rc-avatar svg {
+                fill: #ff7b00 !important;
+                width: 100%;
+                height: 100%;
+            }
+
+            .rc-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: flex-start;
+                margin-bottom: 20px;
+                gap: 8px;
+            }
+
+            .rc-title-area {
+                flex: 1;
+            }
+
+            .rc-title-area h2 {
+                margin: 0;
+                font-size: 18px;
+                font-weight: 800;
+                line-height: 1.2;
+            }
+
+            .rc-title-area h2 span {
+                color: #ff7b00;
+            }
+
+            .rc-sub-text {
+                font-size: 9px;
+                color: #999;
+                margin: 4px 0 10px;
+                line-height: 1.3;
+            }
+
+            .rc-stats-side {
+                text-align: right;
+                width: 50%;
+                display: flex;
+                flex-direction: column;
+                align-items: flex-end;
+            }
+
+            .rc-score-row {
+                display: flex;
+                align-items: center;
+                gap: 15px;
+                margin-bottom: 5px;
+            }
+
+            .rc-big-num {
+                font-size: 28px;
+                font-weight: bold;
+                margin: 0;
+                line-height: 0.8;
+            }
+
+            .rc-top-stars {
+                color: #ff7b00;
+                font-size: 11px;
+                letter-spacing: 1px;
+            }
+
+            .rc-avg-tag {
+                font-size: 9.5px;
+                font-weight: bold;
+                text-transform: uppercase;
+                display: block;
+                margin-top: 2px;
+            }
+
+            .rc-bar-stack {
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                gap: 4px;
+                margin-top: 8px;
+            }
+
+            .rc-bar-row {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                font-size: 10px;
+                font-weight: 600;
+                color: #666;
+                height: 12px;
+            }
+
+            .rc-progress-bg {
+                flex: 1;
+                height: 5px;
+                background: #f0f0f0;
+                border-radius: 10px !important;
+                overflow: hidden;
+            }
+
+            .rc-progress-fill {
+                height: 100%;
+                background: #ff7b00;
+                width: 0%;
+                transition: width 0.4s;
+            }
+
+            .rc-small-btn {
+                background: #ff7b00;
+                color: white;
+                border: none;
+                padding: 8px 12px;
+                cursor: pointer;
+                font-weight: bold;
+                font-size: 10px;
+                text-transform: uppercase;
+                border-radius: 4px !important;
+            }
+
+            .rc-scroller {
+                display: flex;
+                overflow-x: auto;
+                gap: 12px;
+                padding: 5px 0;
+                scrollbar-width: none;
+            }
+
+            .rc-scroller::-webkit-scrollbar {
+                display: none;
+            }
+
+            .rc-rating-line {
+                display: flex;
+                align-items: center;
+                gap: 4px;
+                margin: 3px 0;
+                white-space: nowrap;
+            }
+
+            .rc-stars {
+                color: #ff7b00;
+                font-size: 7.5px;
+            }
+
+            .rc-card-num {
+                font-size: 8.5px;
+                font-weight: bold;
+                color: #444;
+            }
+
+            .rc-card-status {
+                font-size: 8.5px;
+                font-weight: bold;
+            }
+
+            .rc-para {
+                font-size: 9.5px;
+                color: #555;
+                line-height: 1.35;
+                margin: 4px 0 0 0;
+                height: 38px;
+                overflow: hidden;
+                display: -webkit-box;
+                -webkit-line-clamp: 3;
+                -webkit-box-orient: vertical;
+            }
+
+            #rc-form-overlay,
+            #rc-secret-menu {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.4);
+                backdrop-filter: blur(8px);
+                z-index: 9999;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .rc-modal-content {
+                width: 100%;
+                max-width: 280px;
+                background: #ffffff;
+                padding: 20px;
+                text-align: center;
+                border-radius: 12px !important;
+            }
+
+            .rc-input-field {
+                width: 100%;
+                padding: 10px;
+                margin: 8px 0;
+                border: 1px solid #eee;
+                font-size: 12px;
+                outline: none;
+                border-radius: 4px !important;
+            }
+
+            .rc-star-selector {
+                font-size: 30px;
+                color: #eee;
+                cursor: pointer;
+                display: flex;
+                justify-content: center;
+                gap: 5px;
+            }
+
+            .rc-star-selector span.selected {
+                color: #ff7b00;
+            }
+
+            #rc-form-type-text {
+                font-size: 11px;
+                font-weight: bold;
+                margin-bottom: 10px;
+                height: 15px;
+                text-transform: uppercase;
+            }
+
+            .rc-menu-btn {
+                width: 100%;
+                padding: 12px;
+                margin: 6px 0;
+                border: none;
+                cursor: pointer;
+                font-weight: bold;
+                font-size: 14px;
+                border-radius: 6px !important;
+            }
+
+            /* ஆரம்பத்தில் டைமர் மற்றும் ஆஃபர் பேட்ஜை மறைக்க */
+            #timer_container,
+            .top-left-offer {
+                display: none;
+            }
+
+            /* 📌 NEW: Rectangular Rating Box CSS */
+            .rating-num-box {
+                padding: 1px 4px;
+                border-radius: 3px !important;
+                font-size: 9px !important;
+                font-weight: 800;
+                margin-left: 5px;
+                display: inline-block;
+            }
+
+            .stars-fill {
+                font-size: 11px !important;
+            }
+        </style>
+
+
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+
+                function updateLogic() {
+                    const now = new Date();
+                    const year = now.getFullYear();
+
+                    // --- 1. ALL FESTIVALS ---
+                    const FESTIVAL_LIST = [
+                        { name: "VALENTINE OFFER", sM: 3, sD: 10, sH: 21, sMi: 13, eM: 4, eD: 21, eH: 11, eMi: 29 },
+                        { name: "TAMIL NEW YEAR", sM: 4, sD: 7, sH: 0, sMi: 0, eM: 4, eD: 14, eH: 23, eMi: 59 },
+                        { name: "ONAM SPECIAL", sM: 8, sD: 18, sH: 0, sMi: 0, eM: 8, eD: 27, eH: 23, eMi: 59 },
+                        { name: "DIWALI OFFER", sM: 10, sD: 25, sH: 0, sMi: 0, eM: 11, eD: 2, eH: 23, eMi: 59 },
+                        { name: "NEW YEAR 2027", sM: 12, sD: 26, sH: 0, sMi: 0, eM: 1, eD: 1, eH: 23, eMi: 59 }
+                    ];
+
+                    // --- 2. CALENDAR SEASON (Place Change Settings) ---
+                    const CAL_SEASON = {
+                        sM: 2, sD: 20, sH: 17, sMi: 30, // Example Start: Feb 20, 5:30 PM
+                        eM: 2, eD: 20, eH: 18, sMi: 30, // Example End: Feb 20, 6:30 PM
+                        off: "30% OFF", pri: "Just ₹399", sav: "Save ₹199"
+                    };
+
+                    // --- 3. EDITABLE PRICES ---
+                    const NORMAL_PRICES = {
+                        "v_off1": { off: "Best Seller", pri: "Just ₹99", sav: "Save ₹100" },
+                        "v_off2": { off: "Best Price", pri: "Just ₹150", sav: "Save ₹200" },
+                        "v_off3": { off: "Best Price", pri: "Just ₹300", sav: "Save ₹50" },
+                        "v_off4": { off: "Best Price", pri: "Just ₹150", sav: "Save ₹15" },
+                        "v_off5": { off: "Best Price", pri: "Just ₹299", sav: "Save ₹100" },
+                        "v_off6": { off: "Best Price", pri: "Just ₹150", sav: "Save ₹200" },
+                        "v_off7": { off: "Best Price", pri: "Just ₹300", sav: "Save ₹50" },
+                        "v_off8": { off: "Best Price", pri: "Just ₹150", sav: "Save ₹15" },
+                        "v_off9": { off: "Best Price", pri: "Just ₹299", sav: "Save ₹100" },
+                        "v_off10": { off: "Best Price", pri: "Just ₹299", sav: "Save ₹100" },
+                    };
+
+                    const FEST_PRICES = {
+                        "v_off1": { off: "Buy 2 Get 1", pri: "Just ₹199", sav: "Save ₹200" },
+                        "v_off2": { off: "40% OFF", pri: "Just ₹110", sav: "Save ₹100" },
+                        "v_off3": { off: "45% OFF", pri: "Just ₹210", sav: "Save ₹180" },
+                        "v_off4": { off: "50% OFF", pri: "Just ₹130", sav: "Save ₹120" }
+                    };
+
+                    let activeFest = null;
+                    let targetTime = null;
+
+                    // --- FESTIVAL CHECKER ---
+                    FESTIVAL_LIST.forEach(f => {
+                        const start = new Date(year, f.sM - 1, f.sD, f.sH, f.sMi);
+                        const end = new Date(year, f.eM - 1, f.eD, f.eH, f.eMi);
+                        if (now >= start && now <= end) {
+                            activeFest = f;
+                            targetTime = end;
+                        }
+                    });
+
+                    // Target the Timer Container only
+                    const miniTimer = document.querySelector('.mini-timer-right');
+                    const festTag = document.querySelector('.fest-tag');
+
+                    // --- TIMER VISIBILITY ---
+                    if (activeFest) {
+                        if (miniTimer) miniTimer.style.display = 'flex'; // Use flex to keep row layout
+                        if (festTag) festTag.innerText = activeFest.name + " ENDS IN:";
+                        renderTimer(targetTime - now);
+                    } else {
+                        if (miniTimer) miniTimer.style.display = 'none'; // Only the timer hides
+                    }
+
+                    // --- CALENDAR SEASON CALCULATION ---
+                    const calStart = new Date(year, CAL_SEASON.sM - 1, CAL_SEASON.sD, CAL_SEASON.sH, CAL_SEASON.sMi);
+                    const calEnd = new Date(year, CAL_SEASON.eM - 1, CAL_SEASON.eD, CAL_SEASON.eH, CAL_SEASON.eMi);
+                    const isCalSeasonActive = (now >= calStart && now <= calEnd);
+
+                    // --- BOX & PRICE LOGIC ---
+                    const grid = document.querySelector('.sprite-grid');
+                    const boxes = document.querySelectorAll('.box');
+                    let calBox = null;
+                    let secondBox = (boxes.length > 1) ? boxes[1] : null;
+
+                    boxes.forEach(box => {
+                        const badge = box.querySelector('.top-left-offer');
+                        if (!badge) return;
+
+                        const isCal = box.innerText.includes("Calendar");
+                        if (isCal) calBox = box;
+
+                        // Set Price Data: Festival vs Normal
+                        let data = activeFest ? FEST_PRICES[badge.id] : NORMAL_PRICES[badge.id];
+
+                        // Override if Calendar Season is active
+                        if (isCal && isCalSeasonActive) data = CAL_SEASON;
+
+                        if (data) {
+                            badge.innerText = data.off;
+                            const p = box.querySelector('.orange-num');
+                            const s = box.querySelector('.cut-price');
+                            if (p) p.innerText = data.pri;
+                            if (s) s.innerText = data.sav;
+                            badge.style.display = 'block';
+                        }
+                    });
+
+                    // --- DYNAMIC POSITIONING ---
+                    if (calBox && grid && secondBox) {
+                        if (isCalSeasonActive) {
+                            if (grid.children[1] !== calBox) grid.insertBefore(calBox, secondBox);
+                        } else {
+                            if (grid.lastElementChild !== calBox) grid.appendChild(calBox);
+                        }
+                    }
+                }
+
+                function renderTimer(diff) {
+                    const f = (n) => n.toString().padStart(2, '0');
+                    if (diff < 0) diff = 0;
+
+                    // Update your HTML IDs: days, hours, minutes, seconds
+                    const d = document.getElementById('days');
+                    const h = document.getElementById('hours');
+                    const m = document.getElementById('minutes');
+                    const s = document.getElementById('seconds');
+
+                    if (d) d.innerText = f(Math.floor(diff / 86400000));
+                    if (h) h.innerText = f(Math.floor((diff % 86400000) / 3600000));
+                    if (m) m.innerText = f(Math.floor((diff % 3600000) / 60000));
+                    if (s) s.innerText = f(Math.floor((diff % 60000) / 1000));
+                }
+
+                setInterval(updateLogic, 1000);
+                updateLogic();
+            });
+
+
+
+        </script>
+
+
+
+
+
+        <div class="rc-header">
+            <div class="rc-title-area">
+                <h2>Our Customer <span>Reviews</span></h2>
+                <p class="rc-sub-text">"Thank you for sharing your review."</p>
+                <button class="rc-small-btn" onclick="openReviewPopup()">write a review</button>
+            </div>
+            <div class="rc-stats-side">
+                <div class="rc-score-row">
+                    <p class="rc-big-num" id="rc-top-value">5.0</p>
+                    <div style="text-align: left;">
+                        <div class="rc-top-stars" id="rc-top-stars-display">★★★★★</div>
+                        <span class="rc-avg-tag" id="rc-top-status">Excellent</span>
+                    </div>
+                </div>
+                <div class="rc-bar-stack">
+                    <div class="rc-bar-row"><span>5</span>
+                        <div class="rc-progress-bg">
+                            <div id="rc-p-5" class="rc-progress-fill"></div>
+                        </div>
+                    </div>
+                    <div class="rc-bar-row"><span>4</span>
+                        <div class="rc-progress-bg">
+                            <div id="rc-p-4" class="rc-progress-fill"></div>
+                        </div>
+                    </div>
+                    <div class="rc-bar-row"><span>3</span>
+                        <div class="rc-progress-bg">
+                            <div id="rc-p-3" class="rc-progress-fill"></div>
+                        </div>
+                    </div>
+                    <div class="rc-bar-row"><span>2</span>
+                        <div class="rc-progress-bg">
+                            <div id="rc-p-2" class="rc-progress-fill"></div>
+                        </div>
+                    </div>
+                    <div class="rc-bar-row"><span>1</span>
+                        <div class="rc-progress-bg">
+                            <div id="rc-p-1" class="rc-progress-fill"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="rc-scroller" id="rc-feed"></div>
+
+        <div id="rc-secret-menu" onclick="this.style.display='none'">
+            <div class="rc-modal-content" onclick="event.stopPropagation()">
+                <h4 style="margin:0 0 15px;">Review Options</h4>
+                <button class="rc-menu-btn" style="background:#ff7b00; color:white;" onclick="editReview()">Edit
+                    Review</button>
+                <button class="rc-menu-btn" style="background:#e74c3c; color:white;" onclick="deleteReview()">Delete
+                    Review</button>
+                <button class="rc-menu-btn" style="background:#eee;"
+                    onclick="document.getElementById('rc-secret-menu').style.display='none'">Cancel</button>
+            </div>
+        </div>
+
+        <div id="rc-form-overlay">
+            <div class="rc-modal-content">
+                <h3 style="margin:0 0 10px;">Submit Review</h3>
+                <input type="text" id="rc-user-name" class="rc-input-field" placeholder="Full Name">
+                <div class="rc-star-selector" id="rc-star-trigger">
+                    <span onclick="setReviewStars(1)">★</span><span onclick="setReviewStars(2)">★</span><span
+                        onclick="setReviewStars(3)">★</span><span onclick="setReviewStars(4)">★</span><span
+                        onclick="setReviewStars(5)">★</span>
+                </div>
+
+                <div style="text-align: left; margin: 12px 0 5px 2px;">
+                    <span style="font-size: 11px; font-weight: 800; text-transform: uppercase; color: #666;">Select Your
+                        Design</span>
+                </div>
+                <select id="rc-product-name" class="rc-input-field"
+                    style="margin-top:0px; font-weight:bold; color:#444;">
+                    <option value="General Review">General Review / Overall</option>
+                    <option value="Poster Design">Poster Design</option>
+                    <option value="Flyer Design">Flyer Design</option>
+                    <option value="Calendar Design">Calendar Design</option>
+                    <option value="Business Cards">Business Cards</option>
+                    <option value="Flex Banner Design">Flex Banner Design</option>
+                    <option value="Brochure Designs">Brochure Designs</option>
+                    <option value="Menu Cards">Menu Cards</option>
+                    <option value="Packaging Designs">Packaging Designs</option>
+                    <option value="Label Designs">Label Designs</option>
+                    <option value="Product Box Designs">Product Box Designs</option>
+                </select>
+                <div id="rc-form-type-text"></div>
+                <textarea id="rc-user-msg" class="rc-input-field" rows="3"
+                    placeholder="Write your feedback..."></textarea>
+                <button class="rc-small-btn" style="width:100%;" onclick="submitFinalReview()">Submit Review</button>
+                <p onclick="closeReviewPopup()"
+                    style="color:#bbb; cursor:pointer; font-size:10px; margin-top:15px; font-weight:bold;">CANCEL</p>
+            </div>
+        </div>
+        <script>
+            const STORAGE_KEY = 'clint_v29_color_fix';
+            const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxR1ezgnLU6OXsQnYVEsAzc_rkmpUtOBJo937Bv3J3uR_FeKorCM53Hr3QLSvPb_GV4cw/exec';
+
+            let currentStars = 0, activeIdx = -1;
+
+            const statusMap = {
+                1: { t: "Poor", c: "#e74c3c" },
+                2: { t: "Average", c: "#f39c12" },
+                3: { t: "Ok", c: "#3498db" },
+                4: { t: "Good", c: "#2980b9" },
+                5: { t: "Excellent", c: "#1b5e20" }
+            };
+
+            let allReviews = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+
+            // TIME AGO
+            function timeAgo(date) {
+                if (!date) return "Just now";
+                const seconds = Math.floor((new Date() - new Date(date)) / 1000);
+                if (isNaN(seconds) || seconds < 60) return "Just now";
+                const intervals = { year: 31536000, month: 2592000, week: 604800, day: 86400, hour: 3600, minute: 60 };
+                for (const [unit, sec] of Object.entries(intervals)) {
+                    const interval = Math.floor(seconds / sec);
+                    if (interval >= 1) return interval + " " + unit + (interval > 1 ? "s" : "") + " ago";
+                }
+                return "Just now";
+            }
+
+            // 📌 1. Cache Bypass Fix - FRESH DATA LOAD FROM SERVER
+            function loadReviewsFromServer() {
+                refreshUI();
+
+                // "?t=" + Time : இது Browser பழைய Data-வை காட்டுவதை தடுத்து, கன்பார்ம் ஆக புது Data-வை Sheet-லிருந்து எடுக்கும்
+                const nocacheUrl = SCRIPT_URL + "?t=" + new Date().getTime();
+
+                fetch(nocacheUrl, { cache: "no-store", mode: 'cors' })
+                    .then(res => res.json())
+                    .then(data => {
+                        if (Array.isArray(data)) {
+                            allReviews = data.reverse();
+                            localStorage.setItem(STORAGE_KEY, JSON.stringify(allReviews));
+                            refreshUI();
+                        }
+                    })
+                    .catch(err => console.log("Google sheet Load error", err));
+            }
+
+            // REFRESH UI
+            function refreshUI() {
+                const list = document.getElementById('rc-feed');
+                if (!list) return;
+
+                list.innerHTML = '';
+                let counts = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
+
+                allReviews.forEach((rev, i) => {
+                    if (!rev || !rev.rate || rev.rate < 1 || rev.rate > 5) return;
+
+                    counts[rev.rate]++;
+                    const safeRate = rev.rate;
+                    const statusDetails = statusMap[safeRate];
+
+                    list.innerHTML += `
+        <div class="rc-card" onclick="if(event.detail===3){activeIdx=${i}; document.getElementById('rc-secret-menu').style.display='flex';}">
+            <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px;">
+                <div class="rc-avatar">
+                    <svg viewBox="0 0 24 24" width="24" height="24">
+                        <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                    </svg>
+                </div>
+                <div style="display:flex; flex-direction:column; line-height:1.2;">
+                    <span style="font-weight:800; font-size:10px;">${rev.name || 'User'}</span>
+                    <span style="font-size:8.5px; color:#bbb; margin-top:3px;">${timeAgo(rev.time)}</span>
+                </div>
+            </div>
+            <div class="rc-rating-line">
+                <span class="rc-stars">${"★".repeat(safeRate)}${"☆".repeat(5 - safeRate)}</span>
+                <span class="rc-card-num" style="font-size:10px;">${safeRate}.0</span>
+                <span class="rc-card-status" style="color:${statusDetails.c}">${statusDetails.t}</span>
+            </div>
+            <p class="rc-para" style="font-size:10px; line-height:1.4; color:#555;">${(rev.msg || '').replace(/^\[.*?\]\s*/, '')}</p>
+        </div>`;
+                });
+
+                let maxCount = -1, dominantStar = 5;
+
+                for (let i = 5; i >= 1; i--) {
+                    if (counts[i] >= maxCount) {
+                        maxCount = counts[i];
+                        dominantStar = i;
+                    }
+
+                    let barPercentage = (counts[i] / 80) * 100;
+                    if (barPercentage > 100) barPercentage = 100;
+
+                    const bar = document.getElementById('rc-p-' + i);
+                    if (bar) bar.style.width = barPercentage + "%";
+                }
+
+                if (allReviews.length > 0) {
+                    const topVal = document.getElementById('rc-top-value');
+                    if (topVal) topVal.innerText = dominantStar + ".0";
+
+                    const topStars = document.getElementById('rc-top-stars-display');
+                    if (topStars) topStars.innerText = "★".repeat(dominantStar) + "☆".repeat(5 - dominantStar);
+
+                    const statusEl = document.getElementById('rc-top-status');
+                    if (statusEl) {
+                        statusEl.innerText = statusMap[dominantStar].t;
+                        statusEl.style.color = statusMap[dominantStar].c;
+                    }
+                }
+
+                // 📌 NEW: PRODUCT SPECIFIC AVERAGE RATING CALCULATION
+                const productStats = {};
+                allReviews.forEach(rev => {
+                    const parseProd = (rev.msg || "").match(/^\[(.*?)\]/);
+                    if (parseProd && parseProd[1] && rev.rate >= 1 && rev.rate <= 5) {
+                        const pName = parseProd[1];
+                        if (!productStats[pName]) productStats[pName] = { sum: 0, count: 0 };
+                        productStats[pName].sum += rev.rate;
+                        productStats[pName].count++;
+                    }
+                });
+
+                // Update the DOM for all 10 Product Boxes
+                document.querySelectorAll('.product-stars').forEach(box => {
+                    const pName = box.getAttribute('data-product');
+                    if (!pName) return;
+
+                    let avg = 0.0;
+                    let fillCount = 0;
+
+                    if (productStats[pName] && productStats[pName].count > 0) {
+                        avg = (productStats[pName].sum / productStats[pName].count).toFixed(1);
+                    }
+
+                    // 📌 Dynamic Stars specific to rating
+                    let avgNum = parseFloat(avg);
+                    let starHTML = '';
+                    if (avgNum === 0) {
+                        starHTML = '★★★★★'; // Default to 5 full stars if no reviews
+                    } else {
+                        let filled = Math.round(avgNum);
+                        starHTML = "★".repeat(filled) + "☆".repeat(5 - filled);
+                    }
+
+                    const fillEl = box.querySelector('.stars-fill');
+                    const numEl = box.querySelector('.rating-num-box');
+
+                    if (fillEl) {
+                        fillEl.innerText = starHTML;
+                        fillEl.style.color = "#ffb700"; // Always Yellow
+                    }
+
+                    if (numEl) {
+                        let formattedAvg = avg.toString();
+                        if (!formattedAvg.includes('.')) formattedAvg += '.0';
+
+                        if (avgNum === 0) {
+                            // Show 0.0 but without background
+                            numEl.style.display = "inline-block";
+                            numEl.innerText = "0.0";
+                            numEl.style.backgroundColor = "transparent";
+                            numEl.style.color = "#888"; // Little lighter for 0.0
+                            numEl.style.padding = "0px 0px 0px 5px";
+                            numEl.style.fontWeight = "600";
+                        } else {
+                            // Plain text for active ratings! NO BACKGROUND BOX.
+                            numEl.style.display = "inline-block";
+                            numEl.innerText = formattedAvg;
+                            numEl.style.backgroundColor = "transparent"; // Background removed!
+                            numEl.style.color = "#555"; // Simple text color
+                            numEl.style.padding = "0px 0px 0px 5px"; // Small space between star and number
+                            numEl.style.fontWeight = "600";
+                        }
+                    }
+                });
+            }
+
+            // POPUP
+            function openReviewPopup() {
+                activeIdx = -1;
+                const overlay = document.getElementById('rc-form-overlay');
+                if (overlay) overlay.style.display = 'flex';
+            }
+            function closeReviewPopup() {
+                const overlay = document.getElementById('rc-form-overlay');
+                if (overlay) overlay.style.display = 'none';
+                resetForm();
+            }
+            function resetForm() {
+                document.getElementById('rc-user-name').value = "";
+                document.getElementById('rc-user-msg').value = "";
+                document.getElementById('rc-product-name').value = "General Review";
+                setReviewStars(0);
+            }
+
+            // STAR SELECT
+            function setReviewStars(n) {
+                currentStars = n;
+                document.querySelectorAll('#rc-star-trigger span').forEach((s, i) => {
+                    s.style.color = i < n ? "#f39c12" : "#ccc";
+                });
+                const typeText = document.getElementById('rc-form-type-text');
+                if (n > 0) {
+                    typeText.innerText = statusMap[n].t;
+                    typeText.style.color = statusMap[n].c;
+                } else typeText.innerText = "";
+            }
+
+            // SUBMIT REVIEW (100% Google Sheet Data Save Fix)
+            function submitFinalReview() {
+                const name = document.getElementById('rc-user-name').value;
+                const msgInput = document.getElementById('rc-user-msg').value;
+                const productName = document.getElementById('rc-product-name').value;
+
+                if (!name || currentStars === 0) {
+                    alert("Enter name and rating");
+                    return;
+                }
+
+                // 📌 HACK: We attach the product name inside the message itself so it saves correctly in Google Sheets!
+                const finalMsg = `[${productName}] ` + msgInput;
+
+                const rev = { name, msg: finalMsg, rate: currentStars, time: Date.now() };
+
+                // மொபைலில் உடனடியாக தெரிவதற்காக Local Storage-ல் Save செய்கிறோம்
+                if (activeIdx > -1) allReviews[activeIdx] = rev;
+                else allReviews.unshift(rev);
+
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(allReviews));
+                refreshUI();
+                closeReviewPopup();
+
+                // 📌 மிக முக்கியம்: Google Sheet-க்கு Data-வை அனுப்பும் முறையை மாற்றியுள்ளோம் (Form Data URL Method)
+                const formData = new URLSearchParams();
+                formData.append("name", rev.name);
+                formData.append("msg", rev.msg);
+                formData.append("rate", rev.rate);
+                formData.append("time", rev.time);
+
+                fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors', // CORS பிழையை தடுக்கும்
+                    headers: {
+                        // Google Script எளிதாகப் புரிந்து கொள்ளும் Header முறை
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    body: formData.toString()
+                }).catch(err => console.log("Google Sheet Save Error: ", err));
+
+                // சேவ் ஆன பிறகு 3 செகண்ட் கழித்து அத்தனை மொபைலுக்கும் புது டேட்டாவை Load செய்யும்
+                setTimeout(() => {
+                    loadReviewsFromServer();
+                }, 3000);
+            }
+
+
+            // DELETE
+            function deleteReview() {
+                allReviews.splice(activeIdx, 1);
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(allReviews));
+                refreshUI();
+                document.getElementById('rc-secret-menu').style.display = 'none';
+            }
+
+            // EDIT
+            function editReview() {
+                const rev = allReviews[activeIdx];
+                document.getElementById('rc-user-name').value = rev.name;
+
+                // Parse the hack
+                let extractedMsg = rev.msg || "";
+                let extractedProd = "General Review";
+                const parseProd = (rev.msg || "").match(/^\[(.*?)\]\s*(.*)$/);
+                if (parseProd) {
+                    extractedProd = parseProd[1];
+                    extractedMsg = parseProd[2];
+                }
+
+                document.getElementById('rc-product-name').value = extractedProd;
+                document.getElementById('rc-user-msg').value = extractedMsg;
+                setReviewStars(rev.rate);
+                document.getElementById('rc-secret-menu').style.display = 'none';
+                document.getElementById('rc-form-overlay').style.display = 'flex';
+            }
+
+            // LOAD ON START 
+            function initReviewDisplay() {
+                loadReviewsFromServer();
+            }
+
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', initReviewDisplay);
+            } else {
+                initReviewDisplay();
+            }
+        </script>
+
+
+    </div>
+
+
+
+
+
+
+
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+<div id="my-works-section" class="rc-main-wrapper"
+    style="margin-top: 10px; padding: 0 0 15px 0; position: relative; width: 100%; font-family: sans-serif;">
+    <div class="rc-title-area" style="padding: 0 20px;">
+        <h2 style="margin-bottom: 5px; font-size: 18px; font-weight: 700;">My <span style="color: #ff7b00;">Works</span>
+        </h2>
+        <p style="font-size: 10px; color: #777; line-height: 1.4; margin: 0 0 10px 0;">
+            Explore our portfolio of high-quality projects. Swipe right to see all our works.
+        </p>
+    </div>
+
+    <style>
+        /* Animation: Fade and Slide Up */
+        .reveal {
+            opacity: 0;
+            transform: translateY(25px);
+            transition: all 0.6s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .works-scroller {
+            display: flex;
+            overflow-x: auto;
+            /* 1. Force the Left and Right outer gaps */
+            padding-left: 3px;
+            padding-right: 3px;
+            /* 2. Create the Center gap */
+            gap: 15px;
+            margin-left: 20px;
+            scrollbar-width: none;
+
+            scroll-snap-type: x mandatory;
+            width: 100%;
+            box-sizing: border-box;
+            /* This is critical */
+        }
+
+        .works-scroller::-webkit-scrollbar {
+            display: none;
+        }
+
+        .work-box {
+            /* 3. The Math for 2 Boxes:
+       (Total Width - (Left Gap + Center Gap + Right Gap)) / 2
+       (100% - 45px) / 2 
+    */
+            flex: 0 0 calc((100vw - 45px) / 2);
+
+            /* 4. This ensures the box aligns to your 15px padding, not the screen edge */
+            scroll-snap-align: start;
+
+            aspect-ratio: 1080 / 1350;
+            background: #f9f9f9;
+            border: 1px solid #eee;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        /* 5. If it still touches, this invisible wall will force the gap */
+        .works-scroller::before {
+            content: '';
+            flex: 0 0 0px;
+        }
+
+        .work-box {
+            /* 4. The Math: 
+       We need space for 3 gaps of 15px each (Left + Center + Right) = 45px.
+       We divide the remaining space by 2 to show two boxes.
+    */
+            flex: 0 0 calc((100% - 45px) / 2);
+
+            /* 5. Snaps the box to the 15px left padding */
+            scroll-snap-align: start;
+
+            aspect-ratio: 1080 / 1350;
+            background: #f9f9f9;
+            border: 1px solid #eee;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .work-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .see-more-btn-container {
+            display: flex;
+            /* Use 'flex-end' for right side, or 'center' for middle */
+            justify-content: flex-end;
+            padding: 15px 20px;
+            /* Increased top padding to 15px */
+            z-index: 100;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .rc-small-btn {
+            background: #ff7b00;
+            color: #ffffff !important;
+            text-decoration: none !important;
+            padding: 8px 16px;
+            /* Slightly larger for better touch */
+            font-size: 11px;
+            font-weight: 800;
+            text-transform: uppercase;
+            border-radius: 4px;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+
+            animation: pulse-small 2s infinite;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+
+    <div class="works-scroller reveal">
+        <div class="work-box"><img src="d logo moucups.jpg" alt="Artboard 1"></div>
+        <div class="work-box"><img src="bucket insta.jpg" alt="Logo Mockup"></div>
+        <div class="work-box"><img src="Vinodh Kreative\BRO MOU.jpg"></div>
+        <div class="work-box"><img src="https://via.placeholder.com/1080x1350?text=4"></div>
+        <div class="work-box"><img src="https://via.placeholder.com/1080x1350?text=5"></div>
+        <div class="work-box"><img src="https://via.placeholder.com/1080x1350?text=6"></div>
+        <div class="work-box"><img src="https://via.placeholder.com/1080x1350?text=7"></div>
+        <div class="work-box"><img src="https://via.placeholder.com/1080x1350?text=8"></div>
+        <div class="work-box"><img src="https://via.placeholder.com/1080x1350?text=9"></div>
+        <div class="work-box"><img src="https://via.placeholder.com/1080x1350?text=10"></div>
+    </div>
+
+    <div class="see-more-btn-container reveal">
+        <a href="https://yourlinkhere.com" class="rc-small-btn">See All →</a>
+    </div>
+</div>
+
+<script>
+    function reveal() {
+        var reveals = document.querySelectorAll(".reveal");
+        for (var i = 0; i < reveals.length; i++) {
+            var windowHeight = window.innerHeight;
+            var elementTop = reveals[i].getBoundingClientRect().top;
+            var elementVisible = 50;
+            if (elementTop < windowHeight - elementVisible) {
+                reveals[i].classList.add("active");
+            }
+        }
+    }
+
+    window.addEventListener("scroll", reveal);
+    window.addEventListener("DOMContentLoaded", reveal);
+    setTimeout(reveal, 500);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="form-overlay" id="formOverlay">
+    <div class="contact-form">
+        <span class="close-btn" id="closeForm">&times;</span>
+        <h4 class="small-title">Quick Inquiry</h4>
+        <input type="text" id="userName" placeholder="Your Name">
+        <select id="userService" class="form-select">
+            <option value="Logo Design">Logo Design</option>
+            <option value="Ads Design">Ads Design</option>
+            <option value="Branding">Branding</option>
+        </select>
+        <textarea id="userMsg" placeholder="Project details..."></textarea>
+        <button class="send-btn" id="submitToWA">Send via WhatsApp</button>
+    </div>
+</div>
+
+
+
+
+
+
+<footer
+    style="background-color: #6a3093; color: #ffffff; padding: 40px 25px 20px 25px; margin-top: 40px; font-family: 'Poppins', sans-serif;">
+    <div
+        style="max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; align-items: start;">
+
+        <div>
+            <div style="font-weight: 600; font-size: 18px; display: flex; align-items: center; color: #ffffff;">
+                <i class="fas fa-layer-group" style="margin-right: 10px; font-size: 16px;"></i>
+                Ajith Graphics
+            </div>
+        </div>
+
+        <div>
+            <h4
+                style="font-size: 14px; margin-bottom: 15px; color: rgba(255,255,255,0.7); text-transform: uppercase; letter-spacing: 1px;">
+                Contact</h4>
+            <div style="font-size: 13px;">
+                <p style="margin-bottom: 10px; display: flex; align-items: center;">
+                    <i class="fab fa-whatsapp" style="width: 25px; font-size: 16px;"></i>
+                    <span>78451 88347</span>
+                </p>
+                <p style="margin-bottom: 10px; display: flex; align-items: center;">
+                    <i class="far fa-envelope" style="width: 25px; font-size: 14px;"></i>
+                    <span>Ajith@8681852242@gmail.com</span>
+                </p>
+            </div>
+        </div>
+
+        <div>
+            <h4
+                style="font-size: 14px; margin-bottom: 15px; color: rgba(255,255,255,0.7); text-transform: uppercase; letter-spacing: 1px;">
+                Links</h4>
+            <ul style="list-style: none; padding: 0; font-size: 13px; line-height: 2;">
+                <li><a href="#" style="text-decoration: none; color: #ffffff; opacity: 0.9;">Home</a></li>
+                <li><a href="#" style="text-decoration: none; color: #ffffff; opacity: 0.9;">About</a></li>
+                <li><a href="#" style="text-decoration: none; color: #ffffff; opacity: 0.9;">Services</a></li>
+                <li><a href="#" style="text-decoration: none; color: #ffffff; opacity: 0.9;">Contact</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 40px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1);">
+        <p style="font-size: 11px; color: rgba(255,255,255,0.5); letter-spacing: 2px; text-transform: uppercase;">
+            Design by <span style="font-weight: 700; color: #ffffff;">Ajith</span>
+        </p>
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+<script>
+
+
+
+
+
+
+
+
+
+
+
+
+    // Live top timer jav code
+
+
+    function runLiveClock() {
+        const now = new Date();
+
+        // Time: 00:00:00 PM format
+        const timeOptions = { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true };
+        const timeStr = now.toLocaleTimeString('en-US', timeOptions);
+
+        // Day: Sun, Mon, etc.
+        const dayStr = now.toLocaleDateString('en-US', { weekday: 'short' });
+
+        // Month: Jan, Feb, etc.
+        const monthStr = now.toLocaleDateString('en-US', { month: 'short' });
+
+        // Date - Year: 31 - 2026 format
+        const dateStr = now.getDate().toString().padStart(2, '0');
+        const yearStr = now.getFullYear();
+        const dateYearStr = `${dateStr} - ${yearStr}`;
+
+        // Update the HTML elements
+        if (document.getElementById('live-time')) document.getElementById('live-time').textContent = timeStr;
+        if (document.getElementById('live-day')) document.getElementById('live-day').textContent = dayStr;
+        if (document.getElementById('live-month')) document.getElementById('live-month').textContent = monthStr;
+        if (document.getElementById('live-date-year')) document.getElementById('live-date-year').textContent = dateYearStr;
+    }
+
+    // Start the clock
+    setInterval(runLiveClock, 1000);
+    runLiveClock(); // Run immediately so it doesn't show 00:00:00 on load
+
+
+
+
+
+
+    // Toggle bar actvation Java
+
+
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+
+    if (menuToggle && navLinks) {
+        menuToggle.onclick = function () {
+            navLinks.classList.toggle('active');
+        };
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    function identifyAndNavigate(productName) {
+        // 1. மொபைல் மாடலைத் தோராயமாக அடையாளம் காணுதல்
+        const agent = navigator.userAgent;
+        let mobileBrand = "Mobile User";
+
+        if (/iPhone/i.test(agent)) mobileBrand = "iPhone";
+        else if (/Samsung/i.test(agent)) mobileBrand = "Samsung Mobile";
+        else if (/Android/i.test(agent)) mobileBrand = "Android Device";
+
+        // 2. இந்த விவரங்களை தற்காலிகமாகச் சேமித்தல் (Identity Tracking)
+        const visitorInfo = {
+            device: mobileBrand,
+            selectedProduct: productName,
+            timestamp: new Date().toLocaleString()
+        };
+
+        // தரவை பிரவுசர் மெமரியில் சேமிக்கிறோம்
+        localStorage.setItem('visitorData', JSON.stringify(visitorInfo));
+
+        // 3. புதிய பக்கத்திற்கு அழைத்துச் செல்லுதல்
+        window.location.href = "poster-design.html";
+    }
+
+
+
+
+
+
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const loader = document.getElementById("preloader");
+
+        // சரியாக 2 வினாடிகள் (2000ms) கழித்து மறையும்
+        setTimeout(() => {
+            loader.classList.add("fade-out");
+
+            // மெமரியிலிருந்து முழுமையாக நீக்க (Optional)
+            setTimeout(() => {
+                loader.style.display = "none";
+            }, 800);
+
+        }, 2000);
+    });
+
+
+</script>
+
+
+
+
+<!-- Analytics Tracker & View Counter Javascript -->
+<script>
+    const ANALYTICS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwcK72xg7xm6yayFeJPcY8kX2q3DmSvyMTj9JgSLAUj0MrYCKuXCFulgPmyFnG---a7kQ/exec';
+
+    // Session Management for 1 Line Output Details
+    let sessionEnterTime = sessionStorage.getItem('session_start_time') ? new Date(sessionStorage.getItem('session_start_time')) : new Date();
+    if (!sessionStorage.getItem('session_start_time')) sessionStorage.setItem('session_start_time', sessionEnterTime.toISOString());
+    let sessionActivities = JSON.parse(sessionStorage.getItem('client_activities')) || [];
+
+    document.addEventListener('DOMContentLoaded', function () {
+        fetchIPAndLocation().then(() => {
+            logViewActivity("Website Main");
+        });
+        setTimeout(loadPublicViewCounts, 1000);
+    });
+
+    function getMobileName() {
+        let ua = navigator.userAgent;
+        if (/iPhone/.test(ua)) return "Apple iPhone";
+        if (/iPad/.test(ua)) return "Apple iPad";
+        if (/Android/.test(ua)) return "Android Mobile";
+        if (/Windows/.test(ua)) return "Windows PC/Laptop";
+        if (/Macintosh/.test(ua)) return "Mac Computer";
+        return "Other Device";
+    }
+
+    async function fetchIPAndLocation() {
+        if (!sessionStorage.getItem('my_ip')) {
+            try {
+                let res = await fetch('https://ipinfo.io/json');
+                let data = await res.json();
+                sessionStorage.setItem('my_ip', data.ip || "Hidden");
+                sessionStorage.setItem('my_loc', (data.city || "") + ", " + (data.region || ""));
+            } catch (err) {
+                sessionStorage.setItem('my_ip', "Hidden");
+                sessionStorage.setItem('my_loc', "Unknown");
+            }
+        }
+    }
+
+    function logViewActivity(targetName) {
+        // Track the activities and build the full journey string
+        if (!sessionStorage.getItem('viewed_' + targetName)) {
+            sessionStorage.setItem('viewed_' + targetName, 'true');
+            sessionActivities.push(targetName);
+            sessionStorage.setItem('client_activities', JSON.stringify(sessionActivities));
+        }
+
+        // Send Immediately so you can see it working!
+        let allActivitiesStr = sessionActivities.join(" ➔ ");
+        sendToSecretAnalytics("Activities: " + allActivitiesStr, "Active");
+    }
+
+    function getIndianTime(dateObj) {
+        return dateObj.toLocaleTimeString('en-IN', { timeZone: 'Asia/Kolkata', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true });
+    }
+
+    function sendToSecretAnalytics(targetIdStr, status) {
+        let ip = sessionStorage.getItem('my_ip') || "Hidden";
+        let loc = sessionStorage.getItem('my_loc') || "Unknown";
+        let device = getMobileName();
+        
+        // UNIQUE SESSION ID: பல வரிகள் உருவாதைத் தடுக்க 100% பாதுகாப்பான Session ID
+        let sessionId = sessionStorage.getItem('my_session_id');
+        if (!sessionId) {
+            sessionId = "SESS-" + Math.floor(Math.random() * 999999999);
+            sessionStorage.setItem('my_session_id', sessionId);
+        }
+
+        let enterIST = getIndianTime(sessionEnterTime);
+        let leaveIST = status === "Leaving" ? getIndianTime(new Date()) : "Active";
+
+        let fd = new URLSearchParams();
+        fd.append("targetId", targetIdStr);
+        fd.append("ip", ip);
+        fd.append("loc", loc);
+        fd.append("device", device);
+        fd.append("enterTime", enterIST);
+        fd.append("leaveTime", leaveIST);
+        fd.append("sessionId", sessionId);
+
+        if (navigator.sendBeacon) {
+            navigator.sendBeacon(ANALYTICS_SCRIPT_URL, fd);
+        } else {
+            fetch(ANALYTICS_SCRIPT_URL, {
+                method: "POST", mode: "no-cors",
+                headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                body: fd.toString()
+            }).catch(e => console.log(e));
+        }
+    }
+
+    // 📌 When User Leaves, send final state with exit time
+    window.addEventListener("beforeunload", function () {
+        let allActivitiesStr = sessionActivities.length > 0 ? sessionActivities.join(" ➔ ") : "Website Main";
+        sendToSecretAnalytics("Activities: " + allActivitiesStr + " (Exit)", "Leaving");
+    });
+
+    function loadPublicViewCounts() {
+        fetch(ANALYTICS_SCRIPT_URL + "?t=" + new Date().getTime())
+            .then(res => res.json())
+            .then(countsData => {
+                document.querySelectorAll('.view-counter').forEach(el => {
+                    const lookFor = el.getAttribute('data-target');
+                    if (countsData[lookFor]) {
+                        el.innerText = countsData[lookFor];
+                    }
+                });
+            }).catch(err => console.log("View count load error", err));
+    }
+</script>
+
+
+
+<script src="script.js"></script>
+</body>
+
+</html>
