@@ -1388,7 +1388,9 @@
         </div>
         <script>
             const STORAGE_KEY = 'clint_v29_color_fix';
-            const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxR1ezgnLU6OXsQnYVEsAzc_rkmpUtOBJo937Bv3J3uR_FeKorCM53Hr3QLSvPb_GV4cw/exec';
+
+            // 👇 1. REVIEWS சீட் லிங்கை இங்கே பேஸ்ட் செய்யவும் 👇
+            const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxz1FWHQ4OxdKo_hdgqAHva8OfXq6o8XJj19ifqYvTxqJsw0gZgcQZT4HeiWYmKPED_Ig/exec';
 
             let currentStars = 0, activeIdx = -1;
 
@@ -1419,8 +1421,8 @@
             function loadReviewsFromServer() {
                 refreshUI();
 
-                // "?t=" + Time : இது Browser பழைய Data-வை காட்டுவதை தடுத்து, கன்பார்ம் ஆக புது Data-வை Sheet-லிருந்து எடுக்கும்
-                const nocacheUrl = SCRIPT_URL + "?t=" + new Date().getTime();
+                // "?action=reviews&t=" + Time : இது Browser பழைய Data-வை காட்டுவதை தடுத்து, கன்பார்ம் ஆக புது Data-வை Sheet-லிருந்து எடுக்கும்
+                const nocacheUrl = SCRIPT_URL + "?action=reviews&t=" + new Date().getTime();
 
                 fetch(nocacheUrl, { cache: "no-store", mode: 'cors' })
                     .then(res => res.json())
@@ -2088,17 +2090,22 @@
 
 <!-- Analytics Tracker & View Counter Javascript -->
 <script>
-    const ANALYTICS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwAlvqCg8By5lQwTObQGVuXjZvF7XqLqFvKya4Z6KbPVmyteshYnqRPrdS2eE2xXmUq/exec';
+    // 👇 2. ANALYTICS & VIEW COUNT சீட் லிங்கை இங்கே பேஸ்ட் செய்யவும் 👇
+    const ANALYTICS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxHI4tOiz4Ir3FwAh8dd7iq67rZDXefywju0mCF8tgcQvFvO_NqHegpNMU-Q1OaRoIi4w/exec';
 
-    // Session Management for 1 Line Output Details
-    let sessionEnterTime = sessionStorage.getItem('session_start_time') ? new Date(sessionStorage.getItem('session_start_time')) : new Date();
-    if (!sessionStorage.getItem('session_start_time')) sessionStorage.setItem('session_start_time', sessionEnterTime.toISOString());
-    let sessionActivities = JSON.parse(sessionStorage.getItem('client_activities')) || [];
+    // 1. SESSION START: Enter time & Initial View 
+    if (!sessionStorage.getItem('my_session_active')) {
+        sessionStorage.setItem('my_session_active', 'true');
+        sessionStorage.setItem('sess_date', new Date().toLocaleDateString('en-IN'));
+        sessionStorage.setItem('sess_enter_time', new Date().toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true }));
+        sessionStorage.setItem('sess_clicks', JSON.stringify(["Website Main"]));
+    }
 
     document.addEventListener('DOMContentLoaded', function () {
-        fetchIPAndLocation().then(() => {
-            logViewActivity("Website Main");
-        });
+        // Allow sending again if user refreshes or navigates back!
+        sessionStorage.removeItem('sess_sent');
+
+        fetchIPAndLocation();
         setTimeout(loadPublicViewCounts, 1000);
     });
 
@@ -2113,79 +2120,78 @@
     }
 
     async function fetchIPAndLocation() {
-        if (!sessionStorage.getItem('my_ip')) {
+        if (!sessionStorage.getItem('sess_loc')) {
             try {
                 let res = await fetch('https://ipinfo.io/json');
                 let data = await res.json();
-                sessionStorage.setItem('my_ip', data.ip || "Hidden");
-                sessionStorage.setItem('my_loc', (data.city || "") + ", " + (data.region || ""));
+                sessionStorage.setItem('sess_loc', (data.city || "") + ", " + (data.region || ""));
             } catch (err) {
-                sessionStorage.setItem('my_ip', "Hidden");
-                sessionStorage.setItem('my_loc', "Unknown");
+                sessionStorage.setItem('sess_loc', "Unknown Location");
             }
         }
     }
 
+    // 2. CLICK PRODUCT: Add to list, NO backend send yet!
     function logViewActivity(targetName) {
-        // Track the activities and build the full journey string
-        if (!sessionStorage.getItem('viewed_' + targetName)) {
-            sessionStorage.setItem('viewed_' + targetName, 'true');
-            sessionActivities.push(targetName);
-            sessionStorage.setItem('client_activities', JSON.stringify(sessionActivities));
-        }
+        let clicksStr = sessionStorage.getItem('sess_clicks');
+        let clicksArr = clicksStr ? JSON.parse(clicksStr) : [];
 
-        // Send Immediately so you can see it working!
-        let allActivitiesStr = sessionActivities.join(" ➔ ");
-        sendToSecretAnalytics("Activities: " + allActivitiesStr, "Active");
+        if (!clicksArr.includes(targetName)) {
+            clicksArr.push(targetName);
+            sessionStorage.setItem('sess_clicks', JSON.stringify(clicksArr));
+        }
     }
 
-    function getIndianTime(dateObj) {
-        return dateObj.toLocaleTimeString('en-IN', { timeZone: 'Asia/Kolkata', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true });
-    }
-
-    function sendToSecretAnalytics(targetIdStr, status) {
-        let ip = sessionStorage.getItem('my_ip') || "Hidden";
-        let loc = sessionStorage.getItem('my_loc') || "Unknown";
-        let device = getMobileName();
-        
-        // UNIQUE SESSION ID: பல வரிகள் உருவாதைத் தடுக்க 100% பாதுகாப்பான Session ID
-        let sessionId = sessionStorage.getItem('my_session_id');
-        if (!sessionId) {
-            sessionId = "SESS-" + Math.floor(Math.random() * 999999999);
-            sessionStorage.setItem('my_session_id', sessionId);
-        }
-
-        let enterIST = getIndianTime(sessionEnterTime);
-        let leaveIST = status === "Leaving" ? getIndianTime(new Date()) : "Active";
+    // 3. EXIT WEBSITE: Send ALL details reliably!
+    function sendFinalData() {
+        // Prevent duplicate sending if already sent
+        if (sessionStorage.getItem('sess_sent')) return;
 
         let fd = new URLSearchParams();
-        fd.append("targetId", targetIdStr);
-        fd.append("ip", ip);
-        fd.append("loc", loc);
-        fd.append("device", device);
-        fd.append("enterTime", enterIST);
-        fd.append("leaveTime", leaveIST);
-        fd.append("sessionId", sessionId);
+        fd.append("action", "save_exit");
+        fd.append("Date", sessionStorage.getItem('sess_date') || new Date().toLocaleDateString('en-IN'));
+        fd.append("MobileName", getMobileName());
+        fd.append("Location", sessionStorage.getItem('sess_loc') || "Unknown Location");
+        fd.append("EnterTime", sessionStorage.getItem('sess_enter_time') || "");
 
-        if (navigator.sendBeacon) {
-            navigator.sendBeacon(ANALYTICS_SCRIPT_URL, fd);
-        } else {
-            fetch(ANALYTICS_SCRIPT_URL, {
-                method: "POST", mode: "no-cors",
-                headers: { "Content-Type": "application/x-www-form-urlencoded" },
-                body: fd.toString()
-            }).catch(e => console.log(e));
-        }
+        // This is safe JSON string decoding
+        let clicksArr = [];
+        try { clicksArr = JSON.parse(sessionStorage.getItem('sess_clicks') || '[]'); } catch (e) { }
+        fd.append("ClickedItems", clicksArr.join(" ➔ "));
+
+        let exitT = new Date().toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true });
+        fd.append("ExitTime", exitT);
+
+        // ALWAYS use fetch with no-cors and keepalive for Google Apps Script Web Apps!
+        // sendBeacon gets blocked when the server responds with a 302 Redirect (which Google Apps Script always does).
+        fetch(ANALYTICS_SCRIPT_URL, {
+            method: "POST", 
+            mode: "no-cors",
+            keepalive: true, // Guarantees the browser sends it even during a tab close
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: fd.toString()
+        }).catch(e => console.log(e));
+
+        // Mark as sent in this session to prevent repeated rows if visibility changes multiple times
+        sessionStorage.setItem('sess_sent', 'true');
     }
 
-    // 📌 When User Leaves, send final state with exit time
-    window.addEventListener("beforeunload", function () {
-        let allActivitiesStr = sessionActivities.length > 0 ? sessionActivities.join(" ➔ ") : "Website Main";
-        sendToSecretAnalytics("Activities: " + allActivitiesStr + " (Exit)", "Leaving");
+    // Capture tab close or switching apps (most reliable)
+    window.addEventListener("visibilitychange", function () {
+        if (document.visibilityState === 'hidden') {
+            sendFinalData();
+        }
     });
 
+    // Backup capture method 1
+    window.addEventListener("pagehide", sendFinalData);
+    
+    // Backup capture method 2 (Standard older browser support)
+    window.addEventListener("beforeunload", sendFinalData);
+
+    // 4. LOAD COUNTS: Fetch total views for each item (Must be handled in Google Script Dojo)
     function loadPublicViewCounts() {
-        fetch(ANALYTICS_SCRIPT_URL + "?t=" + new Date().getTime())
+        fetch(ANALYTICS_SCRIPT_URL + "?action=counts&t=" + new Date().getTime())
             .then(res => res.json())
             .then(countsData => {
                 document.querySelectorAll('.view-counter').forEach(el => {
