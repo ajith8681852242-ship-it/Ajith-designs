@@ -360,5 +360,72 @@
     window.open(`https://wa.me/7845188347?text=${msg}`, '_blank');
 }
 </script>
+<script>
+    // --- 30 MINUTE VIEW BLOCKER LOGIC ---
+    const ANALYTICS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxfGE0g3Rb0ZkovU0um6IWMMWFhP266o1q0w4VtzOY62XBnwE0DJiz8wIFfjvGiJMVf6A/exec';
+    const THIRTY_MINUTES = 30 * 60 * 1000;
+    const isAdminUser = localStorage.getItem('isAdmin') === 'true' || localStorage.getItem('isAdminLoggedIn') === 'true';
+
+    // 4. LOAD CURRENT VIEW COUNTS FROM GOOGLE SHEET
+    function loadPublicViewCounts() {
+        if(document.querySelectorAll('.view-counter').length === 0) return;
+        fetch(ANALYTICS_SCRIPT_URL + "?action=counts&t=" + new Date().getTime())
+            .then(res => res.json())
+            .then(countsData => {
+                document.querySelectorAll('.view-counter').forEach(el => {
+                    const lookFor = el.getAttribute('data-target');
+                    if (countsData[lookFor]) {
+                        el.innerText = countsData[lookFor];
+                    }
+                });
+            }).catch(err => console.log("View count load error", err));
+    }
+
+    // Auto load view stats
+    loadPublicViewCounts();
+
+    function logProductView(productName) {
+        if (isAdminUser) return; // Admins don't count
+        
+        let lastActive = localStorage.getItem('my_session_last_active');
+        if (lastActive && (Date.now() - parseInt(lastActive)) > THIRTY_MINUTES) {
+            localStorage.removeItem('my_session_id');
+            localStorage.removeItem('sess_clicks');
+            localStorage.removeItem('sess_enter_time');
+        }
+
+        if (!localStorage.getItem('my_session_id')) {
+            let sid = 'SESS_' + new Date().getTime() + '_' + Math.floor(Math.random() * 1000);
+            localStorage.setItem('my_session_id', sid);
+            localStorage.setItem('sess_date', new Date().toLocaleDateString('en-IN'));
+            localStorage.setItem('sess_enter_time', new Date().toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true }));
+            localStorage.setItem('sess_clicks', JSON.stringify([productName]));
+            
+            // Push View
+            let vp = new URLSearchParams();
+            vp.append("action", "increment_view");
+            vp.append("ProductName", productName);
+            fetch(ANALYTICS_SCRIPT_URL, { method: "POST", mode: "no-cors", keepalive: true, body: vp.toString() }).catch(e => console.log(e));
+        } else {
+            // Already active session
+            let clicks = JSON.parse(localStorage.getItem('sess_clicks') || "[]");
+            if (!clicks.includes(productName)) {
+                clicks.push(productName);
+                localStorage.setItem('sess_clicks', JSON.stringify(clicks));
+                
+                let vp = new URLSearchParams();
+                vp.append("action", "increment_view");
+                vp.append("ProductName", productName);
+                fetch(ANALYTICS_SCRIPT_URL, { method: "POST", mode: "no-cors", keepalive: true, body: vp.toString() }).catch(e => console.log(e));
+            }
+        }
+        localStorage.setItem('my_session_last_active', Date.now().toString());
+    }
+
+    // Trigger viewing Product Box Designs immediately upon opening product.html
+    window.addEventListener('load', () => {
+        logProductView("Product Box Designs");
+    });
+</script>
 </body>
 </html>
