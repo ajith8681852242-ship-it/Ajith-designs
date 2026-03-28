@@ -476,7 +476,8 @@
 
 
 
-    <div class="services-wrapper">
+    <!-- 🔥 This ID allows the Back Button to drop the user exactly at the 3 colors 🔥 -->
+    <div class="services-wrapper" id="three-colors-view" style="scroll-margin-top: 65px;">
         <div class="header-row">
             <div class="header-left">
                 <h2 class="small-title">OUR <span class="accent">SERVICES</span></h2>
@@ -533,7 +534,7 @@
     <div class="sprite-grid">
 
         <!-- 1. Poster Design -->
-        <div class="box reveal">
+        <div class="box reveal" id="box-poster">
             <div class="img-area">
                 <div class="top-left-offer" id="v_off1">20% OFF</div>
                 <img id="v_img1"
@@ -2070,7 +2071,13 @@
     document.addEventListener("DOMContentLoaded", function () {
         const loader = document.getElementById("preloader");
 
-        // சரியாக 2 வினாடிகள் (2000ms) கழித்து மறையும்
+        // 🔥 CRITICAL UX FIX: If returning from another page, skip the animation instantly! 🔥
+        if (sessionStorage.getItem('my_session_active')) {
+            loader.style.display = "none";
+            return;
+        }
+
+        // முதல் முறை உள்ளே வருபவர்களுக்கு மட்டும் சரியாக 2 வினாடிகள் (2000ms) கழித்து மறையும்
         setTimeout(() => {
             loader.classList.add("fade-out");
 
@@ -2091,21 +2098,45 @@
 <!-- Analytics Tracker & View Counter Javascript -->
 <script>
     // 👇 2. ANALYTICS & VIEW COUNT சீட் லிங்கை இங்கே பேஸ்ட் செய்யவும் 👇
-    const ANALYTICS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxHI4tOiz4Ir3FwAh8dd7iq67rZDXefywju0mCF8tgcQvFvO_NqHegpNMU-Q1OaRoIi4w/exec';
+    const ANALYTICS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxfGE0g3Rb0ZkovU0um6IWMMWFhP266o1q0w4VtzOY62XBnwE0DJiz8wIFfjvGiJMVf6A/exec';
 
-    // 1. SESSION START: Enter time & Initial View 
-    if (!sessionStorage.getItem('my_session_active')) {
-        sessionStorage.setItem('my_session_active', 'true');
-        sessionStorage.setItem('sess_date', new Date().toLocaleDateString('en-IN'));
-        sessionStorage.setItem('sess_enter_time', new Date().toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true }));
-        sessionStorage.setItem('sess_clicks', JSON.stringify(["Website Main"]));
+    // 🔴 Admin Check: Do not log views for admin 🔴
+    const isAdminUser = localStorage.getItem('isAdmin') === 'true' || localStorage.getItem('isAdminLoggedIn') === 'true';
+
+    // --- 30 MINUTE VIEW BLOCKER LOGIC ---
+    const THIRTY_MINUTES = 30 * 60 * 1000;
+    let lastActive = localStorage.getItem('my_session_last_active');
+    
+    // If more than 30 mins have passed, reset the session so Views can count again
+    if (lastActive && (Date.now() - parseInt(lastActive)) > THIRTY_MINUTES) {
+        localStorage.removeItem('my_session_id');
+        localStorage.removeItem('sess_clicks');
+        localStorage.removeItem('sess_enter_time');
     }
 
-    document.addEventListener('DOMContentLoaded', function () {
-        // Allow sending again if user refreshes or navigates back!
-        sessionStorage.removeItem('sess_sent');
+    // 1. SESSION START: Unique ID, Enter time & Initial View 
+    if (!localStorage.getItem('my_session_id') && !isAdminUser) {
+        let sid = 'SESS_' + new Date().getTime() + '_' + Math.floor(Math.random() * 1000);
+        localStorage.setItem('my_session_id', sid);
+        localStorage.setItem('sess_date', new Date().toLocaleDateString('en-IN'));
+        localStorage.setItem('sess_enter_time', new Date().toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true }));
+        localStorage.setItem('sess_clicks', JSON.stringify(["Website Main"]));
 
-        fetchIPAndLocation();
+        // 🔥 Send +1 View directly to Google Sheet View Count for Website Main 🔥
+        let vp = new URLSearchParams();
+        vp.append("action", "increment_view");
+        vp.append("ProductName", "Website Main");
+        fetch(ANALYTICS_SCRIPT_URL, { method: "POST", mode: "no-cors", keepalive: true, body: vp.toString() }).catch(e => console.log(e));
+    }
+
+    // Update session active timer
+    localStorage.setItem('my_session_last_active', Date.now().toString());
+
+    document.addEventListener('DOMContentLoaded', function () {
+        if (!isAdminUser) {
+            sessionStorage.removeItem('sess_sent');
+            fetchIPAndLocation();
+        }
         setTimeout(loadPublicViewCounts, 1000);
     });
 
@@ -2113,67 +2144,121 @@
         let ua = navigator.userAgent;
         if (/iPhone/.test(ua)) return "Apple iPhone";
         if (/iPad/.test(ua)) return "Apple iPad";
-        if (/Android/.test(ua)) return "Android Mobile";
+        if (/Android/.test(ua)) {
+            let brand = "";
+            let model = "";
+
+            // 1. Try to get exact device model from User-Agent string
+            let match = ua.match(/\(([^)]+)\)/);
+            if (match) {
+                let parts = match[1].split(';');
+                for (let i = 0; i < parts.length; i++) {
+                    let p = parts[i].trim();
+                    if (p.includes('Build')) {
+                        model = p.split('Build')[0].trim();
+                        break;
+                    }
+                }
+                if (!model && parts.length >= 3) {
+                    model = parts[2].trim();
+                }
+            }
+
+            // 2. Try to get Manufacturer Brand natively from modern browsers
+            if (navigator.userAgentData && navigator.userAgentData.brands) {
+                for (let b of navigator.userAgentData.brands) {
+                    if (!b.brand.includes("Chrom") && !b.brand.includes("Not") && !b.brand.includes("Brand")) {
+                        brand = b.brand; break;
+                    }
+                }
+            }
+
+            if (model) {
+                return brand ? `Android (${brand} ${model})` : `Android (${model})`;
+            }
+            return "Android Mobile";
+        }
         if (/Windows/.test(ua)) return "Windows PC/Laptop";
         if (/Macintosh/.test(ua)) return "Mac Computer";
         return "Other Device";
     }
 
     async function fetchIPAndLocation() {
-        if (!sessionStorage.getItem('sess_loc')) {
+        if (!localStorage.getItem('sess_loc')) {
             try {
                 let res = await fetch('https://ipinfo.io/json');
                 let data = await res.json();
-                sessionStorage.setItem('sess_loc', (data.city || "") + ", " + (data.region || ""));
+                localStorage.setItem('sess_loc', (data.city || "") + ", " + (data.region || ""));
             } catch (err) {
-                sessionStorage.setItem('sess_loc', "Unknown Location");
+                localStorage.setItem('sess_loc', "Unknown Location");
             }
         }
     }
 
-    // 2. CLICK PRODUCT: Add to list, NO backend send yet!
+    // 2. CLICK PRODUCT: Add to list, update Visuals, and send View!
     function logViewActivity(targetName) {
-        let clicksStr = sessionStorage.getItem('sess_clicks');
+        if (isAdminUser) return; // Ignore Admin View
+        
+        // Session-based checking guarantees 1 view per Website Visit (30 mins limits)!
+        let clicksStr = localStorage.getItem('sess_clicks');
         let clicksArr = clicksStr ? JSON.parse(clicksStr) : [];
-
+        
         if (!clicksArr.includes(targetName)) {
+            // New unique click in this active session!
             clicksArr.push(targetName);
-            sessionStorage.setItem('sess_clicks', JSON.stringify(clicksArr));
+            localStorage.setItem('sess_clicks', JSON.stringify(clicksArr));
+            localStorage.setItem('my_session_last_active', Date.now().toString());
+
+            // 🔥 Instantly update View Count physically on local screen! 🔥
+            document.querySelectorAll('.view-counter').forEach(el => {
+                const lookFor = el.getAttribute('data-target');
+                if (lookFor === targetName) {
+                    let currentCount = parseInt(el.innerText || "0");
+                    el.innerText = currentCount + 1;
+                }
+            });
+
+            // 🔥 Send +1 View directly to Google Sheet View Count (Prevents duplicating inside this session) 🔥
+            let vp = new URLSearchParams();
+            vp.append("action", "increment_view");
+            vp.append("ProductName", targetName);
+            fetch(ANALYTICS_SCRIPT_URL, { method: "POST", mode: "no-cors", keepalive: true, body: vp.toString() }).catch(e => console.log(e));
         }
     }
 
-    // 3. EXIT WEBSITE: Send ALL details reliably!
+    // 3. EXIT WEBSITE: Send ALL details reliably! (Will Overwrite the same row!)
     function sendFinalData() {
-        // Prevent duplicate sending if already sent
-        if (sessionStorage.getItem('sess_sent')) return;
+        if (isAdminUser || sessionStorage.getItem('sess_sent')) return;
 
         let fd = new URLSearchParams();
         fd.append("action", "save_exit");
-        fd.append("Date", sessionStorage.getItem('sess_date') || new Date().toLocaleDateString('en-IN'));
+        fd.append("SessionID", localStorage.getItem('my_session_id') || ('SESS_' + new Date().getTime()));
+        fd.append("Date", localStorage.getItem('sess_date') || new Date().toLocaleDateString('en-IN'));
         fd.append("MobileName", getMobileName());
-        fd.append("Location", sessionStorage.getItem('sess_loc') || "Unknown Location");
-        fd.append("EnterTime", sessionStorage.getItem('sess_enter_time') || "");
+        fd.append("Location", localStorage.getItem('sess_loc') || "Unknown Location");
+        fd.append("EnterTime", localStorage.getItem('sess_enter_time') || "");
 
         // This is safe JSON string decoding
         let clicksArr = [];
-        try { clicksArr = JSON.parse(sessionStorage.getItem('sess_clicks') || '[]'); } catch (e) { }
+        try { clicksArr = JSON.parse(localStorage.getItem('sess_clicks') || '[]'); } catch (e) { }
         fd.append("ClickedItems", clicksArr.join(" ➔ "));
 
         let exitT = new Date().toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true });
         fd.append("ExitTime", exitT);
 
-        // ALWAYS use fetch with no-cors and keepalive for Google Apps Script Web Apps!
-        // sendBeacon gets blocked when the server responds with a 302 Redirect (which Google Apps Script always does).
         fetch(ANALYTICS_SCRIPT_URL, {
-            method: "POST", 
+            method: "POST",
             mode: "no-cors",
-            keepalive: true, // Guarantees the browser sends it even during a tab close
+            keepalive: true,
             headers: { "Content-Type": "application/x-www-form-urlencoded" },
             body: fd.toString()
         }).catch(e => console.log(e));
 
-        // Mark as sent in this session to prevent repeated rows if visibility changes multiple times
         sessionStorage.setItem('sess_sent', 'true');
+
+        // 🔥 CRITICAL FIX: DO NOT CLEAR ROW HISTORY HERE 🔥
+        // By relying on the browser's native sessionStorage, if they press the "Back button", 
+        // the session remains alive! This stops duplicate visits counting as separate new lines!
     }
 
     // Capture tab close or switching apps (most reliable)
@@ -2185,7 +2270,7 @@
 
     // Backup capture method 1
     window.addEventListener("pagehide", sendFinalData);
-    
+
     // Backup capture method 2 (Standard older browser support)
     window.addEventListener("beforeunload", sendFinalData);
 
