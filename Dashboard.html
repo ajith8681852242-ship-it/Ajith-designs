@@ -1,293 +1,179 @@
 <!DOCTYPE html>
-<html lang="ta">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ajith Studio | Control Room</title>
+    <script>
+        // Security Check: Only Master Admin can access
+        if (localStorage.getItem('isAdminLoggedIn') !== 'true') {
+            alert("Access Denied! Admin Login Required.");
+            window.location.href = "login.html";
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
-
+    
     <style>
-        /* Navbar மற்றும் Content இடையே இடைவெளி */
-        body {
-            margin: 0;
-            padding-top: 70px; /* Navbar மறைக்காமல் இருக்க */
-            background-color: #f9f9f9;
-        }
-
-        /* பிரதான தலைப்பு - New Heading Added */
-        .page-main-heading {
-            text-align: center;
-            margin-top: 20px;
-        }
+        /* Base Minimalist White Theme */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        body { background-color: #f7f9fc; color: #1a1f36; padding-bottom: 60px; }
         
-        .page-main-heading h2 {
-            font-size: 22px;
-            color: #2c3e50;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            margin-bottom: 5px;
-        }
+        /* Navbar */
+        .navbar { background: #ffffff; height: 70px; display: flex; align-items: center; position: sticky; top: 0; z-index: 1000; box-shadow: 0 1px 3px rgba(0,0,0,0.04); border-bottom: 1px solid #eef0f5; }
+        .nav-container { width: 92%; max-width: 1000px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-weight: 800; font-size: 1.2rem; display: flex; align-items: center; color: #1a1f36; }
+        .logo span { color: #0052ff; }
+        .logo i { margin-right: 10px; color: #0052ff; font-size: 1.4rem; }
+        .logout-btn { background: #fff1f0; color: #d93025; border: none; padding: 8px 16px; border-radius: 6px; font-size: 13px; font-weight: 600; cursor: pointer; transition: 0.2s; }
+        .logout-btn:hover { background: #ffe3e0; }
 
-        .page-main-heading p {
-            font-size: 11px;
-            color: #7f8c8d;
-            margin: 0;
-        }
+        /* Main Container */
+        .dashboard-container { max-width: 1000px; margin: 0 auto; padding: 30px 20px; }
+        
+        /* Headers */
+        .section-header { margin-bottom: 20px; margin-top: 40px; }
+        .section-header h2 { font-size: 1.15rem; font-weight: 700; color: #1a1f36; text-transform: uppercase; letter-spacing: 0.5px; }
+        .section-header p { font-size: 0.85rem; color: #697386; margin-top: 4px; }
+        
+        /* Box Editors Grid */
+        .grid-editors { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
+        .editor-card { background: #ffffff; border-radius: 12px; padding: 15px; box-shadow: 0 2px 8px rgba(0,0,0,0.03); border: 1px solid #eef0f5; position: relative; transition: 0.2s; }
+        .editor-card:hover { transform: translateY(-3px); box-shadow: 0 4px 15px rgba(0,0,0,0.06); }
+        .del-btn { position: absolute; top: -10px; right: -10px; background: #fff; color: #d93025; width: 28px; height: 28px; border-radius: 50%; font-size: 13px; border: 1px solid #fce8e6; cursor: pointer; box-shadow: 0 2px 5px rgba(217,48,37,0.15); display: flex; justify-content: center; align-items: center; z-index: 10; transition: 0.2s; }
+        .del-btn:hover { background: #d93025; color: #fff; }
+        .img-box { width: 100%; aspect-ratio: 1; background: #f7f9fc; border-radius: 8px; overflow: hidden; display: flex; align-items: center; justify-content: center; border: 1px dashed #d9e2ec; cursor: pointer; margin-bottom: 15px; }
+        .img-box img { width: 100%; height: 100%; object-fit: cover; }
+        .editor-card input { width: 100%; background: #f7f9fc; border: 1px solid #eef0f5; padding: 11px 12px; border-radius: 6px; font-size: 12px; margin-bottom: 10px; color: #1a1f36; outline: none; transition: 0.2s; }
+        .editor-card input:focus { border-color: #0052ff; background: #ffffff; box-shadow: 0 0 0 3px rgba(0,82,255,0.1); }
+        .box-badge { position: absolute; top: 15px; left: 15px; background: rgba(0,0,0,0.6); color: #fff; font-size: 10px; padding: 4px 8px; border-radius: 4px; font-weight: 600; pointer-events: none; }
+        .save-indicator { display: flex; align-items: center; gap: 6px; font-size: 12px; color: #0d8246; font-weight: 600; margin-top: 15px; justify-content: flex-end; }
+        
+        /* Analytics Grid */
+        #analytics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; }
+        .stat-card { background: #ffffff; border-radius: 12px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.03); border: 1px solid #eef0f5; position: relative; overflow: hidden; transition: 0.2s; }
+        .stat-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.06); }
+        .stat-card::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: #0052ff; border-top-left-radius: 12px; border-bottom-left-radius: 12px; }
+        .stat-card.main-stat::before { background: #0d8246; }
+        .stat-card-title { font-size: 11px; font-weight: 600; color: #697386; text-transform: uppercase; margin-bottom: 8px; }
+        .stat-card-value { font-size: 28px; font-weight: 800; color: #1a1f36; display: flex; align-items: center; gap: 10px; }
+        .stat-card-value i { font-size: 16px; color: #0052ff; opacity: 0.8; }
+        .stat-card.main-stat .stat-card-value i { color: #0d8246; }
+        
+        /* Danger Zone */
+        .danger-zone { background: #fff1f0; border: 1px solid #fce8e6; padding: 20px; border-radius: 12px; }
+        .danger-zone-header { display: flex; align-items: center; gap: 10px; color: #d93025; font-weight: 700; margin-bottom: 10px; font-size: 15px; }
+        .danger-zone-desc { font-size: 13px; color: #5f6368; margin-bottom: 15px; line-height: 1.5; }
+        .btn-danger { background: #d93025; color: #ffffff; border: none; padding: 12px 20px; border-radius: 6px; font-weight: 600; font-size: 13px; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; transition: 0.2s; box-shadow: 0 2px 4px rgba(217,48,37,0.2); }
+        .btn-danger:hover { background: #b31412; box-shadow: 0 4px 8px rgba(217,48,37,0.3); transform: translateY(-1px); }
+        .btn-danger:disabled { background: #e0e0e0; cursor: not-allowed; box-shadow: none; color: #a0a0a0; }
+        
+        /* Loading State */
+        .loader-spinner { animation: spin 1s linear infinite; font-size: 24px; color: #0052ff; margin: auto; display: block; text-align: center; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
-        /* அட்மின் கண்டெய்னர் */
-        .admin-panel {
-            font-family: 'Poppins', sans-serif;
-            padding: 20px 10px;
-            text-align: center;
-        }
-
-        /* 3 பெட்டிகள் ஒரே வரிசையில் */
-        .grid-editors {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-top: 15px;
-        }
-
-        /* மிகச்சிறிய மற்றும் உயரம் குறைக்கப்பட்ட பெட்டி */
-        .editor-card {
-            width: 105px;
-            height: 190px;
-            border: 1px solid #000;
-            background: #fff;
-            padding: 5px;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            border-radius: 4px;
-        }
-
-        /* இடது மேல் மூலை - Delete பட்டன் */
-        .del-btn {
-            position: absolute;
-            top: -6px;
-            left: -6px;
-            background: #000;
-            color: #fff;
-            width: 18px;
-            height: 18px;
-            font-size: 12px;
-            border: none;
-            cursor: pointer;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border-radius: 2px;
-            z-index: 10;
-        }
-
-        /* சதுர இமேஜ் பாக்ஸ் */
-        .img-box {
-            width: 100%;
-            aspect-ratio: 1 / 1;
-            border: 1px solid #eee;
-            margin-bottom: 5px;
-            cursor: pointer;
-            background: #fafafa;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-        }
-
-        .img-box img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        /* இன்புட்கள் */
-        .editor-card input {
-            width: 100%;
-            border: none;
-            border-bottom: 1px solid #eee;
-            font-size: 9px;
-            margin-bottom: 5px;
-            padding: 2px 0;
-            outline: none;
-            text-align: left;
-        }
-
-        .editor-card input:focus {
-            border-bottom: 1px solid #3498db;
-        }
-
-        .box-label {
-            margin-top: auto;
-            font-size: 9px;
-            font-weight: bold;
-            color: #3498db;
-        }
-
-        .save-hint {
-            font-size: 10px;
-            color: #27ae60;
-            margin-top: 20px;
-            font-weight: bold;
-        }
+        /* Status Toast */
+        #toast { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: #1a1f36; color: #fff; padding: 12px 24px; border-radius: 8px; font-size: 13px; font-weight: 600; display: none; z-index: 2000; box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
     </style>
+<script src="settings.js"></script>
 </head>
 <body>
 
     <nav class="navbar">
         <div class="nav-container">
             <div class="logo">
-                <div class="nav-logo">
-                    <i id="secret-icon" onclick="handleSecretClick()" class="fas fa-palette logo-icon-rotate blue-clr" style="cursor: pointer;"></i>
-                    <span>Ajith <span class="logo-blue">studio</span></span>
-                </div>
+                <i class="fas fa-layer-group"></i> Ajith <span>Studio</span>
             </div>
-            <ul class="nav-links" id="navLinks">
-                <li><a href="index.html#home">HOME</a></li>
-                <li><a href="index.html#about">ABOUT</a></li>
-                <li><a href="index.html#services">SERVICES</a></li>
-                <li><a href="index.html#contact">CONTACT</a></li>
-                <li><a href="#" onclick="logout()" style="color: red;">LOGOUT</a></li>
-            </ul>
-            <div class="toggle-btn" id="menuToggle"><i class="fas fa-bars"></i></div>
+            <button class="logout-btn" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</button>
         </div>
     </nav>
 
-    <div class="page-main-heading">
-        <h2>CONTROL ROOM</h2>
+    <div class="dashboard-container">
         
-    </div>
+        <div class="section-header" style="margin-top: 0;">
+            <h2>Website Content Editor</h2>
+            <p>Update the 3 featured product boxes on the home page styling.</p>
+        </div>
 
-    <div class="admin-panel">
         <div class="grid-editors">
+            <!-- Box 1 -->
             <div class="editor-card">
-                <button class="del-btn" onclick="clearData(1)">X</button>
+                <button class="del-btn" onclick="clearData(1)" title="Clear Box"><i class="fas fa-times"></i></button>
+                <div class="box-badge">BOX 1</div>
                 <label for="f1" class="img-box">
-                    <img id="p_img1" src="https://via.placeholder.com/100?text=Upload">
+                    <img id="p_img1" src="https://via.placeholder.com/150?text=Upload+Image">
                 </label>
                 <input type="file" id="f1" style="display:none" onchange="saveImg(this, 1)">
                 <input type="text" id="i_tit1" oninput="saveData(1)" placeholder="Heading">
-                <input type="text" id="i_siz1" oninput="saveData(1)" placeholder="Size">
-                <input type="text" id="i_pri1" oninput="saveData(1)" placeholder="Price">
-                <input type="text" id="i_off1" oninput="saveData(1)" placeholder="Offer">
-                <div class="box-label">BOX 1</div>
+                <input type="text" id="i_siz1" oninput="saveData(1)" placeholder="Dimensions (Size)">
+                <input type="text" id="i_pri1" oninput="saveData(1)" placeholder="Price (₹)">
+                <input type="text" id="i_off1" oninput="saveData(1)" placeholder="Offer Text">
             </div>
 
+            <!-- Box 2 -->
             <div class="editor-card">
-                <button class="del-btn" onclick="clearData(2)">X</button>
+                <button class="del-btn" onclick="clearData(2)" title="Clear Box"><i class="fas fa-times"></i></button>
+                <div class="box-badge">BOX 2</div>
                 <label for="f2" class="img-box">
-                    <img id="p_img2" src="https://via.placeholder.com/100?text=Upload">
+                    <img id="p_img2" src="https://via.placeholder.com/150?text=Upload+Image">
                 </label>
                 <input type="file" id="f2" style="display:none" onchange="saveImg(this, 2)">
                 <input type="text" id="i_tit2" oninput="saveData(2)" placeholder="Heading">
-                <input type="text" id="i_siz2" oninput="saveData(2)" placeholder="Size">
-                <input type="text" id="i_pri2" oninput="saveData(2)" placeholder="Price">
-                <input type="text" id="i_off2" oninput="saveData(2)" placeholder="Offer">
-                <div class="box-label">BOX 2</div>
+                <input type="text" id="i_siz2" oninput="saveData(2)" placeholder="Dimensions (Size)">
+                <input type="text" id="i_pri2" oninput="saveData(2)" placeholder="Price (₹)">
+                <input type="text" id="i_off2" oninput="saveData(2)" placeholder="Offer Text">
             </div>
 
+            <!-- Box 3 -->
             <div class="editor-card">
-                <button class="del-btn" onclick="clearData(3)">X</button>
+                <button class="del-btn" onclick="clearData(3)" title="Clear Box"><i class="fas fa-times"></i></button>
+                <div class="box-badge">BOX 3</div>
                 <label for="f3" class="img-box">
-                    <img id="p_img3" src="https://via.placeholder.com/100?text=Upload">
+                    <img id="p_img3" src="https://via.placeholder.com/150?text=Upload+Image">
                 </label>
                 <input type="file" id="f3" style="display:none" onchange="saveImg(this, 3)">
                 <input type="text" id="i_tit3" oninput="saveData(3)" placeholder="Heading">
-                <input type="text" id="i_siz3" oninput="saveData(3)" placeholder="Size">
-                <input type="text" id="i_pri3" oninput="saveData(3)" placeholder="Price">
-                <input type="text" id="i_off3" oninput="saveData(3)" placeholder="Offer">
-                <div class="box-label">BOX 3</div>
+                <input type="text" id="i_siz3" oninput="saveData(3)" placeholder="Dimensions (Size)">
+                <input type="text" id="i_pri3" oninput="saveData(3)" placeholder="Price (₹)">
+                <input type="text" id="i_off3" oninput="saveData(3)" placeholder="Offer Text">
             </div>
         </div>
-        <p class="save-hint">✓ Auto-Saving Enabled</p>
+        
+        <div class="save-indicator"><i class="fas fa-check-circle"></i> Auto-saving to LocalStorage</div>
+
+        <hr style="border: none; border-top: 1px solid #eef0f5; margin: 40px 0;">
+
+        <!-- Analytics Section -->
+        <div class="section-header">
+            <h2>Live Traffic Analytics</h2>
+            <p>Real-time view counts from your Google Sheet Backend.</p>
+        </div>
+
+        <div id="analytics-grid">
+            <i class="fas fa-circle-notch loader-spinner"></i>
+        </div>
+
+        <hr style="border: none; border-top: 1px solid #eef0f5; margin: 40px 0;">
+
+        <!-- Danger Zone -->
+        <div class="section-header">
+            <h2>Data Management</h2>
+            <p>Advanced controls for your Google Sheet data.</p>
+        </div>
+
+        <div class="danger-zone">
+            <div class="danger-zone-header"><i class="fas fa-exclamation-triangle"></i> Clear Visitor Sessions</div>
+            <div class="danger-zone-desc">This action will securely delete all logged client details (Row Data) in the <b>Analytics</b> tab of your Google Sheet to free up space. Feel free to use this anytime. Your <b>View Counts</b> and product interaction numbers will remain completely safe.</div>
+            <button class="btn-danger" id="clearAnalyticsBtn" onclick="clearGoogleSheetAnalytics()">
+                <i class="fas fa-trash-alt"></i> Delete Old Sessions
+            </button>
+        </div>
+
     </div>
 
-    <script>
-        // Secret Click to Login
-        let clickCount = 0;
-        let clickTimer;
-        function handleSecretClick() {
-            clickCount++;
-            clearTimeout(clickTimer);
-            clickTimer = setTimeout(() => { clickCount = 0; }, 2000);
-            if (clickCount === 5) { window.location.href = "login.html"; }
-        }
+    <!-- Toast Notification -->
+    <div id="toast"><i class="fas fa-info-circle"></i> <span id="toast-msg">Success</span></div>
 
-        // Save Data
-        function saveData(id) {
-            localStorage.setItem(`b${id}_tit`, document.getElementById(`i_tit${id}`).value);
-            localStorage.setItem(`b${id}_siz`, document.getElementById(`i_siz${id}`).value);
-            localStorage.setItem(`b${id}_pri`, document.getElementById(`i_pri${id}`).value);
-            localStorage.setItem(`b${id}_off`, document.getElementById(`i_off${id}`).value);
-        }                                         
-                                               
-        // Save Image
-        function saveImg(input, id) {
-            if (input.files && input.files[0]) {
-                let reader = new FileReader();
-                reader.onload = function(e) {
-                    localStorage.setItem(`b${id}_img`, e.target.result);
-                    document.getElementById(`p_img${id}`).src = e.target.result;
-                };
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
-
-        // Delete Data
-        function clearData(id) {
-            if(confirm("Delete Box " + id + "?")) {
-                localStorage.removeItem(`b${id}_tit`);
-                localStorage.removeItem(`b${id}_siz`);
-                localStorage.removeItem(`b${id}_pri`);
-                localStorage.removeItem(`b${id}_off`);
-                localStorage.removeItem(`b${id}_img`);
-                location.reload(); 
-            }
-        }
-
-        // Load Data on Start
-        window.onload = function() {
-            for(let i=1; i<=3; i++) {
-                document.getElementById(`i_tit${i}`).value = localStorage.getItem(`b${i}_tit`) || "";
-                document.getElementById(`i_siz${i}`).value = localStorage.getItem(`b${i}_siz`) || "";
-                document.getElementById(`i_pri${i}`).value = localStorage.getItem(`b${i}_pri`) || "";
-                document.getElementById(`i_off${i}`).value = localStorage.getItem(`b${i}_off`) || "";
-                if(localStorage.getItem(`b${i}_img`)) {
-                    document.getElementById(`p_img${i}`).src = localStorage.getItem(`b${i}_img`);
-                }
-            }
-        };
-    </script>
-
-
-
-
-
-
-
-
-
-
-
-
-                 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <script src="script.js"></script>
+    <script src="Dashboard.js"></script>
 </body>
 </html>

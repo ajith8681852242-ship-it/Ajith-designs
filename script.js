@@ -8,8 +8,9 @@ document.addEventListener('DOMContentLoaded', function() {
             navLinks.classList.toggle('active');
         });
     }
+});
 
-
+/* --- broken residual code commented out 
 document.getElementById('rc-top-value').innerText = dominantStar + ".0";
             document.getElementById('rc-top-stars-display').innerText = "★".repeat(dominantStar);
             document.getElementById('rc-top-status').innerText = statusMap[dominantStar].t;
@@ -43,8 +44,7 @@ document.getElementById('rc-top-value').innerText = dominantStar + ".0";
         }
 
         refreshUI();
-
-
+--- */
 
 
 //Top Banner Time and festivel setting
@@ -320,7 +320,3 @@ function closeDetails() {
     // Hide the white page
     document.getElementById('detailPage').style.display = 'none';
 }
-
-
-
-
