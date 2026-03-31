@@ -8,6 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
+<script src="settings.js"></script>
 </head>
 
 <body>
@@ -2291,7 +2292,58 @@
 
 
 
-<script src="script.js"></script>
-</body>
+<script src="script.js">
+    // GLOBAL BADGE & LIKE & PRELOADER SCRIPT
+    document.addEventListener("DOMContentLoaded", function() {
+        if (sessionStorage.getItem("my_session_active")) {
+            const loader = document.getElementById("preloader");
+            if (loader) loader.style.display = "none";
+        } else {
+            sessionStorage.setItem("my_session_active", "1");
+        }
 
+        const state = window.getFestivalState();
+        for(let i=1; i<=10; i++) {
+            let el = document.getElementById("v_off" + i);
+            if(el) {
+                if(state && (state.type === "Active" || state.type === "Upcoming")) {
+                    el.className = "top-left-offer " + AppConfig.Badges.OfferBg;
+                    if (i !== 1) { el.innerText = AppConfig.Badges.OfferText; }
+                    // i===1 (Poster Design) keeps whatever it already had (e.g., BUY 2 GET 1)
+                } else {
+                    el.className = "top-left-offer " + AppConfig.Badges.NormalBg;
+                    if (i === 1) { el.innerText = AppConfig.Badges.PosterNormalText; }
+                    else { el.innerText = AppConfig.Badges.NormalText; }
+                }
+            }
+        }
+
+        const likeBtn = document.getElementById("nav-like-btn");
+        const likeIcon = document.getElementById("like-icon");
+        const likeCount = document.getElementById("like-count");
+        if(likeBtn) {
+            let likes = parseInt(localStorage.getItem("global_likes_count")) || 12054;
+            let hasLiked = localStorage.getItem("user_has_liked") === "true";
+            
+            if(hasLiked) likeIcon.className = "fas fa-heart";
+            likeCount.innerText = (likes / 1000).toFixed(1) + "k";
+
+            likeBtn.addEventListener("click", () => {
+                hasLiked = !hasLiked;
+                if(hasLiked) {
+                    likeIcon.className = "fas fa-heart";
+                    likes++;
+                    localStorage.setItem("user_has_liked", "true");
+                } else {
+                    likeIcon.className = "far fa-heart";
+                    likes--;
+                    localStorage.setItem("user_has_liked", "false");
+                }
+                localStorage.setItem("global_likes_count", likes.toString());
+                likeCount.innerText = (likes / 1000).toFixed(1) + "k";
+            });
+        }
+    });
+</script>
+</body>
 </html>
