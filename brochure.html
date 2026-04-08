@@ -20,7 +20,7 @@
         @keyframes rotateLogo { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
         .toggle-btn { font-size: 1.6rem; color: #333; cursor: pointer; margin-right: 15px; display: flex; align-items: center; }
         
-        .app-container { margin-top: 70px; padding: 0 20px; max-width: 500px; margin-left: auto; margin-right: auto; }
+        .app-container { margin-top: 70px; padding: 0 25px; max-width: 500px; margin-left: auto; margin-right: auto; }
         .image-box { position: relative; width: 100%; aspect-ratio: 1/1; border: 1px solid #eee; border-radius: 4px; padding: 3px; background: #fff; overflow: hidden; }
         .image-box img { width: 100%; height: 100%; object-fit: contain; transition: 0.3s ease-in-out; }
         
@@ -31,12 +31,10 @@
         .status-box { position: absolute; top: 10px; left: 10px; padding: 6px 12px; font-weight: 700; font-size: 10px; text-transform: uppercase; border-radius: 4px; color: white; z-index: 10; }
         .best-price-box { background: #2196F3; display: block; }
         .special-offer-box { background: #FF0000; display: none; }
-        
-        /* Added margin-left for the gap next to FREE text */
-        .offer-blink { color: #FF0000; font-weight: 800; animation: slowBlink 1.5s linear infinite; margin-left: 5px; }
-        
-        .status-blink { animation: slowBlink 1s linear infinite; }
         @keyframes slowBlink { 0% { opacity: 1; } 50% { opacity: 0.2; } 100% { opacity: 1; } }
+
+        /* Free text with Gap and Blink */
+        .offer-blink { color: #FF0000; font-weight: 800; animation: slowBlink 1.5s linear infinite; margin-left: 3px; }
   /* General UI Styles */
         .title-row { display: flex; justify-content: space-between; align-items: center; margin-top: 15px; }
         .design-mention-big { font-size: 16px; font-weight: 600; color: #000; }
@@ -56,10 +54,13 @@
         .btn-combo { border: 1px solid #ccc; border-radius: 4px; font-size: 10px; font-weight: 600; height: 30px; padding: 0 12px; display: flex; align-items: center; justify-content: center; background: #fff; text-transform: uppercase; min-width: 90px; cursor: pointer; }
         .btn-combo.active { background: #6a3093; color: #fff; border-color: #6a3093; }
 
-        .details-card { margin-top: 10px; border-bottom: 1px dashed #eee; padding-bottom: 12px; }
-        .details-card h4 { font-size: 11px; color: #449330; margin-bottom: 8px; font-weight: 700; }
-        .details-card li { display: flex; align-items: center; font-size: 11px; color: #555; margin-bottom: 6px; }
-        .details-card i { color: #6a3093; margin-right: 8px; font-size: 10px; } 
+        .details-card { margin-top: 15px; border-top: 1px solid #f0f0f0; border-bottom: 1px solid #f0f0f0; padding: 15px 0; margin-bottom: 25px; }
+        .details-card h4 { font-size: 13px; color: #449330; margin-bottom: 12px; text-transform: capitalize; font-weight: 700; }
+        
+        .highlights-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 10px; }
+        .highlight-item { display: flex; flex-direction: column; }
+        .highlight-label { font-size: 9px; color: #999; text-transform: capitalize; margin-bottom: 2px; }
+        .highlight-value { font-size: 11px; color: #333; font-weight: 600; }
 
         .input-row { margin-top: 15px; display: flex; align-items: center; gap: 12px; }
         .input-label { font-size: 11px; font-weight: 700; width: 110px; color: #333; }
@@ -67,68 +68,62 @@
 
         .total-price-section { display: flex; justify-content: space-between; align-items: center; margin-top: 25px; padding-top: 15px; border-top: 1px solid #eee; }
         .total-text { font-size: 12px; font-weight: 700; color: #333; text-transform: uppercase; }
+        
+        .price-row { display: flex; align-items: baseline; gap: 5px; margin-right: 15px; }
         .price-display { font-size: 22px; font-weight: 600; color: #6a3093; }
+        .off-tag { font-size: 14px; color: #555; font-weight: 500; margin-left: 2px; }
 
-        .footer-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; position: fixed; bottom: 0; left: 0; width: 100%; background: #ffffff; padding: 15px 20px; box-shadow: 0 -2px 10px rgba(0,0,0,0.05); z-index: 2000; }
+        .footer-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; position: fixed; bottom: 0; left: 0; width: 100%; background: #ffffff; padding: 15px 25px; box-shadow: 0 -2px 10px rgba(0,0,0,0.05); z-index: 2000; }
         .footer-btn { height: 42px; border-radius: 6px; font-size: 13px; font-weight: 600; border: none; display: flex; align-items: center; justify-content: center; cursor: pointer; gap: 8px; }
         .back-btn { background: #f0f0f0; color: #333; }
         .whatsapp-btn { background: #6a3093; color: #fff; }
 
         @media (min-width: 360px) {
+            .navbar { height: 60px; }
+            .logo { font-size: 1.1rem; }
+            .logo-icon-rotate { font-size: 1.4rem; }
+            .toggle-btn { font-size: 1.7rem; }
             .app-container { margin-top: 75px; }
-
-             .design-mention-big { font-size: 19px; }
-             .dot { width: 6px; height: 6px; } 
-           
-           .qty-selector { height: 35px; width: 105px; }
-           .qty-number { font-size: 16px; }
-
-            .btn-combo { height: 35px; font-size: 11.5px; min-width: 110px; }
-            
-            .input-label { font-size: 13px; width: 130px; }
-    .input-field { width: 130px; height: 35px; font-size: 13px; }
-
-            .total-text { font-size: 14px; }
-    .price-display { font-size: 22px; }
-
-           
-            .details-card h4 { font-size: 14px; }
-           .details-card li { font-size: 13px; margin-bottom: 5px; }
-           .details-card i { font-size: 12px; } /* Scaled down tick icon */
-           
-          #mainHeading { font-size: 14px; }
-
+            .status-box {  font-size: 14px; padding: 9px 22px; border-radius: 3px; }
+            .design-mention-big { font-size: 19px; }
+            .dot { width: 6px; height: 6px; } 
+            .qty-selector { height: 35px; width: 105px; }
+            .qty-number { font-size: 16px; }
+            #mainHeading { font-size: 11px; }
             #timerStatus { font-size: 9px; }
-             #timerClock { font-size: 13px; }
-
+            #timerClock { font-size: 13px; }
+            .btn-combo { height: 35px; font-size: 11.5px; min-width: 110px; }
+            .details-card h4 { font-size: 14px; }
+            .input-label { font-size: 13px; width: 130px; }
+            .input-field { width: 130px; height: 35px; font-size: 13px; }
+            .total-text { font-size: 14px; }
+            .price-display { font-size: 22px; }
             .footer-btn { height: 45px; font-size: 15px; border-radius: 8px; }
-            .status-box { top: 12px; left: 12px; padding: 8px 16px; font-size: 11px; border-radius: 5px; }
         }
 
         @media (min-width: 400px) {
-            .app-container { margin-top: 85px; padding: 0 25px; }
             .navbar { height: 70px; }
             .logo { font-size: 1.2rem; }
             .logo-icon-rotate { font-size: 1.7rem; }
             .toggle-btn { font-size: 2rem; }
-             .dot { width: 6px; height: 6px; } 
-           .design-mention-big { font-size: 22px; }
-           .qty-selector { height: 40px; width: 120px; }
+            .app-container { margin-top: 85px; padding: 0 25px; }
+            .status-box {  font-size: 14px; padding: 9px 22px; border-radius: 3px; }
+            .design-mention-big { font-size: 22px; }
+            .dot { width: 6px; height: 6px; } 
+            .qty-selector { height: 40px; width: 120px; }
             .qty-number { font-size: 18px; }
-            .btn-combo { height: 40px; font-size: 13px; min-width: 130px; }
-            .details-card i { font-size: 13px; } 
-             #timerStatus { font-size: 11px; }
+            #mainHeading { font-size: 13px; }
+            #timerStatus { font-size: 11px; }
             #timerClock { font-size: 15px; }
-             .status-box { font-size: 13px; padding: 10px 20px; }
+            .btn-combo { height: 40px; font-size: 13px; min-width: 130px; }
+            .details-card h4 { font-size: 15px; margin-bottom: 10px; }
+            .highlight-label { font-size: 11px; }
+            .highlight-value { font-size: 13px; }
             .input-label { font-size: 14px; width: 150px; }
             .input-field { width: 150px; height: 40px; font-size: 14px; }
             .total-text { font-size: 15px; }
-            .price-display { font-size: 25px; }
+            .price-display { font-size: 25px !important; }
             .footer-btn { height: 50px; font-size: 16px; }
-            #mainHeading { font-size: 15px; }
-             .details-card h4 { font-size: 14px; }
-            .details-card li { font-size: 14px; }
-           
         }
 
         @media (max-width: 992px) {
@@ -138,8 +133,9 @@
             .nav-links li a { font-size: 0.9rem; font-weight: 600; text-decoration: none; display: block; color: #333; }
         }
     </style>
+<script src="settings.js"></script>
 </head>
-<body onload="initApp()">
+<body onload="updateUI(); syncFestivalEngine(); fillDeliveryOptions(); setInterval(syncFestivalEngine, 1000);">
 
     <nav class="navbar">
         <div class="nav-container">
@@ -191,9 +187,9 @@
             <div class="btn-combo" id="btn-branding" onclick="selectStyle('branding')">Branding</div>
         </div>
         
-        <div class="details-card">
-            <h4>Package Includes:</h4>
-            <ul id="detailsList"></ul>
+        <div class="details-card" id="detailsSection">
+            <h4>Design Highlights</h4>
+            <div id="highlightsGrid" class="highlights-grid"></div>
         </div>
 
         <div class="input-row">
@@ -210,11 +206,14 @@
 
         <div class="total-price-section">
             <span class="total-text">Total Price</span>
-            <div class="price-display">₹<span id="totalPrice">0</span></div>
+            <div class="price-row">
+                <div class="price-display">₹<span id="totalPrice">0</span></div>
+                <div id="offTag" class="off-tag"></div>
+            </div>
         </div>
 
         <div class="footer-btns">
-            <button class="footer-btn back-btn" onclick="history.back()">
+            <button class="footer-btn back-btn" onclick="window.location.href='index.html#box-brochure'">
                 <i class="fa-solid fa-arrow-left"></i> Back
             </button>
             <button class="footer-btn whatsapp-btn" onclick="sendToWhatsApp()">
@@ -225,102 +224,105 @@
 
 <script>
     const STYLE_IMAGES = { creative: "Brochure creative.jpg", branding: "branding_menu.jpg" };
-    const PRICES_DB = { normal: { creative: 399, branding: 499 }, festival: { creative: 349, branding: 449 } };
-    
-    const DETAILS_DB = {
-        normal: {
-            creative: ["Creative Menu Card Design", "High Quality Print Files", "Modern Layouts"],
-            branding: ["Premium Identity", "Vector Logo", "Source Files Included"]
-        },
-        festival: {
-            creative: ["Festival Special Creative Design", "Express Delivery", "Unlimited Revisions"],
-            branding: ["Festival Branding Package", "Logo + Social Media Kit", "Full License"]
-        }
+    const NORMAL_CONFIG = {
+        prices: { creative: 399, branding: 499 },
+        details: [
+            { label: "Design", value: "Creative Brochure Design" },
+            { label: "Quality", value: "High Quality Print Files" },
+            { label: "Layout", value: "Modern Layouts" },
+            { label: "Theme", value: "Perfect Color Themes" }
+        ]
     };
 
-    const FESTIVAL_DB = [
-        { name: "Easter", start: { month: 3, date: 5, hour: 18, min: 20 }, 
-         end: { month: 4, date: 26, hour: 19, min: 35 }, label: 
-        "Easter Special <span class='offer-blink'>Offer</span>" },
-       
-        { name: "Tamil New Year & Vishu", start: { month: 4, date: 7, hour: 0, min: 0 }, end: { month: 4, date: 15, hour: 23, min: 59 }, label: "புத்தாண்டு & விஷு <span class='offer-blink'>Mega Offer</span>" },
-        { name: "Workers Day", start: { month: 5, date: 1, hour: 0, min: 0 }, end: { month: 5, date: 1, hour: 23, min: 59 }, label: "May Day Special <span class='offer-blink'>Offer</span>" },
+    const FESTIVAL_CONFIG = {
+        prices: { creative: 349, branding: 449 },
+        details: [
+            { label: "Design", value: "Creative Brochure Design" },
+            { label: "Quality", value: "High Quality Print Files" },
+            { label: "Delivery", value: "Express Delivery" },
+            { label: "Revision", value: "Unlimited Revisions" }
+        ]
+    };
+
+    // Database with specific start/end times
+       const FESTIVAL_DB = [
+        { name: "Easter", start: { month: 3, date: 5, hour: 19, min: 54 }, end: { month: 4, date: 5, hour: 23, min: 59 }, label: "Easter Special <span class='offer-blink'>Offer</span>" },
+        { name: "Tamil New Year & Vishu", start: { month: 4, date: 8, hour: 0, min: 0 }, end: { month: 4, date: 14, hour: 23, min: 59 }, label: "Tamil New Year <span class='offer-blink'>Mega Offer</span>" },
+        { name: "Workers Day", start: { month: 4, date: 30, hour: 0, min: 0 }, end: { month: 5, date: 1, hour: 23, min: 59 }, label: "Workers Day Special <span class='offer-blink'>Offer</span>" },
         { name: "Independence Day", start: { month: 8, date: 8, hour: 0, min: 0 }, end: { month: 8, date: 15, hour: 23, min: 59 }, label: "Independence Day <span class='offer-blink'>Offer</span>" },
-        { name: "Onam", start: { month: 8, date: 19, hour: 0, min: 0 }, end: { month: 8, date: 27, hour: 23, min: 59 }, label: "Onam Special <span class='offer-blink'>Offer</span>" },
-        { name: "Vinayagar Chaturthi", start: { month: 9, date: 7, hour: 0, min: 0 }, end: { month: 9, date: 14, hour: 23, min: 59 }, label: "விநாயகர் சதுர்த்தி <span class='offer-blink'>Offer</span>" },
-        { name: "Ayudha & Saraswathi Puja", start: { month: 10, date: 12, hour: 0, min: 0 }, end: { month: 10, date: 21, hour: 23, min: 59 }, label: "ஆயுத பூஜை <span class='offer-blink'>Special Sale</span>" },
-        { name: "Deepavali", start: { month: 11, date: 1, hour: 0, min: 0 }, end: { month: 11, date: 9, hour: 23, min: 59 }, label: "தீபாவளி <span class='offer-blink'>Mega Dhamaka</span>" },
-        { name: "Christmas", start: { month: 12, date: 18, hour: 0, min: 0 }, end: { month: 12, date: 26, hour: 23, min: 59 }, label: "Christmas <span class='offer-blink'>Special Offer</span>" },
-        { name: "New Year 2027", start: { month: 12, date: 27, hour: 0, min: 0 }, end: { month: 1, date: 2, hour: 23, min: 59 }, label: "New Year 2027 <span class='offer-blink'>Offer</span>" }
+        { name: "Onam", start: { month: 8, date: 19, hour: 0, min: 0 }, end: { month: 8, date: 26, hour: 23, min: 59 }, label: "Onam Special <span class='offer-blink'>Offer</span>" },
+        { name: "Vinayagar Chaturthi", start: { month: 9, date: 8, hour: 0, min: 0 }, end: { month: 9, date: 14, hour: 23, min: 59 }, label: "Vinayagar Chaturthi <span class='offer-blink'>Offer</span>" },
+        { name: "Ayudha & Saraswathi Puja", start: { month: 10, date: 14, hour: 0, min: 0 }, end: { month: 10, date: 20, hour: 23, min: 59 }, label: "Ayudha & Saraswathi Puja <span class='offer-blink'>Special Sale</span>" },
+        { name: "Deepavali", start: { month: 11, date: 1, hour: 0, min: 0 }, end: { month: 11, date: 8, hour: 23, min: 59 }, label: "Deepavali <span class='offer-blink'>Mega Dhamaka</span>" },
+        { name: "Christmas", start: { month: 12, date: 18, hour: 0, min: 0 }, end: { month: 12, date: 25, hour: 23, min: 59 }, label: "Christmas <span class='offer-blink'>Special Offer</span>" },
+        { name: "New Year 2027", start: { month: 12, date: 26, hour: 0, min: 0 }, end: { month: 1, date: 1, hour: 23, min: 59 }, label: "New Year <span class='offer-blink'>Offer</span>" }
     ];
+
 
     let activeStyle = 'creative';
     let qty = 1;
     let isFestivalActive = false;
 
-    // Initialize application on load
-    window.onload = function() {
-        initApp();
-    };
+    let currentActiveFest = null;
+    let timerInterval = null;
 
-    function initApp() {
-        if (document.getElementById('deliverySelect')) fillDeliveryOptions();
-        
-        const menuBtn = document.getElementById('menuToggle');
-        if (menuBtn) {
-            menuBtn.onclick = () => document.getElementById('navLinks').classList.toggle('active');
-        }
-
-        setInterval(runRealTimeUpdate, 1000); 
-        runRealTimeUpdate(); 
-    }
-
-    function runRealTimeUpdate() {
+    function syncFestivalEngine() {
         const now = new Date();
         const year = now.getFullYear();
-        let currentFest = null;
+        let foundFest = null;
 
         FESTIVAL_DB.forEach(f => {
-            // JS months are 0-11
-            let s = new Date(year, f.start.month - 1, f.start.date, f.start.hour || 0, f.start.min || 0);
-            
-            // If end month is smaller than start month (like New Year), it means it ends next year
+            const startDate = new Date(year, f.start.month - 1, f.start.date, f.start.hour, f.start.min);
             let endYear = (f.end.month < f.start.month) ? year + 1 : year;
-            let e = new Date(endYear, f.end.month - 1, f.end.date, f.end.hour || 23, f.end.min || 59);
-            
-            if (now >= s && now <= e) currentFest = { ...f, endTime: e };
+            const endDate = new Date(endYear, f.end.month - 1, f.end.date, f.end.hour, f.end.min);
+
+            if (now >= startDate && now <= endDate) {
+                foundFest = { ...f, endTimeObj: endDate };
+            }
         });
 
+        if (foundFest && !isFestivalActive) {
+            isFestivalActive = true;
+            currentActiveFest = foundFest;
+            applyFestivalUI(true);
+        } else if (!foundFest && isFestivalActive) {
+            isFestivalActive = false;
+            currentActiveFest = null;
+            applyFestivalUI(false);
+        }
+
+        if (isFestivalActive && currentActiveFest) {
+            updateCountdownClock(currentActiveFest.endTimeObj);
+        }
+    }
+
+    function applyFestivalUI(active) {
         const heading = document.getElementById('mainHeading');
         const timerBox = document.getElementById('timerBox');
         const bestPrice = document.getElementById('best-price');
         const festOffer = document.getElementById('fest-offer');
 
-        if (currentFest) {
-            isFestivalActive = true;
-            if (heading) heading.innerHTML = currentFest.label;
-            if (timerBox) timerBox.style.display = "flex";
-            if (bestPrice) bestPrice.style.display = "none";
-            if (festOffer) festOffer.style.display = "block";
-            updateCountdown(currentFest.endTime);
+        if (active) {
+            heading.innerHTML = currentActiveFest.label;
+            timerBox.style.display = "flex";
+            bestPrice.style.display = "none";
+            festOffer.style.display = "block";
         } else {
-            isFestivalActive = false;
-            if (heading) heading.innerText = "Choose Your Style";
-            if (timerBox) timerBox.style.display = "none";
-            if (bestPrice) bestPrice.style.display = "block";
-            if (festOffer) festOffer.style.display = "none";
+            heading.innerText = "Choose Your Style";
+            timerBox.style.display = "none";
+            bestPrice.style.display = "block";
+            festOffer.style.display = "none";
         }
         updateUI();
     }
 
-    function updateCountdown(end) {
-        const now = new Date().getTime();
-        const distance = end.getTime() - now;
-        const timerClock = document.getElementById("timerClock");
-        
-        if (!timerClock) return;
+    function updateCountdownClock(endTime) {
+        const distance = endTime.getTime() - new Date().getTime();
+        const clockElem = document.getElementById("timerClock");
+        if (!clockElem) return;
+
         if (distance < 0) {
-            timerClock.innerText = "EXPIRED";
+            clockElem.innerText = "OFFER ENDED";
             return;
         }
 
@@ -328,39 +330,65 @@
         const h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         const m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
         const s = Math.floor((distance % (1000 * 60)) / 1000);
-        timerClock.innerText = `${d}d ${h}h ${m}m ${s}s`;
+        clockElem.innerText = `${d}d ${h.toString().padStart(2,'0')}h ${m.toString().padStart(2,'0')}m ${s.toString().padStart(2,'0')}s`;
     }
 
     function updateUI() {
-        const mode = isFestivalActive ? 'festival' : 'normal';
+        const currentConfig = isFestivalActive ? FESTIVAL_CONFIG : NORMAL_CONFIG;
+        const mainImg = document.getElementById('mainImg');
+        if (mainImg && STYLE_IMAGES[activeStyle]) mainImg.src = STYLE_IMAGES[activeStyle];
+        
         const pageElem = document.getElementById('pageSelect');
-        const pages = pageElem ? parseInt(pageElem.value) : 1;
-        const basePrice = PRICES_DB[mode][activeStyle];
+        const pages = pageElem ? parseInt(pageElem.value) : 4;
+        const basePrice = currentConfig.prices[activeStyle];
+        const finalPrice = Math.round((basePrice / 4) * pages * qty);
         
         const priceDisplay = document.getElementById('totalPrice');
-        if (priceDisplay) {
-            priceDisplay.innerText = Math.round((basePrice / 4) * pages * qty);
-        }
+        if (priceDisplay) priceDisplay.innerText = finalPrice;
 
-        const list = document.getElementById('detailsList');
-        if (list) {
-            list.innerHTML = ''; 
-            DETAILS_DB[mode][activeStyle].forEach(item => {
-                list.innerHTML += `<li><i class="fa-solid fa-circle-check"></i> ${item}</li>`;
-            });
-            if (isFestivalActive) {
-                list.innerHTML += `<li><i class="fa-solid fa-circle-check"></i> 1 Creative Poster <span class="offer-blink">FREE</span></li>`;
+        // Discount Logic
+        const offTag = document.getElementById('offTag');
+        if (isFestivalActive) {
+            const originalBasePrice = NORMAL_CONFIG.prices[activeStyle];
+            const originalPrice = Math.round((originalBasePrice / 4) * pages * qty);
+            if (originalPrice > finalPrice) {
+                const discount = Math.round(((originalPrice - finalPrice) / originalPrice) * 100);
+                offTag.innerText = `Off ${discount}%`;
+            } else {
+                offTag.innerText = "";
             }
+        } else {
+            offTag.innerText = "";
         }
+        
+        // Update Highlights Grid
+        const gridContainer = document.getElementById('highlightsGrid');
+        gridContainer.innerHTML = "";
+        currentConfig.details.forEach(item => {
+            const div = document.createElement('div');
+            div.className = "highlight-item";
+            let displayValue = item.value;
+            if (item.label === "Design") {
+                displayValue = activeStyle === 'creative' ? "Creative Brochure Design" : "Branding Package";
+            }
+            div.innerHTML = `
+                <span class="highlight-label">${item.label}</span>
+                <span class="highlight-value">${displayValue}</span>
+            `;
+            gridContainer.appendChild(div);
+        });
     }
 
-    // Global Event Handlers
     window.selectStyle = function(s) {
         activeStyle = s;
         document.querySelectorAll('.btn-combo').forEach(b => b.classList.remove('active'));
         const activeBtn = document.getElementById('btn-' + s);
         if (activeBtn) activeBtn.classList.add('active');
         
+        document.querySelectorAll('.dot').forEach(d => d.classList.remove('active'));
+        const activeDot = document.getElementById('dot-' + s);
+        if (activeDot) activeDot.classList.add('active');
+
         const mainImg = document.getElementById('mainImg');
         if (mainImg) mainImg.src = STYLE_IMAGES[s];
         updateUI();
@@ -376,7 +404,7 @@
     function fillDeliveryOptions() {
         const ds = document.getElementById('deliverySelect');
         if (!ds) return;
-        ds.innerHTML = ''; // Clear existing
+        ds.innerHTML = '';
         for (let i = 2; i <= 7; i++) {
             let opt = document.createElement("option");
             opt.value = i; 
@@ -385,28 +413,23 @@
         }
     }
 
-window.sendToWhatsApp = function() {
-    // 1. Get current values from the UI
-    const pages = document.getElementById('pageSelect').value;
-    const delivery = document.getElementById('deliverySelect').value;
-    
-    // 2. Capitalize the Style name (creative -> Creative)
-    const displayStyle = activeStyle.charAt(0).toUpperCase() + activeStyle.slice(1);
+    window.sendToWhatsApp = function() {
+        const pages = document.getElementById('pageSelect').value;
+        const delivery = document.getElementById('deliverySelect').value;
+        const displayStyle = activeStyle.charAt(0).toUpperCase() + activeStyle.slice(1);
 
-    // 3. Construct the message (Total Price removed)
-    const msg = `%20%20%20%20%20%20%20%20%20%20*DESIGN ORDER*%0A%0A` +
-                `*Service* : Brochure Design%0A` +
-                `*Style* : ${displayStyle}%0A` +
-                `*Pages* : ${pages}%0A` +
-                `*Qty* : ${qty} nos%0A` +
-                `*Delivery* : ${delivery} Days%0A` +
-                (isFestivalActive ? `*Offer* : 1 Creative Poster FREE%0A` : "") + 
-                `%0A` + 
-                `----------------------------------`;
+        const msg = `%20%20%20%20%20%20%20%20%20%20*DESIGN ORDER*%0A%0A` +
+                    `*Service* : Brochure Design%0A` +
+                    `*Style* : ${displayStyle}%0A` +
+                    `*Pages* : ${pages}%0A` +
+                    `*Qty* : ${qty} nos%0A` +
+                    `*Delivery* : ${delivery} Days%0A` +
+                    (isFestivalActive ? `*Offer* : 1 Creative Poster FREE%0A` : "") + 
+                    `%0A` + 
+                    `----------------------------------`;
 
-    // 4. Open WhatsApp
-    window.open(`https://wa.me/7845188347?text=${msg}`, '_blank');
-};
+        window.open(`https://wa.me/7845188347?text=${msg}`, '_blank');
+    };
 </script>
 </body>
 </html>
