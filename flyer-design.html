@@ -66,8 +66,8 @@
         .highlight-label { font-size: 9px; color: #999; text-transform: capitalize; margin-bottom: 2px; }
         .highlight-value { font-size: 11px; color: #333; font-weight: 600; }
 
-        .price-row { display: flex; align-items: baseline; gap: 10px; }
-        .off-tag { font-size: 14px; color: #555; font-weight: 500; margin-left: 5px; }
+        .price-row { display: flex; align-items: baseline; gap: 5px; }
+        .off-tag { font-size: 14px; color: #555; font-weight: 500; margin-left: 2px; }
 
         .input-row { margin-top: 15px; display: flex; align-items: center; gap: 12px; }
         .input-label { font-size: 11px; font-weight: 700; color: #333; text-transform: uppercase; width: 110px; }
@@ -100,7 +100,7 @@
             .logo-icon-rotate { font-size: 1.4rem; }
             .toggle-btn { font-size: 1.7rem; }
             .status-box {  font-size: 14px; padding: 9px 22px; border-radius: 3px; }
-             #mainHeading { font-size: 14px; }
+             #mainHeading { font-size: 11px; }
     #timerStatus { font-size: 9px; }
     #timerClock { font-size: 13px; }
      .footer-btn { height: 45px; font-size: 15px; border-radius: 8px; }
@@ -121,10 +121,10 @@
             .input-field { width: 150px; height: 40px; font-size: 14px; }
             .price-display { font-size: 25px; }
             .footer-btn { height: 52px; font-size: 15px; }
-            .details-card h4 { font-size: 14px; margin-bottom: 10px; }
-            .details-card li { font-size: 14px; margin-bottom: 8px; }
-            .details-card i { font-size: 13px; } 
-            #mainHeading { font-size: 16px; }
+            .details-card h4 { font-size: 15px; margin-bottom: 10px; }
+            .highlight-label { font-size: 11px; }
+            .highlight-value { font-size: 13px; }
+            #mainHeading { font-size: 13px; }
             #timerStatus { font-size: 11px; }
             #timerClock { font-size: 15px; }
             .total-text { font-size: 15px; }
@@ -145,7 +145,7 @@
     </style>
 <script src="settings.js"></script>
 </head>
-<body onload="initApp()">
+<body onload="updateUI(); syncFestivalEngine(); setInterval(syncFestivalEngine, 1000);">
 
     <nav class="navbar">
         <div class="nav-container">
@@ -373,9 +373,13 @@
         currentConfig.details.forEach(item => {
             const div = document.createElement('div');
             div.className = "highlight-item";
+            let displayValue = item.value;
+            if (item.label === "Design") {
+                displayValue = activeStyle === 'creative' ? "Creative Design" : "Branding Design";
+            }
             div.innerHTML = `
                 <span class="highlight-label">${item.label}</span>
-                <span class="highlight-value">${item.value}</span>
+                <span class="highlight-value">${displayValue}</span>
             `;
             gridContainer.appendChild(div);
         });
@@ -396,14 +400,7 @@
 
     // --- INITIALIZATION ---
 
-    window.onload = function() {
-        // Run once immediately
-        syncFestivalEngine();
-        updateUI();
-        
-        // Run "Engine" every 1 second for real-time automatic switching
-        setInterval(syncFestivalEngine, 1000);
-    };
+    // initApp is now handled via body onload directly
 
     // --- EVENT HANDLERS ---
 
