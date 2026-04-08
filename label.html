@@ -32,9 +32,10 @@
         .status-box { position: absolute; top: 10px; left: 10px; padding: 6px 12px; font-weight: 700; font-size: 10px; text-transform: uppercase; border-radius: 4px; color: white; z-index: 10; }
         .best-price-box { background: #2196F3; }
         .festival-offer-box { background: #FF0000; display: none; }
-
-        .free-blink { animation: blink 1s linear infinite; color: #FF0000; font-weight: 800; }
         @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0.2; } 100% { opacity: 1; } }
+
+        /* Free text with Gap and Blink */
+        .free-blink { color: #FF0000; font-weight: 800; animation: blink 1s linear infinite; margin-left: 3px; }
 
         .title-row { display: flex; justify-content: space-between; align-items: center; margin-top: 15px; }
         .design-mention-big { font-size: 16px; font-weight: 600; color: #000; }
@@ -55,21 +56,24 @@
         .btn-combo { border: 1px solid #ccc; border-radius: 4px; font-size: 10px; font-weight: 600; height: 30px; padding: 0 12px; display: flex; align-items: center; justify-content: center; background: #fff; text-transform: uppercase; min-width: 90px; cursor: pointer; }
         .btn-combo.active { background: #6a3093; color: #fff; border-color: #6a3093; }
 
-        .details-card { margin-top: 10px; border-bottom: 1px dashed #eee; padding-bottom: 12px; scroll-margin-top: 80px; }
-        .details-card h4 { font-size: 12px; color: #449330; margin-bottom: 8px; font-weight: 700; }
+        .details-card { margin-top: 15px; border-top: 1px solid #f0f0f0; border-bottom: 1px solid #f0f0f0; padding: 15px 0; margin-bottom: 25px; scroll-margin-top: 80px; }
+        .details-card h4 { font-size: 13px; color: #449330; margin-bottom: 12px; text-transform: capitalize; font-weight: 700; }
         
-        .highlights-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 5px; }
+        .highlights-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 10px; }
         .highlight-item { display: flex; flex-direction: column; }
-        .hl-label { font-size: 9px; color: #777; margin-bottom: 2px; }
-        .hl-val { font-size: 10.5px; font-weight: 600; color: #222; }
+        .highlight-label { font-size: 9px; color: #999; text-transform: capitalize; margin-bottom: 2px; }
+        .highlight-value { font-size: 11px; color: #333; font-weight: 600; }
 
         .input-row { margin-top: 15px; display: flex; align-items: center; gap: 12px; }
         .input-label { font-size: 11px; font-weight: 700; color: #333; text-transform: uppercase; width: 110px; }
         .input-field { width: 100px; height: 32px; border: 1px solid #ddd; border-radius: 4px; padding: 0 8px; font-size: 11px; outline: none; background: #fff; }
 
-        .total-price-section { display: flex; align-items: center; gap: 12px; margin-top: 25px; padding: 10px 0; border-top: 1px solid #f9f9f9; }
-        .total-text { font-size: 12px; font-weight: 600; color: #333; text-transform: uppercase; width: 110px; }
-        .price-display { font-size: 15px; font-weight: 700; color: #6a3093; }
+        .total-price-section { display: flex; justify-content: space-between; align-items: center; margin-top: 25px; padding: 10px 5px; border-top: 1px solid #f9f9f9; }
+        .total-text { font-size: 12px; font-weight: 700; color: #333; text-transform: uppercase; }
+        
+        .price-row { display: flex; align-items: baseline; gap: 5px; margin-right: 15px; }
+        .price-display { font-size: 22px; font-weight: 600; color: #6a3093; }
+        .off-tag { font-size: 14px; color: #555; font-weight: 500; margin-left: 2px; }
 
        .footer-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; position: fixed; bottom: 0; left: 0; width: 100%; background: #fff; padding: 15px 25px; box-shadow: 0 -2px 10px rgba(0,0,0,0.05); }
         .footer-btn { height: 45px; border-radius: 6px; font-size: 14px; font-weight: 600; border: none; display: flex; align-items: center; justify-content: center; cursor: pointer; gap: 8px; }
@@ -77,86 +81,28 @@
         .whatsapp-btn { background: #6a3093; color: #fff; }
         
         @media (min-width: 360px) {
-    /* Navbar & Logo Scaled Down */
-    .navbar { height: 60px; }
-    .logo { font-size: 1.1rem; }
-    .logo-icon-rotate { font-size: 1.4rem; }
-    .toggle-btn { font-size: 1.7rem; }
-    
-    /* Layout & Spacing */
-    .app-container { margin-top: 75px; padding: 0 25px; }
-   .status-box {  font-size: 14px; padding: 9px 22px; border-radius: 3px; }
-    .design-mention-big { font-size: 19px; }
-    .dot { width: 6px; height: 6px; } 
+            .navbar { height: 60px; }
+            .logo { font-size: 1.1rem; }
+            .logo-icon-rotate { font-size: 1.4rem; }
+            .toggle-btn { font-size: 1.7rem; }
+            .app-container { margin-top: 75px; padding: 0 25px; }
+            .status-box {  font-size: 14px; padding: 9px 22px; border-radius: 3px; }
+            .design-mention-big { font-size: 19px; }
+            .dot { width: 6px; height: 6px; } 
+            .qty-selector { height: 35px; width: 105px; }
+            .qty-number { font-size: 16px; }
+            #mainHeading { font-size: 11px; }
+            #timerStatus { font-size: 9px; }
+            #timerClock { font-size: 13px; }
+            .btn-combo { height: 35px; font-size: 11.5px; min-width: 110px; }
+            .details-card h4 { font-size: 14px; }
+            .input-label { font-size: 13px; width: 130px; }
+            .input-field { width: 130px; height: 35px; font-size: 13px; }
+            .total-text { font-size: 14px; }
+            .price-display { font-size: 22px; }
+            .footer-btn { height: 45px; font-size: 15px; border-radius: 8px; }
+        }
 
-    /* Controls & Headings */
-    .qty-selector { height: 35px; width: 105px; }
-    .qty-number { font-size: 16px; }
-    #mainHeading { font-size: 14px; }
-    #timerStatus { font-size: 9px; }
-    #timerClock { font-size: 13px; }
-    
-    /* Buttons & Details */
-    .btn-combo { height: 35px; font-size: 11.5px; min-width: 110px; }
-    .details-card h4 { font-size: 13.5px; }
-    .hl-label { font-size: 10px; }
-    .hl-val { font-size: 11.5px; }
-
-    /* Input Fields */
-    .input-label { font-size: 13px; width: 130px; }
-    .input-field { width: 130px; height: 35px; font-size: 13px; }
-
-    /* Price Displays */
-    .total-text { font-size: 14px; width: 130px; }
-    .price-display { font-size: 22px; }
-
-    /* Footer Action */
-    .footer-btn { height: 45px; font-size: 15px; border-radius: 8px; }
-    
-}
-
-
-  @media (min-width: 380px) {
-    /* Navbar & Logo - Clean & Balanced */
-    .navbar { height: 62px; }
-    .logo { font-size: 1.15rem; }
-    .logo-icon-rotate { font-size: 1.5rem; }
-    .toggle-btn { font-size: 1.75rem; }
-    
-    /* Layout & Spacing */
-    .app-container { margin-top: 78px; padding: 0 25px; }
-    .status-box {  font-size: 14px; padding: 9px 22px; border-radius: 3px; }
-    .design-mention-big { font-size: 20px; } 
-    .dot { width: 7px; height: 7px; } 
-
-    /* Controls & Headings */
-    .qty-selector { height: 32px; width: 95px; }
-    .qty-number { font-size: 15px; }
-    #mainHeading { font-size: 15px; }
-    #timerStatus { font-size: 10px; }
-    #timerClock { font-size: 14px; }
-    
-    /* Buttons & Details */
-    .btn-combo { height: 34px; font-size: 12.5px; min-width: 100px; }
-    .details-card h4 { font-size: 15px; }
-    .hl-label { font-size: 11px; }
-    .hl-val { font-size: 13px; }
-
-    /* Input Fields */
-    .input-label { font-size: 14px; width: 125px; }
-    .input-field { width: 130px; height: 34px; font-size: 14px; }
-
-    /* Price Displays */
-    .total-text { font-size: 15px; width: 125px; }
-    .price-display { font-size: 23px; }
-
-    /* Footer Action */
-    .footer-btn { height: 46px; font-size: 16px; border-radius: 8px; }
-}
-
-
-
-        /* BIG SIZE DESIGN (400px+) */
         @media (min-width: 400px) {
             .navbar { height: 70px; }
             .logo { font-size: 1.2rem; }
@@ -168,17 +114,17 @@
             .dot { width: 7px; height: 7px; } 
             .qty-selector { height: 40px; width: 120px; }
             .qty-number { font-size: 18px; }
-            #mainHeading { font-size: 16px; }
-            #timerStatus { font-size: 11px; }
+            #mainHeading { font-size: 13px; }
+            #timerStatus { font-size: 10px; }
             #timerClock { font-size: 15px; }
             .btn-combo { height: 40px; font-size: 13px; min-width: 130px; }
-            .details-card h4 { font-size: 16px; }
-            .hl-label { font-size: 12px; }
-            .hl-val { font-size: 14px; }
+            .details-card h4 { font-size: 15px; margin-bottom: 10px; }
+            .highlight-label { font-size: 11px; }
+            .highlight-value { font-size: 13px; }
             .input-label { font-size: 14px; width: 150px; }
             .input-field { width: 150px; height: 40px; font-size: 14px; }
-            .total-text { font-size: 15px; width: 150px; }
-            .price-display { font-size: 25px; }
+            .total-text { font-size: 15px; }
+            .price-display { font-size: 25px !important; }
             .footer-btn { height: 50px; font-size: 16px; }
         }
 
@@ -191,7 +137,7 @@
     </style>
 <script src="settings.js"></script>
 </head>
-<body onload="initApp()">
+<body onload="updateUI(); checkFestivalRealTime(); setInterval(checkFestivalRealTime, 1000);">
     <nav class="navbar">
         <div class="nav-container">
             <div class="logo">
@@ -220,13 +166,8 @@
             <div id="dot-creative" class="dot"></div>
         </div>
 
-        <div class="title-row" style="align-items: flex-start;">
-            <div>
-                <div class="design-mention-big">Label <span>Design</span></div>
-                <div class="product-stars" data-product="Label Designs" style="font-size: 12px; color: #ffb700; margin-top: 3px; font-weight: 600;">
-                    <span class="stars-fill">★★★★★</span> <span class="rating-num-box" style="color: #666; margin-left: 4px;">0.0</span>
-                </div>
-            </div>
+        <div class="title-row">
+            <div class="design-mention-big">Label <span>Design</span></div>
             <div class="qty-selector">
                 <button class="qty-btn" onclick="changeQty(-1)">−</button>
                 <div class="qty-number" id="qtyDisplay">1</div>
@@ -249,7 +190,7 @@
         
         <div class="details-card" id="detailsSection">
             <h4>Design Highlights</h4>
-            <div id="detailsList" class="highlights-grid"></div>
+            <div id="highlightsGrid" class="highlights-grid"></div>
         </div>
 
         <div class="input-row">
@@ -272,9 +213,9 @@
 
         <div class="total-price-section">
             <span class="total-text">Total Price</span>
-            <div style="display: flex; align-items: center; justify-content: flex-end;">
+            <div class="price-row">
                 <div class="price-display">₹<span id="totalPrice">0</span></div>
-                <span id="priceOffText" style="font-size: 12px; color: #555; margin-left: 8px; font-weight: 500; display: none;">Off 10%</span>
+                <div id="offTag" class="off-tag"></div>
             </div>
         </div>
 
@@ -300,16 +241,24 @@
     { name: "New Year 2027", start: { month: 12, date: 26, hour: 0, min: 0 }, end: { month: 1, date: 1, hour: 23, min: 59 }, label: "New Year <span class='free-blink'>Offer</span>" }
 ];
 
-    const PRICES_NORMAL = { 
-        simple: 300, creative: 400, 
-        list_s: ["Simple Label Design", "High Quality Print Files", "Limited Revisions", "Fast Delivery"], 
-        list_c: ["Creative Label Design", "High Quality Print Files", "Unlimited Revisions", "Fast Delivery"] 
+    const NORMAL_CONFIG = {
+        prices: { simple: 300, creative: 400 },
+        details: [
+            { label: "Design", value: "Creative Design" },
+            { label: "Quality", value: "High Quality Print Files" },
+            { label: "Revision", value: "Unlimited Revisions" },
+            { label: "Delivery", value: "Fast Delivery" }
+        ]
     };
-    
-    const PRICES_OFFER = { 
-        simple: 200, creative: 350, 
-        list_s: ["Simple Label Design", "High Quality Print Files", "Limited Revisions", "Fast Delivery"], 
-        list_c: ["Creative Label Design", "High Quality Print Files", "Unlimited Revisions", "Fast Delivery"] 
+
+    const FESTIVAL_CONFIG = {
+        prices: { simple: 200, creative: 350 },
+        details: [
+            { label: "Design", value: "Creative Design" },
+            { label: "Quality", value: "High Quality Print Files" },
+            { label: "Revision", value: "Unlimited Revisions" },
+            { label: "Delivery", value: "Fast Delivery" }
+        ]
     };
 
     let activeStyle = 'simple';
@@ -317,10 +266,7 @@
     let currentFestival = null;
     let timerInterval;
 
-    function initApp() {
-        setInterval(checkFestivalRealTime, 1000);
-        updateUI();
-    }
+    // initApp logic now handled by body onload
 
     function checkFestivalRealTime() {
         const now = new Date();
@@ -396,41 +342,42 @@
     }
 
     function updateUI() {
-        const isOffer = currentFestival !== null;
-        const data = isOffer ? PRICES_OFFER : PRICES_NORMAL;
+        const config = currentFestival ? FESTIVAL_CONFIG : NORMAL_CONFIG;
         document.getElementById('displayImg').src = IMAGE_PATHS[activeStyle];
-        document.getElementById('totalPrice').innerText = data[activeStyle] * qty;
         
-        const offTextEl = document.getElementById('priceOffText');
-        if (isOffer) {
-            const normP = PRICES_NORMAL[activeStyle];
-            const offP = PRICES_OFFER[activeStyle];
-            const pct = Math.round(((normP - offP) / normP) * 100);
-            offTextEl.innerText = `Off ${pct}%`;
-            offTextEl.style.display = 'inline-block';
+        const finalPrice = config.prices[activeStyle] * qty;
+        document.getElementById('totalPrice').innerText = finalPrice;
+
+        // Discount Logic
+        const offTag = document.getElementById('offTag');
+        if (currentFestival) {
+            const originalPrice = NORMAL_CONFIG.prices[activeStyle] * qty;
+            if (originalPrice > finalPrice) {
+                const discount = Math.round(((originalPrice - finalPrice) / originalPrice) * 100);
+                offTag.innerText = `Off ${discount}%`;
+            } else {
+                offTag.innerText = "";
+            }
         } else {
-            offTextEl.style.display = 'none';
+            offTag.innerText = "";
         }
         
-        const list = activeStyle === 'simple' ? [...data.list_s] : [...data.list_c];
-        document.getElementById('detailsList').innerHTML = `
-            <div class="highlight-item">
-                <span class="hl-label">Design type</span>
-                <span class="hl-val">${list[0]}</span>
-            </div>
-            <div class="highlight-item">
-                <span class="hl-label">Revisions</span>
-                <span class="hl-val">${list[2]}</span>
-            </div>
-            <div class="highlight-item">
-                <span class="hl-label">Quality</span>
-                <span class="hl-val">${list[1]}</span>
-            </div>
-            <div class="highlight-item">
-                <span class="hl-label">Delivery</span>
-                <span class="hl-val">${list[3]}</span>
-            </div>
-        `;
+        // Update Highlights Grid
+        const gridContainer = document.getElementById('highlightsGrid');
+        gridContainer.innerHTML = "";
+        config.details.forEach(item => {
+            const div = document.createElement('div');
+            div.className = "highlight-item";
+            let displayValue = item.value;
+            if (item.label === "Design") {
+                displayValue = activeStyle === 'creative' ? "Creative Design" : "Branding Design";
+            }
+            div.innerHTML = `
+                <span class="highlight-label">${item.label}</span>
+                <span class="highlight-value">${displayValue}</span>
+            `;
+            gridContainer.appendChild(div);
+        });
     }
 
     const menuToggle = document.getElementById('menuToggle');
@@ -438,26 +385,20 @@
     menuToggle.onclick = () => navLinks.classList.toggle('active');
 
   function sendToWhatsApp() {
-    // 1. Get values from inputs
     const sizeInput = document.getElementById('sizeInput');
     const deliveryInput = document.getElementById('deliveryInput');
-    
     const sizeVal = sizeInput ? sizeInput.value.trim() : "";
     const deliveryVal = deliveryInput ? deliveryInput.value : "Not Specified";
-
-    // 2. Format the Type text based on your active style
     const typeText = activeStyle === 'creative' ? "Creative Design" : "Branding Design";
 
-    // 3. Construct the Message (Price lines completely removed)
     const msg = `%20%20%20%20%20%20%20%20%20%20*DESIGN ORDER*%0A%0A` +
-                `*Services* : Menu Card Design%0A` +
+                `*Services* : Label Design%0A` +
                 `*Type* : ${typeText}%0A` +
                 (sizeVal !== "" ? `*Size* : ${sizeVal}%0A` : "") + 
                 `*Delivery* : ${deliveryVal}%0A` +
                 `*Qty* : ${qty} nos%0A` +
                 `----------------------------------`;
 
-    // 4. Open WhatsApp
     window.open(`https://wa.me/7845188347?text=${msg}`, '_blank');
 }
 </script>
