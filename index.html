@@ -7,7 +7,8 @@
     <title>Ajith Designs | Graphics Designer</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css?v=6">
+<script src="settings.js?v=6"></script>
 </head>
 
 <body>
@@ -60,23 +61,62 @@
             <!-- இது இரண்டையும் ஒரே Group-ஆக மாற்றிவிட்டதால், பிளவு படாமல் வலது முனையில் சேரும்! -->
             <div class="right-nav-items" style="display: flex; align-items: center;">
 
-                <!-- (A) 👁️ Black Minimalist View Counter -->
-                <div class="navbar-view-minimal" title="Total Website Visitors"
-                    style="display: flex; flex-direction: row; align-items: center; gap: 6px;">
-                    <svg viewBox="0 0 24 24" fill="currentColor">
-                        <path
-                            d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z" />
-                    </svg>
-                    <span class="view-counter" id="main-view-count" data-target="Website Main">0</span>
+                <div style="display: flex; gap: 15px; align-items: center;">
+                    <style>
+                    @keyframes heartPop { 0% { transform: scale(1); } 50% { transform: scale(1.35); } 100% { transform: scale(1); } }
+                    .heart-liked { animation: heartPop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards !important; fill: #ff3366 !important; stroke: #ff3366 !important; color: #ff3366 !important; }
+                    
+                    /* Responsive sizes for icons and count values */
+                    .nav-icon-size { width: 17px; height: 17px; }
+                    .nav-count-size { font-size: 12px; }
+                    @media screen and (min-width: 400px) {
+                        .nav-icon-size { width: 22px; height: 22px; }
+                        .nav-count-size { font-size: 15px; }
+                    }
+                    </style>
+
+                    <!-- New Like Counter -->
+                    <div class="navbar-like-minimal" id="nav-like-btn" title="Like our Website" style="display: flex; flex-direction: row; align-items: center; gap: 4px; cursor: pointer; color: #333;">
+                        <svg id="like-icon-svg" class="nav-icon-size" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                        </svg>
+                        <span class="view-counter nav-count-size" id="like-count" data-target="Website Likes" style="font-weight: 700; font-family: 'Poppins', sans-serif;">0</span>
+                    </div>
+
+                    <!-- (A) 👁️ Black Minimalist View Counter -->
+                    <div class="navbar-view-minimal" title="Total Website Visitors"
+                        style="display: flex; flex-direction: row; align-items: center; gap: 6px;">
+                        <svg viewBox="0 0 24 24" fill="currentColor" class="nav-icon-size">
+                            <path
+                                d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z" />
+                        </svg>
+                        <span class="view-counter nav-count-size" id="main-view-count" data-target="Website Main" style="font-weight: 700; font-family: 'Poppins', sans-serif;">0</span>
+                    </div>
                 </div>
 
                 <!-- (B) Nav Links (Laptop-ல் View Count-க்கு அடுத்ததாக (Right) வரும்) -->
                 <ul class="nav-links" id="navLinks">
-                    <li><a href="index.html">HOME</a></li>
-                    <li><a href="index.html#about">ABOUT</a></li>
-                    <li><a href="index.html#services">SERVICES</a></li>
-                    <li><a href="index.html#contact">CONTACT</a></li>
+                    <li class="normal-nav"><a href="index.html">HOME</a></li>
+                    <li class="normal-nav"><a href="index.html#about">ABOUT</a></li>
+                    <li class="normal-nav"><a href="index.html#services">SERVICES</a></li>
+                    <li class="normal-nav"><a href="index.html#contact">CONTACT</a></li>
+                    <li id="dashboard-nav-item" style="display: none;"><a href="Dashboard.html" style="color: #ff3366; font-weight: 800; letter-spacing: 1px;">DASHBOARD</a></li>
+                    <li id="logout-nav-item" style="display: none;"><a href="#" onclick="handleLogout(event)" style="color: #ff3366; font-weight: 800; letter-spacing: 1px;">LOGOUT</a></li>
                 </ul>
+                <script>
+                    if (localStorage.getItem("isAdminLoggedIn") === "true" || localStorage.getItem("isAdmin") === "true") {
+                        document.getElementById('dashboard-nav-item').style.display = 'block';
+                        document.getElementById('logout-nav-item').style.display = 'block';
+                    }
+
+                    window.handleLogout = function(event) {
+                        if (event) event.preventDefault(); // Prevent jump to top
+                        localStorage.removeItem("isAdminLoggedIn");
+                        localStorage.removeItem("isAdmin");
+                        localStorage.removeItem("currentUser");
+                        window.location.reload();
+                    };
+                </script>
 
                 <!-- (C) Mobile Menu Toggle Button (Laptop-ல் தானாக மறைந்துவிடும்) -->
                 <div class="toggle-btn" id="menuToggle" style="cursor: pointer; margin-left:15px;">
@@ -337,6 +377,9 @@
 }
     }
 
+
+
+    
 /* Mobile View: Reduced by 3pt */
 @media (max-width: 399px) {
     :host { 
@@ -369,6 +412,89 @@
 
 
 
+
+    @media (min-width: 390px) and (max-width: 399px) {
+
+
+      
+:host { 
+    position: absolute; 
+    left: 50%;
+    transform: translateX(-50%);
+    
+    /* Clean Bottom Positioning */
+    bottom: 8px; 
+    top: auto !important; 
+    
+    z-index: 1000;
+    width: 100%;
+    display: block;
+    pointer-events: none;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Poppins', sans-serif;
+    pointer-events: auto;
+}
+
+.row {
+    display: flex;
+    align-items: center;
+    gap: 6px; /* Tighter gap for smaller text */
+}
+
+/* REDUCED SIZE - Professional & Sharp */
+.status-text {
+    font-size: 11px; /* Desktop: Reduced by 3pt */
+    font-weight: 700;
+    text-transform: uppercase;
+    line-height: 1;
+    letter-spacing: 0.3px;
+}
+
+.icon-box {
+    position: relative;
+    width: 12px; 
+    height: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dot { 
+    width: 6px; 
+    height: 6px; 
+    background-color: currentColor; 
+    border-radius: 50%; 
+}
+
+.ring {
+    position: absolute; 
+    width: 100%; 
+    height: 100%;
+    border: 1.2px solid currentColor; 
+    border-radius: 50%;
+    animation: ripple 2s infinite ease-out;
+}
+
+@keyframes ripple {
+    0% { transform: scale(1); opacity: 1; }
+    100% { transform: scale(3.5); opacity: 0; }
+}
+
+/* Time text - Minimalist */
+.daily-time {
+    font-size: 5px; /* Slightly smaller to match */
+    color: #000000; 
+    font-weight: 600;
+    margin-top: 3px;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+}
+    }
 
 
 
@@ -562,7 +688,7 @@
         </div>
 
         <!-- 2. Flyer Design -->
-        <div class="box reveal">
+        <div class="box reveal" id="box-flyer">
             <div class="img-area">
                 <div class="top-left-offer" id="v_off2">20% OFF</div>
                 <img id="v_img2" src="flyer thump.jpg" onclick="logViewActivity('Flyer Design')">
@@ -586,7 +712,7 @@
         </div>
 
         <!-- 3. Calendar Design -->
-        <div class="box reveal">
+        <div class="box reveal" id="box-calendar">
             <div class="img-area">
                 <div class="top-left-offer" id="v_off3">20% OFF</div>
                 <img id="v_img3" src="1 sheet calender.jpg" onclick="logViewActivity('Calendar Design')">
@@ -610,7 +736,7 @@
         </div>
 
         <!-- 4. Business Cards -->
-        <div class="box reveal">
+        <div class="box reveal" id="box-business-cards">
             <div class="img-area">
                 <div class="top-left-offer" id="v_off4">20% OFF</div>
                 <img id="v_img4" src="bussiness card thump.jpg" onclick="logViewActivity('Business Cards')">
@@ -634,7 +760,7 @@
         </div>
 
         <!-- 5. Flex & Banner Design -->
-        <div class="box reveal">
+        <div class="box reveal" id="box-flex-banner">
             <div class="img-area">
                 <div class="top-left-offer" id="v_off5">20% OFF</div>
                 <img id="v_img5" src="banner thump.jpg" onclick="logViewActivity('Flex Banner Design')">
@@ -658,7 +784,7 @@
         </div>
 
         <!-- 6. Brochure Designs -->
-        <div class="box reveal">
+        <div class="box reveal" id="box-brochure">
             <div class="img-area">
                 <div class="top-left-offer" id="v_off6">20% OFF</div>
                 <img id="v_img6" src="Brochure creative.jpg" onclick="logViewActivity('Brochure Designs')">
@@ -682,7 +808,7 @@
         </div>
 
         <!-- 7. Menu Cards Designs -->
-        <div class="box reveal">
+        <div class="box reveal" id="box-menu-cards">
             <div class="img-area">
                 <div class="top-left-offer" id="v_off7">20% OFF</div>
                 <img id="v_img7" src="Menu Design thump.jpg" onclick="logViewActivity('Menu Cards')">
@@ -706,7 +832,7 @@
         </div>
 
         <!-- 8. Packaging Designs -->
-        <div class="box reveal">
+        <div class="box reveal" id="box-packaging">
             <div class="img-area">
                 <div class="top-left-offer" id="v_off8">20% OFF</div>
                 <img id="v_img8" src="packaging thump.jpg" onclick="logViewActivity('Packaging Designs')">
@@ -730,7 +856,7 @@
         </div>
 
         <!-- 9. Label Designs -->
-        <div class="box reveal">
+        <div class="box reveal" id="box-label">
             <div class="img-area">
                 <div class="top-left-offer" id="v_off9">20% OFF</div>
                 <img id="v_img9" src="Label Packaging Design 1.png" onclick="logViewActivity('Label Designs')">
@@ -754,7 +880,7 @@
         </div>
 
         <!-- 10. Product box Designs -->
-        <div class="box reveal">
+        <div class="box reveal" id="box-product">
             <div class="img-area">
                 <div class="top-left-offer" id="v_off10">20% OFF</div>
                 <img id="v_img10" src="product design thump.jpg" onclick="logViewActivity('Product Box Designs')">
@@ -1147,147 +1273,31 @@
             .stars-fill {
                 font-size: 11px !important;
             }
+
+            @media (min-width: 400px) {
+                .rc-title-area h2 { font-size: 20px; } 
+                .rc-sub-text { font-size: 11px; } 
+                .rc-big-num { font-size: 30px; } 
+                .rc-top-stars { font-size: 13px; } 
+                .rc-avg-tag { font-size: 11.5px; } 
+                .rc-bar-row { font-size: 12px; } 
+                .rc-small-btn { font-size: 12px; padding: 10px 14px; } 
+                .rc-stars { font-size: 9.5px; } 
+                .rc-card-num { font-size: 10.5px; } 
+                .rc-card-status { font-size: 10.5px; } 
+                .rc-para { font-size: 11.5px; } 
+                .rc-input-field { font-size: 14px; } 
+                #rc-form-type-text { font-size: 13px; } 
+                .rc-menu-btn { font-size: 16px; } 
+                .rc-star-selector { font-size: 32px; } 
+                .rating-num-box { font-size: 11px !important; }
+                .stars-fill { font-size: 13px !important; }
+            }
         </style>
 
 
 
-        <script>
-            document.addEventListener('DOMContentLoaded', function () {
-
-                function updateLogic() {
-                    const now = new Date();
-                    const year = now.getFullYear();
-
-                    // --- 1. ALL FESTIVALS ---
-                    const FESTIVAL_LIST = [
-                        { name: "VALENTINE OFFER", sM: 3, sD: 10, sH: 21, sMi: 13, eM: 4, eD: 21, eH: 11, eMi: 29 },
-                        { name: "TAMIL NEW YEAR", sM: 4, sD: 7, sH: 0, sMi: 0, eM: 4, eD: 14, eH: 23, eMi: 59 },
-                        { name: "ONAM SPECIAL", sM: 8, sD: 18, sH: 0, sMi: 0, eM: 8, eD: 27, eH: 23, eMi: 59 },
-                        { name: "DIWALI OFFER", sM: 10, sD: 25, sH: 0, sMi: 0, eM: 11, eD: 2, eH: 23, eMi: 59 },
-                        { name: "NEW YEAR 2027", sM: 12, sD: 26, sH: 0, sMi: 0, eM: 1, eD: 1, eH: 23, eMi: 59 }
-                    ];
-
-                    // --- 2. CALENDAR SEASON (Place Change Settings) ---
-                    const CAL_SEASON = {
-                        sM: 2, sD: 20, sH: 17, sMi: 30, // Example Start: Feb 20, 5:30 PM
-                        eM: 2, eD: 20, eH: 18, sMi: 30, // Example End: Feb 20, 6:30 PM
-                        off: "30% OFF", pri: "Just ₹399", sav: "Save ₹199"
-                    };
-
-                    // --- 3. EDITABLE PRICES ---
-                    const NORMAL_PRICES = {
-                        "v_off1": { off: "Best Seller", pri: "Just ₹99", sav: "Save ₹100" },
-                        "v_off2": { off: "Best Price", pri: "Just ₹150", sav: "Save ₹200" },
-                        "v_off3": { off: "Best Price", pri: "Just ₹300", sav: "Save ₹50" },
-                        "v_off4": { off: "Best Price", pri: "Just ₹150", sav: "Save ₹15" },
-                        "v_off5": { off: "Best Price", pri: "Just ₹299", sav: "Save ₹100" },
-                        "v_off6": { off: "Best Price", pri: "Just ₹150", sav: "Save ₹200" },
-                        "v_off7": { off: "Best Price", pri: "Just ₹300", sav: "Save ₹50" },
-                        "v_off8": { off: "Best Price", pri: "Just ₹150", sav: "Save ₹15" },
-                        "v_off9": { off: "Best Price", pri: "Just ₹299", sav: "Save ₹100" },
-                        "v_off10": { off: "Best Price", pri: "Just ₹299", sav: "Save ₹100" },
-                    };
-
-                    const FEST_PRICES = {
-                        "v_off1": { off: "Buy 2 Get 1", pri: "Just ₹199", sav: "Save ₹200" },
-                        "v_off2": { off: "40% OFF", pri: "Just ₹110", sav: "Save ₹100" },
-                        "v_off3": { off: "45% OFF", pri: "Just ₹210", sav: "Save ₹180" },
-                        "v_off4": { off: "50% OFF", pri: "Just ₹130", sav: "Save ₹120" }
-                    };
-
-                    let activeFest = null;
-                    let targetTime = null;
-
-                    // --- FESTIVAL CHECKER ---
-                    FESTIVAL_LIST.forEach(f => {
-                        const start = new Date(year, f.sM - 1, f.sD, f.sH, f.sMi);
-                        const end = new Date(year, f.eM - 1, f.eD, f.eH, f.eMi);
-                        if (now >= start && now <= end) {
-                            activeFest = f;
-                            targetTime = end;
-                        }
-                    });
-
-                    // Target the Timer Container only
-                    const miniTimer = document.querySelector('.mini-timer-right');
-                    const festTag = document.querySelector('.fest-tag');
-
-                    // --- TIMER VISIBILITY ---
-                    if (activeFest) {
-                        if (miniTimer) miniTimer.style.display = 'flex'; // Use flex to keep row layout
-                        if (festTag) festTag.innerText = activeFest.name + " ENDS IN:";
-                        renderTimer(targetTime - now);
-                    } else {
-                        if (miniTimer) miniTimer.style.display = 'none'; // Only the timer hides
-                    }
-
-                    // --- CALENDAR SEASON CALCULATION ---
-                    const calStart = new Date(year, CAL_SEASON.sM - 1, CAL_SEASON.sD, CAL_SEASON.sH, CAL_SEASON.sMi);
-                    const calEnd = new Date(year, CAL_SEASON.eM - 1, CAL_SEASON.eD, CAL_SEASON.eH, CAL_SEASON.eMi);
-                    const isCalSeasonActive = (now >= calStart && now <= calEnd);
-
-                    // --- BOX & PRICE LOGIC ---
-                    const grid = document.querySelector('.sprite-grid');
-                    const boxes = document.querySelectorAll('.box');
-                    let calBox = null;
-                    let secondBox = (boxes.length > 1) ? boxes[1] : null;
-
-                    boxes.forEach(box => {
-                        const badge = box.querySelector('.top-left-offer');
-                        if (!badge) return;
-
-                        const isCal = box.innerText.includes("Calendar");
-                        if (isCal) calBox = box;
-
-                        // Set Price Data: Festival vs Normal
-                        let data = activeFest ? FEST_PRICES[badge.id] : NORMAL_PRICES[badge.id];
-
-                        // Override if Calendar Season is active
-                        if (isCal && isCalSeasonActive) data = CAL_SEASON;
-
-                        if (data) {
-                            badge.innerText = data.off;
-                            const p = box.querySelector('.orange-num');
-                            const s = box.querySelector('.cut-price');
-                            if (p) p.innerText = data.pri;
-                            if (s) s.innerText = data.sav;
-                            badge.style.display = 'block';
-                        }
-                    });
-
-                    // --- DYNAMIC POSITIONING ---
-                    if (calBox && grid && secondBox) {
-                        if (isCalSeasonActive) {
-                            if (grid.children[1] !== calBox) grid.insertBefore(calBox, secondBox);
-                        } else {
-                            if (grid.lastElementChild !== calBox) grid.appendChild(calBox);
-                        }
-                    }
-                }
-
-                function renderTimer(diff) {
-                    const f = (n) => n.toString().padStart(2, '0');
-                    if (diff < 0) diff = 0;
-
-                    // Update your HTML IDs: days, hours, minutes, seconds
-                    const d = document.getElementById('days');
-                    const h = document.getElementById('hours');
-                    const m = document.getElementById('minutes');
-                    const s = document.getElementById('seconds');
-
-                    if (d) d.innerText = f(Math.floor(diff / 86400000));
-                    if (h) h.innerText = f(Math.floor((diff % 86400000) / 3600000));
-                    if (m) m.innerText = f(Math.floor((diff % 3600000) / 60000));
-                    if (s) s.innerText = f(Math.floor((diff % 60000) / 1000));
-                }
-
-                setInterval(updateLogic, 1000);
-                updateLogic();
-            });
-
-
-
-        </script>
+        
 
 
 
@@ -1388,10 +1398,11 @@
             </div>
         </div>
         <script>
-            const STORAGE_KEY = 'clint_v29_color_fix';
+            // Restoring the correct storage key so existing reviews show instantly
+            const STORAGE_KEY = 'clint_realtime_reviews_v2';
 
             // 👇 1. REVIEWS சீட் லிங்கை இங்கே பேஸ்ட் செய்யவும் 👇
-            const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxz1FWHQ4OxdKo_hdgqAHva8OfXq6o8XJj19ifqYvTxqJsw0gZgcQZT4HeiWYmKPED_Ig/exec';
+            const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxf1Y5DOF1FNdcVvo05hnX14tliIMSsQWKpH4Pd2zTNAKjIqdUVCBmNuFUtPlzayIRG/exec';
 
             let currentStars = 0, activeIdx = -1;
 
@@ -1475,9 +1486,10 @@
                 });
 
                 let maxCount = -1, dominantStar = 5;
+                let ratingObjects = [];
 
                 for (let i = 5; i >= 1; i--) {
-                    if (counts[i] >= maxCount) {
+                    if (counts[i] > maxCount) {
                         maxCount = counts[i];
                         dominantStar = i;
                     }
@@ -1487,7 +1499,21 @@
 
                     const bar = document.getElementById('rc-p-' + i);
                     if (bar) bar.style.width = barPercentage + "%";
+                    
+                    ratingObjects.push({ star: i, count: counts[i] });
                 }
+
+                // 📌 NEW: Sort bars dynamically by count!
+                // If counts are equal, higher star should be on top.
+                // Since ratingObjects is pushed 5 downwards, stable sort keeps 5 before 4.
+                ratingObjects.sort((a, b) => b.count - a.count); // highest count first
+                ratingObjects.forEach((obj, idx) => {
+                    const barFill = document.getElementById('rc-p-' + obj.star);
+                    if (barFill) {
+                        const row = barFill.closest('.rc-bar-row');
+                        if (row) row.style.order = idx;
+                    }
+                });
 
                 if (allReviews.length > 0) {
                     const topVal = document.getElementById('rc-top-value');
@@ -1503,15 +1529,14 @@
                     }
                 }
 
-                // 📌 NEW: PRODUCT SPECIFIC AVERAGE RATING CALCULATION
+                // 📌 NEW: PRODUCT SPECIFIC MODE RATING CALCULATION
                 const productStats = {};
                 allReviews.forEach(rev => {
                     const parseProd = (rev.msg || "").match(/^\[(.*?)\]/);
                     if (parseProd && parseProd[1] && rev.rate >= 1 && rev.rate <= 5) {
                         const pName = parseProd[1];
-                        if (!productStats[pName]) productStats[pName] = { sum: 0, count: 0 };
-                        productStats[pName].sum += rev.rate;
-                        productStats[pName].count++;
+                        if (!productStats[pName]) productStats[pName] = { c: {1:0, 2:0, 3:0, 4:0, 5:0} };
+                        productStats[pName].c[rev.rate]++;
                     }
                 });
 
@@ -1521,10 +1546,18 @@
                     if (!pName) return;
 
                     let avg = 0.0;
-                    let fillCount = 0;
-
-                    if (productStats[pName] && productStats[pName].count > 0) {
-                        avg = (productStats[pName].sum / productStats[pName].count).toFixed(1);
+                    
+                    if (productStats[pName]) {
+                        let maxVotes = 0;
+                        let modeRating = 0;
+                        // Start from 1 to 5, so if tie, higher star wins! (>=)
+                        for(let i=1; i<=5; i++) {
+                             if(productStats[pName].c[i] >= maxVotes && productStats[pName].c[i] > 0) {
+                                 maxVotes = productStats[pName].c[i];
+                                 modeRating = i;
+                             }
+                        }
+                        if(modeRating > 0) avg = modeRating;
                     }
 
                     // 📌 Dynamic Stars specific to rating
@@ -1631,6 +1664,8 @@
                 formData.append("msg", rev.msg);
                 formData.append("rate", rev.rate);
                 formData.append("time", rev.time);
+                // Action included so the Google backend processes it as a review save
+                formData.append("action", "submit_review"); 
 
                 fetch(SCRIPT_URL, {
                     method: 'POST',
@@ -2010,17 +2045,7 @@
 
 
 
-    // Toggle bar actvation Java
-
-
-    const menuToggle = document.getElementById('menuToggle');
-    const navLinks = document.getElementById('navLinks');
-
-    if (menuToggle && navLinks) {
-        menuToggle.onclick = function () {
-            navLinks.classList.toggle('active');
-        };
-    }
+    // Toggle bar actvation Java (Moved to script.js)
 
 
 
@@ -2098,9 +2123,10 @@
 <!-- Analytics Tracker & View Counter Javascript -->
 <script>
     // 👇 2. ANALYTICS & VIEW COUNT சீட் லிங்கை இங்கே பேஸ்ட் செய்யவும் 👇
-    const ANALYTICS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxfGE0g3Rb0ZkovU0um6IWMMWFhP266o1q0w4VtzOY62XBnwE0DJiz8wIFfjvGiJMVf6A/exec';
+    const ANALYTICS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxf1Y5DOF1FNdcVvo05hnX14tliIMSsQWKpH4Pd2zTNAKjIqdUVCBmNuFUtPlzayIRG/exec';
 
-    // 🔴 Admin Check: Do not log views for admin 🔴
+    // Admin tracking:
+    // - `isAdminLoggedIn` is used for dashboard access UI and avoids counting user views.
     const isAdminUser = localStorage.getItem('isAdmin') === 'true' || localStorage.getItem('isAdminLoggedIn') === 'true';
 
     // --- 30 MINUTE VIEW BLOCKER LOGIC ---
@@ -2126,7 +2152,7 @@
         let vp = new URLSearchParams();
         vp.append("action", "increment_view");
         vp.append("ProductName", "Website Main");
-        fetch(ANALYTICS_SCRIPT_URL, { method: "POST", mode: "no-cors", keepalive: true, body: vp.toString() }).catch(e => console.log(e));
+        fetch(ANALYTICS_SCRIPT_URL, { method: "POST", mode: "no-cors", keepalive: true, headers: { "Content-Type": "application/x-www-form-urlencoded" }, body: vp.toString() }).catch(e => console.log(e));
     }
 
     // Update session active timer
@@ -2222,7 +2248,7 @@
             let vp = new URLSearchParams();
             vp.append("action", "increment_view");
             vp.append("ProductName", targetName);
-            fetch(ANALYTICS_SCRIPT_URL, { method: "POST", mode: "no-cors", keepalive: true, body: vp.toString() }).catch(e => console.log(e));
+            fetch(ANALYTICS_SCRIPT_URL, { method: "POST", mode: "no-cors", keepalive: true, headers: { "Content-Type": "application/x-www-form-urlencoded" }, body: vp.toString() }).catch(e => console.log(e));
         }
     }
 
@@ -2246,7 +2272,7 @@
         let exitT = new Date().toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true });
         fd.append("ExitTime", exitT);
 
-        fetch(ANALYTICS_SCRIPT_URL, {
+        fetch('https://script.google.com/macros/s/AKfycbxf1Y5DOF1FNdcVvo05hnX14tliIMSsQWKpH4Pd2zTNAKjIqdUVCBmNuFUtPlzayIRG/exec', {
             method: "POST",
             mode: "no-cors",
             keepalive: true,
@@ -2276,7 +2302,7 @@
 
     // 4. LOAD COUNTS: Fetch total views for each item (Must be handled in Google Script Dojo)
     function loadPublicViewCounts() {
-        fetch(ANALYTICS_SCRIPT_URL + "?action=counts&t=" + new Date().getTime())
+        fetch('https://script.google.com/macros/s/AKfycbxf1Y5DOF1FNdcVvo05hnX14tliIMSsQWKpH4Pd2zTNAKjIqdUVCBmNuFUtPlzayIRG/exec' + "?action=counts&t=" + new Date().getTime())
             .then(res => res.json())
             .then(countsData => {
                 document.querySelectorAll('.view-counter').forEach(el => {
@@ -2291,7 +2317,75 @@
 
 
 
-<script src="script.js"></script>
-</body>
+<script src="script.js?v=9"></script>
+<script>
+    // GLOBAL BADGE & LIKE & PRELOADER SCRIPT
+    document.addEventListener("DOMContentLoaded", function() {
+        if (sessionStorage.getItem("my_session_active")) {
+            const loader = document.getElementById("preloader");
+            if (loader) loader.style.display = "none";
+        } else {
+            sessionStorage.setItem("my_session_active", "1");
+        }
 
+        const state = window.getFestivalState();
+        for(let i=1; i<=10; i++) {
+            let el = document.getElementById("v_off" + i);
+            if(el) {
+                if(state && (state.type === "Active" || state.type === "Upcoming")) {
+                    el.className = "top-left-offer " + AppConfig.Badges.OfferBg;
+                    if (i !== 1) { el.innerText = AppConfig.Badges.OfferText; }
+                    // i===1 (Poster Design) keeps whatever it already had (e.g., BUY 2 GET 1)
+                } else {
+                    el.className = "top-left-offer " + AppConfig.Badges.NormalBg;
+                    if (i === 1) { el.innerText = AppConfig.Badges.PosterNormalText; }
+                    else { el.innerText = AppConfig.Badges.NormalText; }
+                }
+            }
+        }
+
+        const likeBtn = document.getElementById("nav-like-btn");
+        const likeIconSvg = document.getElementById("like-icon-svg");
+        const likeCount = document.getElementById("like-count");
+        if(likeBtn) {
+            let hasLiked = localStorage.getItem("user_has_liked") === "true";
+            
+            if(hasLiked) {
+                likeIconSvg.classList.add("heart-liked");
+            }
+
+            likeBtn.addEventListener("click", () => {
+                if (localStorage.getItem('isAdmin') === 'true' || localStorage.getItem('isAdminLoggedIn') === 'true') {
+                    // Admins get visual feedback but don't count towards public likes
+                    if (!likeIconSvg.classList.contains("heart-liked")) {
+                        likeIconSvg.classList.add("heart-liked");
+                    }
+                    return;
+                }
+
+                let currentlyLiked = localStorage.getItem("user_has_liked") === "true";
+                if(!currentlyLiked) {
+                    // Mark as liked! (1 device = 1 like)
+                    localStorage.setItem("user_has_liked", "true");
+                    
+                    likeIconSvg.classList.add("heart-liked");
+
+                    if(likeCount) {
+                        let currentVal = parseInt(likeCount.innerText.replace(/[^0-9]/g, "")) || 0;
+                        likeCount.innerText = currentVal + 1;
+                    }
+
+                    // Send +1 Like to Google Sheets simply as a view for 'Website Likes'
+                    let vp = new URLSearchParams();
+                    vp.append("action", "increment_view"); 
+                    vp.append("ProductName", "Website Likes");
+                    fetch('https://script.google.com/macros/s/AKfycbxf1Y5DOF1FNdcVvo05hnX14tliIMSsQWKpH4Pd2zTNAKjIqdUVCBmNuFUtPlzayIRG/exec', { 
+                        method: "POST", mode: "no-cors", keepalive: true, headers: { "Content-Type": "application/x-www-form-urlencoded" }, body: vp.toString() 
+                    }).catch(e => console.log(e));
+                }
+            });
+        }
+    });
+</script>
+</body>
 </html>
